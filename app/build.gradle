@@ -7,7 +7,7 @@ android {
     compileSdk 30
 
     defaultConfig {
-        applicationId "com.anonymous.mbti"
+        applicationId "com.anonymous.coffin"
         minSdk 23
         targetSdk 30
         versionCode 1

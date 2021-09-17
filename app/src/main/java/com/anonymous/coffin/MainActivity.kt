@@ -1,4 +1,4 @@
-package com.anonymous.mbti
+package com.anonymous.coffin
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
