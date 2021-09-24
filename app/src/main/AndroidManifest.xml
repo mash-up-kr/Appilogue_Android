@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Coffin">
         <activity
-            android:name="com.anonymous.coffin.MainActivity"
+            android:name="com.anonymous.coffin.features.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,7 +1,8 @@
-package com.anonymous.coffin
+package com.anonymous.coffin.features
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.anonymous.coffin.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
