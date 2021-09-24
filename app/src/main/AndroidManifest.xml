@@ -3,6 +3,7 @@
     package="com.anonymous.coffin">
 
     <application
+        android:name=".AnonymousApplication"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -10,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Coffin">
         <activity
-            android:name="com.anonymous.coffin.features.MainActivity"
+            android:name="com.anonymous.coffin.features.main.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
