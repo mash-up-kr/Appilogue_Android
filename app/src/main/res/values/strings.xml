@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Coffin</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_profile">profile</string>
+    <string name="menu_community">community</string>
 </resources>
