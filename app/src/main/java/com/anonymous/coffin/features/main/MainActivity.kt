@@ -44,12 +44,12 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     private fun setFragment(fragment: Fragment) {
         val primaryFragment = supportFragmentManager.primaryNavigationFragment
         supportFragmentManager.commit {
+            primaryFragment?.let { hide(it) }
             if (!fragment.isAdded) {
                 add(R.id.fcv_fragmentContainerView, fragment)
             } else {
                 show(fragment)
             }
-            primaryFragment?.let { hide(it) }
             setPrimaryNavigationFragment(fragment)
         }
     }
