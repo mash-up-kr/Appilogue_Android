@@ -10,11 +10,11 @@ import androidx.lifecycle.ViewModel
 import java.lang.IllegalStateException
 
 
-abstract class BaseFragment<B : ViewDataBinding, VH : ViewModel>(
+abstract class BaseFragment<B : ViewDataBinding, VM : ViewModel>(
     @LayoutRes private val layoutResId: Int
 ) : Fragment(layoutResId) {
 
-    abstract val viewModel: VH
+    abstract val viewModel: VM
     private lateinit var _binding: B
     protected val binding: B
         get() = _binding
