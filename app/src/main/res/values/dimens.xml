@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="size_navigation_icon">20dp</dimen>
+    <dimen name="peek_bottomsheet_home">240dp</dimen>
+    <dimen name="radius_corner">30dp</dimen>
+</resources>
