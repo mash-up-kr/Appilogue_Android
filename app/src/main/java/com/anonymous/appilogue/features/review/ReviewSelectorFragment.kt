@@ -6,6 +6,7 @@ import androidx.fragment.app.viewModels
 import com.anonymous.appilogue.R
 import com.anonymous.appilogue.databinding.FragmentReviewSelectorBinding
 import com.anonymous.appilogue.features.base.BaseFragment
+import com.anonymous.appilogue.features.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -17,36 +18,39 @@ class ReviewSelectorFragment
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.apply {
+            mainVm = (activity as MainActivity).mainViewModel
+        }
+
         initView()
-        initObservers()
     }
 
     private fun initView() {
         binding.blackHoleView.setOnClickListener {
-            viewModel.isBlackHoleSelected
+            it.isSelected = true
+            binding.whiteHoleView.isSelected = false
+            binding.planetDescriptionView.apply {
+                visibility = View.VISIBLE
+                text = getString(R.string.description_black_hole)
+            }
+            binding.selectButton.apply {
+                setBackgroundColor(resources.getColor(R.color.purple_01, context.theme))
+                setTextColor(resources.getColor(R.color.white, context.theme))
+            }
         }
 
         binding.whiteHoleView.setOnClickListener {
             it.isSelected = true
             binding.blackHoleView.isSelected = false
-        }
-    }
-
-    private fun initObservers() {
-        viewModel.isBlackHoleSelected.observe(viewLifecycleOwner) {
-            viewModel.selectBlackHole()
-        }
-        viewModel.isWhiteHoleSelected.observe(viewLifecycleOwner) {
             viewModel.selectWhiteHole()
-        }
-    }
-
-    companion object {
-        const val SELECT_APP_KEY = "REVIEW_APP_KEY"
-
-        fun newInstance() {
-            val instance = ReviewSelectorFragment()
-
+            binding.planetDescriptionView.apply {
+                visibility = View.VISIBLE
+                text = getString(R.string.description_white_hole)
+            }
+            binding.selectButton.apply {
+                setBackgroundColor(resources.getColor(R.color.purple_01, context.theme))
+                setTextColor(resources.getColor(R.color.white, context.theme))
+            }
         }
     }
 }
