@@ -24,13 +24,16 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     private val profileFragment by lazy { ProfileFragment() }
     private val communityFragment by lazy { CommunityFragment() }
 
+    val viewModel by viewModels<HomeViewModel>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         bind {
-            bottomNavigationView.setOnItemSelectedListener {
-                navigateFragment(it)
-                true
-            }
+            homeViewModel = viewModel
+        }
+        binding.bottomNavigationView.setOnItemSelectedListener {
+            navigateFragment(it)
+            true
         }
         setFragment(homeFragment)
     }
