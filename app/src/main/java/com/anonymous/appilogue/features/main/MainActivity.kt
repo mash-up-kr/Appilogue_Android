@@ -24,8 +24,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     private val profileFragment by lazy { ProfileFragment() }
     private val communityFragment by lazy { CommunityFragment() }
 
-    private val viewModel by viewModels<HomeViewModel>()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         bind {
@@ -33,10 +31,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                 navigateFragment(it)
                 true
             }
-            homeViewModel = viewModel
         }
         setFragment(homeFragment)
-        initBottomSheet()
     }
 
     private fun navigateFragment(menuItem: MenuItem) {
@@ -60,28 +56,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                 show(fragment)
             }
             setPrimaryNavigationFragment(fragment)
-        }
-    }
-
-
-    private fun initBottomSheet() {
-        setBottomSheetHeight()
-        BottomSheetBehavior.from(binding.bottomSheetHome.root)
-            .addBottomSheetCallback(
-                object : BottomSheetBehavior.BottomSheetCallback() {
-                    override fun onStateChanged(bottomSheet: View, newState: Int) {
-                        // TODO
-                    }
-
-                    override fun onSlide(bottomSheet: View, slideOffset: Float) {
-                        // TODO
-                    }
-                })
-    }
-
-    private fun setBottomSheetHeight() {
-        binding.bottomSheetHome.root.updateLayoutParams {
-            // TODO
         }
     }
 }

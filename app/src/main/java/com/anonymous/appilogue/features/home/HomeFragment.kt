@@ -20,12 +20,34 @@ class HomeFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initBottomSheet()
+    }
+
+    private fun initBottomSheet() {
         binding.ivMainPlanet.setOnClickListener {
-            (activity as MainActivity).run {
-                findViewById<BottomNavigationView>(R.id.bottomNavigationView).visibility = View.GONE
-                findViewById<ConstraintLayout>(R.id.bottomSheetHome).updateLayoutParams {
-                    height = 600
-                }
+            activity?.findViewById<BottomNavigationView>(R.id.bottomNavigationView)?.visibility =
+                View.GONE
+            BottomSheetBehavior.from(binding.bottomSheetHome.root).apply {
+                state = BottomSheetBehavior.STATE_EXPANDED
+            }
+        }
+        binding.bottomSheetHome.root.apply {
+            updateLayoutParams {
+                height = 600
+                // TODO
+            }
+            BottomSheetBehavior.from(this).apply {
+                state = BottomSheetBehavior.STATE_HIDDEN
+                addBottomSheetCallback(
+                    object : BottomSheetBehavior.BottomSheetCallback() {
+                        override fun onStateChanged(bottomSheet: View, newState: Int) {
+                            // TODO
+                        }
+
+                        override fun onSlide(bottomSheet: View, slideOffset: Float) {
+                            // TODO
+                        }
+                    })
             }
         }
     }

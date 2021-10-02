@@ -9,6 +9,10 @@
             type="com.anonymous.appilogue.features.home.HomeViewModel" />
     </data>
 
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -26,5 +30,11 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <include
+            android:id="@+id/bottomSheetHome"
+            layout="@layout/bottomsheet_home"
+            app:homeViewModel="@{homeViewModel}" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </layout>
