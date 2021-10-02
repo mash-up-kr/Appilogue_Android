@@ -1,16 +1,228 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
     </data>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:background="@drawable/img_login_bg">
 
+        <TextView
+            android:id="@+id/certification_explain_text1"
+            android:layout_width="315dp"
+            android:layout_height="34dp"
+            android:layout_marginStart="22dp"
+            android:layout_marginTop="116dp"
+            android:layout_marginEnd="22dp"
+            android:layout_marginBottom="490dp"
+            android:text="인증번호를 입력하세요."
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/certification_back_button"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="start"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="18dp"
+            android:background="@drawable/btn_back_left_24px"
+            android:backgroundTint="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    </LinearLayout>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/certification_close_button"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="305dp"
+            android:layout_marginTop="19dp"
+            android:layout_marginEnd="19dp"
+            android:background="@drawable/btn_close_24px"
+            android:backgroundTint="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/certification_back_button"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/certification_number1"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="181dp"
+            android:layout_marginEnd="292dp"
+            android:layout_marginBottom="415dp"
+            android:gravity="center"
+            android:inputType="number"
+            android:maxLength="1"
+            android:nextFocusDown="@+id/certification_number2"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <requestFocus />
+        </EditText>
+
+        <EditText
+            android:id="@+id/certification_number2"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_marginStart="9dp"
+            android:layout_marginTop="181dp"
+            android:layout_marginBottom="415dp"
+            android:digits="0123456789"
+            android:gravity="center"
+            android:inputType="number"
+            android:maxLength="1"
+            android:nextFocusDown="@+id/certification_number3"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/certification_number1"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/certification_number3"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_marginStart="9dp"
+            android:layout_marginTop="181dp"
+            android:layout_marginBottom="415dp"
+            android:digits="0123456789"
+            android:gravity="center"
+            android:inputType="number"
+            android:maxLength="1"
+            android:nextFocusDown="@+id/certification_number4"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/certification_number2"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </EditText>
+
+        <EditText
+            android:id="@+id/certification_number4"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_marginStart="9dp"
+            android:layout_marginTop="181dp"
+            android:layout_marginBottom="415dp"
+            android:digits="0123456789"
+            android:gravity="center"
+            android:inputType="number"
+            android:maxLength="1"
+            android:nextFocusDown="@+id/certification_number5"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/certification_number3"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/certification_number5"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_marginStart="9dp"
+            android:layout_marginTop="181dp"
+            android:layout_marginBottom="415dp"
+            android:digits="0123456789"
+            android:gravity="center"
+            android:inputType="number"
+            android:maxLength="1"
+            android:nextFocusDown="@+id/certification_number6"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/certification_number4"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/certification_number6"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_marginStart="9dp"
+            android:layout_marginTop="181dp"
+            android:layout_marginBottom="415dp"
+            android:digits="0123456789"
+            android:gravity="center"
+            android:imeOptions="actionDone"
+            android:inputType="number"
+            android:maxLength="1"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/certification_number5"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/certification_explain_text2"
+            android:layout_width="313dp"
+            android:layout_height="22dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="241dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="377dp"
+            android:digits="0123456789"
+            android:text="전송된 인증번호는 10분 안에 만료됩니다."
+            android:textColor="@color/gray_02"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="32dp"
+            android:layout_height="22dp"
+            android:layout_marginStart="143dp"
+            android:layout_marginTop="278dp"
+            android:layout_marginEnd="185dp"
+            android:layout_marginBottom="340dp"
+            android:text="10:00"
+            android:textColor="@color/gray_02"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="22dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="278dp"
+            android:layout_marginEnd="143dp"
+            android:layout_marginBottom="340dp"
+            android:text="재전송"
+            android:textColor="@color/gray_02"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textView2"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/certification_move_next_button"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="335dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="257dp"
+            android:background="@drawable/border_radius_10_purple"
+            android:backgroundTint="@color/purple_01"
+            android:text="다음"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

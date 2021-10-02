@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="vm"
             type="com.anonymous.appilogue.features.login.LoginViewModel" />
@@ -11,9 +11,10 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/img_login_bg">
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/email_back_button"
             android:layout_width="24dp"
             android:layout_height="24dp"
@@ -21,10 +22,11 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="18dp"
             android:background="@drawable/btn_back_left_24px"
+            android:backgroundTint="@color/white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/email_close_button"
             android:layout_width="24dp"
             android:layout_height="24dp"
@@ -32,6 +34,7 @@
             android:layout_marginTop="19dp"
             android:layout_marginEnd="19dp"
             android:background="@drawable/btn_close_24px"
+            android:backgroundTint="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/email_back_button"
             app:layout_constraintTop_toTopOf="parent" />
@@ -44,6 +47,7 @@
             android:layout_marginTop="116dp"
             android:layout_marginBottom="490dp"
             android:text="이메일을 입력해주세요"
+            android:textColor="@color/white"
             android:textSize="22sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -58,7 +62,10 @@
             android:layout_marginTop="180dp"
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="412dp"
+            android:background="@drawable/border_radius_16"
+            android:backgroundTint="@color/gray_01"
             android:hint="Appilogue@gmail.com"
+            android:textColorHint="@color/white"
             app:errorEnabled="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -69,8 +76,9 @@
                 android:id="@+id/textInputEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="15sp"
                 android:text="@={vm.inputText}"
+                android:textColor="@color/white"
+                android:textSize="15sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -83,14 +91,14 @@
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="75dp"
             android:text="입력한 이메일로 인증번호가 전송됩니다"
+            android:textColor="@color/gray_02"
             android:textSize="12sp"
             app:layout_constraintBottom_toTopOf="@+id/email_move_next_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
 
-
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/email_move_next_button"
             android:layout_width="0dp"
             android:layout_height="48dp"
@@ -98,7 +106,10 @@
             android:layout_marginTop="335dp"
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="257dp"
+            android:background="@drawable/border_radius_10_purple"
+            android:backgroundTint="@color/purple_01"
             android:text="다음"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

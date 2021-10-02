@@ -31,7 +31,17 @@
         android:id="@+id/certificationFragment"
         android:name="com.anonymous.appilogue.features.login.CertificationFragment"
         android:label="CertificationFragment"
-        tools:layout="@layout/fragment_certification"/>
+        tools:layout="@layout/fragment_certification">
+        <action
+            android:id="@+id/action_certificationFragment_to_passwordFragment"
+            app:destination="@id/passwordFragment" />
+        <action
+            android:id="@+id/action_certificationFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_certificationFragment_to_emailFragment"
+            app:destination="@id/emailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/nicknameFragment"
         android:name="com.anonymous.appilogue.features.login.NicknameFragment"

@@ -1,6 +1,5 @@
 package com.anonymous.appilogue.features.main
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
@@ -10,7 +9,6 @@ import com.anonymous.appilogue.databinding.ActivityMainBinding
 import com.anonymous.appilogue.features.base.BaseActivity
 import com.anonymous.appilogue.features.community.CommunityFragment
 import com.anonymous.appilogue.features.home.HomeFragment
-import com.anonymous.appilogue.features.login.LoginActivity
 import com.anonymous.appilogue.features.profile.ProfileFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -29,9 +27,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                 true
             }
         }
-        val intent = Intent(this, LoginActivity::class.java)
-        startActivity(intent)
-//        setFragment(homeFragment)
+        setFragment(homeFragment)
     }
 
     private fun navigateFragment(menuItem: MenuItem) {
