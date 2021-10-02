@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/login_navigation"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.anonymous.appilogue.features.login.LoginFragment"
+        android:label="LoginFragment"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_loginFragment_to_emailFragment"
+            app:destination="@id/emailFragment"
+            app:enterAnim="@android:anim/slide_in_left" />
+    </fragment>
+    <fragment
+        android:id="@+id/emailFragment"
+        android:name="com.anonymous.appilogue.features.login.EmailFragment"
+        android:label="EmailFragment"
+        tools:layout="@layout/fragment_email">
+        <action
+            android:id="@+id/action_emailFragment_to_certificationFragment"
+            app:destination="@id/certificationFragment" />
+        <action
+            android:id="@+id/action_emailFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/certificationFragment"
+        android:name="com.anonymous.appilogue.features.login.CertificationFragment"
+        android:label="CertificationFragment"
+        tools:layout="@layout/fragment_certification"/>
+    <fragment
+        android:id="@+id/nicknameFragment"
+        android:name="com.anonymous.appilogue.features.login.NicknameFragment"
+        android:label="NicknameFragment"
+        tools:layout="@layout/fragment_nickname"/>
+    <fragment
+        android:id="@+id/passwordFragment"
+        android:name="com.anonymous.appilogue.features.login.PasswordFragment"
+        android:label="PasswordFragment"
+        tools:layout="@layout/fragment_password"/>
+</navigation>

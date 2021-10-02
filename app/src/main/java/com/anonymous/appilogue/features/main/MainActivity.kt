@@ -1,10 +1,8 @@
 package com.anonymous.appilogue.features.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
-import android.view.View
-import androidx.activity.viewModels
-import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import com.anonymous.appilogue.R
@@ -12,9 +10,8 @@ import com.anonymous.appilogue.databinding.ActivityMainBinding
 import com.anonymous.appilogue.features.base.BaseActivity
 import com.anonymous.appilogue.features.community.CommunityFragment
 import com.anonymous.appilogue.features.home.HomeFragment
-import com.anonymous.appilogue.features.home.HomeViewModel
+import com.anonymous.appilogue.features.login.LoginActivity
 import com.anonymous.appilogue.features.profile.ProfileFragment
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -32,7 +29,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                 true
             }
         }
-        setFragment(homeFragment)
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
+//        setFragment(homeFragment)
     }
 
     private fun navigateFragment(menuItem: MenuItem) {
