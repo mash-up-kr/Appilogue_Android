@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:id="@+id/action_profile"
-        android:title="@string/menu_profile" />
 
     <item
         android:id="@+id/action_home"
+        android:icon="@mipmap/ic_community_disable"
         android:title="@string/menu_home" />
 
     <item
         android:id="@+id/action_community"
+        android:icon="@mipmap/icon_tothehole"
         android:title="@string/menu_community" />
+
+    <item
+        android:id="@+id/action_profile"
+        android:icon="@mipmap/icon_mypage_disable"
+        android:title="@string/menu_profile" />
 </menu>

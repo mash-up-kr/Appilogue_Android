@@ -17,7 +17,7 @@ class HomeViewModel @Inject constructor() : ViewModel() {
     private val _bottomSheetState = MutableLiveData(BottomSheetBehavior.STATE_HIDDEN)
     val bottomSheetState: LiveData<Int> = _bottomSheetState
 
-    private val _bottomSheetHideable = MutableLiveData(false)
+    private val _bottomSheetHideable = MutableLiveData(true)
     val bottomSheetHideable: LiveData<Boolean> = _bottomSheetHideable
 
     fun changeBottomSheetState(newState: Int) {
