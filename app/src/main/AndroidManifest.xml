@@ -3,7 +3,7 @@
     package="com.anonymous.appilogue">
 
     <application
-        android:name="com.anonymous.appilogue.AnonymousApplication"
+        android:name="com.anonymous.appilogue.AppilogueApplication"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"

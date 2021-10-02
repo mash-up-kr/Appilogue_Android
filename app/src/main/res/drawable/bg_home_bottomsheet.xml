@@ -7,12 +7,12 @@
         android:top="2dp">
         <shape>
             <corners
-                android:topLeftRadius="@dimen/radius_corner"
-                android:topRightRadius="@dimen/radius_corner" />
+                android:topLeftRadius="@dimen/bottom_sheet_radius"
+                android:topRightRadius="@dimen/bottom_sheet_radius" />
             <stroke
                 android:width="2dp"
-                android:color="@color/gray" />
-            <solid android:color="@color/half_alpha_black" />
+                android:color="@color/gray_01" />
+            <solid android:color="@color/black_alpha50" />
         </shape>
     </item>
 </layer-list>
