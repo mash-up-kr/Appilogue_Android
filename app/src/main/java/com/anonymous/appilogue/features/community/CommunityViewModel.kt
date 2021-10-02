@@ -1,4 +1,4 @@
-package com.anonymous.coffin.features.community
+package com.anonymous.appilogue.features.community
 
 import androidx.lifecycle.ViewModel
 

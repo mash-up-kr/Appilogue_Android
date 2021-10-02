@@ -6,14 +6,14 @@
 
         <variable
             name="homeViewModel"
-            type="com.anonymous.coffin.features.home.HomeViewModel" />
+            type="com.anonymous.appilogue.features.home.HomeViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:behavior_hideable="true"
-        android:background="@drawable/bg_corner_stroke"
+        android:background="@drawable/bg_home_bottomsheet"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
         <View

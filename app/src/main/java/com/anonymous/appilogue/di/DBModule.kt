@@ -1,8 +1,8 @@
-package com.anonymous.coffin.di
+package com.anonymous.appilogue.di
 
 import android.content.Context
 import androidx.room.Room
-import com.anonymous.coffin.persistence.AppDatabase
+import com.anonymous.appilogue.persistence.AppDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

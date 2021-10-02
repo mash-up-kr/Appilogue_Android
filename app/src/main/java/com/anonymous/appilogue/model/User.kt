@@ -1,4 +1,4 @@
-package com.anonymous.coffin.model
+package com.anonymous.appilogue.model
 
 data class User(
     val nickName: String

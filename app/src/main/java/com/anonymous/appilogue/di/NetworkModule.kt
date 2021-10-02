@@ -1,4 +1,4 @@
-package com.anonymous.coffin.di
+package com.anonymous.appilogue.di
 
 import dagger.Module
 import dagger.Provides

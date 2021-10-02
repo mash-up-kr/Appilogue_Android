@@ -1,4 +1,4 @@
-package com.anonymous.coffin.features.home
+package com.anonymous.appilogue.features.home
 
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
