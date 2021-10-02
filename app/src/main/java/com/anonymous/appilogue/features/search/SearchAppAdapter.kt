@@ -25,9 +25,20 @@ class SearchAppAdapter : ListAdapter<InstalledApp, SearchAppAdapter.SearchAppVie
         }
     }
 
-    class SearchAppViewHolder(
+    inner class SearchAppViewHolder(
         private val binding: ItemInstalledAppBinding
     ) : RecyclerView.ViewHolder(binding.root) {
+
+        init {
+            binding.root.setOnClickListener {
+                val position = bindingAdapterPosition
+                if (position < itemCount) {
+                    val item = getItem(position)
+
+                    binding.root.context.startActivity()
+                }
+            }
+        }
 
         fun bind(installedApp: InstalledApp) {
             binding.apply {
