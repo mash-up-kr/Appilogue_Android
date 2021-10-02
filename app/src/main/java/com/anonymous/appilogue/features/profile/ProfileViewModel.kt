@@ -1,4 +1,4 @@
-package com.anonymous.coffin.features.profile
+package com.anonymous.appilogue.features.profile
 
 import androidx.lifecycle.ViewModel
 

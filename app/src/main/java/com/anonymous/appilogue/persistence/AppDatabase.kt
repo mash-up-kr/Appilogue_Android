@@ -1,4 +1,4 @@
-package com.anonymous.coffin.persistence
+package com.anonymous.appilogue.persistence
 
 import androidx.room.RoomDatabase
 

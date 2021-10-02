@@ -1,4 +1,4 @@
-package com.anonymous.coffin.features.base
+package com.anonymous.appilogue.features.base
 
 import android.os.Bundle
 import androidx.annotation.LayoutRes

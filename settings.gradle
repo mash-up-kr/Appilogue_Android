@@ -5,5 +5,5 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "Coffin"
+rootProject.name = "Appilogue"
 include ':app'

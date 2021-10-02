@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.anonymous.coffin">
+    package="com.anonymous.appilogue">
 
     <application
-        android:name=".AnonymousApplication"
+        android:name="com.anonymous.appilogue.AnonymousApplication"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Coffin">
+        android:theme="@style/Theme.Appilogue">
         <activity
-            android:name="com.anonymous.coffin.features.main.MainActivity"
+            android:name="com.anonymous.appilogue.features.main.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

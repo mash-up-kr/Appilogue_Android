@@ -1,8 +1,8 @@
-package com.anonymous.coffin.features.profile
+package com.anonymous.appilogue.features.profile
 
-import com.anonymous.coffin.R
-import com.anonymous.coffin.databinding.FragmentProfileBinding
-import com.anonymous.coffin.features.base.BaseFragment
+import com.anonymous.appilogue.R
+import com.anonymous.appilogue.databinding.FragmentProfileBinding
+import com.anonymous.appilogue.features.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

@@ -1,15 +1,20 @@
-package com.anonymous.coffin.features.main
+package com.anonymous.appilogue.features.main
 
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
+import androidx.activity.viewModels
+import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
-import com.anonymous.coffin.R
-import com.anonymous.coffin.databinding.ActivityMainBinding
-import com.anonymous.coffin.features.base.BaseActivity
-import com.anonymous.coffin.features.community.CommunityFragment
-import com.anonymous.coffin.features.home.HomeFragment
-import com.anonymous.coffin.features.profile.ProfileFragment
+import com.anonymous.appilogue.R
+import com.anonymous.appilogue.databinding.ActivityMainBinding
+import com.anonymous.appilogue.features.base.BaseActivity
+import com.anonymous.appilogue.features.community.CommunityFragment
+import com.anonymous.appilogue.features.home.HomeFragment
+import com.anonymous.appilogue.features.home.HomeViewModel
+import com.anonymous.appilogue.features.profile.ProfileFragment
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

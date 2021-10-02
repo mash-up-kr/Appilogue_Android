@@ -1,4 +1,4 @@
-package com.anonymous.coffin
+package com.anonymous.appilogue
 
 import org.junit.Assert.assertEquals
 import org.junit.Test

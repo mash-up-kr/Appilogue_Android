@@ -1,4 +1,4 @@
-package com.anonymous.coffin
+package com.anonymous.appilogue
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
