@@ -1,7 +1,7 @@
 ext {
     // Android
     androidBuildToolsVersion = "7.0.2"
-    min_sdk_version = 23
+    min_sdk_version = 24
     target_sdk_version = 30
     compile_sdk_version = 30
 
@@ -39,6 +39,8 @@ ext {
 
     // RxJava
     rxJavaVersion = "3.1.1"
+    rxAndroidVersion = "3.0.0"
+    rxBindingVersion = "4.0.0"
 
     // debug
     timberVersion = "5.0.0"

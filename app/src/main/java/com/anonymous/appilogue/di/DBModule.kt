@@ -3,6 +3,7 @@ package com.anonymous.appilogue.di
 import android.content.Context
 import androidx.room.Room
 import com.anonymous.appilogue.persistence.AppDatabase
+import com.anonymous.appilogue.persistence.InstalledAppDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -20,5 +21,4 @@ object DBModule {
         Room.databaseBuilder(context, AppDatabase::class.java, "ImageCollector.db")
             .fallbackToDestructiveMigration()
             .build()
-
 }
