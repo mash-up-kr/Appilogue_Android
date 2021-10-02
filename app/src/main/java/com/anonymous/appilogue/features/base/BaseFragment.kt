@@ -20,7 +20,8 @@ abstract class BaseFragment<B : ViewDataBinding, VM : ViewModel>(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        _binding = DataBindingUtil.bind(view) ?: throw IllegalStateException("Failed to bind the view on the Fragment.")
+        _binding = DataBindingUtil.bind(view)
+            ?: throw IllegalStateException("Failed to bind the view on the Fragment.")
         with(binding) {
             lifecycleOwner = viewLifecycleOwner
         }

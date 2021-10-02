@@ -10,4 +10,13 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+    <style name="Widget.Design.TextInputLayout" parent="Theme.Appilogue">
+        <item name="hintTextAppearance">@drawable/border_radius_10_purple</item>
+        <item name="errorTextAppearance">@drawable/border_radius_10_purple</item>
+        <item name="counterTextAppearance">@style/TextAppearance.Design.Counter</item>
+        <item name="counterOverflowTextAppearance">@style/TextAppearance.Design.Counter.Overflow</item>
+    </style>
+    <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash</item>
+    </style>
 </resources>
