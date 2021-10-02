@@ -88,6 +88,9 @@ dependencies {
 
     // RxJava
     implementation "io.reactivex.rxjava3:rxjava:$rxJavaVersion"
+    implementation "io.reactivex.rxjava3:rxandroid:$rxAndroidVersion"
+    implementation "com.jakewharton.rxbinding4:rxbinding:$rxBindingVersion"
+    implementation "com.jakewharton.rxbinding4:rxbinding-material:$rxBindingVersion"
 
     // debug
     implementation "com.jakewharton.timber:timber:$timberVersion"

@@ -10,12 +10,14 @@ import com.anonymous.appilogue.features.base.BaseActivity
 import com.anonymous.appilogue.features.community.CommunityFragment
 import com.anonymous.appilogue.features.home.HomeFragment
 import com.anonymous.appilogue.features.profile.ProfileFragment
+import com.anonymous.appilogue.features.search.SearchAppFragment
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
-    private val homeFragment by lazy { HomeFragment() }
+    private val homeFragment by lazy { SearchAppFragment() }
     private val profileFragment by lazy { ProfileFragment() }
     private val communityFragment by lazy { CommunityFragment() }
 

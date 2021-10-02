@@ -3,4 +3,5 @@
     <dimen name="size_navigation_icon">36dp</dimen>
     <dimen name="peek_bottomsheet_home">240dp</dimen>
     <dimen name="bottom_sheet_radius">20dp</dimen>
+    <dimen name="review_content_horizontal_margin">24dp</dimen>
 </resources>

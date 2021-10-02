@@ -6,4 +6,13 @@
     <string name="my_blackhole">나의 블랙홀</string>
     <string name="email_format_error_text">이메일 형식이 아닙니다.</string>
     <string name="to_home">홈으로</string>
+    <string name="toolbar_title_search_app">App 검색</string>
+    <string name="description_back_button">back button</string>
+    <string name="description_close_button">close button</string>
+    <string name="search_title_text">리뷰하고 싶은 앱을 검색해 보세요</string>
+    <string name="hint_search_app_edit_text">앱 이름을 입력해주세요.</string>
+    <string name="description_installed_app_icon">app icon</string>
+    <string name="planet_toolbar">planet toolbar</string>
+    <string name="description_black_hole">블랙홀은 더 이상 사용하지 않는, 또는\n떠나보내주고 싶은 앱이 모여있는 곳이에요.</string>
+    <string name="description_white_hole">화이트홀은 블랙홀에 있던 앱을 꺼내오거나,\n좋은 경험으로 기념하고 싶은 앱이 모여있는 곳이에요.</string>
 </resources>
