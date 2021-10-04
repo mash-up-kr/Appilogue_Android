@@ -65,11 +65,6 @@ class HomeFragment :
                     }
                 })
             }
-            viewModel.bottomSheetState.observe(viewLifecycleOwner, { newState ->
-                BottomSheetBehavior.from(this).apply {
-                    state = newState
-                }
-            })
             viewModel.bottomSheetHideable.observe(viewLifecycleOwner, { bottomSheetHideable ->
                 BottomSheetBehavior.from(this).apply {
                     isHideable = bottomSheetHideable

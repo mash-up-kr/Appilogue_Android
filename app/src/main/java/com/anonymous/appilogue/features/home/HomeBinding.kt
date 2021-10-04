@@ -1,8 +1,12 @@
 package com.anonymous.appilogue.features.home
 
+import android.util.Log
+import android.view.View
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.BindingAdapter
 import com.anonymous.appilogue.R
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 
 @BindingAdapter("titleByFocus")
 fun setTitle(view: TextView, focus: Focus) {
@@ -15,5 +19,12 @@ fun setTitle(view: TextView, focus: Focus) {
         else -> String()
     }.run {
         view.text = this
+    }
+}
+
+@BindingAdapter("state")
+fun setState(layout: ConstraintLayout, newState: Int) {
+    BottomSheetBehavior.from(layout).apply {
+        state = newState
     }
 }

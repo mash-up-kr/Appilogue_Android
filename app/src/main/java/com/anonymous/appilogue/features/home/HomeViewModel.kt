@@ -31,14 +31,14 @@ class HomeViewModel @Inject constructor() : ViewModel() {
             }
         }
         _starFocused.value = focus
-        when (focus) {
-            Focus.None -> {
+        when (focus.ordinal) {
+            0 -> {
                 _bottomSheetHideable.value = true
-                _bottomSheetState.value = BottomSheetBehavior.STATE_HIDDEN
+                changeBottomSheetState(BottomSheetBehavior.STATE_HIDDEN)
             }
-            else -> {
+            in 1..Focus.STAR_NUM -> {
                 _bottomSheetHideable.value = false
-                _bottomSheetState.value = BottomSheetBehavior.STATE_COLLAPSED
+                changeBottomSheetState(BottomSheetBehavior.STATE_COLLAPSED)
             }
         }
     }
