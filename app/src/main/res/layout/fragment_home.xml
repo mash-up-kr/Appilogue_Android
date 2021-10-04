@@ -25,6 +25,29 @@
             android:layout_height="match_parent"
             android:background="@mipmap/img_home_bg">
 
+            <TextView
+                android:id="@+id/tv_title"
+                titleByFocus="@{homeViewModel.starFocused}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="42dp"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginEnd="25dp"
+                app:layout_constraintBottom_toBottomOf="@id/tv_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_title"
+                app:tint="@color/white"
+                app:srcCompat="@drawable/ic_icon_alarm"
+                tools:ignore="ContentDescription" />
+
             <ImageView
                 android:id="@+id/iv_mainPlanet"
                 android:layout_width="220dp"
