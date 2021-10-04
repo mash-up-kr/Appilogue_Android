@@ -5,7 +5,7 @@
 
     <data>
 
-        <import type="com.anonymous.appilogue.features.home.HomeViewModel.Focus" />
+        <import type="com.anonymous.appilogue.features.home.Focus" />
 
         <import type="com.google.android.material.bottomsheet.BottomSheetBehavior" />
 

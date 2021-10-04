@@ -26,21 +26,8 @@ class HomeViewModel @Inject constructor() : ViewModel() {
 
     fun changeFocus(focus: Focus) {
         if (focus == Focus.None) {
-            when (starFocused.value) {
-                Focus.OnPlanet -> {
-                    _starFocused.value = Focus.OffPlanet
-                }
-                Focus.OnSpaceDust -> {
-                    _starFocused.value = Focus.OffSpaceDust
-                }
-                Focus.OnWhiteHole -> {
-                    _starFocused.value = Focus.OffWhiteHole
-                }
-                Focus.OnBlackHole -> {
-                    _starFocused.value = Focus.OffBlackHole
-                }
-                else -> {
-                }
+            starFocused.value?.let {
+                _starFocused.value = Focus.from(it.ordinal + Focus.STAR_NUM)
             }
         }
         _starFocused.value = focus
@@ -54,9 +41,5 @@ class HomeViewModel @Inject constructor() : ViewModel() {
                 _bottomSheetState.value = BottomSheetBehavior.STATE_COLLAPSED
             }
         }
-    }
-
-    enum class Focus {
-        None, OnWhiteHole, OnBlackHole, OnSpaceDust, OnPlanet, OffWhiteHole, OffBlackHole, OffSpaceDust, OffPlanet
     }
 }

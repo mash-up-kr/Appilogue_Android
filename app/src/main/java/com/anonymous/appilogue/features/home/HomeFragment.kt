@@ -4,7 +4,6 @@ import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.content.res.Resources
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import androidx.core.view.updateLayoutParams
@@ -19,9 +18,18 @@ import dagger.hilt.android.AndroidEntryPoint
 class HomeFragment :
     BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.fragment_home) {
 
-    private val stars by lazy {
+    private val starsByFocus by lazy {
         with(binding) {
-            listOf(ivBlackHole, ivMainPlanet, ivSpaceDust, ivWhiteHole)
+            hashMapOf(
+                Pair(Focus.OnBlackHole, ivBlackHole),
+                Pair(Focus.OffBlackHole, ivBlackHole),
+                Pair(Focus.OnWhiteHole, ivWhiteHole),
+                Pair(Focus.OffWhiteHole, ivWhiteHole),
+                Pair(Focus.OffPlanet, ivMainPlanet),
+                Pair(Focus.OnPlanet, ivMainPlanet),
+                Pair(Focus.OnSpaceDust, ivSpaceDust),
+                Pair(Focus.OffSpaceDust, ivSpaceDust)
+            )
         }
     }
 
@@ -29,10 +37,10 @@ class HomeFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initBottomSheet()
         bind {
             homeViewModel = viewModel
         }
+        initBottomSheet()
         observeStar()
     }
 
@@ -52,9 +60,7 @@ class HomeFragment :
 
                     override fun onSlide(bottomSheet: View, slideOffset: Float) {
                         listOf(binding.ivBackButton, binding.tvBackToHome).forEach {
-                            apply {
-                                it.alpha = slideOffset + 1
-                            }
+                            it.alpha = slideOffset + 1
                         }
                     }
                 })
@@ -74,48 +80,16 @@ class HomeFragment :
 
     private fun observeStar() {
         viewModel.starFocused.observe(viewLifecycleOwner, {
-            when (it) {
-                HomeViewModel.Focus.OnBlackHole -> {
-                    binding.ivBlackHole.run {
-                        focusStar(this, true)
+            when (it.ordinal) {
+                in 1..Focus.STAR_NUM -> {
+                    starsByFocus[it]?.let { star ->
+                        focusStar(star, true)
                     }
                 }
-                HomeViewModel.Focus.OnPlanet -> {
-                    binding.ivMainPlanet.run {
-                        focusStar(this, true)
+                in Focus.STAR_NUM..Focus.STAR_NUM * 2 -> {
+                    starsByFocus[it]?.let { star ->
+                        focusStar(star, false)
                     }
-                }
-                HomeViewModel.Focus.OnWhiteHole -> {
-                    binding.ivWhiteHole.run {
-                        focusStar(this, true)
-                    }
-                }
-                HomeViewModel.Focus.OnSpaceDust -> {
-                    binding.ivSpaceDust.run {
-                        focusStar(this, true)
-                    }
-                }
-                HomeViewModel.Focus.OffBlackHole -> {
-                    binding.ivBlackHole.run {
-                        focusStar(this, false)
-                    }
-                }
-                HomeViewModel.Focus.OffPlanet -> {
-                    binding.ivMainPlanet.run {
-                        focusStar(this, false)
-                    }
-                }
-                HomeViewModel.Focus.OffWhiteHole -> {
-                    binding.ivWhiteHole.run {
-                        focusStar(this, false)
-                    }
-                }
-                HomeViewModel.Focus.OffSpaceDust -> {
-                    binding.ivSpaceDust.run {
-                        focusStar(this, false)
-                    }
-                }
-                else -> {
                 }
             }
         })
@@ -132,7 +106,9 @@ class HomeFragment :
         val focusXMoveSize = if (isFocusIn) (windowXCenter - focusedStarXCenter) else 0f
         val focusYMoveSize = if (isFocusIn) (windowYCenter - focusedStarYCenter) else 0f
         moveStar(focusedStar, scaleSize, focusXMoveSize, focusYMoveSize)
-        stars
+        starsByFocus
+            .values
+            .toSet()
             .filter { star -> focusedStar != star }
             .forEach { unFocusedStar ->
                 val unFocusedStarXCenter = (unFocusedStar.left + unFocusedStar.right) / 2.0f
@@ -153,12 +129,11 @@ class HomeFragment :
     ) {
         val scaleX = ObjectAnimator.ofFloat(imageView, "scaleX", scaleSize)
         val scaleY = ObjectAnimator.ofFloat(imageView, "scaleY", scaleSize)
-        val moveY = ObjectAnimator.ofFloat(imageView, "translationY", yMoveSize * 1.0f)
-        val moveX = ObjectAnimator.ofFloat(imageView, "translationX", xMoveSize * 1.0f)
-        scaleX.duration = STAR_MOVE_TIME
-        scaleY.duration = STAR_MOVE_TIME
-        moveY.duration = STAR_MOVE_TIME
-        moveX.duration = STAR_MOVE_TIME
+        val moveY = ObjectAnimator.ofFloat(imageView, "translationY", yMoveSize)
+        val moveX = ObjectAnimator.ofFloat(imageView, "translationX", xMoveSize)
+        listOf(scaleX, scaleY, moveX, moveY).map {
+            it.duration = STAR_MOVE_TIME
+        }
 
         val scaleChange = AnimatorSet()
         val move = AnimatorSet()
