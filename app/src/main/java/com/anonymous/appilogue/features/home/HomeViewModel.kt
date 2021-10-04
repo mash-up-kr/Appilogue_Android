@@ -25,6 +25,24 @@ class HomeViewModel @Inject constructor() : ViewModel() {
     }
 
     fun changeFocus(focus: Focus) {
+        if (focus == Focus.None) {
+            when (starFocused.value) {
+                Focus.OnPlanet -> {
+                    _starFocused.value = Focus.OffPlanet
+                }
+                Focus.OnSpaceDust -> {
+                    _starFocused.value = Focus.OffSpaceDust
+                }
+                Focus.OnWhiteHole -> {
+                    _starFocused.value = Focus.OffWhiteHole
+                }
+                Focus.OnBlackHole -> {
+                    _starFocused.value = Focus.OffBlackHole
+                }
+                else -> {
+                }
+            }
+        }
         _starFocused.value = focus
         when (focus) {
             Focus.None -> {
@@ -39,6 +57,6 @@ class HomeViewModel @Inject constructor() : ViewModel() {
     }
 
     enum class Focus {
-        None, OnWhiteHole, OnBlackHole, OnSpaceDust, OnPlanet
+        None, OnWhiteHole, OnBlackHole, OnSpaceDust, OnPlanet, OffWhiteHole, OffBlackHole, OffSpaceDust, OffPlanet
     }
 }
