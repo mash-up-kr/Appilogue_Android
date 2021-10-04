@@ -23,7 +23,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>(R.layou
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val navController = Navigation.findNavController(view)
         binding.btStartEmail.setOnClickListener {
             it.findNavController().navigate(R.id.action_loginFragment_to_emailFragment)
         }

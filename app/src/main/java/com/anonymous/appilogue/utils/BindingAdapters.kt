@@ -1,5 +1,6 @@
 package com.anonymous.appilogue.utils
 
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
@@ -25,7 +26,12 @@ fun ImageView.bindImageUrl(uri: String?) {
     }
 }
 
-@BindingAdapter("selectBlackHole", requireAll = true)
+@BindingAdapter("show")
+fun TextView.bindShow(visible: Boolean) {
+    visibility = if (visible) View.VISIBLE else View.INVISIBLE
+}
+
+@BindingAdapter("selectBlackHole")
 fun TextView.bindText(isSelectBlackHole: Boolean) {
     text = if (isSelectBlackHole) {
         context.getString(R.string.description_black_hole)

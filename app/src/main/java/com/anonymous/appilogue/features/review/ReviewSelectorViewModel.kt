@@ -5,10 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
 @HiltViewModel
-class ReviewSelectorViewModel(
-) : ViewModel() {
+class ReviewSelectorViewModel @Inject constructor() : ViewModel() {
 
     private val _isBlackHoleSelected = MutableLiveData<Boolean>()
     val isBlackHoleSelected: LiveData<Boolean> = _isBlackHoleSelected

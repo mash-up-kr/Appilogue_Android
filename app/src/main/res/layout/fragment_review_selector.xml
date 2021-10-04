@@ -7,6 +7,9 @@
         <variable
             name="vm"
             type="com.anonymous.appilogue.features.review.ReviewSelectorViewModel" />
+        <variable
+            name="mainVm"
+            type="com.anonymous.appilogue.features.main.MainViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,6 +20,7 @@
             android:id="@+id/appbar_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/black"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
@@ -71,7 +75,7 @@
             android:layout_height="100dp"
             android:layout_marginTop="20dp"
             android:background="@drawable/border_radius_16"
-            android:src="@{}"
+            android:src="@{mainVm.selectedApp.icon}"
             app:layout_constraintTop_toBottomOf="@id/appbar_layout"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
@@ -93,7 +97,7 @@
                 android:paddingHorizontal="10dp"
                 android:background="@drawable/border_radius_08"
                 android:backgroundTint="@color/gray_02"
-                android:text="@{}"
+                android:text="@{mainVm.selectedApp.name}"
                 android:textStyle="bold"
                 style="@style/TextStyle.Normal12"
                 tools:text="어나니머쓱"/>
@@ -177,9 +181,8 @@
             android:layout_marginHorizontal="@dimen/review_content_horizontal_margin"
             android:gravity="center"
             android:background="@drawable/border_radius_12_gradient"
-            android:visibility="@{vm.isBlackHoleSelected() || vm.isWhiteHoleSelected()}"
+            android:visibility="invisible"
             style="@style/TextStyle.Normal12"
-            app:selectBlackHole="@{vm.isBlackHoleSelected()}"
             app:layout_constraintTop_toBottomOf="@id/black_hole_title_view"
             app:layout_constraintBottom_toTopOf="@id/select_button"
             app:layout_constraintStart_toStartOf="parent"
@@ -200,7 +203,6 @@
             android:textColor="@color/gray_02"
             android:gravity="center"
             style="@style/TextStyle.Normal16"
-            app:isSelected="@{vm.isBlackHoleSelected() || vm.isWhiteHoleSelected()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
