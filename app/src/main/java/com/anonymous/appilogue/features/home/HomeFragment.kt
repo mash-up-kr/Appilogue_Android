@@ -2,6 +2,7 @@ package com.anonymous.appilogue.features.home
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
+import android.animation.ValueAnimator
 import android.content.res.Resources
 import android.os.Bundle
 import android.view.View
@@ -14,6 +15,7 @@ import com.anonymous.appilogue.features.base.BaseFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import dagger.hilt.android.AndroidEntryPoint
+import android.view.animation.Animation
 
 @AndroidEntryPoint
 class HomeFragment :
@@ -43,6 +45,16 @@ class HomeFragment :
         }
         initBottomSheet()
         observeStar()
+        animateSpace()
+    }
+
+    private fun animateSpace() {
+        ObjectAnimator.ofFloat(binding.ivSpace, "translationX", SPACE_MOVE_RANGE).apply {
+            duration = SPACE_MOVE_DURATION
+            repeatCount = Animation.INFINITE
+            repeatMode = ValueAnimator.REVERSE
+            start()
+        }
     }
 
     private fun initBottomSheet() {
@@ -144,5 +156,7 @@ class HomeFragment :
         const val STAR_MOVE_TIME = 1000L
         const val MAX_STAR_RATIO = 0.6f
         const val STAR_INTERVAL_MAGNIFICATION = 7.0f
+        const val SPACE_MOVE_RANGE = 100f
+        const val SPACE_MOVE_DURATION = 6000L
     }
 }
