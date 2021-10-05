@@ -20,13 +20,16 @@
         tools:context=".features.main.MainActivity">
 
         <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/fcv_fragmentContainerView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:id="@+id/nav_main_host_fragment"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:defaultNavHost="true"
             app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:navGraph="@navigation/main_navigation" />
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNavigationView"

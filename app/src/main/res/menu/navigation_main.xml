@@ -2,17 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/action_home"
+        android:id="@+id/homeFragment"
         android:icon="@mipmap/ic_community_disable"
-        android:title="@string/menu_home" />
+        android:title="@string/home_fragment" />
 
     <item
-        android:id="@+id/action_community"
+        android:id="@+id/communityFragment"
         android:icon="@mipmap/icon_tothehole"
-        android:title="@string/menu_community" />
+        android:title="@string/community_fragment" />
 
     <item
-        android:id="@+id/action_profile"
+        android:id="@+id/profileFragment"
         android:icon="@mipmap/icon_mypage_disable"
-        android:title="@string/menu_profile" />
+        android:title="@string/profile_fragment" />
 </menu>
