@@ -10,8 +10,8 @@
         <import type="com.anonymous.appilogue.features.home.HomeViewModel.Focus" />
 
         <variable
-            name="homeViewModel"
-            type="com.anonymous.appilogue.features.home.HomeViewModel" />
+            name="mainViewModel"
+            type="com.anonymous.appilogue.features.main.MainViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -36,7 +36,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@color/black_01"
-            android:visibility="@{homeViewModel.starFocused == Focus.None ? View.VISIBLE : View.INVISIBLE}"
+            android:visibility="@{mainViewModel.bottomNavigationState ? View.VISIBLE : View.GONE}"
             app:itemIconSize="@dimen/size_navigation_icon"
             app:itemIconTint="@color/gray_02"
             app:labelVisibilityMode="unlabeled"

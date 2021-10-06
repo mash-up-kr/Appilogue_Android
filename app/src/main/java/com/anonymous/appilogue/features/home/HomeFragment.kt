@@ -8,6 +8,7 @@ import androidx.fragment.app.activityViewModels
 import com.anonymous.appilogue.R
 import com.anonymous.appilogue.databinding.FragmentHomeBinding
 import com.anonymous.appilogue.features.base.BaseFragment
+import com.anonymous.appilogue.features.main.MainViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import dagger.hilt.android.AndroidEntryPoint
@@ -16,6 +17,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class HomeFragment :
     BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.fragment_home) {
 
+    val mainViewModel: MainViewModel by activityViewModels()
     override val viewModel: HomeViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -36,6 +38,11 @@ class HomeFragment :
                 viewModel.changeBottomSheetState(BottomSheetBehavior.STATE_HIDDEN)
                 addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
                     override fun onStateChanged(bottomSheet: View, newState: Int) {
+                        if (newState != BottomSheetBehavior.STATE_HIDDEN) {
+                            mainViewModel.hideBottomNavigation()
+                        } else {
+                            mainViewModel.showBottomNavigation()
+                        }
                         viewModel.changeBottomSheetState(newState)
                     }
 

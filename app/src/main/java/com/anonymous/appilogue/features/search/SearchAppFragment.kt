@@ -26,7 +26,7 @@ class SearchAppFragment
 
     private val searchAppAdapter: SearchAppAdapter by lazy {
         val mainActivity = activity as MainActivity
-        SearchAppAdapter(mainActivity.mainViewModel) {
+        SearchAppAdapter(mainActivity.viewModel) {
             mainActivity.navigateTo(R.id.searchAppFragment2)
         }
     }
@@ -73,10 +73,5 @@ class SearchAppFragment
     override fun onDestroyView() {
         disposable?.dispose()
         super.onDestroyView()
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        //(activity as MainActivity).hideBottomNavigation()
     }
 }

@@ -20,15 +20,15 @@ import com.anonymous.appilogue.features.home.HomeViewModel
 import com.anonymous.appilogue.features.profile.ProfileFragment
 import com.anonymous.appilogue.features.search.SearchAppFragment
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
-    val viewModel: HomeViewModel by viewModels()
-    val mainViewModel: MainViewModel by viewModels()
+    val viewModel: MainViewModel by viewModels()
 
-    val navController by lazy {
+    private val navController by lazy {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_main_host_fragment) as NavHostFragment
         navHostFragment.navController
@@ -37,15 +37,25 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         bind {
-            homeViewModel = viewModel
+            mainViewModel = viewModel
         }
         initNavigation()
     }
 
     private fun initNavigation() {
-        with(binding) {
-            bottomNavigationView.setupWithNavController(navController)
-            bottomNavigationView.itemIconTintList = null
+        with(binding.bottomNavigationView) {
+            setupWithNavController(navController)
+            itemIconTintList = null
+            setOnItemSelectedListener {
+                if (it.isChecked && it.itemId == R.id.homeFragment) {
+                    navigateTo(R.id.searchAppFragment2)
+                    viewModel.hideBottomNavigation()
+                } else {
+                    navigateTo(it.itemId)
+                    viewModel.showBottomNavigation()
+                }
+                true
+            }
         }
     }
 
