@@ -3,7 +3,6 @@ package com.anonymous.appilogue.di
 import android.content.Context
 import androidx.room.Room
 import com.anonymous.appilogue.persistence.AppDatabase
-import com.anonymous.appilogue.persistence.InstalledAppDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

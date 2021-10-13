@@ -13,7 +13,7 @@
 
         <TextView
             android:id="@+id/certification_explain_text1"
-            android:layout_width="315dp"
+            android:layout_width="0dp"
             android:layout_height="34dp"
             android:layout_marginStart="22dp"
             android:layout_marginTop="116dp"
@@ -58,15 +58,17 @@
             android:layout_height="44dp"
             android:layout_marginStart="24dp"
             android:layout_marginTop="181dp"
-            android:layout_marginEnd="292dp"
+            android:layout_marginEnd="9dp"
             android:layout_marginBottom="415dp"
             android:gravity="center"
             android:inputType="number"
             android:maxLength="1"
             android:nextFocusDown="@+id/certification_number2"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/certification_number2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -79,14 +81,20 @@
             android:layout_height="44dp"
             android:layout_marginStart="9dp"
             android:layout_marginTop="181dp"
+            android:layout_marginEnd="9dp"
             android:layout_marginBottom="415dp"
             android:digits="0123456789"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:gravity="center"
             android:inputType="number"
             android:maxLength="1"
             android:nextFocusDown="@+id/certification_number3"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/certification_number3"
             app:layout_constraintStart_toEndOf="@+id/certification_number1"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -96,18 +104,20 @@
             android:layout_height="44dp"
             android:layout_marginStart="9dp"
             android:layout_marginTop="181dp"
+            android:layout_marginEnd="9dp"
             android:layout_marginBottom="415dp"
             android:digits="0123456789"
             android:gravity="center"
             android:inputType="number"
             android:maxLength="1"
             android:nextFocusDown="@+id/certification_number4"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/certification_number4"
             app:layout_constraintStart_toEndOf="@+id/certification_number2"
-            app:layout_constraintTop_toTopOf="parent">
-
-        </EditText>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/certification_number4"
@@ -115,14 +125,18 @@
             android:layout_height="44dp"
             android:layout_marginStart="9dp"
             android:layout_marginTop="181dp"
+            android:layout_marginEnd="9dp"
             android:layout_marginBottom="415dp"
             android:digits="0123456789"
             android:gravity="center"
             android:inputType="number"
             android:maxLength="1"
             android:nextFocusDown="@+id/certification_number5"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/certification_number5"
             app:layout_constraintStart_toEndOf="@+id/certification_number3"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -132,14 +146,18 @@
             android:layout_height="44dp"
             android:layout_marginStart="9dp"
             android:layout_marginTop="181dp"
+            android:layout_marginEnd="9dp"
             android:layout_marginBottom="415dp"
             android:digits="0123456789"
             android:gravity="center"
             android:inputType="number"
             android:maxLength="1"
             android:nextFocusDown="@+id/certification_number6"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/certification_number6"
             app:layout_constraintStart_toEndOf="@+id/certification_number4"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -149,20 +167,24 @@
             android:layout_height="44dp"
             android:layout_marginStart="9dp"
             android:layout_marginTop="181dp"
+            android:layout_marginEnd="24dp"
             android:layout_marginBottom="415dp"
             android:digits="0123456789"
             android:gravity="center"
             android:imeOptions="actionDone"
             android:inputType="number"
             android:maxLength="1"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/certification_number5"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/certification_explain_text2"
-            android:layout_width="313dp"
+            android:layout_width="0dp"
             android:layout_height="22dp"
             android:layout_marginStart="24dp"
             android:layout_marginTop="241dp"
@@ -178,7 +200,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/timer"
             android:layout_width="32dp"
             android:layout_height="22dp"
             android:layout_marginStart="143dp"
@@ -194,7 +216,8 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/restart"
+            android:layout_width="0dp"
             android:layout_height="22dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="278dp"
@@ -205,7 +228,7 @@
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textView2"
+            app:layout_constraintStart_toEndOf="@+id/timer"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatButton
@@ -217,7 +240,6 @@
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="257dp"
             android:background="@drawable/border_radius_10_purple"
-            android:backgroundTint="@color/purple_01"
             android:text="다음"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"

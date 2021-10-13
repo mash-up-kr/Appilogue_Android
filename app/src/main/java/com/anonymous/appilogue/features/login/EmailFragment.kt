@@ -17,7 +17,7 @@ class EmailFragment : BaseFragment<FragmentEmailBinding, LoginViewModel>(R.layou
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         return inflater.inflate(R.layout.fragment_email, container, false)
     }
@@ -43,7 +43,7 @@ class EmailFragment : BaseFragment<FragmentEmailBinding, LoginViewModel>(R.layou
                     s: CharSequence?,
                     start: Int,
                     count: Int,
-                    after: Int
+                    after: Int,
                 ) {
                     // do nothing
                 }

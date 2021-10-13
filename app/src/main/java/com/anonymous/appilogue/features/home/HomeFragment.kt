@@ -1,14 +1,12 @@
 package com.anonymous.appilogue.features.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.activityViewModels
 import com.anonymous.appilogue.R
 import com.anonymous.appilogue.databinding.FragmentHomeBinding
 import com.anonymous.appilogue.features.base.BaseFragment
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import dagger.hilt.android.AndroidEntryPoint
 
