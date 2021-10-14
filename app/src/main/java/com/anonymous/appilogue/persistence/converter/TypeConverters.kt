@@ -2,13 +2,15 @@ package com.anonymous.appilogue.persistence.converter
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import androidx.room.ProvidedTypeConverter
 import androidx.room.TypeConverter
 import java.io.ByteArrayOutputStream
 
+@ProvidedTypeConverter
 class BitmapTypeConverter {
 
     @TypeConverter
-    fun fromBitmap(bitmap: Bitmap): ByteArray {
+    fun toByteArray(bitmap: Bitmap): ByteArray {
         val outputStream = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
         return outputStream.toByteArray()

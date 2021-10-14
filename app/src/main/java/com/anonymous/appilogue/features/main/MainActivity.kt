@@ -6,14 +6,19 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
+import androidx.lifecycle.lifecycleScope
 import com.anonymous.appilogue.R
 import com.anonymous.appilogue.databinding.ActivityMainBinding
 import com.anonymous.appilogue.features.base.BaseActivity
 import com.anonymous.appilogue.features.home.HomeFragment
 import com.anonymous.appilogue.features.home.HomeViewModel
 import com.anonymous.appilogue.features.profile.ProfileFragment
+import com.anonymous.appilogue.features.search.AppSearchManager
 import com.anonymous.appilogue.features.search.SearchAppFragment
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
@@ -24,6 +29,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     val viewModel: HomeViewModel by viewModels()
     val mainViewModel: MainViewModel by viewModels()
+
+    @Inject
+    lateinit var appSearchManager: AppSearchManager
 
     val navigateTo: (Fragment) -> Unit = { fragment ->
         val primaryFragment = supportFragmentManager.primaryNavigationFragment
@@ -48,6 +56,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             true
         }
         navigateTo(homeFragment)
+
+        lifecycleScope.launch(Dispatchers.IO) {
+            appSearchManager.updateInstalledAppList()
+        }
     }
 
     private fun navigateFragment(menuItem: MenuItem) {

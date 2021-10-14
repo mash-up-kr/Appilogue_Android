@@ -4,8 +4,7 @@ import com.anonymous.appilogue.model.InstalledApp
 import com.anonymous.appilogue.model.toData
 import com.anonymous.appilogue.model.toEntity
 import com.anonymous.appilogue.persistence.InstalledAppDao
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
+import timber.log.Timber
 import javax.inject.Inject
 
 class SearchAppRepository @Inject constructor(
@@ -13,12 +12,11 @@ class SearchAppRepository @Inject constructor(
 ) {
 
     suspend fun insertInstalledAppList(appList: List<InstalledApp>) {
-        installedAppDao.insertInstalledAppList(appList.map { it.toEntity() })
+        val result = installedAppDao.insertInstalledAppList(appList.map { it.toEntity() })
+        Timber.d(result.toString())
     }
 
-    fun fetchInstalledAppList(): Flow<List<InstalledApp>> {
-        return installedAppDao.fetchInstalledAppList().map { appList ->
-            appList.map { it.toData() }
-        }
+    suspend fun fetchInstalledAppList(): List<InstalledApp> {
+        return installedAppDao.fetchInstalledAppList().map { it.toData() }
     }
 }

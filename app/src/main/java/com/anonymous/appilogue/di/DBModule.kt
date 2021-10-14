@@ -18,14 +18,21 @@ object DBModule {
 
     @Provides
     @Singleton
-    fun provideAppDatabase(@ApplicationContext context: Context): AppDatabase =
-        Room.databaseBuilder(context, AppDatabase::class.java, "ImageCollector.db")
+    fun provideAppDatabase(
+        @ApplicationContext context: Context,
+        bitmapTypeConverter: BitmapTypeConverter
+    ): AppDatabase =
+        Room.databaseBuilder(context, AppDatabase::class.java, "Appilogue.db")
             .fallbackToDestructiveMigration()
-            .addTypeConverter(BitmapTypeConverter())
+            .addTypeConverter(bitmapTypeConverter)
             .build()
 
     @Provides
     @Singleton
     fun provideInstalledAppDao(appDatabase: AppDatabase): InstalledAppDao =
         appDatabase.installedAppDao()
+
+    @Provides
+    @Singleton
+    fun provideBitmapTypeConverter(): BitmapTypeConverter = BitmapTypeConverter()
 }

@@ -27,7 +27,6 @@ class AppSearchManager @Inject constructor(
             .filter { appInfo -> !appInfo.name.isNullOrBlank() && packageManager.getApplicationLabel(appInfo).isNotBlank() }
             .map { appInfo ->
                 val appName = packageManager.getApplicationLabel(appInfo).toString()
-                Timber.d(appName)
                 InstalledApp(appName, packageManager.getApplicationIcon(appInfo).toBitmap())
             }
     }
