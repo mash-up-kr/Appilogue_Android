@@ -1,8 +1,18 @@
 <resources>
     <string name="app_name">Appilogue</string>
-    <string name="my_blackhole">나의 블랙홀</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_profile">profile</string>
+    <string name="menu_community">community</string>
     <string name="email_format_error_text">이메일 형식이 아닙니다.</string>
     <string name="to_home">홈으로</string>
+    <!--    Home   -->
+    <string name="my_blackhole">나의 블랙홀</string>
+    <string name="my_space">나의 우주 공간</string>
+    <string name="planet">행성</string>
+    <string name="white_hole">화이트홀</string>
+    <string name="black_hole">블랙홀</string>
+    <string name="space_dust">우주먼지</string>
+    <!--    Review   -->
     <string name="toolbar_title_search_app">App 검색</string>
     <string name="description_back_button">back button</string>
     <string name="description_close_button">close button</string>

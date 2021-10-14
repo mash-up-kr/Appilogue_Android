@@ -10,10 +10,11 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        state="@{homeViewModel.bottomSheetState}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:behavior_hideable="true"
         android:background="@drawable/bg_home_bottomsheet"
+        app:behavior_hideable="true"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
         <View

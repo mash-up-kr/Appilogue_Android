@@ -14,13 +14,10 @@ import androidx.navigation.ui.setupWithNavController
 import com.anonymous.appilogue.R
 import com.anonymous.appilogue.databinding.ActivityMainBinding
 import com.anonymous.appilogue.features.base.BaseActivity
-import com.anonymous.appilogue.features.community.CommunityFragment
 import com.anonymous.appilogue.features.home.HomeFragment
 import com.anonymous.appilogue.features.home.HomeViewModel
 import com.anonymous.appilogue.features.profile.ProfileFragment
 import com.anonymous.appilogue.features.search.SearchAppFragment
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
