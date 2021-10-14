@@ -15,6 +15,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/bg_home_bottomsheet"
         app:behavior_hideable="true"
+        app:behavior_peekHeight="@dimen/peek_bottomsheet_home"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
         <View

@@ -112,12 +112,18 @@
                 app:srcCompat="@mipmap/space_dust"
                 tools:ignore="ContentDescription" />
 
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|start"
+            app:layout_behavior="com.anonymous.appilogue.utils.FloatingButtonBehavior">
             <ImageView
                 android:id="@+id/iv_backButton"
                 android:layout_width="16dp"
                 android:layout_height="16dp"
                 android:layout_marginStart="24dp"
-                android:layout_marginBottom="220dp"
                 android:onClick="@{ _ -> homeViewModel.changeFocus(Focus.None)}"
                 android:visibility="@{homeViewModel.bottomSheetState == BottomSheetBehavior.STATE_COLLAPSED ? View.VISIBLE : View.INVISIBLE}"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -138,8 +144,6 @@
                 app:layout_constraintBottom_toBottomOf="@id/iv_backButton"
                 app:layout_constraintStart_toStartOf="@id/iv_backButton"
                 app:layout_constraintTop_toTopOf="@id/iv_backButton" />
-
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <include

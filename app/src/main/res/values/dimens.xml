@@ -5,4 +5,7 @@
     <dimen name="expanded_bottomsheet_home_margin">108dp</dimen>
     <dimen name="bottom_sheet_radius">20dp</dimen>
     <dimen name="review_content_horizontal_margin">24dp</dimen>
+
+    <dimen name="small_margin">10dp</dimen>
+    <dimen name="large_margin">20dp</dimen>
 </resources>
