@@ -3,12 +3,6 @@ package com.anonymous.appilogue.repository
 import android.content.Context
 import android.content.pm.PackageManager
 import com.anonymous.appilogue.model.InstalledApp
-import com.anonymous.appilogue.persistence.InstalledAppDao
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
 import timber.log.Timber
 import javax.inject.Inject
 
