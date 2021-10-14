@@ -16,7 +16,7 @@ fun setTitle(view: TextView, focus: Focus) {
         Focus.OnWhiteHole -> view.context.getString(R.string.white_hole)
         Focus.OnBlackHole -> view.context.getString(R.string.black_hole)
         Focus.OnSpaceDust -> view.context.getString(R.string.space_dust)
-        else -> String()
+        else -> EMPTY_STRING
     }.run {
         view.text = this
     }
@@ -28,3 +28,5 @@ fun setState(layout: ConstraintLayout, newState: Int) {
         state = newState
     }
 }
+
+const val EMPTY_STRING = ""
