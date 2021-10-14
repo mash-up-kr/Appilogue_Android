@@ -54,7 +54,7 @@ class SearchAppFragment
                 }
             }
         disposable = binding.searchEditTextView.textChanges()
-            .doOnNext { text -> binding.searchInputLayout.isHintEnabled = text == null }
+            .doOnNext { text -> binding.searchInputLayout.isHintEnabled = text.isNullOrEmpty() }
             .debounce(300L, TimeUnit.MILLISECONDS)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

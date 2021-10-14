@@ -1,8 +1,6 @@
 package com.anonymous.appilogue.features.search
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
 import com.anonymous.appilogue.model.InstalledApp
 import com.anonymous.appilogue.repository.SearchAppRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -13,7 +11,7 @@ import javax.inject.Inject
 class SearchAppViewModel @Inject constructor(
     private val searchAppRepository: SearchAppRepository
 ) : ViewModel() {
-    private var installedAppList: List<InstalledApp> = searchAppRepository.searchAppList()
+    private var installedAppList: LiveData<List<InstalledApp>> = searchAppRepository.fetchInstalledAppList().asLiveData()
 
     val inputKeyword = MutableLiveData<String>()
 
@@ -23,7 +21,9 @@ class SearchAppViewModel @Inject constructor(
     fun search(keyword: String) {
         Timber.d("Search : $keyword")
         _searchResult.value = if (keyword.isNotBlank()) {
-            installedAppList.filter { app -> app.name.lowercase().contains(keyword.lowercase()) }
+            installedAppList.value?.filter { app ->
+                app.name.lowercase().contains(keyword.lowercase())
+            } ?: emptyList()
         } else {
             emptyList()
         }
