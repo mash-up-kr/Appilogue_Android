@@ -14,14 +14,6 @@ import com.anonymous.appilogue.features.base.BaseFragment
 class EmailFragment : BaseFragment<FragmentEmailBinding, LoginViewModel>(R.layout.fragment_email) {
     override val viewModel = LoginViewModel()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View? {
-        return inflater.inflate(R.layout.fragment_email, container, false)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
