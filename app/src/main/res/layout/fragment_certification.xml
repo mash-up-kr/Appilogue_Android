@@ -49,7 +49,7 @@
             android:background="@drawable/btn_close_24px"
             android:backgroundTint="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/certification_back_button"
+            app:layout_constraintStart_toEndOf="@id/certification_back_button"
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
@@ -63,12 +63,12 @@
             android:gravity="center"
             android:inputType="number"
             android:maxLength="1"
-            android:nextFocusDown="@+id/certification_number2"
+            android:nextFocusDown="@id/certification_number2"
             android:selectAllOnFocus="true"
             android:singleLine="true"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/certification_number2"
+            app:layout_constraintEnd_toStartOf="@id/certification_number2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -89,13 +89,13 @@
             android:gravity="center"
             android:inputType="number"
             android:maxLength="1"
-            android:nextFocusDown="@+id/certification_number3"
+            android:nextFocusDown="@id/certification_number3"
             android:selectAllOnFocus="true"
             android:singleLine="true"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/certification_number3"
-            app:layout_constraintStart_toEndOf="@+id/certification_number1"
+            app:layout_constraintEnd_toStartOf="@id/certification_number3"
+            app:layout_constraintStart_toEndOf="@id/certification_number1"
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
@@ -110,13 +110,13 @@
             android:gravity="center"
             android:inputType="number"
             android:maxLength="1"
-            android:nextFocusDown="@+id/certification_number4"
+            android:nextFocusDown="@id/certification_number4"
             android:selectAllOnFocus="true"
             android:singleLine="true"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/certification_number4"
-            app:layout_constraintStart_toEndOf="@+id/certification_number2"
+            app:layout_constraintEnd_toStartOf="@id/certification_number4"
+            app:layout_constraintStart_toEndOf="@id/certification_number2"
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
@@ -131,13 +131,13 @@
             android:gravity="center"
             android:inputType="number"
             android:maxLength="1"
-            android:nextFocusDown="@+id/certification_number5"
+            android:nextFocusDown="@id/certification_number5"
             android:selectAllOnFocus="true"
             android:singleLine="true"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/certification_number5"
-            app:layout_constraintStart_toEndOf="@+id/certification_number3"
+            app:layout_constraintEnd_toStartOf="@id/certification_number5"
+            app:layout_constraintStart_toEndOf="@id/certification_number3"
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
@@ -152,13 +152,13 @@
             android:gravity="center"
             android:inputType="number"
             android:maxLength="1"
-            android:nextFocusDown="@+id/certification_number6"
+            android:nextFocusDown="@id/certification_number6"
             android:selectAllOnFocus="true"
             android:singleLine="true"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/certification_number6"
-            app:layout_constraintStart_toEndOf="@+id/certification_number4"
+            app:layout_constraintEnd_toStartOf="@id/certification_number6"
+            app:layout_constraintStart_toEndOf="@id/certification_number4"
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
@@ -179,7 +179,7 @@
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/certification_number5"
+            app:layout_constraintStart_toEndOf="@id/certification_number5"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -228,7 +228,7 @@
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/timer"
+            app:layout_constraintStart_toEndOf="@id/timer"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatButton

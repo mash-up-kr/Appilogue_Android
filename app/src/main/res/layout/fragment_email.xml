@@ -36,7 +36,7 @@
             android:background="@drawable/btn_close_24px"
             android:backgroundTint="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/email_back_button"
+            app:layout_constraintStart_toEndOf="@id/email_back_button"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -93,10 +93,10 @@
             android:text="입력한 이메일로 인증번호가 전송됩니다"
             android:textColor="@color/gray_02"
             android:textSize="12sp"
-            app:layout_constraintBottom_toTopOf="@+id/email_move_next_button"
+            app:layout_constraintBottom_toTopOf="@id/email_move_next_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
+            app:layout_constraintTop_toBottomOf="@id/textInputLayout" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/email_move_next_button"
