@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import com.anonymous.appilogue.R
 import com.anonymous.appilogue.databinding.FragmentCertificationBinding
@@ -16,7 +17,7 @@ import kotlin.concurrent.timer
 
 class CertificationFragment :
     BaseFragment<FragmentCertificationBinding, LoginViewModel>(R.layout.fragment_certification) {
-    override val viewModel = LoginViewModel()
+    override val viewModel: LoginViewModel by activityViewModels()
     private var time = 600000
     private var timerTask: Timer? = null
 
