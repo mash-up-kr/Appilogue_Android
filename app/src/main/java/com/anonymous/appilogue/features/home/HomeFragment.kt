@@ -3,6 +3,7 @@ package com.anonymous.appilogue.features.home
 import android.content.res.Resources
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
 import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.activityViewModels
 import com.anonymous.appilogue.R
@@ -17,20 +18,7 @@ class HomeFragment :
     BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.fragment_home) {
 
     val mainViewModel: MainViewModel by activityViewModels()
-    private val starsByFocus by lazy {
-        with(binding) {
-            hashMapOf(
-                Pair(Focus.OnBlackHole, ivBlackHole),
-                Pair(Focus.OffBlackHole, ivBlackHole),
-                Pair(Focus.OnWhiteHole, ivWhiteHole),
-                Pair(Focus.OffWhiteHole, ivWhiteHole),
-                Pair(Focus.OffPlanet, ivMainPlanet),
-                Pair(Focus.OnPlanet, ivMainPlanet),
-                Pair(Focus.OnSpaceDust, ivSpaceDust),
-                Pair(Focus.OffSpaceDust, ivSpaceDust)
-            )
-        }
-    }
+    var starsByFocus = hashMapOf<Focus, ImageView>()
 
     override val viewModel: HomeViewModel by activityViewModels()
 
@@ -41,8 +29,24 @@ class HomeFragment :
         }
         initBottomSheet()
         observeStar()
+        initStarByFocus()
         SpaceManager.stars = starsByFocus.values.toSet().toList()
         SpaceManager.animateSpace(binding.ivSpace)
+    }
+
+    fun initStarByFocus() {
+        with(binding) {
+            starsByFocus = hashMapOf(
+                Pair(Focus.OnBlackHole, ivBlackHole),
+                Pair(Focus.OffBlackHole, ivBlackHole),
+                Pair(Focus.OnWhiteHole, ivWhiteHole),
+                Pair(Focus.OffWhiteHole, ivWhiteHole),
+                Pair(Focus.OffPlanet, ivMainPlanet),
+                Pair(Focus.OnPlanet, ivMainPlanet),
+                Pair(Focus.OnSpaceDust, ivSpaceDust),
+                Pair(Focus.OffSpaceDust, ivSpaceDust)
+            )
+        }
     }
 
     private fun initBottomSheet() {
