@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
@@ -121,14 +122,18 @@ class CertificationFragment :
             if (it!!.isNotEmpty()) {
                 with(certificationMoveNextButton) {
                     isEnabled = true
-                    setTextColor(resources.getColor(R.color.white))
-                    setBackgroundColor(resources.getColor(R.color.purple_01))
+                    context?.let { ctx ->
+                        setTextColor(ContextCompat.getColor(ctx, R.color.white))
+                        setBackgroundColor(ContextCompat.getColor(ctx, R.color.purple_01))
+                    }
                 }
             } else {
                 with(certificationMoveNextButton) {
                     isEnabled = false
-                    setTextColor(resources.getColor(R.color.gray_01))
-                    setBackgroundColor(resources.getColor(R.color.black_01))
+                    context?.let { ctx ->
+                        setTextColor(ContextCompat.getColor(ctx, R.color.gray_01))
+                        setBackgroundColor(ContextCompat.getColor(ctx, R.color.black_01))
+                    }
                 }
             }
         }
