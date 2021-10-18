@@ -3,12 +3,14 @@ package com.anonymous.appilogue.features.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.anonymous.appilogue.model.ReviewedApp
+import com.anonymous.appilogue.repository.AppRepository
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor() : ViewModel() {
+class HomeViewModel @Inject constructor(val appRepository: AppRepository) : ViewModel() {
 
     private val _starFocused = MutableLiveData(Focus.None)
     val starFocused: LiveData<Focus> = _starFocused
@@ -18,6 +20,9 @@ class HomeViewModel @Inject constructor() : ViewModel() {
 
     private val _bottomSheetHideable = MutableLiveData(true)
     val bottomSheetHideable: LiveData<Boolean> = _bottomSheetHideable
+
+    private val _blackHoleApps = MutableLiveData(listOf<ReviewedApp>())
+    val blackHoleApps: LiveData<List<ReviewedApp>> = _blackHoleApps
 
     fun changeBottomSheetState(newState: Int) {
         _bottomSheetState.value = newState
@@ -37,5 +42,9 @@ class HomeViewModel @Inject constructor() : ViewModel() {
             _bottomSheetHideable.value = true
             changeBottomSheetState(BottomSheetBehavior.STATE_HIDDEN)
         }
+    }
+
+    fun fetchBlackHoleApps() {
+        _blackHoleApps.value = appRepository.getBlackHoleApps()
     }
 }

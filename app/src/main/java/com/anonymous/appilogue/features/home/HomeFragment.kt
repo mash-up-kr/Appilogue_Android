@@ -18,6 +18,7 @@ class HomeFragment :
     BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.fragment_home) {
 
     val mainViewModel: MainViewModel by activityViewModels()
+    val bottomSheetAppAdapter by lazy { BottomSheetAppAdapter() }
     var starsByFocus = hashMapOf<Focus, ImageView>()
 
     override val viewModel: HomeViewModel by activityViewModels()
@@ -30,8 +31,13 @@ class HomeFragment :
         initBottomSheet()
         observeStar()
         initStarByFocus()
+        binding.bottomSheetHome.rvBottomsheet.apply {
+            adapter = bottomSheetAppAdapter
+            addItemDecoration(BottomSheetRecyclerViewDecoration(context))
+        }
         SpaceStateManager.stars = starsByFocus.values.toSet().toList()
         SpaceStateManager.animateSpace(binding.ivSpace)
+        viewModel.fetchBlackHoleApps()
     }
 
     private fun initStarByFocus() {

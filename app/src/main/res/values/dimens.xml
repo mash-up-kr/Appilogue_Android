@@ -6,4 +6,6 @@
     <dimen name="bottom_sheet_radius">20dp</dimen>
     <dimen name="review_content_horizontal_margin">24dp</dimen>
     <dimen name="above_bottom_sheet_margin">10dp</dimen>
+    <dimen name="bottom_sheet_item_side_margin">8dp</dimen>
+    <dimen name="bottom_sheet_item_bottom_margin">25dp</dimen>
 </resources>

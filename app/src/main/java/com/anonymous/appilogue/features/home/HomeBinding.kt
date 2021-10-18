@@ -1,9 +1,13 @@
 package com.anonymous.appilogue.features.home
 
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.BindingAdapter
 import com.anonymous.appilogue.R
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 
 @BindingAdapter("titleByFocus")
@@ -27,4 +31,15 @@ fun setState(layout: ConstraintLayout, newState: Int) {
     }
 }
 
+@BindingAdapter("appImageUrl")
+fun ImageView.bindAppImageUrl(uri: String?) {
+    if (!uri.isNullOrEmpty()) {
+        Glide.with(context)
+            .load(uri)
+            .transform(CenterCrop(), RoundedCorners(APP_ICON_RADIUS))
+            .into(this)
+    }
+}
+
 const val EMPTY_STRING = ""
+const val APP_ICON_RADIUS = 20
