@@ -31,13 +31,8 @@ class HomeFragment :
         initBottomSheet()
         observeStar()
         initStarByFocus()
-        binding.bottomSheetHome.rvBottomsheet.apply {
-            adapter = bottomSheetAppAdapter
-            addItemDecoration(BottomSheetRecyclerViewDecoration(context))
-        }
         SpaceStateManager.stars = starsByFocus.values.toSet().toList()
         SpaceStateManager.animateSpace(binding.ivSpace)
-        viewModel.fetchBlackHoleApps()
     }
 
     private fun initStarByFocus() {
@@ -56,6 +51,7 @@ class HomeFragment :
     }
 
     private fun initBottomSheet() {
+        initBottomSheetRecyclerView()
         binding.bottomSheetHome.root.apply {
             updateLayoutParams {
                 height = Resources.getSystem().displayMetrics.heightPixels -
@@ -89,11 +85,25 @@ class HomeFragment :
         }
     }
 
+    private fun initBottomSheetRecyclerView() {
+        binding.bottomSheetHome.rvBlackHoleBottomsheet.apply {
+            adapter = bottomSheetAppAdapter
+            addItemDecoration(BottomSheetRecyclerViewDecoration(context))
+        }
+        binding.bottomSheetHome.rvWhiteHoleBottomsheet.apply {
+            adapter = bottomSheetAppAdapter
+            addItemDecoration(BottomSheetRecyclerViewDecoration(context))
+        }
+        viewModel.fetchBlackHoleApps()
+        viewModel.fetchWhiteHoleApps()
+    }
+
     private fun observeStar() {
         viewModel.starFocused.observe(viewLifecycleOwner, {
             if (Focus.isOnFocus(it)) {
                 starsByFocus[it]?.let { star ->
                     SpaceStateManager.focusStar(star, true)
+                    viewModel.focusbottomSheetTab(1)
                 }
             }
             if (Focus.isOffFocus(it)) {

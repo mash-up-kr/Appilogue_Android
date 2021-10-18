@@ -1,5 +1,6 @@
 package com.anonymous.appilogue.features.home
 
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -38,6 +39,34 @@ fun ImageView.bindAppImageUrl(uri: String?) {
             .load(uri)
             .transform(CenterCrop(), RoundedCorners(APP_ICON_RADIUS))
             .into(this)
+    }
+}
+
+@BindingAdapter("secondTabVisible")
+fun setVisible(view: View, focus: Focus) {
+    when (focus) {
+        Focus.OnPlanet, Focus.OnSpaceDust -> view.visibility = View.VISIBLE
+        else -> view.visibility = View.GONE
+    }
+}
+
+@BindingAdapter("firstTabTitle")
+fun setFirstTabTitle(textView: TextView, focus: Focus) {
+    when (focus) {
+        Focus.OnPlanet -> textView.text = textView.context.getString(R.string.my_planet)
+        Focus.OnSpaceDust -> textView.text = textView.context.getString(R.string.my_space_dust)
+        Focus.OnBlackHole -> textView.text = textView.context.getString(R.string.my_black_hole)
+        Focus.OnWhiteHole -> textView.text = textView.context.getString(R.string.my_white_hole)
+        else -> textView.text = EMPTY_STRING
+    }
+}
+
+@BindingAdapter("secondTabTitle")
+fun setSecondTabTitle(textView: TextView, focus: Focus) {
+    when (focus) {
+        Focus.OnPlanet -> textView.text = textView.context.getString(R.string.planet_store)
+        Focus.OnSpaceDust -> textView.text = textView.context.getString(R.string.dust_store)
+        else -> textView.text = EMPTY_STRING
     }
 }
 

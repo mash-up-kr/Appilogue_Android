@@ -4,6 +4,10 @@
 
     <data>
 
+        <import type="com.anonymous.appilogue.features.home.Focus" />
+
+        <import type="android.view.View" />
+
         <variable
             name="homeViewModel"
             type="com.anonymous.appilogue.features.home.HomeViewModel" />
@@ -28,38 +32,81 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tv_myBlackHole"
+            android:id="@+id/tv_bottomSheetFirstTab"
+            firstTabTitle="@{homeViewModel.starFocused}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginTop="28dp"
-            android:text="@string/my_blackhole"
+            android:alpha="@{homeViewModel.bottomSheetTabFocus == 1 ? 1f : 0.3f}"
+            android:onClick="@{ _ -> homeViewModel.focusbottomSheetTab(1)}"
             android:textColor="@color/white"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <View
-            android:id="@+id/v_underLine"
+            android:id="@+id/v_underLineFirstTab"
             android:layout_width="0dp"
             android:layout_height="4dp"
             android:layout_marginTop="8dp"
+            android:alpha="@{homeViewModel.bottomSheetTabFocus == 1 ? 1f : 0.3f}"
             android:background="@drawable/border_radius_10_white"
-            app:layout_constraintEnd_toEndOf="@id/tv_myBlackHole"
-            app:layout_constraintStart_toStartOf="@id/tv_myBlackHole"
-            app:layout_constraintTop_toBottomOf="@id/tv_myBlackHole" />
+            app:layout_constraintEnd_toEndOf="@id/tv_bottomSheetFirstTab"
+            app:layout_constraintStart_toStartOf="@id/tv_bottomSheetFirstTab"
+            app:layout_constraintTop_toBottomOf="@id/tv_bottomSheetFirstTab" />
 
+        <TextView
+            android:id="@+id/tv_bottomSheetSecondTab"
+            secondTabTitle="@{homeViewModel.starFocused}"
+            secondTabVisible="@{homeViewModel.starFocused}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="28dp"
+            android:alpha="@{homeViewModel.bottomSheetTabFocus == 2 ? 1f : 0.3f}"
+            android:onClick="@{ _ -> homeViewModel.focusbottomSheetTab(2)}"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@id/tv_bottomSheetFirstTab"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/v_underLineSecondTab"
+            secondTabVisible="@{homeViewModel.starFocused}"
+            android:layout_width="0dp"
+            android:layout_height="4dp"
+            android:layout_marginTop="8dp"
+            android:alpha="@{homeViewModel.bottomSheetTabFocus == 2 ? 1f : 0.3f}"
+            android:background="@drawable/border_radius_10_white"
+            app:layout_constraintEnd_toEndOf="@id/tv_bottomSheetSecondTab"
+            app:layout_constraintStart_toStartOf="@id/tv_bottomSheetSecondTab"
+            app:layout_constraintTop_toBottomOf="@id/tv_bottomSheetSecondTab" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_bottomsheet"
+            android:id="@+id/rv_blackHoleBottomsheet"
             replaceList="@{homeViewModel.blackHoleApps}"
             android:layout_width="wrap_content"
-            android:layout_marginTop="30dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:visibility="@{homeViewModel.starFocused == Focus.OnBlackHole ? View.VISIBLE : View.GONE}"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/v_underLine"
+            app:layout_constraintTop_toBottomOf="@id/v_underLineFirstTab"
+            app:spanCount="5" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_whiteHoleBottomsheet"
+            replaceList="@{homeViewModel.whiteHoleApps}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:visibility="@{homeViewModel.starFocused == Focus.OnWhiteHole ? View.VISIBLE : View.GONE}"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/v_underLineFirstTab"
             app:spanCount="5" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

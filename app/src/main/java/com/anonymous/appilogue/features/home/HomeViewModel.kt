@@ -24,6 +24,12 @@ class HomeViewModel @Inject constructor(val appRepository: AppRepository) : View
     private val _blackHoleApps = MutableLiveData(listOf<ReviewedApp>())
     val blackHoleApps: LiveData<List<ReviewedApp>> = _blackHoleApps
 
+    private val _whiteHoleApps = MutableLiveData(listOf<ReviewedApp>())
+    val whiteHoleApps: LiveData<List<ReviewedApp>> = _whiteHoleApps
+
+    private val _bottomSheetTabFocus = MutableLiveData(1)
+    val bottomSheetTabFocus: LiveData<Int> = _bottomSheetTabFocus
+
     fun changeBottomSheetState(newState: Int) {
         _bottomSheetState.value = newState
     }
@@ -46,5 +52,19 @@ class HomeViewModel @Inject constructor(val appRepository: AppRepository) : View
 
     fun fetchBlackHoleApps() {
         _blackHoleApps.value = appRepository.getBlackHoleApps()
+    }
+
+    fun fetchWhiteHoleApps() {
+        _whiteHoleApps.value = appRepository.getWhiteHoleApps()
+    }
+
+    fun focusbottomSheetTab(index: Int) {
+        when (index) {
+            in 1..2 -> {
+                _bottomSheetTabFocus.value = index
+            }
+            else -> {
+            }
+        }
     }
 }
