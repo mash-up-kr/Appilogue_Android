@@ -26,13 +26,14 @@
 
         <TextView
             android:id="@+id/tv_appText"
-            android:layout_width="50dp"
+            android:layout_width="60dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
-            android:singleLine="true"
             android:gravity="center"
+            android:singleLine="true"
             android:text="@{item.name}"
             android:textColor="@color/white"
+            android:textSize="12sp"
             app:layout_constrainedWidth="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
