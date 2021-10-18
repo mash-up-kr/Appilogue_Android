@@ -7,7 +7,7 @@ import android.content.res.Resources
 import android.view.animation.Animation
 import android.widget.ImageView
 
-object SpaceManager {
+object SpaceStateManager {
 
     var stars: List<ImageView> = listOf()
 
@@ -24,7 +24,7 @@ object SpaceManager {
         val focusedStarXCenter = (focusedStar.left + focusedStar.right) / 2.0f
         val focusedStarYCenter = (focusedStar.top + focusedStar.bottom) / 2.0f
         val focusedStarSize = focusedStar.right - focusedStar.left
-        val windowXCenter = Resources.getSystem().displayMetrics.widthPixels / 2.0f
+        val windowXCenter = Resources.getSystem().displayMetrics.widthPixels / 2.0F
         val windowYCenter = Resources.getSystem().displayMetrics.heightPixels / 2.0f
         val maxStarSize = windowXCenter / MAX_STAR_RATIO
         val scaleSize = if (isFocusIn) maxStarSize / focusedStarSize else 1f

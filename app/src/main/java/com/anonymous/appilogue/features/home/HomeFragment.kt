@@ -30,20 +30,20 @@ class HomeFragment :
         initBottomSheet()
         observeStar()
         initStarByFocus()
-        SpaceManager.stars = starsByFocus.values.toSet().toList()
-        SpaceManager.animateSpace(binding.ivSpace)
+        SpaceStateManager.stars = starsByFocus.values.toSet().toList()
+        SpaceStateManager.animateSpace(binding.ivSpace)
     }
 
-    fun initStarByFocus() {
+    private fun initStarByFocus() {
         with(binding) {
             starsByFocus = hashMapOf(
                 Pair(Focus.OnBlackHole, ivBlackHole),
-                Pair(Focus.OffBlackHole, ivBlackHole),
                 Pair(Focus.OnWhiteHole, ivWhiteHole),
-                Pair(Focus.OffWhiteHole, ivWhiteHole),
-                Pair(Focus.OffPlanet, ivMainPlanet),
                 Pair(Focus.OnPlanet, ivMainPlanet),
                 Pair(Focus.OnSpaceDust, ivSpaceDust),
+                Pair(Focus.OffBlackHole, ivBlackHole),
+                Pair(Focus.OffWhiteHole, ivWhiteHole),
+                Pair(Focus.OffPlanet, ivMainPlanet),
                 Pair(Focus.OffSpaceDust, ivSpaceDust)
             )
         }
@@ -87,12 +87,12 @@ class HomeFragment :
         viewModel.starFocused.observe(viewLifecycleOwner, {
             if (Focus.isOnFocus(it)) {
                 starsByFocus[it]?.let { star ->
-                    SpaceManager.focusStar(star, true)
+                    SpaceStateManager.focusStar(star, true)
                 }
             }
             if (Focus.isOffFocus(it)) {
                 starsByFocus[it]?.let { star ->
-                    SpaceManager.focusStar(star, false)
+                    SpaceStateManager.focusStar(star, false)
                 }
             }
         })
