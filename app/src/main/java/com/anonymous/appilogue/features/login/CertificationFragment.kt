@@ -3,7 +3,6 @@ package com.anonymous.appilogue.features.login
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.EditText
 import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.activityViewModels
@@ -87,34 +86,31 @@ class CertificationFragment :
         val certificationNumberList =
             listOf(certificationNumber1, certificationNumber2, certificationNumber3, certificationNumber4, certificationNumber5, certificationNumber6)
 
-        fun setAddTextChangedListener() {
-            for (index in 0..4) {
-                certificationNumberList[index].addTextChangedListener {
-                    if (it!!.isNotEmpty()) {
-                        certificationNumberList[index + 1].requestFocus()
-                    }
+        for (index in 0..4) {
+            certificationNumberList[index].addTextChangedListener {
+                if (it!!.isNotEmpty()) {
+                    certificationNumberList[index + 1].requestFocus()
                 }
             }
-            certificationNumberList[5].addTextChangedListener {
-                if (it!!.isNotEmpty()) {
-                    with(certificationMoveNextButton) {
-                        isEnabled = true
-                        context?.let { ctx ->
-                            setTextColor(ContextCompat.getColor(ctx, R.color.white))
-                            setBackgroundColor(ContextCompat.getColor(ctx, R.color.purple_01))
-                        }
+        }
+        certificationNumberList[5].addTextChangedListener {
+            if (it!!.isNotEmpty()) {
+                with(certificationMoveNextButton) {
+                    isEnabled = true
+                    context?.let { ctx ->
+                        setTextColor(ContextCompat.getColor(ctx, R.color.white))
+                        setBackgroundColor(ContextCompat.getColor(ctx, R.color.purple_01))
                     }
-                } else {
-                    with(certificationMoveNextButton) {
-                        isEnabled = false
-                        context?.let { ctx ->
-                            setTextColor(ContextCompat.getColor(ctx, R.color.gray_01))
-                            setBackgroundColor(ContextCompat.getColor(ctx, R.color.black_01))
-                        }
+                }
+            } else {
+                with(certificationMoveNextButton) {
+                    isEnabled = false
+                    context?.let { ctx ->
+                        setTextColor(ContextCompat.getColor(ctx, R.color.gray_01))
+                        setBackgroundColor(ContextCompat.getColor(ctx, R.color.black_01))
                     }
                 }
             }
         }
-        setAddTextChangedListener()
     }
 }
