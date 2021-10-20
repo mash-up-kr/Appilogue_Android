@@ -2,9 +2,8 @@ package com.anonymous.appilogue.features.login
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import android.widget.EditText
 import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.activityViewModels
@@ -85,49 +84,37 @@ class CertificationFragment :
     }
 
     private fun FragmentCertificationBinding.setAddTextChangeListener() {
-        certificationNumber1.addTextChangedListener {
-            if (it!!.isNotEmpty()) {
-                certificationNumber2.requestFocus()
-            }
-        }
-        certificationNumber2.addTextChangedListener {
-            if (it!!.isNotEmpty()) {
-                certificationNumber3.requestFocus()
-            }
-        }
-        certificationNumber3.addTextChangedListener {
-            if (it!!.isNotEmpty()) {
-                certificationNumber4.requestFocus()
-            }
-        }
-        certificationNumber4.addTextChangedListener {
-            if (it!!.isNotEmpty()) {
-                certificationNumber5.requestFocus()
-            }
-        }
-        certificationNumber5.addTextChangedListener {
-            if (it!!.isNotEmpty()) {
-                certificationNumber6.requestFocus()
-            }
-        }
-        certificationNumber6.addTextChangedListener {
-            if (it!!.isNotEmpty()) {
-                with(certificationMoveNextButton) {
-                    isEnabled = true
-                    context?.let { ctx ->
-                        setTextColor(ContextCompat.getColor(ctx, R.color.white))
-                        setBackgroundColor(ContextCompat.getColor(ctx, R.color.purple_01))
+        val certificationNumberList =
+            listOf(certificationNumber1, certificationNumber2, certificationNumber3, certificationNumber4, certificationNumber5, certificationNumber6)
+
+        fun setAddTextChangedListener() {
+            for (index in 0..4) {
+                certificationNumberList[index].addTextChangedListener {
+                    if (it!!.isNotEmpty()) {
+                        certificationNumberList[index + 1].requestFocus()
                     }
                 }
-            } else {
-                with(certificationMoveNextButton) {
-                    isEnabled = false
-                    context?.let { ctx ->
-                        setTextColor(ContextCompat.getColor(ctx, R.color.gray_01))
-                        setBackgroundColor(ContextCompat.getColor(ctx, R.color.black_01))
+            }
+            certificationNumberList[5].addTextChangedListener {
+                if (it!!.isNotEmpty()) {
+                    with(certificationMoveNextButton) {
+                        isEnabled = true
+                        context?.let { ctx ->
+                            setTextColor(ContextCompat.getColor(ctx, R.color.white))
+                            setBackgroundColor(ContextCompat.getColor(ctx, R.color.purple_01))
+                        }
+                    }
+                } else {
+                    with(certificationMoveNextButton) {
+                        isEnabled = false
+                        context?.let { ctx ->
+                            setTextColor(ContextCompat.getColor(ctx, R.color.gray_01))
+                            setBackgroundColor(ContextCompat.getColor(ctx, R.color.black_01))
+                        }
                     }
                 }
             }
         }
+        setAddTextChangedListener()
     }
 }
