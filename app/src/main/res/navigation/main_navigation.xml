@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/communityFragment"
+        android:name="com.anonymous.appilogue.features.community.CommunityFragment"
+        android:label="CommunityFragment" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.anonymous.appilogue.features.profile.ProfileFragment"
+        android:label="ProfileFragment" />
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.anonymous.appilogue.features.home.HomeFragment"
+        android:label="HomeFragment" />
+    <fragment
+        android:id="@+id/searchAppFragment2"
+        android:name="com.anonymous.appilogue.features.search.SearchAppFragment"
+        android:label="SearchAppFragment" />
+</navigation>

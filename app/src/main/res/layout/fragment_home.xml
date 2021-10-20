@@ -5,7 +5,7 @@
 
     <data>
 
-        <import type="com.anonymous.appilogue.features.home.HomeViewModel.Focus" />
+        <import type="com.anonymous.appilogue.features.home.Focus" />
 
         <import type="com.google.android.material.bottomsheet.BottomSheetBehavior" />
 
@@ -22,27 +22,107 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@mipmap/img_home_bg">
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/iv_space"
+                android:layout_width="500dp"
+                android:layout_height="800dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@mipmap/img_home_bg"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/tv_title"
+                titleByFocus="@{homeViewModel.starFocused}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="42dp"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/iv_alarm"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginEnd="25dp"
+                app:layout_constraintBottom_toBottomOf="@id/tv_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_title"
+                app:srcCompat="@drawable/ic_icon_alarm"
+                app:tint="@color/white"
+                tools:ignore="ContentDescription" />
 
             <ImageView
                 android:id="@+id/iv_mainPlanet"
-                android:layout_width="300dp"
-                android:layout_height="300dp"
+                android:layout_width="220dp"
+                android:layout_height="220dp"
+                android:layout_marginBottom="20dp"
+                android:clickable="@{homeViewModel.starFocused == Focus.None}"
                 android:onClick="@{ _ -> homeViewModel.changeFocus(Focus.OnPlanet)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/star"
+                app:srcCompat="@mipmap/main_planet"
                 tools:ignore="ContentDescription" />
+
+            <ImageView
+                android:id="@+id/iv_blackHole"
+                android:layout_width="136dp"
+                android:layout_height="136dp"
+                android:layout_marginStart="23dp"
+                android:layout_marginBottom="138dp"
+                android:clickable="@{homeViewModel.starFocused == Focus.None}"
+                android:onClick="@{ _ -> homeViewModel.changeFocus(Focus.OnBlackHole)}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:srcCompat="@mipmap/black_hole"
+                tools:ignore="ContentDescription" />
+
+            <ImageView
+                android:id="@+id/iv_whiteHole"
+                android:layout_width="133dp"
+                android:layout_height="133dp"
+                android:layout_marginTop="101dp"
+                android:layout_marginEnd="18dp"
+                android:clickable="@{homeViewModel.starFocused == Focus.None}"
+                android:onClick="@{ _ -> homeViewModel.changeFocus(Focus.OnWhiteHole)}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@mipmap/white_hole"
+                tools:ignore="ContentDescription" />
+
+            <ImageView
+                android:id="@+id/iv_spaceDust"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="40dp"
+                android:layout_marginBottom="174dp"
+                android:clickable="@{homeViewModel.starFocused == Focus.None}"
+                android:onClick="@{ _ -> homeViewModel.changeFocus(Focus.OnSpaceDust)}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:srcCompat="@mipmap/space_dust"
+                tools:ignore="ContentDescription" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_behavior="com.anonymous.appilogue.features.custom.AboveBottomSheetBehavior">
 
             <ImageView
                 android:id="@+id/iv_backButton"
                 android:layout_width="16dp"
                 android:layout_height="16dp"
                 android:layout_marginStart="24dp"
-                android:layout_marginBottom="222dp"
                 android:onClick="@{ _ -> homeViewModel.changeFocus(Focus.None)}"
                 android:visibility="@{homeViewModel.bottomSheetState == BottomSheetBehavior.STATE_COLLAPSED ? View.VISIBLE : View.INVISIBLE}"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -63,8 +143,6 @@
                 app:layout_constraintBottom_toBottomOf="@id/iv_backButton"
                 app:layout_constraintStart_toStartOf="@id/iv_backButton"
                 app:layout_constraintTop_toTopOf="@id/iv_backButton" />
-
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <include

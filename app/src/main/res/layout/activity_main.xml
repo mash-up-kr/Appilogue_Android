@@ -7,11 +7,11 @@
 
         <import type="android.view.View" />
 
-        <import type="com.anonymous.appilogue.features.home.HomeViewModel.Focus" />
+        <import type="com.anonymous.appilogue.features.home.Focus" />
 
         <variable
-            name="homeViewModel"
-            type="com.anonymous.appilogue.features.home.HomeViewModel" />
+            name="mainViewModel"
+            type="com.anonymous.appilogue.features.main.MainViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -20,20 +20,23 @@
         tools:context=".features.main.MainActivity">
 
         <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/fcv_fragmentContainerView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"
+            android:id="@+id/nav_main_host_fragment"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:defaultNavHost="true"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:navGraph="@navigation/main_navigation" />
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNavigationView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@color/black_01"
-            android:visibility="@{homeViewModel.starFocused == Focus.None ? View.VISIBLE : View.INVISIBLE}"
+            android:visibility="@{mainViewModel.bottomNavigationState ? View.VISIBLE : View.INVISIBLE}"
             app:itemIconSize="@dimen/size_navigation_icon"
             app:itemIconTint="@color/gray_02"
             app:labelVisibilityMode="unlabeled"

@@ -24,20 +24,18 @@ class HomeViewModel @Inject constructor() : ViewModel() {
     }
 
     fun changeFocus(focus: Focus) {
-        _starFocused.value = focus
-        when (focus) {
-            Focus.None -> {
-                _bottomSheetHideable.value = true
-                _bottomSheetState.value = BottomSheetBehavior.STATE_HIDDEN
-            }
-            else -> {
-                _bottomSheetHideable.value = false
-                _bottomSheetState.value = BottomSheetBehavior.STATE_COLLAPSED
+        if (focus == Focus.None) {
+            starFocused.value?.let {
+                _starFocused.value = Focus.toOffFocus(it)
             }
         }
-    }
-
-    enum class Focus {
-        None, OnWhiteHole, OnBlackHole, OnSpaceDust, OnPlanet
+        _starFocused.value = focus
+        if (Focus.isOnFocus(focus)) {
+            _bottomSheetHideable.value = false
+            changeBottomSheetState(BottomSheetBehavior.STATE_COLLAPSED)
+        } else {
+            _bottomSheetHideable.value = true
+            changeBottomSheetState(BottomSheetBehavior.STATE_HIDDEN)
+        }
     }
 }
