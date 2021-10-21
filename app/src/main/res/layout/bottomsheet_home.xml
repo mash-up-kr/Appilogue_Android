@@ -14,7 +14,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        state="@{homeViewModel.bottomSheetState}"
+        bottomSheetState="@{homeViewModel.bottomSheetState}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_home_bottomsheet"

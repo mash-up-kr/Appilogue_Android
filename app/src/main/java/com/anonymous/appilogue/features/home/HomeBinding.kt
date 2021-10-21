@@ -10,24 +10,25 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import org.w3c.dom.Text
 
 @BindingAdapter("titleByFocus")
-fun setTitle(view: TextView, focus: Focus) {
+fun TextView.setTitleByFocus(focus: Focus) {
     when (focus) {
-        Focus.None -> view.context.getString(R.string.my_space)
-        Focus.OnPlanet -> view.context.getString(R.string.planet)
-        Focus.OnWhiteHole -> view.context.getString(R.string.white_hole)
-        Focus.OnBlackHole -> view.context.getString(R.string.black_hole)
-        Focus.OnSpaceDust -> view.context.getString(R.string.space_dust)
+        Focus.None -> context.getString(R.string.my_space)
+        Focus.OnPlanet -> context.getString(R.string.planet)
+        Focus.OnWhiteHole -> context.getString(R.string.white_hole)
+        Focus.OnBlackHole -> context.getString(R.string.black_hole)
+        Focus.OnSpaceDust -> context.getString(R.string.space_dust)
         else -> EMPTY_STRING
     }.run {
-        view.text = this
+        text = this
     }
 }
 
-@BindingAdapter("state")
-fun setState(layout: ConstraintLayout, newState: Int) {
-    BottomSheetBehavior.from(layout).apply {
+@BindingAdapter("bottomSheetState")
+fun ConstraintLayout.setBottomSheetState(newState: Int) {
+    BottomSheetBehavior.from(this).apply {
         state = newState
     }
 }
@@ -43,30 +44,30 @@ fun ImageView.bindAppImageUrl(uri: String?) {
 }
 
 @BindingAdapter("secondTabVisible")
-fun setVisible(view: View, focus: Focus) {
-    when (focus) {
-        Focus.OnPlanet, Focus.OnSpaceDust -> view.visibility = View.VISIBLE
-        else -> view.visibility = View.GONE
+fun View.setSecondTabVisible(focus: Focus) {
+    visibility = when (focus) {
+        Focus.OnPlanet, Focus.OnSpaceDust -> View.VISIBLE
+        else -> View.GONE
     }
 }
 
 @BindingAdapter("firstTabTitle")
-fun setFirstTabTitle(textView: TextView, focus: Focus) {
-    when (focus) {
-        Focus.OnPlanet -> textView.text = textView.context.getString(R.string.my_planet)
-        Focus.OnSpaceDust -> textView.text = textView.context.getString(R.string.my_space_dust)
-        Focus.OnBlackHole -> textView.text = textView.context.getString(R.string.my_black_hole)
-        Focus.OnWhiteHole -> textView.text = textView.context.getString(R.string.my_white_hole)
-        else -> textView.text = EMPTY_STRING
+fun TextView.setFirstTabTitle(focus: Focus) {
+    text = when (focus) {
+        Focus.OnPlanet -> context.getString(R.string.my_planet)
+        Focus.OnSpaceDust -> context.getString(R.string.my_space_dust)
+        Focus.OnBlackHole -> context.getString(R.string.my_black_hole)
+        Focus.OnWhiteHole -> context.getString(R.string.my_white_hole)
+        else -> EMPTY_STRING
     }
 }
 
 @BindingAdapter("secondTabTitle")
-fun setSecondTabTitle(textView: TextView, focus: Focus) {
-    when (focus) {
-        Focus.OnPlanet -> textView.text = textView.context.getString(R.string.planet_store)
-        Focus.OnSpaceDust -> textView.text = textView.context.getString(R.string.dust_store)
-        else -> textView.text = EMPTY_STRING
+fun TextView.setSecondTabTitle(focus: Focus) {
+    text = when (focus) {
+        Focus.OnPlanet -> context.getString(R.string.planet_store)
+        Focus.OnSpaceDust -> context.getString(R.string.dust_store)
+        else -> EMPTY_STRING
     }
 }
 
