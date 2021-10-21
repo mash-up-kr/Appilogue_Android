@@ -25,4 +25,12 @@
     <string name="community_fragment">CommunityFragment</string>
     <string name="profile_fragment">ProfileFragment</string>
     <string name="home_fragment">HomeFragment</string>
+    <!--   Login  -->
+    <string name="insert_email">이메일을 입력해주세요</string>
+    <string name="next_button">다음</string>
+    <string name="email_to_certification">입력한 이메일로 인증번호가 전송됩니다</string>
+    <string name="certification_resend_message">재전송</string>
+    <string name="certification_number_message">인증번호를 입력하세요</string>
+    <string name="certification_can_edit_number">0123456789</string>
+    <string name="certification_notify_message">전송된 인증번호는 10분 안에 만료됩니다.</string>
 </resources>

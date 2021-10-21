@@ -4,5 +4,5 @@ import android.graphics.drawable.Drawable
 
 data class InstalledApp(
     val name: String,
-    val icon: Drawable
+    val icon: Drawable,
 )

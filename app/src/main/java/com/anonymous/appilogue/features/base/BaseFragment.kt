@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModel
 
 
 abstract class BaseFragment<B : ViewDataBinding, VM : ViewModel>(
-    @LayoutRes private val layoutResId: Int
+    @LayoutRes private val layoutResId: Int,
 ) : Fragment(layoutResId) {
 
     abstract val viewModel: VM

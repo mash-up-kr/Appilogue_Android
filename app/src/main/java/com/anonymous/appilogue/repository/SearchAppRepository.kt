@@ -7,7 +7,7 @@ import timber.log.Timber
 import javax.inject.Inject
 
 class SearchAppRepository @Inject constructor(
-    private val applicationContext: Context
+    private val applicationContext: Context,
 ) {
 
     fun searchAppList(): List<InstalledApp> {

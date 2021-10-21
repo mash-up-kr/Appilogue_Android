@@ -3,24 +3,15 @@ package com.anonymous.appilogue.features.login
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import com.anonymous.appilogue.R
 import com.anonymous.appilogue.databinding.FragmentEmailBinding
 import com.anonymous.appilogue.features.base.BaseFragment
 
 class EmailFragment : BaseFragment<FragmentEmailBinding, LoginViewModel>(R.layout.fragment_email) {
-    override val viewModel = LoginViewModel()
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_email, container, false)
-    }
+    override val viewModel: LoginViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -43,7 +34,7 @@ class EmailFragment : BaseFragment<FragmentEmailBinding, LoginViewModel>(R.layou
                     s: CharSequence?,
                     start: Int,
                     count: Int,
-                    after: Int
+                    after: Int,
                 ) {
                     // do nothing
                 }

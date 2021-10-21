@@ -15,6 +15,6 @@ object RepositoryModule {
 
     @Provides
     fun provideSearchAppRepository(
-        @ApplicationContext context: Context
+        @ApplicationContext context: Context,
     ) = SearchAppRepository(context)
 }
