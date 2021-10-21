@@ -9,17 +9,8 @@ import com.anonymous.appilogue.utils.dpToPx
 
 
 class BottomSheetRecyclerViewDecoration(context: Context) : RecyclerView.ItemDecoration() {
-    private val sideMargin =
-        dpToPx(
-            context,
-            context.resources.getDimension(R.dimen.bottom_sheet_item_side_margin) / context.resources.displayMetrics.density
-        )
-    private val bottomMargin =
-        dpToPx(
-            context,
-            context.resources.getDimension(R.dimen.bottom_sheet_item_bottom_margin) / context.resources.displayMetrics.density
-        )
-
+    private val sideMargin = context.resources.getDimensionPixelSize(R.dimen.bottom_sheet_item_side_margin)
+    private val bottomMargin = context.resources.getDimensionPixelSize(R.dimen.bottom_sheet_item_bottom_margin)
 
     override fun getItemOffsets(
         outRect: Rect,
