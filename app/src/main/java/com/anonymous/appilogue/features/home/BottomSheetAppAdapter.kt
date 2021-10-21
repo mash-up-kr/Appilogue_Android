@@ -30,7 +30,7 @@ class BottomSheetAppAdapter :
         }
     }
 
-    inner class BottomSheetAppViewHolder(
+    class BottomSheetAppViewHolder(
         private val binding: ItemAppBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
