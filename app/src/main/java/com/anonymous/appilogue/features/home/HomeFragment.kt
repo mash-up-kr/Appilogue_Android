@@ -12,6 +12,7 @@ import com.anonymous.appilogue.features.base.BaseFragment
 import com.anonymous.appilogue.features.main.MainViewModel
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
 
 @AndroidEntryPoint
 class HomeFragment :
@@ -19,7 +20,7 @@ class HomeFragment :
 
     val mainViewModel: MainViewModel by activityViewModels()
     val bottomSheetAppAdapter by lazy { BottomSheetAppAdapter() }
-    var starsByFocus = hashMapOf<Focus, ImageView>()
+    var starsByFocus = EnumMap<Focus, ImageView>(Focus::class.java)
 
     override val viewModel: HomeViewModel by activityViewModels()
 
@@ -37,7 +38,7 @@ class HomeFragment :
 
     private fun initStarByFocus() {
         with(binding) {
-            starsByFocus = hashMapOf(
+            listOf(
                 Pair(Focus.OnBlackHole, ivBlackHole),
                 Pair(Focus.OnWhiteHole, ivWhiteHole),
                 Pair(Focus.OnPlanet, ivMainPlanet),
@@ -46,7 +47,9 @@ class HomeFragment :
                 Pair(Focus.OffWhiteHole, ivWhiteHole),
                 Pair(Focus.OffPlanet, ivMainPlanet),
                 Pair(Focus.OffSpaceDust, ivSpaceDust)
-            )
+            ).onEach {
+                starsByFocus[it.first] = it.second
+            }
         }
     }
 
