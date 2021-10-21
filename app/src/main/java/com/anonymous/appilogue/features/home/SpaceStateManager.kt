@@ -7,9 +7,7 @@ import android.content.res.Resources
 import android.view.animation.Animation
 import android.widget.ImageView
 
-object SpaceStateManager {
-
-    var stars: List<ImageView> = listOf()
+class SpaceStateManager(private val stars: List<ImageView>) {
 
     fun animateSpace(space: ImageView) {
         ObjectAnimator.ofFloat(space, TRANSLATION_X, SPACE_MOVE_RANGE).apply {
@@ -67,14 +65,15 @@ object SpaceStateManager {
         move.start()
     }
 
-    private const val SCALE_X = "scaleX"
-    private const val SCALE_Y = "scaleY"
-    private const val TRANSLATION_X = "translationX"
-    private const val TRANSLATION_Y = "translationY"
-    private const val STAR_MOVE_TIME = 1000L
-    private const val MAX_STAR_RATIO = 0.6f
-    private const val STAR_INTERVAL_MAGNIFICATION = 7.0f
-    private const val SPACE_MOVE_RANGE = 100f
-    private const val SPACE_MOVE_DURATION = 6000L
-
+    companion object {
+        private const val SCALE_X = "scaleX"
+        private const val SCALE_Y = "scaleY"
+        private const val TRANSLATION_X = "translationX"
+        private const val TRANSLATION_Y = "translationY"
+        private const val STAR_MOVE_TIME = 1000L
+        private const val MAX_STAR_RATIO = 0.6f
+        private const val STAR_INTERVAL_MAGNIFICATION = 7.0f
+        private const val SPACE_MOVE_RANGE = 100f
+        private const val SPACE_MOVE_DURATION = 6000L
+    }
 }

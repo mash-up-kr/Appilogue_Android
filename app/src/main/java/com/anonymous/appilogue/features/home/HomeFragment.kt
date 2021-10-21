@@ -20,6 +20,7 @@ class HomeFragment :
 
     val mainViewModel: MainViewModel by activityViewModels()
     val bottomSheetAppAdapter by lazy { BottomSheetAppAdapter() }
+    var spaceStateManager: SpaceStateManager? = null
     var starsByFocus = EnumMap<Focus, ImageView>(Focus::class.java)
 
     override val viewModel: HomeViewModel by activityViewModels()
@@ -32,8 +33,8 @@ class HomeFragment :
         initBottomSheet()
         observeStar()
         initStarByFocus()
-        SpaceStateManager.stars = starsByFocus.values.toSet().toList()
-        SpaceStateManager.animateSpace(binding.ivSpace)
+        spaceStateManager = SpaceStateManager(starsByFocus.values.toSet().toList())
+        spaceStateManager?.animateSpace(binding.ivSpace)
     }
 
     private fun initStarByFocus() {
@@ -105,13 +106,13 @@ class HomeFragment :
         viewModel.starFocused.observe(viewLifecycleOwner, {
             if (Focus.isOnFocus(it)) {
                 starsByFocus[it]?.let { star ->
-                    SpaceStateManager.focusStar(star, true)
+                    spaceStateManager?.focusStar(star, true)
                     viewModel.focusbottomSheetTab(1)
                 }
             }
             if (Focus.isOffFocus(it)) {
                 starsByFocus[it]?.let { star ->
-                    SpaceStateManager.focusStar(star, false)
+                    spaceStateManager?.focusStar(star, false)
                 }
             }
         })
