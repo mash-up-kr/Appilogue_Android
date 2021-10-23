@@ -10,7 +10,6 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import org.w3c.dom.Text
 
 @BindingAdapter("titleByFocus")
 fun TextView.setTitleByFocus(focus: Focus) {
@@ -40,34 +39,6 @@ fun ImageView.bindAppImageUrl(uri: String?) {
             .load(uri)
             .transform(CenterCrop(), RoundedCorners(APP_ICON_RADIUS))
             .into(this)
-    }
-}
-
-@BindingAdapter("secondTabVisible")
-fun View.setSecondTabVisible(focus: Focus) {
-    visibility = when (focus) {
-        Focus.OnPlanet, Focus.OnSpaceDust -> View.VISIBLE
-        else -> View.GONE
-    }
-}
-
-@BindingAdapter("firstTabTitle")
-fun TextView.setFirstTabTitle(focus: Focus) {
-    text = when (focus) {
-        Focus.OnPlanet -> context.getString(R.string.my_planet)
-        Focus.OnSpaceDust -> context.getString(R.string.my_space_dust)
-        Focus.OnBlackHole -> context.getString(R.string.my_black_hole)
-        Focus.OnWhiteHole -> context.getString(R.string.my_white_hole)
-        else -> EMPTY_STRING
-    }
-}
-
-@BindingAdapter("secondTabTitle")
-fun TextView.setSecondTabTitle(focus: Focus) {
-    text = when (focus) {
-        Focus.OnPlanet -> context.getString(R.string.planet_store)
-        Focus.OnSpaceDust -> context.getString(R.string.dust_store)
-        else -> EMPTY_STRING
     }
 }
 

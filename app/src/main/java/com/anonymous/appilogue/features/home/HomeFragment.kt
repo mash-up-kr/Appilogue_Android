@@ -2,15 +2,22 @@ package com.anonymous.appilogue.features.home
 
 import android.content.res.Resources
 import android.os.Bundle
+import android.util.SparseArray
 import android.view.View
 import android.widget.ImageView
 import androidx.core.view.updateLayoutParams
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.anonymous.appilogue.R
 import com.anonymous.appilogue.databinding.FragmentHomeBinding
 import com.anonymous.appilogue.features.base.BaseFragment
+import com.anonymous.appilogue.features.home.bottomsheet.AppFragment
+import com.anonymous.appilogue.features.home.bottomsheet.AppFragment.Companion.BLACK_HOLE
+import com.anonymous.appilogue.features.home.bottomsheet.AppFragment.Companion.WHITE_HOLE
+import com.anonymous.appilogue.features.home.bottomsheet.BottomSheetPagerAdapter
 import com.anonymous.appilogue.features.main.MainViewModel
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
@@ -19,7 +26,6 @@ class HomeFragment :
     BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.fragment_home) {
 
     val mainViewModel: MainViewModel by activityViewModels()
-    val bottomSheetAppAdapter by lazy { BottomSheetAppAdapter() }
     var spaceStateManager: SpaceStateManager? = null
     var starsByFocus = EnumMap<Focus, ImageView>(Focus::class.java)
 
@@ -35,6 +41,20 @@ class HomeFragment :
         initStarByFocus()
         spaceStateManager = SpaceStateManager(starsByFocus.values.toSet().toList())
         spaceStateManager?.animateSpace(binding.ivSpace)
+        viewModel.changeFocus(Focus.None)
+    }
+
+    private fun getViewPagerTabTextAndFragments(focus: Focus): SparseArray<Pair<Int, () -> Fragment>> {
+        val viewPagerFragments = SparseArray<Pair<Int, () -> Fragment>>()
+        when (focus) {
+            Focus.OnBlackHole -> viewPagerFragments.apply {
+                put(0, Pair(R.string.my_black_hole, { AppFragment.newInstance(BLACK_HOLE) }))
+            }
+            Focus.OnWhiteHole -> viewPagerFragments.apply {
+                put(0, Pair(R.string.my_white_hole, { AppFragment.newInstance(WHITE_HOLE) }))
+            }
+        }
+        return viewPagerFragments
     }
 
     private fun initStarByFocus() {
@@ -55,7 +75,6 @@ class HomeFragment :
     }
 
     private fun initBottomSheet() {
-        initBottomSheetRecyclerView()
         binding.bottomSheetHome.root.apply {
             updateLayoutParams {
                 height = Resources.getSystem().displayMetrics.heightPixels -
@@ -89,25 +108,19 @@ class HomeFragment :
         }
     }
 
-    private fun initBottomSheetRecyclerView() {
-        binding.bottomSheetHome.rvBlackHoleBottomsheet.apply {
-            adapter = bottomSheetAppAdapter
-            addItemDecoration(BottomSheetRecyclerViewDecoration(context))
-        }
-        binding.bottomSheetHome.rvWhiteHoleBottomsheet.apply {
-            adapter = bottomSheetAppAdapter
-            addItemDecoration(BottomSheetRecyclerViewDecoration(context))
-        }
-        viewModel.fetchBlackHoleApps()
-        viewModel.fetchWhiteHoleApps()
-    }
-
     private fun observeStar() {
         viewModel.starFocused.observe(viewLifecycleOwner, {
+            binding.bottomSheetHome.apply {
+                val viewPagerTabTextAndFragments = getViewPagerTabTextAndFragments(it)
+                vpBottomSheetViewPager.adapter =
+                    BottomSheetPagerAdapter(this@HomeFragment, viewPagerTabTextAndFragments)
+                TabLayoutMediator(tlBottomSheetTab, vpBottomSheetViewPager) { tab, position ->
+                    tab.text = getString(viewPagerTabTextAndFragments[position].first)
+                }.attach()
+            }
             if (Focus.isOnFocus(it)) {
                 starsByFocus[it]?.let { star ->
                     spaceStateManager?.focusStar(star, true)
-                    viewModel.focusbottomSheetTab(1)
                 }
             }
             if (Focus.isOffFocus(it)) {

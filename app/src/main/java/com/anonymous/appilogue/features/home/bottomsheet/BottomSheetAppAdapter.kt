@@ -1,4 +1,4 @@
-package com.anonymous.appilogue.features.home
+package com.anonymous.appilogue.features.home.bottomsheet
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,9 +8,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.anonymous.appilogue.R
 import com.anonymous.appilogue.databinding.ItemAppBinding
-import com.anonymous.appilogue.databinding.ItemInstalledAppBinding
-import com.anonymous.appilogue.features.main.MainViewModel
-import com.anonymous.appilogue.model.InstalledApp
 import com.anonymous.appilogue.model.ReviewedApp
 
 class BottomSheetAppAdapter :

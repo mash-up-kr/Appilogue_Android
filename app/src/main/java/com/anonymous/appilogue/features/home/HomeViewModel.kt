@@ -1,5 +1,6 @@
 package com.anonymous.appilogue.features.home
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -21,14 +22,8 @@ class HomeViewModel @Inject constructor(val appRepository: AppRepository) : View
     private val _bottomSheetHideable = MutableLiveData(true)
     val bottomSheetHideable: LiveData<Boolean> = _bottomSheetHideable
 
-    private val _blackHoleApps = MutableLiveData(listOf<ReviewedApp>())
-    val blackHoleApps: LiveData<List<ReviewedApp>> = _blackHoleApps
-
-    private val _whiteHoleApps = MutableLiveData(listOf<ReviewedApp>())
-    val whiteHoleApps: LiveData<List<ReviewedApp>> = _whiteHoleApps
-
-    private val _bottomSheetTabFocus = MutableLiveData(1)
-    val bottomSheetTabFocus: LiveData<Int> = _bottomSheetTabFocus
+    private val _apps = MutableLiveData(listOf<ReviewedApp>())
+    val apps: LiveData<List<ReviewedApp>> = _apps
 
     fun changeBottomSheetState(newState: Int) {
         _bottomSheetState.value = newState
@@ -42,8 +37,8 @@ class HomeViewModel @Inject constructor(val appRepository: AppRepository) : View
         }
         _starFocused.value = focus
         if (Focus.isOnFocus(focus)) {
-            _bottomSheetHideable.value = false
             changeBottomSheetState(BottomSheetBehavior.STATE_COLLAPSED)
+            _bottomSheetHideable.value = false
         } else {
             _bottomSheetHideable.value = true
             changeBottomSheetState(BottomSheetBehavior.STATE_HIDDEN)
@@ -51,20 +46,10 @@ class HomeViewModel @Inject constructor(val appRepository: AppRepository) : View
     }
 
     fun fetchBlackHoleApps() {
-        _blackHoleApps.value = appRepository.getBlackHoleApps()
+        _apps.value = appRepository.getBlackHoleApps()
     }
 
     fun fetchWhiteHoleApps() {
-        _whiteHoleApps.value = appRepository.getWhiteHoleApps()
-    }
-
-    fun focusbottomSheetTab(index: Int) {
-        when (index) {
-            in 1..2 -> {
-                _bottomSheetTabFocus.value = index
-            }
-            else -> {
-            }
-        }
+        _apps.value = appRepository.getWhiteHoleApps()
     }
 }
