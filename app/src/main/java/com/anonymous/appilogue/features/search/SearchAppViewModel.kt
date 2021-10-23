@@ -11,7 +11,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SearchAppViewModel @Inject constructor(
-    private val searchAppRepository: SearchAppRepository
+    private val searchAppRepository: SearchAppRepository,
 ) : ViewModel() {
     private val installedAppList = MutableStateFlow<List<InstalledApp>>(emptyList())
 

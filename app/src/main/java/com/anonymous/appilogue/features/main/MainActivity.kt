@@ -6,6 +6,11 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
+import androidx.navigation.NavHost
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.setupWithNavController
 import androidx.lifecycle.lifecycleScope
 import com.anonymous.appilogue.R
 import com.anonymous.appilogue.databinding.ActivityMainBinding
@@ -23,61 +28,44 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
-    private val homeFragment by lazy { HomeFragment() }
-    private val profileFragment by lazy { ProfileFragment() }
-    private val communityFragment by lazy { SearchAppFragment() }
+    val viewModel: MainViewModel by viewModels()
 
-    val viewModel: HomeViewModel by viewModels()
-    val mainViewModel: MainViewModel by viewModels()
-
-    @Inject
-    lateinit var appSearchManager: AppSearchManager
-
-    val navigateTo: (Fragment) -> Unit = { fragment ->
-        val primaryFragment = supportFragmentManager.primaryNavigationFragment
-        supportFragmentManager.commit {
-            primaryFragment?.let { hide(it) }
-            if (!fragment.isAdded) {
-                add(R.id.fcv_fragmentContainerView, fragment)
-            } else {
-                show(fragment)
-            }
-            setPrimaryNavigationFragment(fragment)
-        }
+    private val navController by lazy {
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_main_host_fragment) as NavHostFragment
+        navHostFragment.navController
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         bind {
-            homeViewModel = viewModel
+            mainViewModel = viewModel
         }
-        binding.bottomNavigationView.setOnItemSelectedListener {
-            navigateFragment(it)
-            true
+        initNavigation()
+    }
+
+    private fun initNavigation() {
+        with(binding.bottomNavigationView) {
+            setupWithNavController(navController)
+            itemIconTintList = null
+            setOnItemSelectedListener {
+                if (it.isChecked && it.itemId == R.id.homeFragment) {
+                    navigateTo(R.id.searchAppFragment2)
+                    viewModel.hideBottomNavigation()
+                } else {
+                    navigateTo(it.itemId)
+                    viewModel.showBottomNavigation()
+                }
+                true
+            }
         }
-        navigateTo(homeFragment)
 
         lifecycleScope.launch(Dispatchers.IO) {
             appSearchManager.updateInstalledAppList()
         }
     }
 
-    private fun navigateFragment(menuItem: MenuItem) {
-        when (menuItem.itemId) {
-            R.id.action_home -> homeFragment
-            R.id.action_profile -> profileFragment
-            R.id.action_community -> communityFragment
-            else -> null
-        }?.let { fragment ->
-            navigateTo(fragment)
-        }
-    }
-
-    fun hideBottomNavigation() {
-        binding.bottomNavigationView.visibility = View.GONE
-    }
-
-    fun showBottomNavigation() {
-        binding.bottomNavigationView.visibility = View.VISIBLE
+    fun navigateTo(id: Int) {
+        navController.navigate(id)
     }
 }

@@ -19,7 +19,7 @@ class ReviewSelectorFragment
         super.onViewCreated(view, savedInstanceState)
 
         binding.apply {
-            mainVm = (activity as MainActivity).mainViewModel
+            mainVm = (activity as MainActivity).viewModel
         }
 
         initView()
