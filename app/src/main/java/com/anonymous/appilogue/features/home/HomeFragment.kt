@@ -48,18 +48,18 @@ class HomeFragment :
         val viewPagerFragments = SparseArray<Pair<Int, () -> Fragment>>()
         when (focus) {
             Focus.OnBlackHole -> viewPagerFragments.apply {
-                put(0, Pair(R.string.my_black_hole, { AppFragment.newInstance(BLACK_HOLE) }))
+                put(FIRST_TAB, Pair(R.string.my_black_hole, { AppFragment.newInstance(BLACK_HOLE) }))
             }
             Focus.OnWhiteHole -> viewPagerFragments.apply {
-                put(0, Pair(R.string.my_white_hole, { AppFragment.newInstance(WHITE_HOLE) }))
+                put(FIRST_TAB, Pair(R.string.my_white_hole, { AppFragment.newInstance(WHITE_HOLE) }))
             }
             Focus.OnPlanet -> viewPagerFragments.apply {
-                put(0, Pair(R.string.my_planet, { MyDecorationFragment.newInstance() }))
-                put(1, Pair(R.string.planet_store, { StoreFragment.newInstance() }))
+                put(FIRST_TAB, Pair(R.string.my_planet, { MyDecorationFragment.newInstance() }))
+                put(SECOND_TAB, Pair(R.string.planet_store, { StoreFragment.newInstance() }))
             }
             Focus.OnSpaceDust -> viewPagerFragments.apply {
-                put(0, Pair(R.string.my_space_dust, { MyDecorationFragment.newInstance() }))
-                put(1, Pair(R.string.dust_store, { StoreFragment.newInstance() }))
+                put(FIRST_TAB, Pair(R.string.my_space_dust, { MyDecorationFragment.newInstance() }))
+                put(SECOND_TAB, Pair(R.string.dust_store, { StoreFragment.newInstance() }))
             }
         }
         return viewPagerFragments
@@ -136,5 +136,10 @@ class HomeFragment :
                 }
             }
         })
+    }
+
+    companion object {
+        const val FIRST_TAB = 0
+        const val SECOND_TAB = 1
     }
 }
