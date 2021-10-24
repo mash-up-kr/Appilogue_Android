@@ -33,15 +33,22 @@
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tl_bottomSheetTab"
+            style="@style/TabLayoutTheme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
+            android:layout_marginStart="15dp"
             android:layout_marginTop="28dp"
             android:background="@color/black_alpha90"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:tabIndicator="@drawable/bg_tab_indicator"
+            app:tabIndicatorColor="@color/white"
             app:tabIndicatorFullWidth="false"
-            app:tabTextColor="@color/white" />
+            app:tabMode="scrollable"
+            app:tabPaddingEnd="10dp"
+            app:tabPaddingStart="10dp"
+            app:tabSelectedTextColor="@color/white"
+            app:tabTextColor="@color/gray_02" />
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/vp_bottomSheetViewPager"
