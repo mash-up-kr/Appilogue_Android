@@ -20,4 +20,8 @@
         android:id="@+id/searchAppFragment2"
         android:name="com.anonymous.appilogue.features.search.SearchAppFragment"
         android:label="SearchAppFragment" />
+    <fragment
+        android:id="@+id/alarmFragment"
+        android:name="com.anonymous.appilogue.features.notification.NotificationFragment"
+        android:label="AlarmFragment" />
 </navigation>

@@ -9,7 +9,9 @@ import androidx.fragment.app.activityViewModels
 import com.anonymous.appilogue.R
 import com.anonymous.appilogue.databinding.FragmentHomeBinding
 import com.anonymous.appilogue.features.base.BaseFragment
+import com.anonymous.appilogue.features.main.MainActivity
 import com.anonymous.appilogue.features.main.MainViewModel
+import com.anonymous.appilogue.features.search.SearchAppAdapter
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -32,6 +34,10 @@ class HomeFragment :
         initStarByFocus()
         SpaceManager.stars = starsByFocus.values.toSet().toList()
         SpaceManager.animateSpace(binding.ivSpace)
+        binding.ivAlarm.setOnClickListener {
+            val mainActivity = activity as MainActivity
+            mainActivity.navigateTo(R.id.alarmFragment)
+        }
     }
 
     fun initStarByFocus() {
