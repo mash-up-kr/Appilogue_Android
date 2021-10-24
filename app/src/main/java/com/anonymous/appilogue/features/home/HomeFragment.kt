@@ -28,8 +28,7 @@ class HomeFragment :
     BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.fragment_home) {
 
     val mainViewModel: MainViewModel by activityViewModels()
-    var spaceStateManager: SpaceStateManager? = null
-    var starsByFocus = EnumMap<Focus, ImageView>(Focus::class.java)
+    private var starsByFocus = EnumMap<Focus, ImageView>(Focus::class.java)
 
     override val viewModel: HomeViewModel by activityViewModels()
 
@@ -41,8 +40,7 @@ class HomeFragment :
         initBottomSheet()
         observeStar()
         initStarByFocus()
-        spaceStateManager = SpaceStateManager(starsByFocus.values.toSet().toList())
-        spaceStateManager?.animateSpace(binding.ivSpace)
+        SpaceAnimator.animateSpace(binding.ivSpace)
         viewModel.changeFocus(Focus.None)
     }
 
@@ -130,11 +128,11 @@ class HomeFragment :
                     }.attach()
                 }
                 starsByFocus[it]?.let { star ->
-                    spaceStateManager?.focusStar(star, true)
+                    SpaceAnimator.focusStar(star, starsByFocus.values.toSet().toList(), true)
                 }
             } else if (Focus.isOffFocus(it)) {
                 starsByFocus[it]?.let { star ->
-                    spaceStateManager?.focusStar(star, false)
+                    SpaceAnimator.focusStar(star, starsByFocus.values.toSet().toList(), false)
                 }
             }
         })
