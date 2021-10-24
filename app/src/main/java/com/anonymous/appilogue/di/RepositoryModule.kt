@@ -3,11 +3,11 @@ package com.anonymous.appilogue.di
 import android.content.Context
 import com.anonymous.appilogue.repository.AppRepository
 import com.anonymous.appilogue.repository.FakeAppRepository
+import com.anonymous.appilogue.persistence.InstalledAppDao
 import com.anonymous.appilogue.repository.SearchAppRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
@@ -16,10 +16,11 @@ import javax.inject.Singleton
 @Module
 object RepositoryModule {
 
+    @Singleton
     @Provides
     fun provideSearchAppRepository(
-        @ApplicationContext context: Context
-    ) = SearchAppRepository(context)
+        installedAppDao: InstalledAppDao
+    ) = SearchAppRepository(installedAppDao)
 
     @Singleton
     @Provides

@@ -4,14 +4,14 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.anonymous.appilogue.model.InstalledApp
+import com.anonymous.appilogue.model.InstalledAppEntity
 
 @Dao
 interface InstalledAppDao {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertInstalledAppList(installedAppLis: List<InstalledApp>)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertInstalledAppList(installedAppLis: List<InstalledAppEntity>)
 
-    @Query("SELECT * FROM InstalledApp")
-    suspend fun getAllInstalledAppList(): List<InstalledApp>
+    @Query("SELECT * FROM InstalledAppEntity")
+    suspend fun fetchInstalledAppList(): List<InstalledAppEntity>
 }

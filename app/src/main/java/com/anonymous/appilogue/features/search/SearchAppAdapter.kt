@@ -13,7 +13,7 @@ import com.anonymous.appilogue.model.InstalledApp
 
 class SearchAppAdapter(
     private val mainViewModel: MainViewModel,
-    private val navigate: () -> Unit
+    private val navigate: () -> Unit,
 ) : ListAdapter<InstalledApp, SearchAppAdapter.SearchAppViewHolder>(diffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchAppViewHolder {
@@ -32,7 +32,7 @@ class SearchAppAdapter(
     inner class SearchAppViewHolder(
         private val binding: ItemInstalledAppBinding,
         private val mainViewModel: MainViewModel,
-        private val navigate: () -> Unit
+        private val navigate: () -> Unit,
     ) : RecyclerView.ViewHolder(binding.root) {
 
         init {
