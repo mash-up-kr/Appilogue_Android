@@ -1,13 +1,16 @@
 package com.anonymous.appilogue.features.home
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.anonymous.appilogue.model.ReviewedApp
 import com.anonymous.appilogue.repository.AppRepository
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withTimeout
 import javax.inject.Inject
 
 @HiltViewModel
@@ -38,7 +41,10 @@ class HomeViewModel @Inject constructor(val appRepository: AppRepository) : View
         _starFocused.value = focus
         if (Focus.isOnFocus(focus)) {
             changeBottomSheetState(BottomSheetBehavior.STATE_COLLAPSED)
-            _bottomSheetHideable.value = false
+            viewModelScope.launch {
+                delay(10)
+                _bottomSheetHideable.value = false
+            }
         } else {
             _bottomSheetHideable.value = true
             changeBottomSheetState(BottomSheetBehavior.STATE_HIDDEN)

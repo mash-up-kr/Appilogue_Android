@@ -110,20 +110,19 @@ class HomeFragment :
 
     private fun observeStar() {
         viewModel.starFocused.observe(viewLifecycleOwner, {
-            binding.bottomSheetHome.apply {
-                val viewPagerTabTextAndFragments = getViewPagerTabTextAndFragments(it)
-                vpBottomSheetViewPager.adapter =
-                    BottomSheetPagerAdapter(this@HomeFragment, viewPagerTabTextAndFragments)
-                TabLayoutMediator(tlBottomSheetTab, vpBottomSheetViewPager) { tab, position ->
-                    tab.text = getString(viewPagerTabTextAndFragments[position].first)
-                }.attach()
-            }
             if (Focus.isOnFocus(it)) {
+                binding.bottomSheetHome.apply {
+                    val viewPagerTabTextAndFragments = getViewPagerTabTextAndFragments(it)
+                    vpBottomSheetViewPager.adapter =
+                        BottomSheetPagerAdapter(this@HomeFragment, viewPagerTabTextAndFragments)
+                    TabLayoutMediator(tlBottomSheetTab, vpBottomSheetViewPager) { tab, position ->
+                        tab.text = getString(viewPagerTabTextAndFragments[position].first)
+                    }.attach()
+                }
                 starsByFocus[it]?.let { star ->
                     spaceStateManager?.focusStar(star, true)
                 }
-            }
-            if (Focus.isOffFocus(it)) {
+            } else if (Focus.isOffFocus(it)) {
                 starsByFocus[it]?.let { star ->
                     spaceStateManager?.focusStar(star, false)
                 }
