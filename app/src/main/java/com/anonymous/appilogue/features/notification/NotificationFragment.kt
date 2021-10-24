@@ -16,9 +16,13 @@ class NotificationFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        bind {
+            notificationViewModel = viewModel
+        }
         binding.ivBack.setOnClickListener {
             (activity as MainActivity).navigateTo(R.id.homeFragment)
         }
         binding.rvNotification.adapter = NotificationAdapter()
+        viewModel.fetchNotifications()
     }
 }

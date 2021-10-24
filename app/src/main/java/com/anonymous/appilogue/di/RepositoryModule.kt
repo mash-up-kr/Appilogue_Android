@@ -1,12 +1,15 @@
 package com.anonymous.appilogue.di
 
 import android.content.Context
+import com.anonymous.appilogue.repository.FakeNotificationRepository
+import com.anonymous.appilogue.repository.NotificationRepository
 import com.anonymous.appilogue.repository.SearchAppRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 
 
 @InstallIn(SingletonComponent::class)
@@ -17,4 +20,8 @@ object RepositoryModule {
     fun provideSearchAppRepository(
         @ApplicationContext context: Context
     ) = SearchAppRepository(context)
+
+    @Provides
+    @Singleton
+    fun provideNotificationRepository(): NotificationRepository = FakeNotificationRepository()
 }
