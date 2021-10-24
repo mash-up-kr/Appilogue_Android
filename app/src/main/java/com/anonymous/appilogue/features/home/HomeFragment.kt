@@ -15,6 +15,8 @@ import com.anonymous.appilogue.features.home.bottomsheet.AppFragment
 import com.anonymous.appilogue.features.home.bottomsheet.AppFragment.Companion.BLACK_HOLE
 import com.anonymous.appilogue.features.home.bottomsheet.AppFragment.Companion.WHITE_HOLE
 import com.anonymous.appilogue.features.home.bottomsheet.BottomSheetPagerAdapter
+import com.anonymous.appilogue.features.home.bottomsheet.MyDecorationFragment
+import com.anonymous.appilogue.features.home.bottomsheet.StoreFragment
 import com.anonymous.appilogue.features.main.MainViewModel
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.tabs.TabLayoutMediator
@@ -52,6 +54,14 @@ class HomeFragment :
             }
             Focus.OnWhiteHole -> viewPagerFragments.apply {
                 put(0, Pair(R.string.my_white_hole, { AppFragment.newInstance(WHITE_HOLE) }))
+            }
+            Focus.OnPlanet -> viewPagerFragments.apply {
+                put(0, Pair(R.string.my_planet, { MyDecorationFragment.newInstance() }))
+                put(1, Pair(R.string.planet_store, { StoreFragment.newInstance() }))
+            }
+            Focus.OnSpaceDust -> viewPagerFragments.apply {
+                put(0, Pair(R.string.my_space_dust, { MyDecorationFragment.newInstance() }))
+                put(1, Pair(R.string.dust_store, { StoreFragment.newInstance() }))
             }
         }
         return viewPagerFragments
