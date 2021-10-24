@@ -22,7 +22,10 @@ class NotificationFragment :
         binding.ivBack.setOnClickListener {
             (activity as MainActivity).navigateTo(R.id.homeFragment)
         }
-        binding.rvNotification.adapter = NotificationAdapter()
+        binding.rvNotification.apply {
+            adapter = NotificationAdapter()
+            addItemDecoration(NotificationRecyclerViewDecoration(context))
+        }
         viewModel.fetchNotifications()
     }
 }

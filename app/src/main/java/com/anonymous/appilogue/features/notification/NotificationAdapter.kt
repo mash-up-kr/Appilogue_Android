@@ -67,8 +67,8 @@ class NotificationAdapter :
     }
 
     companion object {
-        private const val ITEM_VIEW_TYPE_HEADER = 0
-        private const val ITEM_VIEW_TYPE_ITEM = 1
+        const val ITEM_VIEW_TYPE_HEADER = 0
+        const val ITEM_VIEW_TYPE_ITEM = 1
         private val diffCallback = object : DiffUtil.ItemCallback<NotificationListItem>() {
 
             override fun areContentsTheSame(

@@ -19,15 +19,15 @@ class NotificationViewModel @Inject constructor(private val notificationReposito
         notificationRepository.getNotification().forEach {
             notifications.add(NotificationListItem.NotificationItem(it))
         }
-        notifications.add(NotificationListItem.Header("어제"))
+        notifications.add(NotificationListItem.Header("이번 주"))
         notificationRepository.getNotification().forEach {
             notifications.add(NotificationListItem.NotificationItem(it))
         }
-        notifications.add(NotificationListItem.Header("1주일전"))
+        notifications.add(NotificationListItem.Header("이번 달"))
         notificationRepository.getNotification().forEach {
             notifications.add(NotificationListItem.NotificationItem(it))
         }
-        notifications.add(NotificationListItem.Header("1년전"))
+        notifications.add(NotificationListItem.Header("이전 활동"))
         notificationRepository.getNotification().forEach {
             notifications.add(NotificationListItem.NotificationItem(it))
         }

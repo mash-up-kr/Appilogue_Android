@@ -25,5 +25,5 @@
     <string name="community_fragment">CommunityFragment</string>
     <string name="profile_fragment">ProfileFragment</string>
     <string name="home_fragment">HomeFragment</string>
-    <string name="alarm">알림</string>
+    <string name="notification">알림</string>
 </resources>
