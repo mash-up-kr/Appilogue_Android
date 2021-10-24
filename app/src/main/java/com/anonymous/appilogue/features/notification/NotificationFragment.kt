@@ -17,8 +17,8 @@ class NotificationFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.ivBack.setOnClickListener {
-            val mainActivity = activity as MainActivity
-            mainActivity.navigateTo(R.id.homeFragment)
+            (activity as MainActivity).navigateTo(R.id.homeFragment)
         }
+        binding.rvNotification.adapter = NotificationAdapter()
     }
 }

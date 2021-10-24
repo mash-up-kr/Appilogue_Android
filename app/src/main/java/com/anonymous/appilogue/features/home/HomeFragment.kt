@@ -35,8 +35,7 @@ class HomeFragment :
         SpaceManager.stars = starsByFocus.values.toSet().toList()
         SpaceManager.animateSpace(binding.ivSpace)
         binding.ivAlarm.setOnClickListener {
-            val mainActivity = activity as MainActivity
-            mainActivity.navigateTo(R.id.alarmFragment)
+            (activity as MainActivity).navigateTo(R.id.alarmFragment)
         }
     }
 
