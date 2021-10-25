@@ -20,22 +20,7 @@ class SearchAppAdapter(
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = DataBindingUtil.inflate<ItemInstalledAppBinding>(
             layoutInflater, R.layout.item_installed_app, parent, false)
-        return SearchAppViewHolder(binding, mainViewModel, navigate)
-    }
-
-    override fun onBindViewHolder(holder: SearchAppViewHolder, position: Int) {
-        if (position < itemCount) {
-            holder.bind(getItem(position))
-        }
-    }
-
-    inner class SearchAppViewHolder(
-        private val binding: ItemInstalledAppBinding,
-        private val mainViewModel: MainViewModel,
-        private val navigate: () -> Unit,
-    ) : RecyclerView.ViewHolder(binding.root) {
-
-        init {
+        return SearchAppViewHolder(binding).apply {
             binding.root.setOnClickListener {
                 val position = bindingAdapterPosition
                 if (position < itemCount) {
@@ -45,6 +30,17 @@ class SearchAppAdapter(
                 }
             }
         }
+    }
+
+    override fun onBindViewHolder(holder: SearchAppViewHolder, position: Int) {
+        if (position < itemCount) {
+            holder.bind(getItem(position))
+        }
+    }
+
+    class SearchAppViewHolder(
+        private val binding: ItemInstalledAppBinding
+    ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(installedApp: InstalledApp) {
             binding.apply {

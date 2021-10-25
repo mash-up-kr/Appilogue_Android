@@ -1,6 +1,5 @@
 package com.anonymous.appilogue.features.search
 
-import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
@@ -8,7 +7,6 @@ import com.anonymous.appilogue.R
 import com.anonymous.appilogue.databinding.FragmentSearchBinding
 import com.anonymous.appilogue.features.base.BaseFragment
 import com.anonymous.appilogue.features.main.MainActivity
-import com.anonymous.appilogue.features.review.ReviewSelectorFragment
 import com.jakewharton.rxbinding4.view.focusChanges
 import com.jakewharton.rxbinding4.widget.textChanges
 import dagger.hilt.android.AndroidEntryPoint
@@ -26,7 +24,7 @@ class SearchAppFragment
     private val searchAppAdapter: SearchAppAdapter by lazy {
         val mainActivity = activity as MainActivity
         SearchAppAdapter(mainActivity.viewModel) {
-            mainActivity.navigateTo(R.id.searchAppFragment2)
+            mainActivity.navigateTo(R.id.action_searchAppFragment_to_reviewSelectorFragment)
         }
     }
 
@@ -34,6 +32,10 @@ class SearchAppFragment
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        bind {
+            vm = viewModel
+        }
 
         initRecyclerView()
         initView()
