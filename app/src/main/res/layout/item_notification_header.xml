@@ -18,7 +18,7 @@
             android:id="@+id/tv_notification_date_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{item.title}"
+            android:text="@{context.getString(item.stringId)}"
             android:textColor="@color/white"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"

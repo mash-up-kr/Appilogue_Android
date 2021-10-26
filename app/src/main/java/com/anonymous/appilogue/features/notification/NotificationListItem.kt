@@ -9,7 +9,7 @@ sealed class NotificationListItem {
         override val id = notification.id
     }
 
-    class Header(val title: String) : NotificationListItem() {
+    class Header(val stringId: Int) : NotificationListItem() {
         override val id = Int.MIN_VALUE
     }
 }

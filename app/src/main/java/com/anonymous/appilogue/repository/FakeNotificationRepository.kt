@@ -43,6 +43,33 @@ class FakeNotificationRepository @Inject constructor() : NotificationRepository 
                 User("요우"),
                 User("와23456"),
                 Notification.NotificationType.COMMENT_TO_REVIEW
+            ),
+            Notification(
+                5,
+                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-UC_46D9hS_VsZfNjrUgINlcsUG92Eq8ofQ&usqp=CAU",
+                "연습용",
+                Date(System.currentTimeMillis() - 100000000),
+                User("삼삼"),
+                User("와이낫"),
+                Notification.NotificationType.COMMENT_TO_REVIEW
+            ),
+            Notification(
+                6,
+                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-UC_46D9hS_VsZfNjrUgINlcsUG92Eq8ofQ&usqp=CAU",
+                "연습용22",
+                Date(System.currentTimeMillis() - 1000000000),
+                User("삼삼33"),
+                User("와이낫44"),
+                Notification.NotificationType.COMMENT_TO_COMMENT
+            ),
+            Notification(
+                7,
+                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-UC_46D9hS_VsZfNjrUgINlcsUG92Eq8ofQ&usqp=CAU",
+                "연습용33?abdcd연습용33?abdcd연습용33?abdcd,연습용33?abdcd 연습용33?abdcd 연습용33?abdcd 연습용33?abdcd",
+                Date(System.currentTimeMillis() - 10000000000),
+                User("삼삼33?"),
+                User("와이낫44?"),
+                Notification.NotificationType.COMMENT_TO_COMMENT
             )
         )
     }

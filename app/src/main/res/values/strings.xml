@@ -22,6 +22,10 @@
     <string name="notification_hour_passed">%1$d시간 전</string>
     <string name="notification_day_passed">%1$d일 전</string>
     <string name="notification_month_passed">%1$d달 전</string>
+    <string name="today">오늘</string>
+    <string name="this_week">이번 주</string>
+    <string name="this_month">이번 달</string>
+    <string name="did_before">지난 활동</string>
     <!--    Review   -->
     <string name="toolbar_title_search_app">App 검색</string>
     <string name="description_back_button">back button</string>

@@ -30,6 +30,7 @@ fun TextView.setNotificationText(notification: Notification) {
                 maxLines,
                 notification.date.dateToPassedTime(context)
             )
+            text.toString().replace(" ", "\u00A0")
             text = SpannableString(ellipsizedText)
                 .apply {
                     setSpan(
@@ -70,7 +71,7 @@ private fun ellipsizeText(
 ): String {
     val isEllipsis = hasEllipsized(rawText, width, textSize, maxLines)
     if (isEllipsis) {
-        var ellipsisText = rawText
+        var ellipsisText = rawText.replace(" ", "\u00A0")
         while (hasEllipsized(ellipsisText, width, textSize, maxLines)) {
             ellipsisText = ellipsisText.substring(0, ellipsisText.length - 1).trim()
         }
@@ -80,7 +81,7 @@ private fun ellipsizeText(
                 ellipsisText.length - ELLIPSIZE_NUM - lastText.length - ADDITIONAL_TEXT_SPACE
             )
         }${".".repeat(ELLIPSIZE_NUM)} $lastText"
-    } else return rawText
+    } else return rawText.replace(" ", "\u00A0")
 }
 
 const val ELLIPSIZE_NUM = 3
