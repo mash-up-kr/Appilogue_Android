@@ -10,11 +10,10 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withTimeout
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(val appRepository: AppRepository) : ViewModel() {
+class HomeViewModel @Inject constructor(private val appRepository: AppRepository) : ViewModel() {
 
     private val _starFocused = MutableLiveData(Focus.None)
     val starFocused: LiveData<Focus> = _starFocused
@@ -25,7 +24,7 @@ class HomeViewModel @Inject constructor(val appRepository: AppRepository) : View
     private val _bottomSheetHideable = MutableLiveData(true)
     val bottomSheetHideable: LiveData<Boolean> = _bottomSheetHideable
 
-    private val _apps = MutableLiveData(listOf<ReviewedApp>())
+    private val _apps = MutableLiveData(emptyList<ReviewedApp>())
     val apps: LiveData<List<ReviewedApp>> = _apps
 
     fun changeBottomSheetState(newState: Int) {

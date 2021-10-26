@@ -27,8 +27,8 @@ import java.util.*
 class HomeFragment :
     BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.fragment_home) {
 
-    val mainViewModel: MainViewModel by activityViewModels()
-    private var starsByFocus = EnumMap<Focus, ImageView>(Focus::class.java)
+    private val mainViewModel: MainViewModel by activityViewModels()
+    private val starsByFocus = EnumMap<Focus, ImageView>(Focus::class.java)
 
     override val viewModel: HomeViewModel by activityViewModels()
 

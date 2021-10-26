@@ -5,10 +5,8 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.anonymous.appilogue.R
-import com.anonymous.appilogue.databinding.FragmentAppBinding
 import com.anonymous.appilogue.databinding.FragmentMyDecorationBinding
 import com.anonymous.appilogue.features.base.BaseFragment
-import com.anonymous.appilogue.features.home.BottomSheetAppsRecyclerViewDecoration
 import com.anonymous.appilogue.features.home.HomeViewModel
 
 class MyDecorationFragment :

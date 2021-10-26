@@ -5,7 +5,6 @@ import android.graphics.Rect
 import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import com.anonymous.appilogue.R
-import com.anonymous.appilogue.utils.dpToPx
 
 
 class BottomSheetAppsRecyclerViewDecoration(context: Context) : RecyclerView.ItemDecoration() {
