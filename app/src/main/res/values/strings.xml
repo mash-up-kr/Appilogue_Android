@@ -12,6 +12,16 @@
     <string name="white_hole">화이트홀</string>
     <string name="black_hole">블랙홀</string>
     <string name="space_dust">우주먼지</string>
+    <!--    Notification    -->
+    <string name="notification">알림</string>
+    <string name="notification_like">%1$s님이 회원님의 게시물을 좋아합니다. %2$s</string>
+    <string name="notification_comment_to_comment">%1$s님이 회원님에게 답글을 달았습니다: %3$s %2$s</string>
+    <string name="notification_comment_to_review">%1$s님이 회원님 게시물에 답글을 달았습니다: %3$s %2$s</string>
+    <string name="notification_second_passed">%1$d초 전</string>
+    <string name="notification_minute_passed">%1$d분 전</string>
+    <string name="notification_hour_passed">%1$d시간 전</string>
+    <string name="notification_day_passed">%1$d일 전</string>
+    <string name="notification_month_passed">%1$d달 전</string>
     <!--    Review   -->
     <string name="toolbar_title_search_app">App 검색</string>
     <string name="description_back_button">back button</string>
@@ -25,5 +35,4 @@
     <string name="community_fragment">CommunityFragment</string>
     <string name="profile_fragment">ProfileFragment</string>
     <string name="home_fragment">HomeFragment</string>
-    <string name="notification">알림</string>
 </resources>

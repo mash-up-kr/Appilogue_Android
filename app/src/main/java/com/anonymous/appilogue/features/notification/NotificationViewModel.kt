@@ -27,6 +27,18 @@ class NotificationViewModel @Inject constructor(private val notificationReposito
         notificationRepository.getNotification().forEach {
             notifications.add(NotificationListItem.NotificationItem(it))
         }
+        notificationRepository.getNotification().forEach {
+            notifications.add(NotificationListItem.NotificationItem(it))
+        }
+        notificationRepository.getNotification().forEach {
+            notifications.add(NotificationListItem.NotificationItem(it))
+        }
+        notificationRepository.getNotification().forEach {
+            notifications.add(NotificationListItem.NotificationItem(it))
+        }
+        notificationRepository.getNotification().forEach {
+            notifications.add(NotificationListItem.NotificationItem(it))
+        }
         notifications.add(NotificationListItem.Header("이전 활동"))
         notificationRepository.getNotification().forEach {
             notifications.add(NotificationListItem.NotificationItem(it))

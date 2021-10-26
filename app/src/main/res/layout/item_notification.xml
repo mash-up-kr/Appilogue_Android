@@ -26,12 +26,12 @@
 
         <TextView
             android:id="@+id/tv_description"
+            notificationText="@{item.notification}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:ellipsize="middle"
+            android:ellipsize="end"
             android:maxLines="3"
-            android:text="@{item.notification.description}"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="@id/iv_space_dust"
             app:layout_constraintEnd_toEndOf="parent"
