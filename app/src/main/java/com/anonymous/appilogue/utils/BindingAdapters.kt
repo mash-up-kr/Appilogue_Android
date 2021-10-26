@@ -1,5 +1,6 @@
 package com.anonymous.appilogue.utils
 
+import android.graphics.Bitmap
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -21,6 +22,15 @@ fun ImageView.bindImageUrl(uri: String?) {
     if (!uri.isNullOrEmpty()) {
         Glide.with(context)
             .load(uri)
+            .into(this)
+    }
+}
+
+@BindingAdapter("bindBitmap")
+fun ImageView.bindBitmap(bitmap: Bitmap?) {
+    if (bitmap != null) {
+        Glide.with(context)
+            .load(bitmap)
             .into(this)
     }
 }

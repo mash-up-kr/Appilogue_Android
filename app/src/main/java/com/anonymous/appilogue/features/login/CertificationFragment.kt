@@ -1,10 +1,13 @@
 package com.anonymous.appilogue.features.login
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import androidx.core.content.ContextCompat
+import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import com.anonymous.appilogue.R
 import com.anonymous.appilogue.databinding.FragmentCertificationBinding
@@ -13,26 +16,27 @@ import com.anonymous.appilogue.features.main.MainActivity
 
 class CertificationFragment :
     BaseFragment<FragmentCertificationBinding, LoginViewModel>(R.layout.fragment_certification) {
-    override val viewModel = LoginViewModel()
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_certification, container, false)
-    }
+    override val viewModel: LoginViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.lifecycleOwner = this
+        binding.viewModel = viewModel
 
         with(binding) {
+            with(certificationMoveNextButton) {
+                isEnabled = false
+                context?.let { ctx ->
+                    setTextColor(ContextCompat.getColor(ctx, R.color.gray_01))
+                    setBackgroundColor(ContextCompat.getColor(ctx, R.color.black_01))
+                }
+            }
+
             certificationNumber1.requestFocus()
+            setAddTextChangeListener()          // 포커스 자동 넘김
 
             certificationMoveNextButton.setOnClickListener {
-                // 서버의 인증 값과 동일하다면
-//                it.findNavController()
-//                    .navigate(R.id.action_certificationFragment_to_passwordFragment)
+                viewModel?.stopTimer()
                 val intent = Intent(activity, MainActivity::class.java)
                 startActivity(intent)
             }
@@ -47,4 +51,35 @@ class CertificationFragment :
 
     }
 
+    private fun FragmentCertificationBinding.setAddTextChangeListener() {
+        val certificationNumberList =
+            listOf(certificationNumber1, certificationNumber2, certificationNumber3, certificationNumber4, certificationNumber5, certificationNumber6)
+
+        for (index in 0..4) {
+            certificationNumberList[index].addTextChangedListener {
+                if (it!!.isNotEmpty()) {
+                    certificationNumberList[index + 1].requestFocus()
+                }
+            }
+        }
+        certificationNumberList[5].addTextChangedListener {
+            if (it!!.isNotEmpty()) {
+                with(certificationMoveNextButton) {
+                    isEnabled = true
+                    context?.let { ctx ->
+                        setTextColor(ContextCompat.getColor(ctx, R.color.white))
+                        setBackgroundColor(ContextCompat.getColor(ctx, R.color.purple_01))
+                    }
+                }
+            } else {
+                with(certificationMoveNextButton) {
+                    isEnabled = false
+                    context?.let { ctx ->
+                        setTextColor(ContextCompat.getColor(ctx, R.color.gray_01))
+                        setBackgroundColor(ContextCompat.getColor(ctx, R.color.black_01))
+                    }
+                }
+            }
+        }
+    }
 }

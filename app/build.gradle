@@ -94,6 +94,7 @@ dependencies {
 
     // debug
     implementation "com.jakewharton.timber:timber:$timberVersion"
+    implementation "com.facebook.stetho:stetho:$stethoVersion"
 
     // widget
 
