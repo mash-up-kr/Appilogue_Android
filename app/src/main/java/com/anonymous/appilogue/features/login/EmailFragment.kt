@@ -19,17 +19,22 @@ class EmailFragment :
         val regex = "\\w+@\\w+.(com|net|COM|NET)".toRegex()
 
         with(binding) {
-            emailMoveNextButton.isEnabled = false
+            with(emailMoveNextButton) {
+                FirstButtonInit.buttonInit(this)
+                setOnClickListener {
+                    viewModel.timerStart()
+                    it.findNavController().navigate(R.id.action_emailFragment_to_certificationFragment)
+                }
+            }
+
             emailBackButton.setOnClickListener {
                 it.findNavController().navigate(R.id.action_emailFragment_to_loginFragment)
             }
+
             emailCloseButton.setOnClickListener {
                 it.findNavController().navigate(R.id.action_emailFragment_to_loginFragment)
             }
-            emailMoveNextButton.setOnClickListener {
-                viewModel.timerStart()
-                it.findNavController().navigate(R.id.action_emailFragment_to_certificationFragment)
-            }
+
             emailTextInputEditText.setAddTextChangedListener(binding, regex)
         }
     }

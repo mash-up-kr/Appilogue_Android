@@ -17,14 +17,18 @@ class PasswordFragment :
         super.onViewCreated(view, savedInstanceState)
 
         with(binding) {
-            passwordMoveNextButton.setOnClickListener {
-                it.findNavController().navigate(R.id.action_passwordFragment_to_nicknameFragment)
+            with(passwordMoveNextButton) {
+                FirstButtonInit.buttonInit(this)
+                setOnClickListener {
+                    it.findNavController().navigate(R.id.action_passwordFragment_to_nicknameFragment)
+                }
             }
             passwordTextInputEditText.setAddTextChangedListener(binding)
             passwordTextInputEditTextBelow.setAddTextChangedListener(binding)
         }
     }
 }
+
 
 
 

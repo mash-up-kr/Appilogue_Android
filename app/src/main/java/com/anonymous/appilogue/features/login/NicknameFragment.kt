@@ -19,9 +19,12 @@ class NicknameFragment :
 
         with(binding) {
             nicknameTextInputEditText.setAddTextChangedListener(binding)
-            nicknameDoneButton.setOnClickListener {
-                val intent = Intent(activity, MainActivity::class.java)
-                startActivity(intent)
+            with(nicknameDoneButton) {
+                FirstButtonInit.buttonInit(this)
+                setOnClickListener {
+                    val intent = Intent(activity, MainActivity::class.java)
+                    startActivity(intent)
+                }
             }
         }
     }
