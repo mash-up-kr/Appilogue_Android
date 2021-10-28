@@ -23,12 +23,12 @@ class NotificationViewModel @Inject constructor(private val notificationReposito
         _notifications.value = TimeByNotification
             .values()
             .sortedWith(compareBy { it.order })
-            .map {
-                listOf(NotificationListItem.Header(it.stringId)) +
+            .map { timeByNotification ->
+                listOf(NotificationListItem.Header(timeByNotification.stringId)) +
                         notifications
-                            .filter { notification -> notification.date.splitByNotification() == it }
-                            .map {
-                                NotificationListItem.NotificationItem(it)
+                            .filter { notification -> notification.date.splitByNotification() == timeByNotification }
+                            .map { notification ->
+                                NotificationListItem.NotificationItem(notification)
                             }
             }
             .flatten()
