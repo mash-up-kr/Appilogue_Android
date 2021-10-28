@@ -4,13 +4,17 @@
 
     <data>
 
+        <import type="com.anonymous.appilogue.features.home.Focus" />
+
+        <import type="android.view.View" />
+
         <variable
             name="homeViewModel"
             type="com.anonymous.appilogue.features.home.HomeViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        state="@{homeViewModel.bottomSheetState}"
+        bottomSheetState="@{homeViewModel.bottomSheetState}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_home_bottomsheet"
@@ -27,17 +31,33 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/tv_myBlackHole"
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tl_bottomSheetTab"
+            style="@style/TabLayoutTheme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
+            android:layout_marginStart="15dp"
             android:layout_marginTop="28dp"
-            android:text="@string/my_blackhole"
-            android:textColor="@color/white"
-            android:textSize="18sp"
+            android:background="@color/black_alpha90"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:tabIndicator="@drawable/bg_tab_indicator"
+            app:tabIndicatorColor="@color/white"
+            app:tabIndicatorFullWidth="false"
+            app:tabMode="scrollable"
+            app:tabPaddingEnd="10dp"
+            app:tabPaddingStart="10dp"
+            app:tabSelectedTextColor="@color/white"
+            app:tabTextColor="@color/gray_02" />
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/vp_bottomSheetViewPager"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tl_bottomSheetTab" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
