@@ -13,7 +13,7 @@ import com.google.android.material.textfield.TextInputEditText
 object SettingTextChanger {
     private val viewModel = LoginViewModel()
 
-    fun <B> TextInputEditText.setAddTextChangedListener(binding: B, regex: Regex? = null) {
+    fun <B> TextInputEditText.setAddTextChangedListener(binding: B, viewModel: LoginViewModel, regex: Regex? = null) {
         this.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
                 // do nothing
@@ -31,7 +31,7 @@ object SettingTextChanger {
                                 emailTextInputEditText -> {
                                     if (s!!.matches(regex!!)) {
                                         // 이메일 형식이 맞는 경우
-                                        setCorrect(emailMoveNextButton, emailTextInputEditText, binding, s)
+                                        setCorrect(emailMoveNextButton, emailTextInputEditText, binding, viewModel, s)
                                     } else {
                                         // 이메일 형식이 아닌 경우
                                         setIncorrect(
@@ -50,7 +50,7 @@ object SettingTextChanger {
                                 passwordTextInputEditText -> {
                                     // 8자리 이상인 경우
                                     if (s!!.length >= 8) {
-                                        setCorrect(passwordMoveNextButton, passwordTextInputEditText, binding, s)
+                                        setCorrect(passwordMoveNextButton, passwordTextInputEditText, binding, viewModel, s)
                                         // 보통 조건에 부합하는 경우 버튼 클릭 가능하지만 비밀번호는 확인 부분이 있어 한번 더 클릭 못하게 바꿔줍니다
                                         FirstButtonInit.buttonInit(passwordMoveNextButton)
                                     }
@@ -62,7 +62,7 @@ object SettingTextChanger {
                                 passwordTextInputEditTextBelow -> {
                                     // 비밀번호가 같다면
                                     if (s!!.toString() == viewModel.password.value) {
-                                        setCorrect(passwordMoveNextButton, passwordTextInputEditTextBelow, binding, s)
+                                        setCorrect(passwordMoveNextButton, passwordTextInputEditTextBelow, binding, viewModel, s)
                                     }
                                     // 비밀번호가 다르다면
                                     else {
@@ -81,7 +81,7 @@ object SettingTextChanger {
                             when (this@setAddTextChangedListener) {
                                 nicknameTextInputEditText -> {
                                     if (true) {  // 임시 데이터 true 입니당 서버에서 값을 가져와서 확인해야 합니다
-                                        setCorrect(nicknameDoneButton, nicknameTextInputEditText, binding, s!!)
+                                        setCorrect(nicknameDoneButton, nicknameTextInputEditText, binding, viewModel, s!!)
                                     } else {
                                         // 서버에 같은 닉네임이 있다면 혹은 닉네임 길이가 0이라면 까지 추가해야합니다.
                                         setIncorrect(nicknameDoneButton, nicknameTextInputEditText, resources.getString(R.string.nickname_be_used))
@@ -97,7 +97,7 @@ object SettingTextChanger {
 
     }
 
-    private fun <B> setCorrect(button: Button, textInputEditText: TextInputEditText, binding: B, s: Editable) {
+    private fun <B> setCorrect(button: Button, textInputEditText: TextInputEditText, binding: B, viewModel: LoginViewModel, s: Editable) {
         button.isEnabled = true
         textInputEditText.error = null
         with(button) {

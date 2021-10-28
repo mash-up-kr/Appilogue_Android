@@ -18,7 +18,7 @@ class NicknameFragment :
         super.onViewCreated(view, savedInstanceState)
 
         with(binding) {
-            nicknameTextInputEditText.setAddTextChangedListener(binding)
+            nicknameTextInputEditText.setAddTextChangedListener(binding, viewModel)
             with(nicknameDoneButton) {
                 FirstButtonInit.buttonInit(this)
                 setOnClickListener {

@@ -23,8 +23,8 @@ class PasswordFragment :
                     it.findNavController().navigate(R.id.action_passwordFragment_to_nicknameFragment)
                 }
             }
-            passwordTextInputEditText.setAddTextChangedListener(binding)
-            passwordTextInputEditTextBelow.setAddTextChangedListener(binding)
+            passwordTextInputEditText.setAddTextChangedListener(binding, viewModel)
+            passwordTextInputEditTextBelow.setAddTextChangedListener(binding, viewModel)
         }
     }
 }
