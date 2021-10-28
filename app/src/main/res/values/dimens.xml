@@ -7,7 +7,7 @@
     <dimen name="review_content_horizontal_margin">24dp</dimen>
     <dimen name="above_bottom_sheet_margin">10dp</dimen>
     <dimen name="home_bottom_navigation_height">56dp</dimen>
-    <dimen name="notification_side_margin">24dp</dimen>
-    <dimen name="notification_top_margin">10dp</dimen>
-    <dimen name="notification_bottom_margin">20dp</dimen>
+    <dimen name="history_side_margin">24dp</dimen>
+    <dimen name="history_top_margin">10dp</dimen>
+    <dimen name="history_bottom_margin">20dp</dimen>
 </resources>

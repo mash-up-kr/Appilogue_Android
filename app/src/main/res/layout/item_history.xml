@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="com.anonymous.appilogue.features.notification.NotificationListItem.NotificationItem" />
+            type="com.anonymous.appilogue.features.history.HistoryListItem.HistoryItem" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,7 +16,7 @@
 
         <ImageView
             android:id="@+id/iv_space_dust"
-            imageUrl="@{item.notification.iconUrl}"
+            imageUrl="@{item.history.iconUrl}"
             android:layout_width="48dp"
             android:layout_height="48dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -26,7 +26,7 @@
 
         <TextView
             android:id="@+id/tv_description"
-            notificationText="@{item.notification}"
+            historyText="@{item.history}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"

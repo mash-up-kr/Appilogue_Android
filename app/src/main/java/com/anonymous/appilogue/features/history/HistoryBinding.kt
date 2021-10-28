@@ -1,4 +1,4 @@
-package com.anonymous.appilogue.features.notification
+package com.anonymous.appilogue.features.history
 
 import android.text.Spannable
 import android.text.SpannableString
@@ -7,28 +7,28 @@ import android.view.ViewTreeObserver
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.anonymous.appilogue.R
-import com.anonymous.appilogue.model.Notification
+import com.anonymous.appilogue.model.History
 import com.anonymous.appilogue.utils.dateToPassedTime
 import com.anonymous.appilogue.utils.ellipsizeText
 
 
-@BindingAdapter("notificationText")
-fun TextView.setNotificationText(notification: Notification) {
+@BindingAdapter("historyText")
+fun TextView.setHistoryText(history: History) {
     viewTreeObserver.addOnPreDrawListener(object : ViewTreeObserver.OnPreDrawListener {
         override fun onPreDraw(): Boolean {
             viewTreeObserver.removeOnPreDrawListener(this)
             val ellipsisText = context.getString(
-                notification.notificationType.stringResId,
-                notification.from.nickName,
-                notification.date.dateToPassedTime(context),
-                notification.description
+                history.historyType.stringResId,
+                history.from.nickName,
+                history.date.dateToPassedTime(context),
+                history.description
             )
             val ellipsizedText = ellipsizeText(
                 ellipsisText,
                 width,
                 textSize,
                 maxLines,
-                notification.date.dateToPassedTime(context),
+                history.date.dateToPassedTime(context),
                 ELLIPSIZE_NUM
             )
             text.toString().replace(" ", "\u00A0")
@@ -36,12 +36,12 @@ fun TextView.setNotificationText(notification: Notification) {
                 .apply {
                     setSpan(
                         ForegroundColorSpan(context.getColor(R.color.purple_01)),
-                        0, notification.from.nickName.length,
+                        0, history.from.nickName.length,
                         Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
                     )
                     setSpan(
                         ForegroundColorSpan(context.getColor(R.color.gray_02)),
-                        ellipsizedText.length - notification.date.dateToPassedTime(context).length,
+                        ellipsizedText.length - history.date.dateToPassedTime(context).length,
                         ellipsizedText.length,
                         Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
                     )

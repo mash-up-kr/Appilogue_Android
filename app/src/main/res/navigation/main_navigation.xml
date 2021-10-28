@@ -22,6 +22,6 @@
         android:label="SearchAppFragment" />
     <fragment
         android:id="@+id/alarmFragment"
-        android:name="com.anonymous.appilogue.features.notification.NotificationFragment"
+        android:name="com.anonymous.appilogue.features.history.HistoryFragment"
         android:label="AlarmFragment" />
 </navigation>

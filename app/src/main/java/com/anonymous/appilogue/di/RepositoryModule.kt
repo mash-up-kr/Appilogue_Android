@@ -1,7 +1,7 @@
 package com.anonymous.appilogue.di
 
-import com.anonymous.appilogue.repository.FakeNotificationRepository
-import com.anonymous.appilogue.repository.NotificationRepository
+import com.anonymous.appilogue.repository.FakeHistoryRepository
+import com.anonymous.appilogue.repository.HistoryRepository
 import com.anonymous.appilogue.persistence.InstalledAppDao
 import com.anonymous.appilogue.repository.SearchAppRepository
 import dagger.Module
@@ -23,5 +23,5 @@ object RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideNotificationRepository(): NotificationRepository = FakeNotificationRepository()
+    fun provideHistoryRepository(): HistoryRepository = FakeHistoryRepository()
 }
