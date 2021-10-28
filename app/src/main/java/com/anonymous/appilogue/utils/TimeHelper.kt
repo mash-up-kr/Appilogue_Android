@@ -5,20 +5,19 @@ import com.anonymous.appilogue.R
 import java.util.*
 
 fun Date.dateToPassedTime(context: Context): String {
-    var passedTime = Date(System.currentTimeMillis()).time - this.time
-    passedTime /= MILLISECOND
-    if (passedTime < MAX_SECOND)
-        return context.getString(R.string.history_second_passed, passedTime) else
-        passedTime /= MAX_SECOND
-    if (passedTime < MAX_MINUTE)
-        return context.getString(R.string.history_minute_passed, passedTime) else
-        passedTime /= MAX_MINUTE
-    if (passedTime < MAX_HOUR)
-        return context.getString(R.string.history_hour_passed, passedTime) else
-        passedTime /= MAX_HOUR
-    if (passedTime < MAX_DAY)
-        return context.getString(R.string.history_day_passed, passedTime) else
-        passedTime /= MAX_DAY
+    var passedTime = (Date(System.currentTimeMillis()).time - this.time) / MILLISECOND
+    val timeFormatters = listOf(
+        MAX_SECOND to R.string.history_second_passed,
+        MAX_MINUTE to R.string.history_minute_passed,
+        MAX_HOUR to R.string.history_hour_passed,
+        MAX_DAY to R.string.history_day_passed,
+    )
+    timeFormatters.forEach { formatter ->
+        if (passedTime < formatter.first) {
+            return context.getString(formatter.second, passedTime)
+        }
+        passedTime /= formatter.first
+    }
     return context.getString(R.string.history_month_passed, passedTime)
 }
 
