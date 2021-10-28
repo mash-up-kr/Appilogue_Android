@@ -14,18 +14,24 @@ class NotificationFragment :
     BaseFragment<FragmentNotificationBinding, NotificationViewModel>(R.layout.fragment_notification) {
     override val viewModel: NotificationViewModel by activityViewModels()
 
+    private val notificationAdapter: NotificationAdapter by lazy { NotificationAdapter() }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         bind {
             notificationViewModel = viewModel
         }
+        initView()
+        viewModel.fetchNotifications() // fetch mock data
+    }
+
+    private fun initView() {
         binding.ivBack.setOnClickListener {
             (activity as MainActivity).navigateTo(R.id.homeFragment)
         }
         binding.rvNotification.apply {
-            adapter = NotificationAdapter()
+            adapter = notificationAdapter
             addItemDecoration(NotificationRecyclerViewDecoration(context))
         }
-        viewModel.fetchNotifications()
     }
 }
