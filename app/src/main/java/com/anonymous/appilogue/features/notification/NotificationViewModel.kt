@@ -34,15 +34,3 @@ class NotificationViewModel @Inject constructor(private val notificationReposito
             .flatten()
     }
 }
-
-fun Date.splitByNotification(): TimeByNotification? {
-    val passedTime = Date(System.currentTimeMillis()).time - this.time
-    return TimeByNotification.values().find { it.millisecondRange.contains(passedTime) }
-}
-
-enum class TimeByNotification(val stringId: Int, val millisecondRange: LongRange, val order: Int) {
-    TODAY(R.string.today, 1 until DAY_MILLISECOND, 1),
-    THIS_WEEK(R.string.this_week, DAY_MILLISECOND until WEEK_MILLISECOND, 2),
-    THIS_MONTH(R.string.this_month, WEEK_MILLISECOND until MONTH_MILLISECOND, 3),
-    DID_BEFORE(R.string.did_before, MONTH_MILLISECOND until Long.MAX_VALUE, 4)
-}
