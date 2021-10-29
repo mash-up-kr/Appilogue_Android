@@ -150,6 +150,15 @@
             layout="@layout/bottomsheet_home"
             app:homeViewModel="@{homeViewModel}" />
 
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fcv_onboarding"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </layout>
