@@ -32,10 +32,10 @@
         </activity>
         <activity
             android:name="com.anonymous.appilogue.features.main.MainActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".features.login.LoginActivity"
-            android:windowSoftInputMode="adjustResize"></activity>
+            android:windowSoftInputMode="adjustResize" />
     </application>
 
 </manifest>
