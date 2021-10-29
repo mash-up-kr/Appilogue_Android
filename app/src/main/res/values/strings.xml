@@ -10,8 +10,10 @@
     <string name="onboarding_planet_description">닉네임(이)가 살고있는 행성이에요. 우주에 떠도는 APP을 살피면서 행성을 꾸며보세요.</string>
     <string name="onboarding_black_hole_description">여긴 블랙홀이에요. 우주에 정처없이 떠돌아다니는 App을 이제 기념하면서 블랙홀로 보내주세요.</string>
     <string name="onboarding_white_hole_description">여긴 화이트홀이에요. 블랙홀에 갇힌 App을 다시 꺼내 보고싶다면 화이트홀로 보내서 축하해줘요.</string>
-    <string name="onboarding_space_dust_description">닉네임(이)이에요. 이 광활한 우주를 호기심 가득 안고 열심히 둥- 둥- 탐험하고 계시군요!</string>
+    <string name="onboarding_space_dust_description">우주먼지에요. 이 광활한 우주를 호기심 가득 안고 열심히 둥- 둥- 탐험하고 계시군요!</string>
     <string name="onboarding_space_description">닉네임(이)가 활동하고 있는 내 스페이스에요. 우주 속 수많은 APP을 찾으러 탐험을 시작해볼까요?</string>
+    <string name="onboarding_nickname">우주먼지</string>
+    <string name="onboarding_my_space">내 스페이스</string>
     <!--    Home   -->
     <string name="my_space">나의 우주 공간</string>
     <string name="planet">행성</string>

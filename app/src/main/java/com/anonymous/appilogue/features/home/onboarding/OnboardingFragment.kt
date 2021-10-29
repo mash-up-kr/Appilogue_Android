@@ -38,31 +38,31 @@ class OnboardingFragment :
     }
 
     private val onboardingEvents = listOf(
-        R.string.onboarding_planet_description to ({
+        (R.string.onboarding_planet_description to R.string.planet) to ({
             homeViewModel.setStarsAlpha(
                 Focus.OnPlanet,
                 1f
             )
         }),
-        R.string.onboarding_black_hole_description to ({
+        (R.string.onboarding_black_hole_description to R.string.black_hole) to ({
             homeViewModel.setStarsAlpha(
                 Focus.OnBlackHole,
                 1f
             )
         }),
-        R.string.onboarding_white_hole_description to ({
+        (R.string.onboarding_white_hole_description to R.string.white_hole) to ({
             homeViewModel.setStarsAlpha(
                 Focus.OnWhiteHole,
                 1f
             )
         }),
-        R.string.onboarding_space_dust_description to ({
+        (R.string.onboarding_space_dust_description to R.string.onboarding_nickname) to ({
             homeViewModel.setStarsAlpha(
                 Focus.OnSpaceDust,
                 1f
             )
         }),
-        R.string.onboarding_space_description to ({
+        (R.string.onboarding_space_description to R.string.onboarding_my_space) to ({
             homeViewModel.setStarsAlpha(
                 Focus.None,
                 1f
@@ -73,7 +73,7 @@ class OnboardingFragment :
     private fun setNextOnboardingEvent() {
         if (onboardingEventIndex < onboardingEvents.size) {
             val event = onboardingEvents[onboardingEventIndex++]
-            viewModel.setDescriptionRes(event.first)
+            viewModel.setDescriptionRes(event.first.first, event.first.second)
             event.second.invoke()
         } else {
             finishOnboarding()

@@ -9,7 +9,11 @@ class OnboardingViewModel : ViewModel() {
     private val _descriptionRes = MutableLiveData(R.string.onboarding_planet_description)
     val descriptionRes: LiveData<Int> = _descriptionRes
 
-    fun setDescriptionRes(resId: Int) {
-        _descriptionRes.value = resId
+    private val _emphasizeTextRes = MutableLiveData(R.string.planet)
+    val emphasizeTextRes: LiveData<Int> = _emphasizeTextRes
+
+    fun setDescriptionRes(descriptionRes: Int, emphasizeTextRes: Int) {
+        _descriptionRes.value = descriptionRes
+        _emphasizeTextRes.value = emphasizeTextRes
     }
 }
