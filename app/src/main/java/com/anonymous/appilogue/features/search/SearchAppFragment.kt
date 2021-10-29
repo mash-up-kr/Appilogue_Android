@@ -25,7 +25,7 @@ class SearchAppFragment
     private val searchAppAdapter: SearchAppAdapter by lazy {
         val mainActivity = activity as MainActivity
         SearchAppAdapter(mainActivity.viewModel) {
-            mainActivity.navigateTo(R.id.searchAppFragment2)
+            mainActivity.navigateTo(R.id.action_searchAppFragment_to_reviewSelectorFragment)
         }
     }
 
@@ -33,6 +33,10 @@ class SearchAppFragment
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        bind {
+            vm = viewModel
+        }
 
         initRecyclerView()
         initView()

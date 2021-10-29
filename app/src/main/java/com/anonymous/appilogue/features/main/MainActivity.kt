@@ -5,6 +5,8 @@ import androidx.activity.viewModels
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavDirections
+import androidx.navigation.Navigation
 import com.anonymous.appilogue.R
 import com.anonymous.appilogue.databinding.ActivityMainBinding
 import com.anonymous.appilogue.features.base.BaseActivity
@@ -42,7 +44,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             itemIconTintList = null
             setOnItemSelectedListener {
                 if (it.isChecked && it.itemId == R.id.homeFragment) {
-                    navigateTo(R.id.searchAppFragment2)
+                    navigateTo(R.id.searchAppFragment)
                     viewModel.hideBottomNavigation()
                 } else {
                     navigateTo(it.itemId)
@@ -59,5 +61,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     fun navigateTo(id: Int) {
         navController.navigate(id)
+    }
+
+    fun navigateTo(action: NavDirections) {
+        navController.navigate(action)
     }
 }
