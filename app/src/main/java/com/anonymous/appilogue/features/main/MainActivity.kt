@@ -1,29 +1,28 @@
 package com.anonymous.appilogue.features.main
 
 import android.os.Bundle
-import android.view.MenuItem
-import android.view.View
 import androidx.activity.viewModels
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.commit
-import androidx.navigation.NavHost
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavDirections
+import androidx.navigation.Navigation
 import com.anonymous.appilogue.R
 import com.anonymous.appilogue.databinding.ActivityMainBinding
 import com.anonymous.appilogue.features.base.BaseActivity
-import com.anonymous.appilogue.features.home.HomeFragment
-import com.anonymous.appilogue.features.home.HomeViewModel
-import com.anonymous.appilogue.features.profile.ProfileFragment
-import com.anonymous.appilogue.features.search.SearchAppFragment
+import com.anonymous.appilogue.features.search.AppSearchManager
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     val viewModel: MainViewModel by viewModels()
+
+    @Inject
+    lateinit var appSearchManager: AppSearchManager
 
     private val navController by lazy {
         val navHostFragment =
@@ -45,7 +44,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             itemIconTintList = null
             setOnItemSelectedListener {
                 if (it.isChecked && it.itemId == R.id.homeFragment) {
-                    navigateTo(R.id.searchAppFragment2)
+                    navigateTo(R.id.searchAppFragment)
                     viewModel.hideBottomNavigation()
                 } else {
                     navigateTo(it.itemId)
@@ -54,9 +53,17 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                 true
             }
         }
+
+        lifecycleScope.launch(Dispatchers.IO) {
+            appSearchManager.updateInstalledAppList()
+        }
     }
 
     fun navigateTo(id: Int) {
         navController.navigate(id)
+    }
+
+    fun navigateTo(action: NavDirections) {
+        navController.navigate(action)
     }
 }

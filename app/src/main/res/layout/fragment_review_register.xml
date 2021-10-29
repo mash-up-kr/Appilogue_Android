@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="vm"
+            type="com.anonymous.appilogue.features.review.ReviewRegisterViewModel" />
+        <variable
+            name="mainVm"
+            type="com.anonymous.appilogue.features.main.MainViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/black"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+            <androidx.appcompat.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp">
+
+                    <ImageView
+                        android:id="@+id/toolbar_left_icon_view"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_back_left_24"
+                        android:contentDescription="@string/description_back_button"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/TextStyle.ToolBar"
+                        android:text="@string/abb_bar_black_hole_review_title"
+                        tools:text="@string/abb_bar_black_hole_review_title"
+                        app:reviewTitle="@{vm.isBlackHoleReview}"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        />
+
+                    <ImageView
+                        android:id="@+id/toolbar_right_icon_view"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginEnd="24dp"
+                        android:src="@drawable/ic_close_24"
+                        android:contentDescription="@string/description_close_button"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <ImageView
+            android:id="@+id/app_icon_view"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/border_radius_16"
+            android:contentDescription="@string/app_icon_content_description"
+            app:bindBitmap="@{mainVm.selectedApp.icon}"
+            app:layout_constraintTop_toBottomOf="@id/appbar_layout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/app_name_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:paddingVertical="5dp"
+            android:paddingHorizontal="10dp"
+            android:background="@drawable/border_radius_08"
+            android:backgroundTint="@color/gray_02"
+            android:text="@{mainVm.selectedApp.name}"
+            android:textStyle="bold"
+            style="@style/TextStyle.Normal12"
+            tools:text="어나니머쓱"
+            app:layout_constraintTop_toBottomOf="@id/app_icon_view"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/review_input_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginHorizontal="@dimen/review_content_horizontal_margin"
+            android:text="@string/review_input_title_text"
+            style="@style/TextStyle.Normal16"
+            app:layout_constraintTop_toBottomOf="@id/app_name_view"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <EditText
+            android:id="@+id/review_input_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="172dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="@dimen/review_content_horizontal_margin"
+            android:padding="16dp"
+            android:background="@drawable/border_radius_10"
+            android:gravity="top|start"
+            android:inputType="text"
+            android:maxLength="500"
+            android:hint="@string/black_hole_review_hint"
+            android:textColorHint="@color/gray_02"
+            android:text="@={vm.reviewEditText}"
+            style="@style/TextStyle.Normal14"
+            app:layout_constraintTop_toBottomOf="@id/review_input_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/review_text_count_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:textColor="@color/gray_02"
+            android:text="@{@string/review_text_count(vm.reviewEditText.length)}"
+            style="@style/TextStyle.Normal12"
+            tools:text="0/500자"
+            app:layout_constraintTop_toBottomOf="@id/review_input_edit_text"
+            app:layout_constraintEnd_toEndOf="@id/review_input_edit_text" />
+
+        <TextView
+            android:id="@+id/review_keyword_title_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
+            android:layout_marginHorizontal="@dimen/review_content_horizontal_margin"
+            android:text="@string/review_keyword_title_text"
+            style="@style/TextStyle.Normal16"
+            app:layout_constraintTop_toBottomOf="@id/review_input_edit_text"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/review_app_keyword_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:layout_marginHorizontal="@dimen/review_content_horizontal_margin"
+            app:selectionRequired="false"
+            app:layout_constraintTop_toBottomOf="@id/review_keyword_title_view"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/select_button"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginHorizontal="@dimen/review_content_horizontal_margin"
+            android:layout_marginBottom="30dp"
+            android:backgroundTint="@color/gray_01"
+            android:background="@drawable/border_radius_10"
+            android:text="@string/review_send_button_text"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            android:textColor="@color/gray_02"
+            android:gravity="center"
+            style="@style/TextStyle.Normal16"
+            app:isSelected="@{vm.reviewEditText.length > 0}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

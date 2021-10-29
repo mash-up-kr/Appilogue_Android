@@ -34,7 +34,7 @@
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNavigationView"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/home_bottom_navigation_height"
             android:background="@color/black_01"
             android:visibility="@{mainViewModel.bottomNavigationState ? View.VISIBLE : View.INVISIBLE}"
             app:itemIconSize="@dimen/size_navigation_icon"
@@ -42,6 +42,7 @@
             app:labelVisibilityMode="unlabeled"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:menu="@menu/navigation_main" />
 

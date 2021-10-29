@@ -75,7 +75,8 @@
             android:layout_height="100dp"
             android:layout_marginTop="20dp"
             android:background="@drawable/border_radius_16"
-            android:src="@{mainVm.selectedApp.icon}"
+            android:contentDescription="@string/app_icon_content_description"
+            app:bindBitmap="@{mainVm.selectedApp.icon}"
             app:layout_constraintTop_toBottomOf="@id/appbar_layout"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
@@ -107,7 +108,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:layout_gravity="center"
-                android:text="을(를) 어디로"
+                android:text="@string/app_review_sub_title"
                 style="@style/TextStyle.Normal16"/>
 
         </LinearLayout>
@@ -117,7 +118,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="13dp"
-            android:text="리뷰하시겠어요?"
+            android:text="@string/app_review_sub_title_question"
             style="@style/TextStyle.Normal16"
             app:layout_constraintTop_toBottomOf="@id/app_info_view"
             app:layout_constraintStart_toStartOf="parent"
@@ -135,14 +136,15 @@
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintTop_toBottomOf="@id/review_info_text"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/white_hole_view" />
+            app:layout_constraintEnd_toStartOf="@id/white_hole_view"
+            android:contentDescription="@string/black_hole_image_description" />
 
         <TextView
             android:id="@+id/black_hole_title_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:text="블랙홀"
+            android:text="@string/black_hole_text"
             style="@style/TextStyle.Normal16"
             app:layout_constraintTop_toBottomOf="@id/black_hole_view"
             app:layout_constraintStart_toStartOf="@id/black_hole_view"
@@ -160,14 +162,15 @@
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintTop_toBottomOf="@id/review_info_text"
             app:layout_constraintStart_toEndOf="@id/black_hole_view"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            android:contentDescription="@string/white_hole_image_description"/>
 
         <TextView
             android:id="@+id/white_hole_title_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:text="화이트홀"
+            android:text="@string/white_hole_text"
             style="@style/TextStyle.Normal16"
             app:layout_constraintTop_toBottomOf="@id/white_hole_view"
             app:layout_constraintStart_toStartOf="@id/white_hole_view"
@@ -182,11 +185,13 @@
             android:gravity="center"
             android:background="@drawable/border_radius_12_gradient"
             android:visibility="invisible"
+            android:bufferType="spannable"
             style="@style/TextStyle.Normal12"
             app:layout_constraintTop_toBottomOf="@id/black_hole_title_view"
             app:layout_constraintBottom_toTopOf="@id/select_button"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            tools:visibility="visible"
             tools:text="@string/description_black_hole"/>
 
         <TextView
@@ -197,12 +202,13 @@
             android:layout_marginBottom="30dp"
             android:backgroundTint="@color/gray_01"
             android:background="@drawable/border_radius_10"
-            android:text="선택"
+            android:text="@string/review_selector_button_text"
             android:textAlignment="center"
             android:textStyle="bold"
             android:textColor="@color/gray_02"
             android:gravity="center"
             style="@style/TextStyle.Normal16"
+            app:isSelected="@{vm.isBlackHoleSelected || vm.isWhiteHoleSelected}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>

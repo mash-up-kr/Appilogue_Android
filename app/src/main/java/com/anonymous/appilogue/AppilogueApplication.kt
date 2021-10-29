@@ -1,6 +1,7 @@
 package com.anonymous.appilogue
 
 import android.app.Application
+import com.facebook.stetho.Stetho
 import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 
@@ -12,6 +13,7 @@ class AppilogueApplication : Application() {
         if (BuildConfig.DEBUG) {
             Timber.plant(AnonymousDebugTree())
         }
+        Stetho.initializeWithDefaults(this)
     }
 
     private class AnonymousDebugTree : Timber.DebugTree() {

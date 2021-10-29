@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
+    id 'androidx.navigation.safeargs.kotlin'
 }
 
 android {
@@ -94,6 +95,7 @@ dependencies {
 
     // debug
     implementation "com.jakewharton.timber:timber:$timberVersion"
+    implementation "com.facebook.stetho:stetho:$stethoVersion"
 
     // widget
 
