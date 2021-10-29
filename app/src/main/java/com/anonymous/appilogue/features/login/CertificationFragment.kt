@@ -70,8 +70,8 @@ class CertificationFragment :
     }
 
     private fun focusNext(): (EditText, EditText) -> Unit = { editText1, editText2 ->
-        editText1.addTextChangedListener {
-            if (it!!.isNotEmpty()) {
+        editText1.addTextChangedListener { newText ->
+            if (!newText.isNullOrEmpty()) {
                 editText2.requestFocus()
                 if (checkAllData()) {
                     buttonClickEnable()
