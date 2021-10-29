@@ -84,7 +84,7 @@ class CertificationFragment :
 
     private fun certificationCheck(): (EditText) -> Unit = { it ->
         it.addTextChangedListener {
-            if (it!!.isNotEmpty()) {
+            if (!it.isNullOrEmpty()) {
                 buttonClickEnable()
             } else {
                 buttonClickUnEnable()
