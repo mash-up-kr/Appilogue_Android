@@ -55,7 +55,7 @@ class CertificationFragment :
     }
 
     private fun <S> Iterable<S>.setFocusAndChangeButtonState(operation: (S, S) -> Unit, lastOperation: (S) -> Unit) {
-        var iterator = this.iterator()
+        val iterator = this.iterator()
         if (!iterator.hasNext()) throw UnsupportedOperationException("EmptyList can't be reduced")
 
         var value: S = iterator.next()
