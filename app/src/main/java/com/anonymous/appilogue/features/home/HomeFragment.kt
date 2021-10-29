@@ -22,6 +22,7 @@ import com.anonymous.appilogue.features.home.bottomsheet.BottomSheetPagerAdapter
 import com.anonymous.appilogue.features.home.bottomsheet.MyDecorationFragment
 import com.anonymous.appilogue.features.home.bottomsheet.StoreFragment
 import com.anonymous.appilogue.features.home.onboarding.OnboardingFragment
+import com.anonymous.appilogue.features.home.onboarding.OnboardingFragment.Companion.COMPLETED_ONBOARDING
 import com.anonymous.appilogue.features.main.MainViewModel
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.tabs.TabLayoutMediator
@@ -55,7 +56,7 @@ class HomeFragment :
 
     private fun initOnboarding() {
         PreferenceManager.getDefaultSharedPreferences(context).apply {
-            if (true) {
+            if (!getBoolean(COMPLETED_ONBOARDING, false)) {
                 childFragmentManager.commit {
                     add<OnboardingFragment>(R.id.fcv_onboarding)
                     setReorderingAllowed(true)

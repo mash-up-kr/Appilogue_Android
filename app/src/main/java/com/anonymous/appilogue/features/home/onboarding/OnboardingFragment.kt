@@ -41,31 +41,31 @@ class OnboardingFragment :
         (R.string.onboarding_planet_description to R.string.planet) to ({
             homeViewModel.setStarsAlpha(
                 Focus.OnPlanet,
-                1f
+                UNFOCUSED_STAR_ALPHA
             )
         }),
         (R.string.onboarding_black_hole_description to R.string.black_hole) to ({
             homeViewModel.setStarsAlpha(
                 Focus.OnBlackHole,
-                1f
+                UNFOCUSED_STAR_ALPHA
             )
         }),
         (R.string.onboarding_white_hole_description to R.string.white_hole) to ({
             homeViewModel.setStarsAlpha(
                 Focus.OnWhiteHole,
-                1f
+                UNFOCUSED_STAR_ALPHA
             )
         }),
         (R.string.onboarding_space_dust_description to R.string.onboarding_nickname) to ({
             homeViewModel.setStarsAlpha(
                 Focus.OnSpaceDust,
-                1f
+                UNFOCUSED_STAR_ALPHA
             )
         }),
         (R.string.onboarding_space_description to R.string.onboarding_my_space) to ({
             homeViewModel.setStarsAlpha(
                 Focus.None,
-                1f
+                UNFOCUSED_STAR_ALPHA
             )
         })
     )
@@ -89,13 +89,15 @@ class OnboardingFragment :
     override fun onDestroyView() {
         super.onDestroyView()
         mainViewModel.enableClickBottomNavigation()
-        PreferenceManager.getDefaultSharedPreferences(context).edit().apply {
-            putBoolean(COMPLETED_ONBOARDING, true)
-            apply()
-        }
+        if (onboardingEventIndex == onboardingEvents.size)
+            PreferenceManager.getDefaultSharedPreferences(context).edit().apply {
+                putBoolean(COMPLETED_ONBOARDING, true)
+                apply()
+            }
     }
 
     companion object {
         const val COMPLETED_ONBOARDING = "ONBOARDING"
+        const val UNFOCUSED_STAR_ALPHA = 0.3f
     }
 }

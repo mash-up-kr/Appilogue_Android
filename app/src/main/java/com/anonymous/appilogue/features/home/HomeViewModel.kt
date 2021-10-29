@@ -63,11 +63,15 @@ class HomeViewModel @Inject constructor(private val appRepository: AppRepository
 
     fun setStarsAlpha(focus: Focus, alpha: Float) {
         when (focus) {
-            Focus.OnPlanet -> _starsAlpha.value = StarsAlpha(planetAlpha = alpha)
-            Focus.OnWhiteHole -> _starsAlpha.value = StarsAlpha(whiteHoleAlpha = alpha)
-            Focus.OnBlackHole -> _starsAlpha.value = StarsAlpha(blackHoleAlpha = alpha)
-            Focus.OnSpaceDust -> _starsAlpha.value = StarsAlpha(spaceDustAlpha = alpha)
-            Focus.None -> _starsAlpha.value = StarsAlpha(alpha, alpha, alpha, alpha)
+            Focus.OnPlanet -> _starsAlpha.value =
+                StarsAlpha(whiteHoleAlpha = alpha, blackHoleAlpha = alpha, spaceDustAlpha = alpha)
+            Focus.OnWhiteHole -> _starsAlpha.value =
+                StarsAlpha(planetAlpha = alpha, blackHoleAlpha = alpha, spaceDustAlpha = alpha)
+            Focus.OnBlackHole -> _starsAlpha.value =
+                StarsAlpha(whiteHoleAlpha = alpha, planetAlpha = alpha, spaceDustAlpha = alpha)
+            Focus.OnSpaceDust -> _starsAlpha.value =
+                StarsAlpha(whiteHoleAlpha = alpha, blackHoleAlpha = alpha, planetAlpha = alpha)
+            Focus.None -> _starsAlpha.value = StarsAlpha()
         }
     }
 }
