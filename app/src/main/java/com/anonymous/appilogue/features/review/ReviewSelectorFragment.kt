@@ -1,7 +1,11 @@
 package com.anonymous.appilogue.features.review
 
 import android.os.Bundle
+import android.text.Spannable
+import android.text.Spanned
+import android.text.style.ForegroundColorSpan
 import android.view.View
+import android.widget.TextView
 import androidx.fragment.app.viewModels
 import com.anonymous.appilogue.R
 import com.anonymous.appilogue.databinding.FragmentReviewSelectorBinding
@@ -18,7 +22,8 @@ class ReviewSelectorFragment
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.apply {
+        bind {
+            vm = viewModel
             mainVm = (activity as MainActivity).viewModel
         }
 
@@ -29,13 +34,9 @@ class ReviewSelectorFragment
         binding.blackHoleView.setOnClickListener {
             it.isSelected = true
             binding.whiteHoleView.isSelected = false
+            viewModel.selectBlackHole()
             binding.planetDescriptionView.apply {
-                visibility = View.VISIBLE
-                text = getString(R.string.description_black_hole)
-            }
-            binding.selectButton.apply {
-                setBackgroundColor(resources.getColor(R.color.purple_01, context.theme))
-                setTextColor(resources.getColor(R.color.white, context.theme))
+                handleSelectEvent(R.string.description_black_hole, R.string.black_hole_text, R.color.mint)
             }
         }
 
@@ -44,13 +45,32 @@ class ReviewSelectorFragment
             binding.blackHoleView.isSelected = false
             viewModel.selectWhiteHole()
             binding.planetDescriptionView.apply {
-                visibility = View.VISIBLE
-                text = getString(R.string.description_white_hole)
-            }
-            binding.selectButton.apply {
-                setBackgroundColor(resources.getColor(R.color.purple_01, context.theme))
-                setTextColor(resources.getColor(R.color.white, context.theme))
+                handleSelectEvent(R.string.description_white_hole, R.string.white_hole_text, R.color.mint)
             }
         }
+        binding.selectButton.setOnClickListener {
+            if (viewModel.isSelected()) {
+                val action = ReviewSelectorFragmentDirections.actionReviewSelectorFragmentToReviewRegisterFragment(viewModel.isBlackHoleSelected.value)
+                (activity as MainActivity).navigateTo(action)
+            }
+        }
+    }
+
+    private fun TextView.handleSelectEvent(
+        contentTextId: Int,
+        holeTextId: Int,
+        spanColorId: Int
+    ) {
+        visibility = View.VISIBLE
+        text = getString(contentTextId)
+
+        val holeText = getString(holeTextId)
+        val spanColor = context.getColor(spanColorId)
+        val span = text as Spannable
+        span.setSpan(
+            ForegroundColorSpan(spanColor),
+            text.indexOf(holeText),
+            text.indexOf(holeText) + holeText.length,
+            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
     }
 }

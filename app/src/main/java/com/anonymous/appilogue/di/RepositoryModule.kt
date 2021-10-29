@@ -1,6 +1,7 @@
 package com.anonymous.appilogue.di
 
-import android.content.Context
+import com.anonymous.appilogue.repository.FakeHistoryRepository
+import com.anonymous.appilogue.repository.HistoryRepository
 import com.anonymous.appilogue.repository.AppRepository
 import com.anonymous.appilogue.repository.FakeAppRepository
 import com.anonymous.appilogue.persistence.InstalledAppDao
@@ -22,7 +23,12 @@ object RepositoryModule {
         installedAppDao: InstalledAppDao
     ) = SearchAppRepository(installedAppDao)
 
+    @Provides
+    @Singleton
+    fun provideHistoryRepository(): HistoryRepository = FakeHistoryRepository()
+
     @Singleton
     @Provides
     fun provideAppRepository(): AppRepository = FakeAppRepository()
+
 }

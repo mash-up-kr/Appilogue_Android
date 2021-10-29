@@ -14,6 +14,7 @@ import androidx.preference.PreferenceManager
 import com.anonymous.appilogue.R
 import com.anonymous.appilogue.databinding.FragmentHomeBinding
 import com.anonymous.appilogue.features.base.BaseFragment
+import com.anonymous.appilogue.features.main.MainActivity
 import com.anonymous.appilogue.features.home.bottomsheet.AppFragment
 import com.anonymous.appilogue.features.home.bottomsheet.AppFragment.Companion.BLACK_HOLE
 import com.anonymous.appilogue.features.home.bottomsheet.AppFragment.Companion.WHITE_HOLE
@@ -44,6 +45,9 @@ class HomeFragment :
         initBottomSheet()
         observeStar()
         initStarByFocus()
+        binding.ivAlarm.setOnClickListener {
+            (activity as MainActivity).navigateTo(R.id.alarmFragment)
+        }
         SpaceAnimator.animateSpace(binding.ivSpace)
         viewModel.changeFocus(Focus.None)
         initOnboarding()
