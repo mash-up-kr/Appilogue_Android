@@ -17,11 +17,32 @@
         android:name="com.anonymous.appilogue.features.home.HomeFragment"
         android:label="HomeFragment" />
     <fragment
-        android:id="@+id/searchAppFragment2"
-        android:name="com.anonymous.appilogue.features.search.SearchAppFragment"
-        android:label="SearchAppFragment" />
-    <fragment
         android:id="@+id/alarmFragment"
         android:name="com.anonymous.appilogue.features.history.HistoryFragment"
         android:label="AlarmFragment" />
+    <fragment
+        android:id="@+id/searchAppFragment"
+        android:name="com.anonymous.appilogue.features.search.SearchAppFragment"
+        android:label="SearchAppFragment">
+        <action
+            android:id="@+id/action_searchAppFragment_to_reviewSelectorFragment"
+            app:destination="@id/reviewSelectorFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/reviewSelectorFragment"
+        android:name="com.anonymous.appilogue.features.review.ReviewSelectorFragment"
+        android:label="ReviewSelectorFragment">
+        <action
+            android:id="@+id/action_reviewSelectorFragment_to_reviewRegisterFragment"
+            app:destination="@id/reviewRegisterFragment">
+            <argument
+                android:name="isBlackHoleReview"
+                android:defaultValue="false"
+                app:argType="boolean" />
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/reviewRegisterFragment"
+        android:name="com.anonymous.appilogue.features.review.ReviewRegisterFragment"
+        android:label="ReviewRegisterFragment" />
 </navigation>

@@ -1,19 +1,19 @@
 package com.anonymous.appilogue.features.review
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
 
 @HiltViewModel
 class ReviewSelectorViewModel @Inject constructor() : ViewModel() {
 
-    private val _isBlackHoleSelected = MutableLiveData<Boolean>()
-    val isBlackHoleSelected: LiveData<Boolean> = _isBlackHoleSelected
+    private val _isBlackHoleSelected = MutableStateFlow(false)
+    val isBlackHoleSelected: StateFlow<Boolean> = _isBlackHoleSelected
 
-    private val _isWhiteHoleSelected = MutableLiveData<Boolean>()
-    val isWhiteHoleSelected: LiveData<Boolean> = _isWhiteHoleSelected
+    private val _isWhiteHoleSelected = MutableStateFlow(false)
+    val isWhiteHoleSelected: StateFlow<Boolean> = _isWhiteHoleSelected
 
     fun selectBlackHole() {
         _isBlackHoleSelected.value = true
@@ -23,5 +23,9 @@ class ReviewSelectorViewModel @Inject constructor() : ViewModel() {
     fun selectWhiteHole() {
         _isWhiteHoleSelected.value = true
         _isBlackHoleSelected.value = false
+    }
+
+    fun isSelected(): Boolean {
+        return isBlackHoleSelected.value || isWhiteHoleSelected.value
     }
 }

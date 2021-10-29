@@ -6,12 +6,17 @@
     <string name="email_format_error_text">이메일 형식이 아닙니다.</string>
     <string name="to_home">홈으로</string>
     <!--    Home   -->
-    <string name="my_blackhole">나의 블랙홀</string>
     <string name="my_space">나의 우주 공간</string>
     <string name="planet">행성</string>
     <string name="white_hole">화이트홀</string>
     <string name="black_hole">블랙홀</string>
     <string name="space_dust">우주먼지</string>
+    <string name="my_planet">나의 행성</string>
+    <string name="my_space_dust">나의 우주먼지</string>
+    <string name="my_black_hole">나의 블랙홀</string>
+    <string name="my_white_hole">나의 화이트홀</string>
+    <string name="planet_store">행성 스토어</string>
+    <string name="dust_store">먼지 스토어</string>
     <!--    History    -->
     <string name="notification">알림</string>
     <string name="history_like">%1$s님이 회원님의 게시물을 좋아합니다. %2$s</string>
@@ -39,6 +44,21 @@
     <string name="community_fragment">CommunityFragment</string>
     <string name="profile_fragment">ProfileFragment</string>
     <string name="home_fragment">HomeFragment</string>
+    <string name="white_hole_text">화이트홀</string>
+    <string name="black_hole_text">블랙홀</string>
+    <string name="app_review_sub_title">을(를) 어디로</string>
+    <string name="app_review_sub_title_question">리뷰하시겠어요?</string>
+    <string name="black_hole_image_description">블랙홀 이미지</string>
+    <string name="white_hole_image_description">블랙홀 이미지</string>
+    <string name="abb_bar_black_hole_review_title">블랙홀 리뷰</string>
+    <string name="abb_bar_white_hole_review_title">화이트홀 리뷰</string>
+    <string name="app_icon_content_description">Selected App Icon</string>
+    <string name="review_input_title_text">리뷰를 작성해주세요 :)</string>
+    <string name="black_hole_review_hint">이제 그만 너를 놓아줄게…</string>
+    <string name="review_keyword_title_text">이 앱의 키워드를 뽑아주세요</string>
+    <string name="review_send_button_text">리뷰 보내기</string>
+    <string name="review_selector_button_text">선택</string>
+    <string name="review_text_count">%d/500자</string>
     <!--   Login  -->
     <string name="insert_email">이메일을 입력해주세요</string>
     <string name="next_button">다음</string>

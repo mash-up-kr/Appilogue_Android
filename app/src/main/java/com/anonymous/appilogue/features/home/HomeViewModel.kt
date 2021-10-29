@@ -3,12 +3,17 @@ package com.anonymous.appilogue.features.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.anonymous.appilogue.model.ReviewedApp
+import com.anonymous.appilogue.repository.AppRepository
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor() : ViewModel() {
+class HomeViewModel @Inject constructor(private val appRepository: AppRepository) : ViewModel() {
 
     private val _starFocused = MutableLiveData(Focus.None)
     val starFocused: LiveData<Focus> = _starFocused
@@ -18,6 +23,9 @@ class HomeViewModel @Inject constructor() : ViewModel() {
 
     private val _bottomSheetHideable = MutableLiveData(true)
     val bottomSheetHideable: LiveData<Boolean> = _bottomSheetHideable
+
+    private val _apps = MutableLiveData(emptyList<ReviewedApp>())
+    val apps: LiveData<List<ReviewedApp>> = _apps
 
     fun changeBottomSheetState(newState: Int) {
         _bottomSheetState.value = newState
@@ -31,11 +39,22 @@ class HomeViewModel @Inject constructor() : ViewModel() {
         }
         _starFocused.value = focus
         if (Focus.isOnFocus(focus)) {
-            _bottomSheetHideable.value = false
             changeBottomSheetState(BottomSheetBehavior.STATE_COLLAPSED)
+            viewModelScope.launch {
+                delay(10)
+                _bottomSheetHideable.value = false
+            }
         } else {
             _bottomSheetHideable.value = true
             changeBottomSheetState(BottomSheetBehavior.STATE_HIDDEN)
         }
+    }
+
+    fun fetchBlackHoleApps() {
+        _apps.value = appRepository.getBlackHoleApps()
+    }
+
+    fun fetchWhiteHoleApps() {
+        _apps.value = appRepository.getWhiteHoleApps()
     }
 }
