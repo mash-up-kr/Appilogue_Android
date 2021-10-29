@@ -27,6 +27,9 @@ class HomeViewModel @Inject constructor(private val appRepository: AppRepository
     private val _apps = MutableLiveData(emptyList<ReviewedApp>())
     val apps: LiveData<List<ReviewedApp>> = _apps
 
+    private val _starsAlpha = MutableLiveData(StarsAlpha())
+    val starsAlpha: LiveData<StarsAlpha> = _starsAlpha
+
     fun changeBottomSheetState(newState: Int) {
         _bottomSheetState.value = newState
     }
@@ -56,5 +59,15 @@ class HomeViewModel @Inject constructor(private val appRepository: AppRepository
 
     fun fetchWhiteHoleApps() {
         _apps.value = appRepository.getWhiteHoleApps()
+    }
+
+    fun setStarsAlpha(focus: Focus, alpha: Float) {
+        when (focus) {
+            Focus.OnPlanet -> _starsAlpha.value = StarsAlpha(planetAlpha = alpha)
+            Focus.OnWhiteHole -> _starsAlpha.value = StarsAlpha(whiteHoleAlpha = alpha)
+            Focus.OnBlackHole -> _starsAlpha.value = StarsAlpha(blackHoleAlpha = alpha)
+            Focus.OnSpaceDust -> _starsAlpha.value = StarsAlpha(spaceDustAlpha = alpha)
+            Focus.None -> _starsAlpha.value = StarsAlpha(alpha, alpha, alpha, alpha)
+        }
     }
 }
