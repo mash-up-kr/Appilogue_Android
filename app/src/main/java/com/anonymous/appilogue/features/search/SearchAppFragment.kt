@@ -7,6 +7,7 @@ import com.anonymous.appilogue.R
 import com.anonymous.appilogue.databinding.FragmentSearchBinding
 import com.anonymous.appilogue.features.base.BaseFragment
 import com.anonymous.appilogue.features.main.MainActivity
+import com.anonymous.appilogue.utils.showKeyboardUp
 import com.jakewharton.rxbinding4.view.focusChanges
 import com.jakewharton.rxbinding4.widget.textChanges
 import dagger.hilt.android.AndroidEntryPoint
@@ -53,6 +54,7 @@ class SearchAppFragment
             .subscribe { focus ->
                 if (focus) {
                     binding.searchInputLayout.isHintEnabled = false
+                    context?.showKeyboardUp()
                 }
             }
         disposable = binding.searchEditTextView.textChanges()
