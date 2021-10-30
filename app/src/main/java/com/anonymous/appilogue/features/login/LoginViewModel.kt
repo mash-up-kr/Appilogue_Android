@@ -13,14 +13,13 @@ class LoginViewModel : ViewModel() {
     private val _timer = MutableLiveData<String>()
     private lateinit var job: Job
 
-    val inputText = MutableLiveData<String>()
+    val password = MutableLiveData<String>()
+    val checkPassword = MutableLiveData<String>()
+    val emailAddress = MutableLiveData<String>()
+    val nickName = MutableLiveData<String>()
     val timer: LiveData<String> = _timer
 
-    init {
-        timerStart()
-    }
-
-    private fun timerStart() {
+    fun timerStart() {
         if (::job.isInitialized) job.cancel()
         _timerCount = 600000
 

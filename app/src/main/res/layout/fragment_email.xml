@@ -45,42 +45,42 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="116dp"
-            android:layout_marginBottom="490dp"
+            android:layout_marginBottom="30dp"
             android:text="@string/insert_email"
             android:textColor="@color/white"
             android:textSize="22sp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/email_textInputLayout"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayout"
+            android:id="@+id/email_textInputLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="180dp"
             android:layout_marginEnd="24dp"
-            android:layout_marginBottom="412dp"
-            android:background="@drawable/border_radius_16"
             android:backgroundTint="@color/gray_01"
-            android:hint="Email"
+            android:hint="@string/email"
             android:textColorHint="@color/gray_02"
-            app:errorEnabled="true"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/textInputEditText"
+                android:id="@+id/email_text_input_edit_text"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@={vm.inputText}"
+                android:layout_height="52dp"
+                android:background="@drawable/border_radius_16"
+                android:backgroundTint="@color/gray_01"
+                android:inputType="text"
+                android:maxLines="1"
+                android:paddingStart="16dp"
+                android:text="@={vm.nickName}"
                 android:textColor="@color/white"
-                android:textSize="15sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:textSize="16sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
@@ -88,15 +88,14 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="24dp"
-            android:layout_marginBottom="75dp"
             android:text="@string/email_to_certification"
             android:textColor="@color/gray_02"
             android:textSize="12sp"
-            app:layout_constraintBottom_toTopOf="@id/email_move_next_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textInputLayout" />
+            app:layout_constraintTop_toBottomOf="@id/email_textInputLayout" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/email_move_next_button"
@@ -105,15 +104,14 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="335dp"
             android:layout_marginEnd="24dp"
-            android:layout_marginBottom="257dp"
+            android:layout_marginBottom="20dp"
             android:background="@drawable/border_radius_10_purple"
             android:backgroundTint="@color/purple_01"
             android:text="@string/next_button"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
