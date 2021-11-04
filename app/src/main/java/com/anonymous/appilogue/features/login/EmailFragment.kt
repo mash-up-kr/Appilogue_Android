@@ -35,7 +35,7 @@ class EmailFragment :
                 it.findNavController().navigate(R.id.action_emailFragment_to_loginFragment)
             }
 
-            emailTextInputEditText.setAddTextChangedListener(binding, viewModel, regex)
+            emailSubmitEditText.setAddTextChangedListener(binding, viewModel, regex)
         }
     }
 }
