@@ -72,21 +72,25 @@ class CertificationFragment :
     private fun focusNext(): (EditText, EditText) -> Unit = { editText1, editText2 ->
         editText1.addTextChangedListener { newText ->
             if (!newText.isNullOrEmpty()) {
+                editText1.background = ContextCompat.getDrawable(editText1.context, R.drawable.border_radius_08_purple)
                 editText2.requestFocus()
                 if (checkAllData()) {
                     buttonClickEnable()
                 }
             } else {
+                editText1.background = ContextCompat.getDrawable(editText1.context, R.drawable.border_radius_10)
                 buttonClickUnEnable()
             }
         }
     }
 
-    private fun certificationCheck(): (EditText) -> Unit = { it ->
-        it.addTextChangedListener {
+    private fun certificationCheck(): (EditText) -> Unit = { editText ->
+        editText.addTextChangedListener {
             if (!it.isNullOrEmpty()) {
+                editText.background = ContextCompat.getDrawable(editText.context, R.drawable.border_radius_08_purple)
                 buttonClickEnable()
             } else {
+                editText.background = ContextCompat.getDrawable(editText.context, R.drawable.border_radius_10)
                 buttonClickUnEnable()
             }
         }
