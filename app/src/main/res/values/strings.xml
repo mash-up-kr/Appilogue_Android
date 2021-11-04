@@ -69,7 +69,7 @@
     <string name="email_example">예시) Applilogue@gmail.com</string>
     <string name="password_text">비밀번호를 설정해주세요.</string>
     <string name="password_length_over_8">비밀번호 8자 이상</string>
-    <string name="password_re_enter">비밀번호 재입력</string>
+    <string name="password_re_enter">비밀번호 다시 입력</string>
     <string name="nickname_example">닉네임</string>
     <string name="nickname_notify_insert_nickname">사용하실 닉네임을 정해주세요.</string>
     <string name="done">완료</string>
@@ -79,4 +79,5 @@
     <string name="password_check">비밀번호가 다릅니다.</string>
     <string name="nickname_be_used">사용 중인 별명입니다.</string>
     <string name="email">Email</string>
+    <string name="wrong_password">비밀번호가 일치하지 않습니다.</string>
 </resources>

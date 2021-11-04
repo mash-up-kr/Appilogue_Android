@@ -19,12 +19,13 @@ class PasswordFragment :
         with(binding) {
             with(passwordMoveNextButton) {
                 FirstButtonInit.buttonInit(this)
+                binding.passwordWrongPasswordNotification.visibility = View.GONE
                 setOnClickListener {
                     it.findNavController().navigate(R.id.action_passwordFragment_to_nicknameFragment)
                 }
             }
-            passwordTextInputEditText.setAddTextChangedListener(binding, viewModel)
-            passwordTextInputEditTextBelow.setAddTextChangedListener(binding, viewModel)
+            passwordEdittext.setAddTextChangedListener(binding, viewModel)
+            passwordEdittextBelow.setAddTextChangedListener(binding, viewModel)
         }
     }
 }

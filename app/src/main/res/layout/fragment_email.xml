@@ -65,7 +65,7 @@
             android:inputType="textEmailAddress"
             android:maxLines="1"
             android:paddingStart="16dp"
-            android:paddingEnd="26dp"
+            android:paddingEnd="24dp"
             android:text="@={vm.emailAddress}"
             android:textColor="@color/white"
             android:textColorHint="@color/gray_02"

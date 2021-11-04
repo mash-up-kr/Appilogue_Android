@@ -2,6 +2,8 @@ package com.anonymous.appilogue.features.login
 
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -49,10 +51,10 @@ object SettingTextChanger {
                     is FragmentPasswordBinding -> {
                         with(binding) {
                             when (this@setAddTextChangedListener) {
-                                passwordTextInputEditText -> {
+                                passwordEdittext -> {
                                     // 8자리 이상인 경우
                                     if (s!!.length >= 8) {
-                                        setCorrect(passwordMoveNextButton, passwordTextInputEditText, null, binding, viewModel, s)
+                                        setCorrect(passwordMoveNextButton, passwordEdittext, null, binding, viewModel, s)
                                         // 보통 조건에 부합하는 경우 버튼 클릭 가능하지만 비밀번호는 확인 부분이 있어 한번 더 클릭 못하게 바꿔줍니다
                                         FirstButtonInit.buttonInit(passwordMoveNextButton)
                                     }
@@ -60,25 +62,27 @@ object SettingTextChanger {
                                     else {
                                         setIncorrect(
                                             passwordMoveNextButton,
-                                            passwordTextInputEditText,
+                                            passwordEdittext,
                                             null,
                                             resources.getString(R.string.password_length)
                                         )
                                     }
                                 }
-                                passwordTextInputEditTextBelow -> {
+                                passwordEdittextBelow -> {
                                     // 비밀번호가 같다면
                                     if (s!!.toString() == viewModel.password.value) {
-                                        setCorrect(passwordMoveNextButton, passwordTextInputEditTextBelow, null, binding, viewModel, s)
+                                        setCorrect(passwordMoveNextButton, passwordEdittextBelow, null, binding, viewModel, s)
+                                        binding.passwordWrongPasswordNotification.visibility = GONE
                                     }
                                     // 비밀번호가 다르다면
                                     else {
                                         setIncorrect(
                                             passwordMoveNextButton,
-                                            passwordTextInputEditTextBelow,
+                                            passwordEdittextBelow,
                                             null,
                                             resources.getString(R.string.password_check)
                                         )
+                                        binding.passwordWrongPasswordNotification.visibility = VISIBLE
                                     }
                                 }
                             }
@@ -112,7 +116,7 @@ object SettingTextChanger {
 
     private fun <B> setCorrect(
         button: Button,
-        submitEditText: EditText,
+        emailSubmitEditText: EditText?,
         emailExplainText: TextView?,
         binding: B,
         viewModel: LoginViewModel,
@@ -120,9 +124,9 @@ object SettingTextChanger {
     ) {
         button.isEnabled = true
 
-        with(submitEditText) {
-            setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_icon_correct, 0)
-            setBackgroundResource(R.drawable.border_radius_10_purple)
+        with(emailSubmitEditText) {
+            this?.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_icon_correct, 0)
+            this?.setBackgroundResource(R.drawable.border_radius_10_purple)
         }
 
         if (emailExplainText != null) {
@@ -143,21 +147,26 @@ object SettingTextChanger {
             is FragmentEmailBinding -> viewModel.emailAddress.value = s.toString()
             is FragmentNicknameBinding -> viewModel.nickName.value = s.toString()
             is FragmentPasswordBinding -> {
-                if (submitEditText == binding.passwordTextInputEditText) {
+                if (emailSubmitEditText == binding.passwordEdittext) {
                     viewModel.password.value = s.toString()
-                } else if (submitEditText == binding.passwordTextInputEditTextBelow) {
+                } else if (emailSubmitEditText == binding.passwordEdittextBelow) {
                     viewModel.password.value = s.toString()
                 }
             }
         }
     }
 
-    private fun setIncorrect(button: Button, submitEditText: EditText, emailExplainText: TextView?, errorText: String) {
+    private fun setIncorrect(
+        button: Button,
+        emailSubmitEditText: EditText?,
+        emailExplainText: TextView?,
+        errorText: String
+    ) {
         button.isEnabled = false
 
-        with(submitEditText) {
-            setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_icon_error, 0)
-            setBackgroundResource(R.drawable.border_radius_16_red)
+        with(emailSubmitEditText) {
+            this?.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_icon_error, 0)
+            this?.setBackgroundResource(R.drawable.border_radius_16_red)
         }
 
         if (emailExplainText != null) {
