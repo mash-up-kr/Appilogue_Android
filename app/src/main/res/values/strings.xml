@@ -80,4 +80,5 @@
     <string name="nickname_be_used">사용 중인 별명입니다.</string>
     <string name="email">Email</string>
     <string name="wrong_password">비밀번호가 일치하지 않습니다.</string>
+
 </resources>

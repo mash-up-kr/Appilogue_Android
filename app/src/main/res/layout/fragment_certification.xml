@@ -12,7 +12,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/img_login_bg">
+        android:background="@drawable/ic_bg_img_login">
 
         <TextView
             android:id="@+id/certification_explain_text1"

@@ -3,6 +3,7 @@ package com.anonymous.appilogue.features.login
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.view.View.GONE
 import androidx.fragment.app.activityViewModels
 import com.anonymous.appilogue.R
 import com.anonymous.appilogue.databinding.FragmentNicknameBinding
@@ -18,8 +19,9 @@ class NicknameFragment :
         super.onViewCreated(view, savedInstanceState)
 
         with(binding) {
-            nicknameTextInputEditText.setAddTextChangedListener(binding, viewModel)
+            nicknameInputText.setAddTextChangedListener(binding, viewModel)
             with(nicknameDoneButton) {
+                binding.nicknameUsedNameNotification.visibility = GONE
                 FirstButtonInit.buttonInit(this)
                 setOnClickListener {
                     val intent = Intent(activity, MainActivity::class.java)

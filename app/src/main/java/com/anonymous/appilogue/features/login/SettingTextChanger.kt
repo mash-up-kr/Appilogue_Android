@@ -14,8 +14,6 @@ import com.anonymous.appilogue.databinding.FragmentNicknameBinding
 import com.anonymous.appilogue.databinding.FragmentPasswordBinding
 
 object SettingTextChanger {
-    private val viewModel = LoginViewModel()
-
     fun <B> EditText.setAddTextChangedListener(binding: B, viewModel: LoginViewModel, regex: Regex? = null) {
         this.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -23,7 +21,11 @@ object SettingTextChanger {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                // do nothing
+                when (binding) {
+                    is FragmentNicknameBinding -> {
+                        binding.nicknameCounting.text = "${binding.nicknameInputText.length()}/10"
+                    }
+                }
             }
 
             override fun afterTextChanged(s: Editable?) {
@@ -91,17 +93,19 @@ object SettingTextChanger {
                     is FragmentNicknameBinding -> {
                         with(binding) {
                             when (this@setAddTextChangedListener) {
-                                nicknameTextInputEditText -> {
+                                nicknameInputText -> {
                                     if (true) {  // 임시 데이터 true 입니당 서버에서 값을 가져와서 확인해야 합니다
-                                        setCorrect(nicknameDoneButton, nicknameTextInputEditText, null, binding, viewModel, s!!)
+                                        setCorrect(nicknameDoneButton, nicknameInputText, null, binding, viewModel, s!!)
+                                        binding.nicknameUsedNameNotification.visibility = GONE
                                     } else {
                                         // 서버에 같은 닉네임이 있다면 혹은 닉네임 길이가 0이라면 까지 추가해야합니다.
                                         setIncorrect(
                                             nicknameDoneButton,
-                                            nicknameTextInputEditText,
+                                            nicknameInputText,
                                             null,
                                             resources.getString(R.string.nickname_be_used)
                                         )
+                                        binding.nicknameUsedNameNotification.visibility = VISIBLE
                                     }
                                 }
                             }
