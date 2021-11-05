@@ -1,9 +1,7 @@
 package com.anonymous.appilogue.features.login
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.navigation.findNavController
 import com.anonymous.appilogue.R
 import com.anonymous.appilogue.databinding.FragmentLoginBinding
@@ -14,7 +12,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>(R.layou
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.btStartEmail.setOnClickListener {
+        binding.btSignUp.setOnClickListener {
             it.findNavController().navigate(R.id.action_loginFragment_to_emailFragment)
         }
     }

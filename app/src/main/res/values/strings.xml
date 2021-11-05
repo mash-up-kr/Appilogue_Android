@@ -80,5 +80,8 @@
     <string name="nickname_be_used">사용 중인 별명입니다.</string>
     <string name="email">Email</string>
     <string name="wrong_password">비밀번호가 일치하지 않습니다.</string>
-
+    <string name="login_with_email">이메일로 로그인</string>
+    <string name="login_with_apple">Apple로 로그인</string>
+    <string name="login_with_kakao">카카오톡으로 로그인</string>
+    <string name="sign_up">회원가입</string>
 </resources>
