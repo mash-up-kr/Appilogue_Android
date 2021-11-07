@@ -27,14 +27,6 @@ class EmailFragment :
                 }
             }
 
-            emailBackButton.setOnClickListener {
-                it.findNavController().navigate(R.id.action_emailFragment_to_loginFragment)
-            }
-
-            emailCloseButton.setOnClickListener {
-                it.findNavController().navigate(R.id.action_emailFragment_to_loginFragment)
-            }
-
             emailSubmitEditText.setAddTextChangedListener(binding, viewModel, regex)
         }
     }

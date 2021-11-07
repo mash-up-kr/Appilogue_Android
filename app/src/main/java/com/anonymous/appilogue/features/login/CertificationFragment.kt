@@ -35,12 +35,6 @@ class CertificationFragment :
                 viewModel?.stopTimer()
                 it.findNavController().navigate(R.id.action_certificationFragment_to_passwordFragment)
             }
-            certificationBackButton.setOnClickListener {
-                it.findNavController().navigate(R.id.action_certificationFragment_to_emailFragment)
-            }
-            certificationCloseButton.setOnClickListener {
-                it.findNavController().navigate(R.id.action_certificationFragment_to_loginFragment)
-            }
 
         }
 

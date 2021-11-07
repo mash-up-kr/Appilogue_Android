@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.anonymous.appilogue.R
 import com.anonymous.appilogue.databinding.FragmentEmailBinding
+import com.anonymous.appilogue.databinding.FragmentEmailLoginBinding
 import com.anonymous.appilogue.databinding.FragmentNicknameBinding
 import com.anonymous.appilogue.databinding.FragmentPasswordBinding
 
@@ -54,6 +55,8 @@ object SettingTextChanger {
                         with(binding) {
                             when (this@setAddTextChangedListener) {
                                 passwordEdittext -> {
+                                    // 아래로 포커스 이동시에 백그라운드 변경 (포커스가 아니라 입력시라는 점은 추후에 수정..)
+                                    passwordEdittextBelow.setBackgroundResource(R.drawable.border_radius_10)
                                     // 8자리 이상인 경우
                                     if (s!!.length >= 8) {
                                         setCorrect(passwordMoveNextButton, passwordEdittext, null, binding, viewModel, s)
@@ -71,6 +74,8 @@ object SettingTextChanger {
                                     }
                                 }
                                 passwordEdittextBelow -> {
+                                    // 위로 포커스 이동시에 백그라운드 변경 (포커스가 아니라 입력시라는 점은 추후에 수정..)
+                                    passwordEdittext.setBackgroundResource(R.drawable.border_radius_10)
                                     // 비밀번호가 같다면
                                     if (s!!.toString() == viewModel.password.value) {
                                         setCorrect(passwordMoveNextButton, passwordEdittextBelow, null, binding, viewModel, s)
@@ -111,11 +116,50 @@ object SettingTextChanger {
                             }
                         }
                     }
+                    is FragmentEmailLoginBinding -> {
+                        with(binding) {
+                            when (this@setAddTextChangedListener) {
+                                emailLoginEmail -> {
+                                    emailLoginPassword.setBackgroundResource(R.drawable.border_radius_10)
+                                    if (s!!.matches(regex!!)) {
+                                        // 이메일 형식이 맞는 경우
+                                        setCorrect(emailLoginMoveNextButton, emailLoginEmail, null, binding, viewModel, s)
+                                        FirstButtonInit.buttonInit(emailLoginMoveNextButton)
+                                    } else {
+                                        // 이메일 형식이 아닌 경우
+                                        setIncorrect(
+                                            emailLoginMoveNextButton,
+                                            emailLoginEmail,
+                                            null,
+                                            resources.getString(R.string.email_format_error_text)
+                                        )
+                                    }
+                                }
 
+                                emailLoginPassword -> {
+                                    // 8자리 이상인 경우
+                                    emailLoginEmail.setBackgroundResource(R.drawable.border_radius_10)
+                                    if (s!!.length >= 8) { //  => 로그인 부분은 일단 8글자가 아닌 후에 서버와 통신으로 바꿔야함!
+                                        setCorrect(emailLoginMoveNextButton, emailLoginPassword, null, binding, viewModel, s)
+                                        // 보통 조건에 부합하는 경우 버튼 클릭 가능하지만 비밀번호는 확인 부분이 있어 한번 더 클릭 못하게 바꿔줍니다
+                                        binding.emailLoginMoveNextButton.isClickable = true
+                                    }
+                                    // 8자보다 짧을 경우
+                                    else {
+                                        setIncorrect(
+                                            emailLoginMoveNextButton,
+                                            emailLoginPassword,
+                                            null,
+                                            resources.getString(R.string.password_length)
+                                        )
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
         })
-
     }
 
     private fun <B> setCorrect(

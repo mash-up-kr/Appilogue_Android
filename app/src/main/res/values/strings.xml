@@ -84,4 +84,8 @@
     <string name="login_with_apple">Apple로 로그인</string>
     <string name="login_with_kakao">카카오톡으로 로그인</string>
     <string name="sign_up">회원가입</string>
+    <string name="email_login_text">이메일로 로그인</string>
+    <string name="email_login_email_text">이메일</string>
+    <string name="email_login_password_text">비밀번호 입력</string>
+    <string name="email_login_forget_id">비밀번호를 잊어버렸어요.</string>
 </resources>
