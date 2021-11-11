@@ -27,8 +27,9 @@ class HomeViewModel @Inject constructor(private val appRepository: AppRepository
     private val _apps = MutableLiveData(emptyList<ReviewedApp>())
     val apps: LiveData<List<ReviewedApp>> = _apps
 
-    private val _starsAlpha = MutableLiveData(StarsAlpha())
-    val starsAlpha: LiveData<StarsAlpha> = _starsAlpha
+    private val _starsAlpha =
+        MutableLiveData<StarEmphasizeState>(StarEmphasizeState.EmphasizeOnAllStar())
+    val starsAlpha: LiveData<StarEmphasizeState> = _starsAlpha
 
     fun changeBottomSheetState(newState: Int) {
         _bottomSheetState.value = newState
@@ -64,14 +65,14 @@ class HomeViewModel @Inject constructor(private val appRepository: AppRepository
     fun setStarsAlpha(focus: Focus, alpha: Float) {
         when (focus) {
             Focus.OnPlanet -> _starsAlpha.value =
-                StarsAlpha(whiteHoleAlpha = alpha, blackHoleAlpha = alpha, spaceDustAlpha = alpha)
+                StarEmphasizeState.EmphasizeOnPlanet()
             Focus.OnWhiteHole -> _starsAlpha.value =
-                StarsAlpha(planetAlpha = alpha, blackHoleAlpha = alpha, spaceDustAlpha = alpha)
+                StarEmphasizeState.EmphasizeOnWhiteHole()
             Focus.OnBlackHole -> _starsAlpha.value =
-                StarsAlpha(whiteHoleAlpha = alpha, planetAlpha = alpha, spaceDustAlpha = alpha)
+                StarEmphasizeState.EmphasizeOnBlackHole()
             Focus.OnSpaceDust -> _starsAlpha.value =
-                StarsAlpha(whiteHoleAlpha = alpha, blackHoleAlpha = alpha, planetAlpha = alpha)
-            Focus.None -> _starsAlpha.value = StarsAlpha()
+                StarEmphasizeState.EmphasizeOnSpaceDust()
+            Focus.None -> _starsAlpha.value = StarEmphasizeState.EmphasizeOnAllStar()
         }
     }
 }
