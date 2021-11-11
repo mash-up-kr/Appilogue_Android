@@ -8,15 +8,15 @@ import androidx.databinding.BindingAdapter
 import com.anonymous.appilogue.R
 
 @BindingAdapter("onboardingDialogText", "emphasizedText")
-fun TextView.setOnboardingDialogText(onboardingDialogStringId: Int, emphaziedStringId: Int) {
+fun TextView.setOnboardingDialogText(onboardingDialogStringId: Int, emphasizedStringId: Int) {
     val onboardingDialogString = context.getString(onboardingDialogStringId)
-    val emphaziedString = context.getString(emphaziedStringId)
+    val emphasizedString = context.getString(emphasizedStringId)
     text = SpannableString(onboardingDialogString).apply {
-        if (onboardingDialogString.contains(emphaziedString))
+        if (onboardingDialogString.contains(emphasizedString))
             setSpan(
                 ForegroundColorSpan(context.getColor(R.color.mint)),
-                onboardingDialogString.indexOf(emphaziedString),
-                onboardingDialogString.indexOf(emphaziedString) + emphaziedString.length,
+                onboardingDialogString.indexOf(emphasizedString),
+                onboardingDialogString.indexOf(emphasizedString) + emphasizedString.length,
                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
             )
     }
