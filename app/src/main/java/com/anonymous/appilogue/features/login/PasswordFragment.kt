@@ -20,10 +20,19 @@ class PasswordFragment :
             with(passwordMoveNextButton) {
                 FirstButtonInit.buttonInit(this)
                 binding.passwordWrongPasswordNotification.visibility = View.GONE
-                setOnClickListener {
-                    it.findNavController().navigate(R.id.action_passwordFragment_to_nicknameFragment)
+                if (viewModel.lostPassword) {
+                    binding.passwordEnterPasswordText.text = "비밀번호 재설정"
+                    setOnClickListener {
+                        it.findNavController().navigate(R.id.action_passwordFragment_to_loginEmailFragment)
+                    }
+                } else {
+                    binding.passwordEnterPasswordText.text = getString(R.string.password_text)
+                    setOnClickListener {
+                        it.findNavController().navigate(R.id.action_passwordFragment_to_nicknameFragment)
+                    }
                 }
             }
+
             passwordEdittext.setAddTextChangedListener(binding, viewModel)
             passwordEdittextBelow.setAddTextChangedListener(binding, viewModel)
         }

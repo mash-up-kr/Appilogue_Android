@@ -49,9 +49,17 @@
         <action
             android:id="@+id/action_passwordFragment_to_nicknameFragment"
             app:destination="@id/nicknameFragment" />
+        <action
+            android:id="@+id/action_passwordFragment_to_loginEmailFragment"
+            app:destination="@id/loginEmailFragment" />
+
     </fragment>
     <fragment
         android:id="@+id/loginEmailFragment"
         android:name="com.anonymous.appilogue.features.login.LoginEmailFragment"
-        android:label="LoginEmailFragment" />
+        android:label="LoginEmailFragment">
+        <action
+            android:id="@+id/action_loginEmailFragment_to_emailFragment"
+            app:destination="@id/emailFragment" />
+    </fragment>
 </navigation>

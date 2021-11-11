@@ -18,6 +18,12 @@ class EmailFragment :
 
         val regex = "\\w+@\\w+.(com|net|COM|NET)".toRegex()
 
+        if (viewModel.lostPassword) {
+            binding.emailEnterEmailText.text = "가입한 이메일 주소를 입력해주세요"
+        } else {
+            binding.emailEnterEmailText.text = getString(R.string.insert_email)
+        }
+
         with(binding) {
             with(emailMoveNextButton) {
                 FirstButtonInit.buttonInit(this)
@@ -29,5 +35,6 @@ class EmailFragment :
 
             emailSubmitEditText.setAddTextChangedListener(binding, viewModel, regex)
         }
+
     }
 }
