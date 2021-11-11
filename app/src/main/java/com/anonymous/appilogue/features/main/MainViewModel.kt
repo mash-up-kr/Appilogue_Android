@@ -13,6 +13,9 @@ class MainViewModel @Inject constructor() : ViewModel() {
     private val _bottomNavigationState = MutableLiveData(true)
     val bottomNavigationState: LiveData<Boolean> = _bottomNavigationState
 
+    private val _bottomNavigationClickable = MutableLiveData(true)
+    val bottomNavigationClickable: LiveData<Boolean> = _bottomNavigationClickable
+
     fun hideBottomNavigation() {
         _bottomNavigationState.value = false
     }
@@ -20,4 +23,13 @@ class MainViewModel @Inject constructor() : ViewModel() {
     fun showBottomNavigation() {
         _bottomNavigationState.value = true
     }
+
+    fun enableClickBottomNavigation() {
+        _bottomNavigationClickable.value = true
+    }
+
+    fun disableClickBottomNavigation() {
+        _bottomNavigationClickable.value = false
+    }
+
 }
