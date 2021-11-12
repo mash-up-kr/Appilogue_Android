@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.anonymous.appilogue.R
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.textfield.TextInputLayout
 
 
@@ -23,6 +24,16 @@ fun ImageView.bindImageUrl(uri: String?) {
     if (!uri.isNullOrEmpty()) {
         Glide.with(context)
             .load(uri)
+            .into(this)
+    }
+}
+
+@BindingAdapter("profileUrl")
+fun ImageView.bindProfileImageUrl(uri: String?) {
+    if (!uri.isNullOrEmpty()) {
+        Glide.with(context)
+            .load(uri)
+            .apply(RequestOptions().circleCrop().centerCrop())
             .into(this)
     }
 }

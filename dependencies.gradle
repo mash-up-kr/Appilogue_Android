@@ -14,6 +14,7 @@ ext {
     navigationKtxVersion = "2.3.5"
     constraintLayoutVersion = "2.1.1"
     recyclerViewVersion = "1.2.1"
+    pagingVersion = "3.0.1"
 
     // kotlin & coroutine
     kotlinVersion = "1.5.30"

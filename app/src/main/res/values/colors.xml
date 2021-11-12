@@ -7,7 +7,10 @@
     <color name="black_alpha50">#80000000</color>
     <color name="gray_01">#252832</color>
     <color name="gray_02">#595965</color>
+    <color name="gray_03">#808092</color>
+    <color name="gray_04">#DADAE7</color>
     <color name="white">#FFFFFFFF</color>
     <color name="black_alpha90">#E6000000</color>
+    <color name="black_alpha30">#1E000000</color>
     <color name="black_01">#13151B</color>
 </resources>
