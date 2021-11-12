@@ -88,4 +88,7 @@
     <string name="email_login_email_text">이메일</string>
     <string name="email_login_password_text">비밀번호 입력</string>
     <string name="email_login_forget_id">비밀번호를 잊어버렸어요.</string>
+    <string name="email_signed_up_text">"가입한 이메일 주소를 입력해주세요"</string>
+    <string name="password_reset">"비밀번호 재설정"</string>
+    <string name="please_enter_nickname">"닉네임을 입력해주세요."</string>
 </resources>

@@ -15,6 +15,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>(R.layou
         super.onViewCreated(view, savedInstanceState)
 
         initView()
+        viewModel.lostPassword = false
     }
 
     private fun initView() {
