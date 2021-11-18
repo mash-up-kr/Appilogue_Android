@@ -20,11 +20,11 @@ class LoginEmailFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val regex = "\\w+@\\w+.(com|net|COM|NET)".toRegex()
+        val emailCheckRegex = "\\w+@\\w+.(com|net|COM|NET)".toRegex()
 
         initView()
 
-        binding.emailLoginEmail.setAddTextChangedListener(regex)
+        binding.emailLoginEmail.setAddTextChangedListener(emailCheckRegex)
         binding.emailLoginPassword.setAddTextChangedListener()
 
     }
@@ -41,7 +41,7 @@ class LoginEmailFragment :
         }
     }
 
-    fun EditText.setAddTextChangedListener(regex: Regex? = null) {
+    fun EditText.setAddTextChangedListener(emailCheckRegex: Regex? = null) {
         this.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
                 // do nothing
@@ -60,7 +60,7 @@ class LoginEmailFragment :
 
                             with(binding) {
                                 // 8자리 이상인 경우
-                                if (s!!.matches(regex!!)) {
+                                if (s!!.matches(emailCheckRegex!!)) {
                                     setCorrect(emailLoginEmail, s)
                                     // 보통 조건에 부합하는 경우 버튼 클릭 가능하지만 비밀번호는 확인 부분이 있어 한번 더 클릭 못하게 바꿔줍니다
                                     FirstButtonInit.buttonInit(emailLoginMoveNextButton)

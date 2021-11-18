@@ -18,11 +18,11 @@ class EmailFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val regex = "\\w+@\\w+.(com|net|COM|NET)".toRegex()
+        val emailCheckRegex = "\\w+@\\w+.(com|net|COM|NET)".toRegex()
 
         setDifferentTextIfLostPassword()
         initClickListener()
-        setTextChangeListener(regex)
+        setTextChangeListener(emailCheckRegex)
 
     }
 
@@ -47,7 +47,7 @@ class EmailFragment :
         }
     }
 
-    private fun setTextChangeListener(regex: Regex) {
+    private fun setTextChangeListener(emailCheckRegex: Regex) {
         binding.emailSubmitEditText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
                 // do nothing
@@ -58,7 +58,7 @@ class EmailFragment :
             }
 
             override fun afterTextChanged(s: Editable?) {
-                if (s!!.matches(regex!!)) {
+                if (s!!.matches(emailCheckRegex!!)) {
                     // 이메일 형식이 맞는 경우
                     setCorrect(s)
                 } else {
