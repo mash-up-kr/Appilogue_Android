@@ -69,7 +69,7 @@ class EmailFragment :
         })
     }
 
-    private fun setCorrect(s: Editable) {
+    private fun setCorrect(correctEmailText: Editable) {
         with(binding) {
             emailMoveNextButton.isEnabled = true
             with(emailSubmitEditText) {
@@ -89,7 +89,7 @@ class EmailFragment :
                     background.setTint(ContextCompat.getColor(ctx, R.color.purple_01))
                 }
             }
-            viewModel.emailAddress.value = s.toString()
+            viewModel.emailAddress.value = correctEmailText.toString()
         }
     }
 

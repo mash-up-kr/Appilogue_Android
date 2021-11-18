@@ -93,7 +93,7 @@ class LoginEmailFragment :
         })
     }
 
-    private fun setCorrect(emailOrPassword: EditText, s: Editable) {
+    private fun setCorrect(emailOrPassword: EditText, correctEmailOrPassword: Editable) {
 
         with(binding) {
             emailLoginMoveNextButton.isEnabled = true
@@ -108,11 +108,11 @@ class LoginEmailFragment :
         }
         // 첫번 째 이메일로 들어왔다면, 서버 이메일과 비교, 여기서는 임시로 뷰모델 데이터랑 비교만
         if (emailOrPassword == viewModel.emailAddress) {
-            viewModel.password.value = s.toString()
+            viewModel.password.value = correctEmailOrPassword.toString()
         }
         // 두번 째 패스워드로 들어왔다면, checkPassword 에 저장
         else {
-            viewModel.checkPassword.value = s.toString()
+            viewModel.checkPassword.value = correctEmailOrPassword.toString()
         }
 
         emailOrPassword.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_icon_correct, 0)

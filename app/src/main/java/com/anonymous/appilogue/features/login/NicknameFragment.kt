@@ -62,9 +62,7 @@ class NicknameFragment :
         }
     }
 
-    private fun setCorrect(
-        s: Editable
-    ) {
+    private fun setCorrect(s: Editable) {
         with(binding) {
             nicknameDoneButton.isEnabled = true
 

@@ -102,7 +102,7 @@ class PasswordFragment :
         })
     }
 
-    private fun setCorrect(passwordEditText: EditText, s: Editable) {
+    private fun setCorrect(passwordEditText: EditText, correctPassword: Editable) {
 
         with(binding) {
             passwordMoveNextButton.isEnabled = true
@@ -117,11 +117,11 @@ class PasswordFragment :
         }
         // 첫번 째 패스워드로 들어왔다면, password 에 저장
         if (passwordEditText == binding.passwordEdittext) {
-            viewModel.password.value = s.toString()
+            viewModel.password.value = correctPassword.toString()
         }
         // 두번 째 패스워드로 들어왔다면, checkPassword 에 저장
         else {
-            viewModel.checkPassword.value = s.toString()
+            viewModel.checkPassword.value = correctPassword.toString()
         }
 
         passwordEditText.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_icon_correct, 0)
