@@ -49,16 +49,16 @@ class EmailFragment :
 
     private fun setTextChangeListener(emailCheckRegex: Regex) {
         binding.emailSubmitEditText.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
                 // do nothing
             }
 
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 // do nothing
             }
 
             override fun afterTextChanged(s: Editable?) {
-                if (s!!.matches(emailCheckRegex!!)) {
+                if (s?.matches(emailCheckRegex) == true) {
                     // 이메일 형식이 맞는 경우
                     setCorrect(s)
                 } else {

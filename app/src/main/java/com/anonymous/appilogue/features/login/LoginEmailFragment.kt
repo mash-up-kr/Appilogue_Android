@@ -43,15 +43,15 @@ class LoginEmailFragment :
 
     fun EditText.setAddTextChangedListener(emailCheckRegex: Regex? = null) {
         this.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
                 // do nothing
             }
 
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 // do nothing
             }
 
-            override fun afterTextChanged(s: Editable?) {
+            override fun afterTextChanged(s: Editable) {
                 with(binding) {
                     when (this@setAddTextChangedListener) {
                         emailLoginEmail -> {
@@ -60,7 +60,7 @@ class LoginEmailFragment :
 
                             with(binding) {
                                 // 8자리 이상인 경우
-                                if (s!!.matches(emailCheckRegex!!)) {
+                                if (emailCheckRegex?.let { s.matches(it) } == true) {
                                     setCorrect(emailLoginEmail, s)
                                     // 보통 조건에 부합하는 경우 버튼 클릭 가능하지만 비밀번호는 확인 부분이 있어 한번 더 클릭 못하게 바꿔줍니다
                                     FirstButtonInit.buttonInit(emailLoginMoveNextButton)
@@ -78,7 +78,7 @@ class LoginEmailFragment :
 
                             with(binding) {
                                 // 비밀번호가 같다면 (서버랑 연동하는 부분으로 수정해야함)
-                                if (s!!.toString() == viewModel?.password?.value.toString()) {
+                                if (s.toString() == viewModel?.password?.value.toString()) {
                                     setCorrect(emailLoginPassword, s)
                                 }
                                 // 비밀번호가 다르다면

@@ -22,20 +22,20 @@ class NicknameFragment :
 
         initClickListener()
         binding.nicknameInputText.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
                 // do nothing
             }
 
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 binding.nicknameCounting.text = "${binding.nicknameInputText.length()}/10"
             }
 
-            override fun afterTextChanged(s: Editable?) {
+            override fun afterTextChanged(s: Editable) {
                 with(binding) {
                     if (true) {  // 임시 데이터 true 입니당 서버에서 값을 가져와서 확인해야 합니다
-                        setCorrect(s!!)
+                        setCorrect(s)
                         nicknameUsedNameNotification.visibility = GONE
-                    } else if (s.isNullOrEmpty()) {
+                    } else if (s.isEmpty()) {
                         nicknameUsedNameNotification.text = getString(R.string.please_enter_nickname)
                         nicknameDoneButton.isEnabled
                     } else {

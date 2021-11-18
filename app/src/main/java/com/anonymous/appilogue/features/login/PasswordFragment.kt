@@ -48,15 +48,15 @@ class PasswordFragment :
 
     fun EditText.setAddTextChangedListener() {
         this.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
                 // do nothing
             }
 
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 // do nothing
             }
 
-            override fun afterTextChanged(s: Editable?) {
+            override fun afterTextChanged(s: Editable) {
                 with(binding) {
                     when (this@setAddTextChangedListener) {
                         passwordEdittext -> {
@@ -65,7 +65,7 @@ class PasswordFragment :
 
                             with(binding) {
                                 // 8자리 이상인 경우
-                                if (s!!.length >= 8) {
+                                if (s.length >= 8) {
                                     setCorrect(passwordEdittext, s)
                                     // 보통 조건에 부합하는 경우 버튼 클릭 가능하지만 비밀번호는 확인 부분이 있어 한번 더 클릭 못하게 바꿔줍니다
                                     FirstButtonInit.buttonInit(passwordMoveNextButton)
@@ -85,7 +85,7 @@ class PasswordFragment :
 
                             with(binding) {
                                 // 비밀번호가 같다면
-                                if (s!!.toString() == viewModel.password.value) {
+                                if (s.toString() == viewModel.password.value) {
                                     setCorrect(passwordEdittextBelow, s)
                                     binding.passwordWrongPasswordNotification.visibility = View.GONE
                                 }
