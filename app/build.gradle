@@ -69,6 +69,7 @@ dependencies {
 
     // persistence
     implementation "androidx.room:room-ktx:$roomVersion"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     kapt "androidx.room:room-compiler:$roomVersion"
 
     // DI
@@ -107,4 +108,8 @@ dependencies {
 
     // preference
     implementation "androidx.preference:preference-ktx:$preferenceVersion"
+
+    //
+    implementation group: 'de.svenkubiak', name: 'jBCrypt', version: "0.4.1"
 }
+

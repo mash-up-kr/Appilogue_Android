@@ -12,48 +12,97 @@
         android:background="@drawable/img_login_bg">
 
         <TextView
+            android:id="@+id/AppName"
             android:layout_width="wrap_content"
             android:layout_height="46dp"
-            android:layout_marginTop="108dp"
-            android:layout_marginBottom="486dp"
-            android:text="Appilogue"
+            android:layout_marginStart="87dp"
+            android:layout_marginTop="66dp"
+            android:layout_marginEnd="88dp"
+            android:layout_marginBottom="61dp"
+            android:text="@string/app_name"
             android:textColor="@color/white"
             android:textSize="34sp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/imageView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_marginStart="80dp"
-            android:layout_marginTop="200dp"
-            android:layout_marginEnd="80dp"
-            android:layout_marginBottom="240dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="61dp"
+            android:layout_marginBottom="61dp"
             android:src="@drawable/img_planet_star"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/bt_apple_login"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/AppName" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/bt_start_email"
+            android:id="@+id/bt_apple_login"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="505dp"
+            android:layout_marginTop="61dp"
             android:layout_marginEnd="24dp"
-            android:layout_marginBottom="60dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/border_radius_10"
+            android:backgroundTint="@color/login_black"
+            android:text="@string/login_with_apple"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toTopOf="@id/bt_kakao_login"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imageView" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/bt_kakao_login"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/border_radius_10"
+            android:backgroundTint="@color/yellow"
+            android:text="@string/login_with_kakao"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toTopOf="@id/bt_email_login"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/bt_apple_login" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/bt_email_login"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/border_radius_10_purple"
             android:backgroundTint="@color/purple_01"
-            android:text="이메일로 로그인"
+            android:text="@string/login_with_email"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toTopOf="@id/bt_sign_up"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/bt_kakao_login" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/bt_sign_up"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="60dp"
+            android:background="@null"
+            android:backgroundTint="@color/purple_01"
+            android:text="@string/sign_up"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/bt_email_login" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

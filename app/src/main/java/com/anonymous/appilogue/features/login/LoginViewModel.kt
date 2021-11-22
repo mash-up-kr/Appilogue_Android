@@ -13,6 +13,7 @@ class LoginViewModel : ViewModel() {
     private val _timer = MutableLiveData<String>()
     private lateinit var job: Job
 
+    var lostPassword = false
     val password = MutableLiveData<String>()
     val checkPassword = MutableLiveData<String>()
     val emailAddress = MutableLiveData<String>()
