@@ -2,6 +2,7 @@ package com.anonymous.appilogue.features.main
 
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.core.view.forEach
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import androidx.lifecycle.lifecycleScope
@@ -15,6 +16,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import java.lang.Compiler.enable
+
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
@@ -57,6 +60,12 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         lifecycleScope.launch(Dispatchers.IO) {
             appSearchManager.updateInstalledAppList()
         }
+
+        viewModel.bottomNavigationClickable.observe(this, { clickable ->
+            binding.bottomNavigationView.menu.forEach {
+                it.isEnabled = clickable
+            }
+        })
     }
 
     fun navigateTo(id: Int) {

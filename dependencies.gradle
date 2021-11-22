@@ -48,8 +48,8 @@ ext {
 
     // widget
 
-
     // preference
     preferenceVersion = "1.1.1"
 
 }
+

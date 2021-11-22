@@ -112,3 +112,4 @@ dependencies {
     //
     implementation group: 'de.svenkubiak', name: 'jBCrypt', version: "0.4.1"
 }
+
