@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 class LoginViewModel : ViewModel() {
     private var _timerCount = 0
     private val _timer = MutableLiveData<String>()
-    private lateinit var job: Job
+    private var job: Job? = null
 
     var lostPassword = false
     val password = MutableLiveData<String>()
@@ -21,26 +21,17 @@ class LoginViewModel : ViewModel() {
     val timer: LiveData<String> = _timer
 
     fun timerStart() {
-        if (::job.isInitialized) job.cancel()
-        _timerCount = 600000
+        _timerCount = 600
 
         job = viewModelScope.launch {
-            while (_timerCount > 0) {
-                val min = _timerCount / 60000
-                val sec = (_timerCount % 60000) / 1000
-                when (sec) {
-                    in 0..9 -> {
-                        _timer.value = "$min:0$sec"
-                        _timerCount -= 1000
-                        delay(1000L)
-                    }
-                    else -> {
-                        _timer.value = "$min:$sec"
-                        _timerCount -= 1000
-                        delay(1000L)
-                    }
-                }
+            while (_timerCount >= 0) {
+                val min = _timerCount / 60
+                val sec = (_timerCount % 60)
+                _timer.value = String.format("%02d:%02d", min, sec)
+                _timerCount -= 1
+                delay(1000L)
             }
+            stopTimer()
         }
     }
 
@@ -49,6 +40,6 @@ class LoginViewModel : ViewModel() {
     }
 
     fun stopTimer() {
-        if (::job.isInitialized) job.cancel()
+        job?.cancel()
     }
 }
