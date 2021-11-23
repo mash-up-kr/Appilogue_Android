@@ -32,7 +32,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@mipmap/img_home_bg"
+                app:srcCompat="@drawable/img_home_bg"
                 tools:ignore="ContentDescription" />
 
             <TextView
@@ -71,7 +71,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@mipmap/main_planet"
+                app:srcCompat="@drawable/main_planet"
                 tools:ignore="ContentDescription" />
 
             <ImageView
@@ -85,7 +85,7 @@
                 android:onClick="@{ _ -> homeViewModel.changeFocus(Focus.OnBlackHole)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:srcCompat="@mipmap/black_hole"
+                app:srcCompat="@drawable/black_hole"
                 tools:ignore="ContentDescription" />
 
             <ImageView
@@ -99,7 +99,7 @@
                 android:onClick="@{ _ -> homeViewModel.changeFocus(Focus.OnWhiteHole)}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@mipmap/white_hole"
+                app:srcCompat="@drawable/white_hole"
                 tools:ignore="ContentDescription" />
 
             <ImageView
@@ -113,7 +113,7 @@
                 android:onClick="@{ _ -> homeViewModel.changeFocus(Focus.OnSpaceDust)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:srcCompat="@mipmap/space_dust"
+                app:srcCompat="@drawable/space_dust"
                 tools:ignore="ContentDescription" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
