@@ -14,6 +14,7 @@ class LoginViewModel : ViewModel() {
     private var job: Job? = null
 
     var lostPassword = false
+    var certificationNumber = MutableLiveData<String>()
     val password = MutableLiveData<String>()
     val checkPassword = MutableLiveData<String>()
     val emailAddress = MutableLiveData<String>()
