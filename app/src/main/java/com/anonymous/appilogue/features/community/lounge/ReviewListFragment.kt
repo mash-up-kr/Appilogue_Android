@@ -14,8 +14,10 @@ import com.anonymous.appilogue.R
 import com.anonymous.appilogue.databinding.FragmentReviewListBinding
 import com.anonymous.appilogue.features.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -53,15 +55,29 @@ class ReviewListFragment
     }
 
     private fun initView() {
-        binding.loungeRecyclerView.apply {
-            adapter = reviewListAdapter
-            ContextCompat.getDrawable(context, R.drawable.divider)?.let { divider ->
-                val itemDecoration = DividerItemDecoration(context, VERTICAL).apply {
-                    setDrawable(divider)
+        with(binding) {
+            swipeRefreshLayout.setOnRefreshListener {
+                lifecycleScope.launch {
+                    viewModel.fetchImageList()
+                        .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
+                        .onCompletion { swipeRefreshLayout.isRefreshing = false }
+                        .collectLatest {
+                            reviewListAdapter.submitData(it)
+                        }
                 }
-                addItemDecoration(itemDecoration)
+            }
+
+            loungeRecyclerView.apply {
+                adapter = reviewListAdapter
+                ContextCompat.getDrawable(context, R.drawable.divider)?.let { divider ->
+                    val itemDecoration = DividerItemDecoration(context, VERTICAL).apply {
+                        setDrawable(divider)
+                    }
+                    addItemDecoration(itemDecoration)
+                }
             }
         }
+
     }
 
     private fun initObservers() {
