@@ -9,12 +9,10 @@ import androidx.navigation.findNavController
 import com.anonymous.appilogue.R
 import com.anonymous.appilogue.databinding.FragmentEmailBinding
 import com.anonymous.appilogue.features.base.BaseFragment
-import io.reactivex.rxjava3.disposables.CompositeDisposable
 
 class EmailFragment :
     BaseFragment<FragmentEmailBinding, LoginViewModel>(R.layout.fragment_email) {
     override val viewModel: LoginViewModel by activityViewModels()
-    private val compositeDisposable = CompositeDisposable()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -24,7 +22,6 @@ class EmailFragment :
         setDifferentTextIfLostPassword()
         initClickListener()
         setTextChangeListener(emailCheckRegex)
-
     }
 
     // 비밀 번호 찾기를 눌렀을 때와 회원 가입을 눌렀을 때 상단의 텍스트 변경
@@ -62,23 +59,12 @@ class EmailFragment :
 
     private fun setCorrect(correctEmailText: String?) {
         with(binding) {
-            emailMoveNextButton.isEnabled = true
-            with(emailSubmitEditText) {
-                setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_icon_correct, 0)
-                setBackgroundResource(R.drawable.border_radius_10_purple)
-            }
+            setButtonCanClick(true)
+            changeEditTextBackgroundColor(true)
 
             with(emailExplainText) {
                 setText(R.string.email_to_certification)
                 setTextColor(ContextCompat.getColor(emailExplainText.context, R.color.gray_02))
-            }
-
-            with(emailMoveNextButton) {
-                context?.let { ctx ->
-                    setTextColor(ContextCompat.getColor(ctx, R.color.white))
-                    background = ContextCompat.getDrawable(ctx, R.drawable.border_radius_08_purple)
-                    background.setTint(ContextCompat.getColor(ctx, R.color.purple_01))
-                }
             }
             viewModel.emailAddress.value = correctEmailText
         }
@@ -86,19 +72,27 @@ class EmailFragment :
 
     private fun setIncorrect(errorText: String) {
         with(binding) {
-            emailMoveNextButton.isEnabled = false
-
-            with(emailSubmitEditText) {
-                setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_icon_error, 0)
-                setBackgroundResource(R.drawable.border_radius_16_red)
-            }
+            setButtonCanClick(false)
+            changeEditTextBackgroundColor(false)
 
             with(emailExplainText) {
                 text = errorText
                 setTextColor(ContextCompat.getColor(emailExplainText.context, R.color.red))
             }
+        }
+    }
 
-            with(emailMoveNextButton) {
+    private fun setButtonBackgroundColor(click: Boolean) {
+        if (click) {
+            with(binding.emailMoveNextButton) {
+                context?.let { ctx ->
+                    setTextColor(ContextCompat.getColor(ctx, R.color.white))
+                    background = ContextCompat.getDrawable(ctx, R.drawable.border_radius_08_purple)
+                    background.setTint(ContextCompat.getColor(ctx, R.color.purple_01))
+                }
+            }
+        } else {
+            with(binding.emailMoveNextButton) {
                 context?.let { ctx ->
                     setTextColor(ContextCompat.getColor(ctx, R.color.gray_01))
                     background.setTint(ContextCompat.getColor(ctx, R.color.gray_02))
@@ -107,8 +101,27 @@ class EmailFragment :
         }
     }
 
-    override fun onDestroyView() {
-        compositeDisposable.clear()
-        super.onDestroyView()
+    private fun setButtonCanClick(click: Boolean) {
+        if (click) {
+            with(binding.emailMoveNextButton) {
+                setButtonBackgroundColor(true)
+                isEnabled = true
+            }
+        } else {
+            with(binding.emailMoveNextButton) {
+                setButtonBackgroundColor(false)
+                isEnabled = false
+            }
+        }
+    }
+
+    private fun changeEditTextBackgroundColor(change: Boolean) {
+        if (change) {
+            binding.emailSubmitEditText.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_icon_correct, 0)
+            binding.emailSubmitEditText.setBackgroundResource(R.drawable.border_radius_10_purple)
+        } else {
+            binding.emailSubmitEditText.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_icon_error, 0)
+            binding.emailSubmitEditText.setBackgroundResource(R.drawable.border_radius_16_red)
+        }
     }
 }
