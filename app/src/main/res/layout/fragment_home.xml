@@ -32,7 +32,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@mipmap/img_home_bg"
+                app:srcCompat="@drawable/img_home_bg"
                 tools:ignore="ContentDescription" />
 
             <TextView
@@ -64,13 +64,14 @@
                 android:layout_width="220dp"
                 android:layout_height="220dp"
                 android:layout_marginBottom="20dp"
+                android:alpha="@{homeViewModel.starsAlpha.planetAlpha}"
                 android:clickable="@{homeViewModel.starFocused == Focus.None}"
                 android:onClick="@{ _ -> homeViewModel.changeFocus(Focus.OnPlanet)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@mipmap/main_planet"
+                app:srcCompat="@drawable/main_planet"
                 tools:ignore="ContentDescription" />
 
             <ImageView
@@ -79,11 +80,12 @@
                 android:layout_height="136dp"
                 android:layout_marginStart="23dp"
                 android:layout_marginBottom="138dp"
+                android:alpha="@{homeViewModel.starsAlpha.blackHoleAlpha}"
                 android:clickable="@{homeViewModel.starFocused == Focus.None}"
                 android:onClick="@{ _ -> homeViewModel.changeFocus(Focus.OnBlackHole)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:srcCompat="@mipmap/black_hole"
+                app:srcCompat="@drawable/black_hole"
                 tools:ignore="ContentDescription" />
 
             <ImageView
@@ -92,11 +94,12 @@
                 android:layout_height="133dp"
                 android:layout_marginTop="101dp"
                 android:layout_marginEnd="18dp"
+                android:alpha="@{homeViewModel.starsAlpha.whiteHoleAlpha}"
                 android:clickable="@{homeViewModel.starFocused == Focus.None}"
                 android:onClick="@{ _ -> homeViewModel.changeFocus(Focus.OnWhiteHole)}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@mipmap/white_hole"
+                app:srcCompat="@drawable/white_hole"
                 tools:ignore="ContentDescription" />
 
             <ImageView
@@ -105,11 +108,12 @@
                 android:layout_height="40dp"
                 android:layout_marginEnd="40dp"
                 android:layout_marginBottom="174dp"
+                android:alpha="@{homeViewModel.starsAlpha.spaceDustAlpha}"
                 android:clickable="@{homeViewModel.starFocused == Focus.None}"
                 android:onClick="@{ _ -> homeViewModel.changeFocus(Focus.OnSpaceDust)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:srcCompat="@mipmap/space_dust"
+                app:srcCompat="@drawable/space_dust"
                 tools:ignore="ContentDescription" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -149,6 +153,15 @@
             android:id="@+id/bottomSheetHome"
             layout="@layout/bottomsheet_home"
             app:homeViewModel="@{homeViewModel}" />
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fcv_onboarding"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

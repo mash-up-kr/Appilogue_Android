@@ -14,6 +14,9 @@
             android:id="@+id/action_loginFragment_to_emailFragment"
             app:destination="@id/emailFragment"
             app:enterAnim="@android:anim/slide_in_left" />
+        <action
+            android:id="@+id/action_loginFragment_to_loginEmailFragment"
+            app:destination="@id/loginEmailFragment" />
     </fragment>
     <fragment
         android:id="@+id/emailFragment"
@@ -23,9 +26,6 @@
         <action
             android:id="@+id/action_emailFragment_to_certificationFragment"
             app:destination="@id/certificationFragment" />
-        <action
-            android:id="@+id/action_emailFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/certificationFragment"
@@ -35,18 +35,12 @@
         <action
             android:id="@+id/action_certificationFragment_to_passwordFragment"
             app:destination="@id/passwordFragment" />
-        <action
-            android:id="@+id/action_certificationFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
-        <action
-            android:id="@+id/action_certificationFragment_to_emailFragment"
-            app:destination="@id/emailFragment" />
     </fragment>
     <fragment
         android:id="@+id/nicknameFragment"
         android:name="com.anonymous.appilogue.features.login.NicknameFragment"
         android:label="NicknameFragment"
-        tools:layout="@layout/fragment_nickname"/>
+        tools:layout="@layout/fragment_nickname" />
     <fragment
         android:id="@+id/passwordFragment"
         android:name="com.anonymous.appilogue.features.login.PasswordFragment"
@@ -55,5 +49,17 @@
         <action
             android:id="@+id/action_passwordFragment_to_nicknameFragment"
             app:destination="@id/nicknameFragment" />
+        <action
+            android:id="@+id/action_passwordFragment_to_loginEmailFragment"
+            app:destination="@id/loginEmailFragment" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/loginEmailFragment"
+        android:name="com.anonymous.appilogue.features.login.LoginEmailFragment"
+        android:label="LoginEmailFragment">
+        <action
+            android:id="@+id/action_loginEmailFragment_to_emailFragment"
+            app:destination="@id/emailFragment" />
     </fragment>
 </navigation>

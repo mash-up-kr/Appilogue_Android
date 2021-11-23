@@ -8,6 +8,9 @@ import android.widget.ImageView
 import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.add
+import androidx.fragment.app.commit
+import androidx.preference.PreferenceManager
 import com.anonymous.appilogue.R
 import com.anonymous.appilogue.databinding.FragmentHomeBinding
 import com.anonymous.appilogue.features.base.BaseFragment
@@ -18,6 +21,8 @@ import com.anonymous.appilogue.features.home.bottomsheet.AppFragment.Companion.W
 import com.anonymous.appilogue.features.home.bottomsheet.BottomSheetPagerAdapter
 import com.anonymous.appilogue.features.home.bottomsheet.MyDecorationFragment
 import com.anonymous.appilogue.features.home.bottomsheet.StoreFragment
+import com.anonymous.appilogue.features.home.onboarding.OnboardingFragment
+import com.anonymous.appilogue.features.home.onboarding.OnboardingFragment.Companion.COMPLETED_ONBOARDING
 import com.anonymous.appilogue.features.main.MainViewModel
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.tabs.TabLayoutMediator
@@ -46,16 +51,34 @@ class HomeFragment :
         }
         SpaceAnimator.animateSpace(binding.ivSpace)
         viewModel.changeFocus(Focus.None)
+        initOnboarding()
+    }
+
+    private fun initOnboarding() {
+        PreferenceManager.getDefaultSharedPreferences(context).apply {
+            if (!getBoolean(COMPLETED_ONBOARDING, false)) {
+                childFragmentManager.commit {
+                    add<OnboardingFragment>(R.id.fcv_onboarding)
+                    setReorderingAllowed(true)
+                }
+            }
+        }
     }
 
     private fun getViewPagerTabTextAndFragments(focus: Focus): SparseArray<Pair<Int, () -> Fragment>> {
         val viewPagerFragments = SparseArray<Pair<Int, () -> Fragment>>()
         when (focus) {
             Focus.OnBlackHole -> viewPagerFragments.apply {
-                put(FIRST_TAB, Pair(R.string.my_black_hole, { AppFragment.newInstance(BLACK_HOLE) }))
+                put(
+                    FIRST_TAB,
+                    Pair(R.string.my_black_hole, { AppFragment.newInstance(BLACK_HOLE) })
+                )
             }
             Focus.OnWhiteHole -> viewPagerFragments.apply {
-                put(FIRST_TAB, Pair(R.string.my_white_hole, { AppFragment.newInstance(WHITE_HOLE) }))
+                put(
+                    FIRST_TAB,
+                    Pair(R.string.my_white_hole, { AppFragment.newInstance(WHITE_HOLE) })
+                )
             }
             Focus.OnPlanet -> viewPagerFragments.apply {
                 put(FIRST_TAB, Pair(R.string.my_planet, { MyDecorationFragment.newInstance() }))

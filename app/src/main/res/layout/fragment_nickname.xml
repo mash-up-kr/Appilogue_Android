@@ -12,7 +12,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/img_login_bg">
+        android:background="@drawable/ic_bg_img_login">
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/nickname_back_button"
@@ -53,41 +53,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/nickname_textInputLayout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="196dp"
-            android:layout_marginEnd="24dp"
-            android:backgroundTint="@color/gray_01"
-            android:textColorHint="@color/gray_02"
-            app:counterEnabled="true"
-            app:counterMaxLength="10"
-            app:counterTextColor="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/nickname_textInputEditText"
-                android:layout_width="match_parent"
-                android:layout_height="52dp"
-                android:background="@drawable/border_radius_16"
-                android:backgroundTint="@color/gray_01"
-                android:hint="@string/nickname_example"
-                android:inputType="text"
-                android:maxLength="10"
-                android:maxLines="1"
-                android:paddingStart="16dp"
-                android:text="@={vm.nickName}"
-                android:textColor="@color/white"
-                android:textSize="16sp" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-
         <TextView
             android:id="@+id/nickname_explain_text"
             android:layout_width="0dp"
@@ -99,9 +64,60 @@
             android:text="@string/nickname_can_change"
             android:textColor="@color/gray_02"
             android:textSize="12sp"
-            app:layout_constraintBottom_toTopOf="@id/nickname_textInputLayout"
+            app:layout_constraintBottom_toTopOf="@id/nickname_inputText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <EditText
+            android:id="@+id/nickname_inputText"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="196dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/border_radius_16"
+            android:hint="@string/nickname_example"
+            android:inputType="text"
+            android:maxLength="10"
+            android:maxLines="1"
+            android:paddingStart="16dp"
+            android:paddingEnd="24dp"
+            android:text="@={vm.nickName}"
+            android:textColor="@color/white"
+            android:textColorHint="@color/gray_02"
+            android:textSize="16sp"
+            app:counterEnabled="true"
+            app:counterMaxLength="10"
+            app:counterTextColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/nickname_used_name_notification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/nickname_be_used"
+            android:textColor="@color/red"
+            android:textSize="12sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/nickname_inputText" />
+
+        <TextView
+            android:id="@+id/nickname_counting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="24dp"
+            android:hint="0/10"
+            android:textColorHint="@color/white"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/nickname_inputText" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/nickname_done_button"
