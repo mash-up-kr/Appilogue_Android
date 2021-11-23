@@ -4,6 +4,9 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView.VERTICAL
@@ -11,6 +14,9 @@ import com.anonymous.appilogue.R
 import com.anonymous.appilogue.databinding.FragmentReviewListBinding
 import com.anonymous.appilogue.features.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class ReviewListFragment
@@ -43,6 +49,7 @@ class ReviewListFragment
         super.onViewCreated(view, savedInstanceState)
 
         initView()
+        initObservers()
     }
 
     private fun initView() {
@@ -57,10 +64,20 @@ class ReviewListFragment
         }
     }
 
+    private fun initObservers() {
+        lifecycleScope.launch {
+            viewModel.fetchImageList()
+                .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
+                .collectLatest {
+                    reviewListAdapter.submitData(it)
+                }
+        }
+    }
+
     companion object {
-        private const val HOLE_KEY = "hole"
-        const val BLACK_HOLE = "blackhole"
-        const val WHITE_HOLE = "whitehole"
+        const val HOLE_KEY = "hole"
+        const val BLACK_HOLE = "black"
+        const val WHITE_HOLE = "white"
 
         fun newInstance(hole: String): ReviewListFragment {
             val fragment = ReviewListFragment()

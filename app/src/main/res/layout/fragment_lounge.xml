@@ -52,20 +52,7 @@
             app:tabBackground="@drawable/ic_tab_indicator_selector"
             app:layout_constraintTop_toBottomOf="@id/appbar_layout"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" >
-
-            <com.google.android.material.tabs.TabItem
-                android:id="@+id/black_hole_tab"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/black_hole"/>
-
-            <com.google.android.material.tabs.TabItem
-                android:id="@+id/white_hole_tab"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/white_hole"/>
-        </com.google.android.material.tabs.TabLayout>
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/view_pager"

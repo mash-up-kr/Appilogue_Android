@@ -35,7 +35,16 @@ class LoungeFragment
         binding.viewPager.apply {
             adapter = viewPagerAdapter
         }
-        TabLayoutMediator(binding.tabLayout, binding.viewPager) { _, _ -> }.attach()
+        TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
+            when (position) {
+                BLACK_HOLE_PAGE_INDEX -> {
+                    tab.setText(R.string.black_hole)
+                }
+                WHITE_HOLE_PAGE_INDEX -> {
+                    tab.setText(R.string.white_hole)
+                }
+            }
+        }.attach()
     }
 
     private fun getFragmentCreators() = SparseArray<() -> Fragment>().apply {

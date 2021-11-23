@@ -4,8 +4,7 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-data class User(
+data class LikesModel(
     @field:Json(name = "id") val id: Int = 0,
-    @field:Json(name = "nickname") val nickname: String,
-    @field:Json(name = "profileUrl") val profileUrl: String?
+    @field:Json(name = "user") val users: List<User> = emptyList()
 )

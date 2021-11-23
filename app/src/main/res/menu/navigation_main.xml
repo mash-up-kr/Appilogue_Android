@@ -2,9 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/communityFragment"
+        android:id="@+id/loungeFragment"
         android:icon="@drawable/ic_community"
-        android:title="@string/community_fragment" />
+        android:title="@string/lounge_fragment" />
 
     <item
         android:id="@+id/homeFragment"

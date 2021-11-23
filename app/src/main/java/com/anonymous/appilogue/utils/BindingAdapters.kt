@@ -24,6 +24,7 @@ fun ImageView.bindImageUrl(uri: String?) {
     if (!uri.isNullOrEmpty()) {
         Glide.with(context)
             .load(uri)
+            .apply(RequestOptions().fitCenter())
             .into(this)
     }
 }
@@ -33,7 +34,7 @@ fun ImageView.bindProfileImageUrl(uri: String?) {
     if (!uri.isNullOrEmpty()) {
         Glide.with(context)
             .load(uri)
-            .apply(RequestOptions().circleCrop().centerCrop())
+            .apply(RequestOptions().placeholder(R.drawable.).circleCrop().centerCrop())
             .into(this)
     }
 }

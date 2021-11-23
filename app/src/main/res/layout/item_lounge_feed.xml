@@ -26,7 +26,7 @@
             android:layout_width="34dp"
             android:layout_height="34dp"
             android:layout_marginTop="20dp"
-            app:profileUrl="@{item.author.profileUrl}"
+            app:profileUrl="@{item.user.profileUrl}"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
 
@@ -35,7 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:text="@{item.author.nickName}"
+            android:text="@{item.user.nickname}"
             style="@style/TextStyle.Normal14"
             app:layout_constraintTop_toTopOf="@id/profile_view"
             app:layout_constraintStart_toEndOf="@id/profile_view"
@@ -56,6 +56,7 @@
             android:layout_width="18dp"
             android:layout_height="18dp"
             android:src="@drawable/ic_vertical_more"
+            app:imageUrl="@{item.user.profileUrl}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/profile_view"
             app:layout_constraintBottom_toBottomOf="@id/profile_view"
@@ -90,6 +91,7 @@
                 android:layout_height="40dp"
                 android:layout_margin="10dp"
                 android:background="@drawable/border_radius_10"
+                app:imageUrl="@{item.app.iconUrl}"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
@@ -99,27 +101,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
+                android:text="@{item.app.name}"
                 style="@style/TextStyle.Normal14"
                 app:layout_constraintTop_toTopOf="@id/app_icon_view"
+                app:layout_constraintBottom_toBottomOf="@id/app_icon_view"
                 app:layout_constraintStart_toEndOf="@id/app_icon_view"
                 tools:text="앰 이름" />
-
-            <TextView
-                android:id="@+id/app_category_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/gray_03"
-                style="@style/TextStyle.Normal12"
-                app:layout_constraintTop_toBottomOf="@id/app_title_view"
-                app:layout_constraintStart_toStartOf="@id/app_title_view"
-                tools:text="앱 카테고리"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ImageView
             android:id="@+id/like_view"
             android:layout_width="12dp"
             android:layout_height="12dp"
-            android:layout_marginTop="18dp"
+            android:layout_marginTop="20dp"
             android:src="@drawable/ic_heart_selector"
             app:layout_constraintTop_toBottomOf="@id/app_info_container"
             app:layout_constraintStart_toStartOf="parent" />
@@ -131,6 +125,7 @@
             android:layout_marginStart="4dp"
             android:textColor="@color/gray_04"
             android:includeFontPadding="false"
+            android:text="@{String.valueOf(item.likes.size())}"
             style="@style/TextStyle.Normal14"
             app:layout_constraintTop_toTopOf="@id/like_view"
             app:layout_constraintStart_toEndOf="@id/like_view"
@@ -154,6 +149,7 @@
             android:layout_marginStart="4dp"
             android:textColor="@color/gray_04"
             android:includeFontPadding="false"
+            android:text="@{String.valueOf(item.comments.size())}"
             style="@style/TextStyle.Normal14"
             app:layout_constraintTop_toTopOf="@id/comments_view"
             app:layout_constraintStart_toEndOf="@id/comments_view"

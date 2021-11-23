@@ -5,9 +5,9 @@
     app:startDestination="@id/homeFragment">
 
     <fragment
-        android:id="@+id/communityFragment"
-        android:name="com.anonymous.appilogue.features.community.CommunityFragment"
-        android:label="CommunityFragment" />
+        android:id="@+id/loungeFragment"
+        android:name="com.anonymous.appilogue.features.community.lounge.LoungeFragment"
+        android:label="LoungeFragment" />
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.anonymous.appilogue.features.profile.ProfileFragment"
