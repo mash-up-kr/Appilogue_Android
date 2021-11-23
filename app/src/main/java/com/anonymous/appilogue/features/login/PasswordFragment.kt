@@ -1,11 +1,10 @@
 package com.anonymous.appilogue.features.login
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.View
 import android.widget.EditText
 import androidx.core.content.ContextCompat
+import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import com.anonymous.appilogue.R
@@ -21,8 +20,7 @@ class PasswordFragment :
         super.onViewCreated(view, savedInstanceState)
 
         initClickListener()
-        binding.passwordEdittext.setAddTextChangedListener()
-        binding.passwordEdittextBelow.setAddTextChangedListener()
+        setAddTextChangedListener()
     }
 
     private fun initClickListener() {
@@ -47,103 +45,118 @@ class PasswordFragment :
         }
     }
 
-    fun EditText.setAddTextChangedListener() {
-        this.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
-                // do nothing
-            }
-
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                // do nothing
-            }
-
-            override fun afterTextChanged(s: Editable) {
-                with(binding) {
-                    when (this@setAddTextChangedListener) {
-                        passwordEdittext -> {
-                            with(binding) {
-                                // 8자리 이상인 경우
-                                if (s.length >= 8) {
-                                    setCorrect(passwordEdittext, s)
-                                    // 보통 조건에 부합하는 경우 버튼 클릭 가능하지만 비밀번호는 확인 부분이 있어 한번 더 클릭 못하게 바꿔줍니다
-                                    FirstButtonInit.buttonInit(passwordMoveNextButton)
-                                    binding.passwordWrongPasswordNotification.visibility = View.GONE
-                                }
-                                // 8자보다 짧을 경우 => 현재 위에 수정하고 밑에부분에는 추가를 해야만 확인을 함(이거 고쳐)
-                                else {
-                                    setIncorrect(passwordEdittext, resources.getString(R.string.password_length))
-                                    binding.passwordWrongPasswordNotification.visibility = View.VISIBLE
-                                }
-                            }
-                        }
-
-                        passwordEdittextBelow -> {
-                            with(binding) {
-                                // 비밀번호가 같다면
-                                if (s.toString() == viewModel.password.value) {
-                                    setCorrect(passwordEdittextBelow, s)
-                                    binding.passwordWrongPasswordNotification.visibility = View.GONE
-                                }
-                                // 비밀번호가 다르다면
-                                else {
-                                    setIncorrect(passwordEdittextBelow, resources.getString(R.string.password_check))
-                                    binding.passwordWrongPasswordNotification.visibility = View.VISIBLE
-                                }
-                            }
-                        }
+    private fun setAddTextChangedListener() {
+        binding.passwordEdittext.doAfterTextChanged { passwordText ->
+            passwordText?.let {
+                if (passwordText.length >= 8) {
+                    setCorrect(binding.passwordEdittext, it.toString())
+                    binding.passwordWrongPasswordNotification.visibility = View.GONE
+                    if (binding.passwordEdittextBelow.text.isNotEmpty()) {
+                        checkBetweenPassword()
                     }
+                } else {
+                    setIncorrect(binding.passwordEdittext, resources.getString(R.string.password_length))
+                    binding.passwordWrongPasswordNotification.visibility = View.VISIBLE
                 }
             }
-        })
+        }
+
+        binding.passwordEdittextBelow.doAfterTextChanged { passwordBelowText ->
+            passwordBelowText?.let {
+                if (checkBetweenPassword()) {
+                    setCorrect(binding.passwordEdittextBelow, it.toString())
+                    binding.passwordWrongPasswordNotification.visibility = View.GONE
+                } else {
+                    setIncorrect(binding.passwordEdittextBelow, resources.getString(R.string.password_check))
+                    binding.passwordWrongPasswordNotification.visibility = View.VISIBLE
+                }
+            }
+        }
     }
 
-    private fun setCorrect(passwordEditText: EditText, correctPassword: Editable) {
 
-        with(binding) {
-            passwordMoveNextButton.isEnabled = true
+    private fun setCorrect(passwordEditText: EditText, correctPassword: String) {
+        // 첫번 째 패스워드로 들어왔다면, password 에 저장
+        if (passwordEditText == binding.passwordEdittext) {
+            viewModel.password.value = correctPassword
+        }
+        // 두번 째 패스워드로 들어왔다면, checkPassword 에 저장
+        else {
+            val passwordHashed = BCrypt.hashpw(correctPassword, BCrypt.gensalt())
+            viewModel.checkPassword.value = passwordHashed
+        }
+        changeEditTextBackgroundColor(passwordEditText, true)
+    }
 
-            with(passwordMoveNextButton) {
+    private fun setIncorrect(passwordEditText: EditText, errorText: String) {
+        binding.passwordWrongPasswordNotification.text = errorText
+        changeEditTextBackgroundColor(passwordEditText, false)
+    }
+
+    private fun checkBetweenPassword(): Boolean {
+        return if (binding.passwordEdittext.text.toString() == binding.passwordEdittextBelow.text.toString()) {
+            setButtonCanClick(true)
+            changeEditTextBackgroundColor(binding.passwordEdittextBelow, true)
+            true
+        } else {
+            with(binding) {
+                // 위와 아래 패스워드가 올바르게 입력된 상태에서 위의 패스워드를 추가하면,
+                // 길이는 더 길어지고 형식에는 맞지만, 위와 아래의 값은 달라지므로 아래의 패스워드 백그라운드를 변경해줍니다.
+                if (passwordEdittext.text.length >= 8) {
+                    changeEditTextBackgroundColor(passwordEdittext, true)
+                    changeEditTextBackgroundColor(passwordEdittextBelow, false)
+                }
+                // 다를 경우 빨간 글씨로 에러 알려줌
+                with(passwordWrongPasswordNotification) {
+                    setTextColor(ContextCompat.getColor(passwordWrongPasswordNotification.context, R.color.red))
+                }
+                setButtonCanClick(false)
+            }
+            false
+        }
+    }
+
+    private fun setButtonBackgroundColor(click: Boolean) {
+        if (click) {
+            with(binding.passwordMoveNextButton) {
                 context?.let { ctx ->
                     setTextColor(ContextCompat.getColor(ctx, R.color.white))
                     background = ContextCompat.getDrawable(ctx, R.drawable.border_radius_08_purple)
                     background.setTint(ContextCompat.getColor(ctx, R.color.purple_01))
                 }
             }
-        }
-        // 첫번 째 패스워드로 들어왔다면, password 에 저장
-        if (passwordEditText == binding.passwordEdittext) {
-            viewModel.password.value = correctPassword.toString()
-        }
-        // 두번 째 패스워드로 들어왔다면, checkPassword 에 저장
-        else {
-            val passwordHashed = BCrypt.hashpw(correctPassword.toString(), BCrypt.gensalt())
-            viewModel.checkPassword.value = passwordHashed
-        }
-
-        passwordEditText.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_icon_correct, 0)
-        passwordEditText.setBackgroundResource(R.drawable.border_radius_10_purple)
-    }
-
-    private fun setIncorrect(passwordEditText: EditText, errorText: String) {
-        with(binding) {
-            passwordMoveNextButton.isEnabled = false
-
-            // 다를 경우 빨간 글씨로 에러 알려줌
-            with(passwordWrongPasswordNotification) {
-                text = errorText
-                setTextColor(ContextCompat.getColor(passwordWrongPasswordNotification.context, R.color.red))
-            }
-
-            with(passwordMoveNextButton) {
+        } else {
+            with(binding.passwordMoveNextButton) {
                 context?.let { ctx ->
                     setTextColor(ContextCompat.getColor(ctx, R.color.gray_01))
                     background.setTint(ContextCompat.getColor(ctx, R.color.gray_02))
                 }
             }
         }
+    }
 
-        passwordEditText.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_icon_error, 0)
-        passwordEditText.setBackgroundResource(R.drawable.border_radius_16_red)
+    private fun setButtonCanClick(click: Boolean) {
+        if (click) {
+            with(binding.passwordMoveNextButton) {
+                setButtonBackgroundColor(true)
+                isEnabled = true
+            }
+        } else {
+            with(binding.passwordMoveNextButton) {
+                setButtonBackgroundColor(false)
+                isEnabled = false
+            }
+        }
+    }
+
+    private fun changeEditTextBackgroundColor(passwordEditText: EditText, change: Boolean) {
+        if (change) {
+            passwordEditText.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_icon_correct, 0)
+            passwordEditText.setBackgroundResource(R.drawable.border_radius_10_purple)
+        } else {
+            passwordEditText.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_icon_error, 0)
+            passwordEditText.setBackgroundResource(R.drawable.border_radius_16_red)
+        }
     }
 }
 
