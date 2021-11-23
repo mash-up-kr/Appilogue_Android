@@ -61,9 +61,6 @@ class PasswordFragment :
                 with(binding) {
                     when (this@setAddTextChangedListener) {
                         passwordEdittext -> {
-                            // 아래로 포커스 이동시에 백그라운드 변경 (포커스가 아니라 입력시라는 점은 추후에 수정..)
-                            passwordEdittextBelow.setBackgroundResource(R.drawable.border_radius_10)
-
                             with(binding) {
                                 // 8자리 이상인 경우
                                 if (s.length >= 8) {
@@ -81,9 +78,6 @@ class PasswordFragment :
                         }
 
                         passwordEdittextBelow -> {
-                            // 위로 포커스 이동시에 백그라운드 변경 (포커스가 아니라 입력시라는 점은 추후에 수정..)
-                            passwordEdittext.setBackgroundResource(R.drawable.border_radius_10)
-
                             with(binding) {
                                 // 비밀번호가 같다면
                                 if (s.toString() == viewModel.password.value) {

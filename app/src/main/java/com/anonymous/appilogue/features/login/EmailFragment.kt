@@ -1,19 +1,20 @@
 package com.anonymous.appilogue.features.login
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.View
 import androidx.core.content.ContextCompat
+import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import com.anonymous.appilogue.R
 import com.anonymous.appilogue.databinding.FragmentEmailBinding
 import com.anonymous.appilogue.features.base.BaseFragment
+import io.reactivex.rxjava3.disposables.CompositeDisposable
 
 class EmailFragment :
     BaseFragment<FragmentEmailBinding, LoginViewModel>(R.layout.fragment_email) {
     override val viewModel: LoginViewModel by activityViewModels()
+    private val compositeDisposable = CompositeDisposable()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -48,28 +49,18 @@ class EmailFragment :
     }
 
     private fun setTextChangeListener(emailCheckRegex: Regex) {
-        binding.emailSubmitEditText.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
-                // do nothing
+        binding.emailSubmitEditText.doAfterTextChanged { email ->
+            if (email?.matches(emailCheckRegex) == true) {
+                // 이메일 형식이 맞는 경우
+                setCorrect(email.toString())
+            } else {
+                // 이메일 형식이 아닌 경우
+                setIncorrect(resources.getString(R.string.email_format_error_text))
             }
-
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                // do nothing
-            }
-
-            override fun afterTextChanged(s: Editable?) {
-                if (s?.matches(emailCheckRegex) == true) {
-                    // 이메일 형식이 맞는 경우
-                    setCorrect(s)
-                } else {
-                    // 이메일 형식이 아닌 경우
-                    setIncorrect(resources.getString(R.string.email_format_error_text))
-                }
-            }
-        })
+        }
     }
 
-    private fun setCorrect(correctEmailText: Editable) {
+    private fun setCorrect(correctEmailText: String?) {
         with(binding) {
             emailMoveNextButton.isEnabled = true
             with(emailSubmitEditText) {
@@ -89,7 +80,7 @@ class EmailFragment :
                     background.setTint(ContextCompat.getColor(ctx, R.color.purple_01))
                 }
             }
-            viewModel.emailAddress.value = correctEmailText.toString()
+            viewModel.emailAddress.value = correctEmailText
         }
     }
 
@@ -114,5 +105,10 @@ class EmailFragment :
                 }
             }
         }
+    }
+
+    override fun onDestroyView() {
+        compositeDisposable.clear()
+        super.onDestroyView()
     }
 }

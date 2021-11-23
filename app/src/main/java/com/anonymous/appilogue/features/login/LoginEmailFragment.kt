@@ -55,9 +55,6 @@ class LoginEmailFragment :
                 with(binding) {
                     when (this@setAddTextChangedListener) {
                         emailLoginEmail -> {
-                            // 아래로 포커스 이동시에 백그라운드 변경 (포커스가 아니라 입력시라는 점은 추후에 수정..)
-                            emailLoginPassword.setBackgroundResource(R.drawable.border_radius_10)
-
                             with(binding) {
                                 // 8자리 이상인 경우
                                 if (emailCheckRegex?.let { s.matches(it) } == true) {
@@ -73,9 +70,6 @@ class LoginEmailFragment :
                         }
 
                         emailLoginPassword -> {
-                            // 위로 포커스 이동시에 백그라운드 변경 (포커스가 아니라 입력시라는 점은 추후에 수정..)
-                            emailLoginEmail.setBackgroundResource(R.drawable.border_radius_10)
-
                             with(binding) {
                                 // 비밀번호가 같다면 (서버랑 연동하는 부분으로 수정해야함)
                                 if (s.toString() == viewModel?.password?.value.toString()) {
