@@ -9,7 +9,9 @@ import androidx.navigation.findNavController
 import com.anonymous.appilogue.R
 import com.anonymous.appilogue.databinding.FragmentEmailBinding
 import com.anonymous.appilogue.features.base.BaseFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class EmailFragment :
     BaseFragment<FragmentEmailBinding, LoginViewModel>(R.layout.fragment_email) {
     override val viewModel: LoginViewModel by activityViewModels()
@@ -37,6 +39,7 @@ class EmailFragment :
         with(binding) {
             with(emailMoveNextButton) {
                 FirstButtonInit.buttonInit(this)
+
                 setOnClickListener {
                     viewModel.timerStart()
                     it.findNavController().navigate(R.id.action_emailFragment_to_certificationFragment)

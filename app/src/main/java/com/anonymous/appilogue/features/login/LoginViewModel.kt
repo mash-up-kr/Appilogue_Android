@@ -4,22 +4,30 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.anonymous.appilogue.repository.LoginRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import timber.log.Timber
+import javax.inject.Inject
 
-class LoginViewModel : ViewModel() {
+@HiltViewModel
+class LoginViewModel @Inject constructor(private val loginRepository: LoginRepository) : ViewModel() {
     private var _timerCount = 0
     private val _timer = MutableLiveData<String>()
     private var job: Job? = null
 
     var lostPassword = false
     var certificationNumber = MutableLiveData<String>()
+    val emailAddress = MutableLiveData<String>()
     val password = MutableLiveData<String>()
     val checkPassword = MutableLiveData<String>()
-    val emailAddress = MutableLiveData<String>()
     val nickName = MutableLiveData<String>()
     val timer: LiveData<String> = _timer
+
+    var a = false
 
     fun timerStart() {
         _timerCount = 600
@@ -42,5 +50,17 @@ class LoginViewModel : ViewModel() {
 
     fun stopTimer() {
         job?.cancel()
+    }
+
+    fun sendCertificationNumber() {
+        loginRepository.sendCertificationEmail(mapOf("email" to emailAddress.value.toString()))
+            .subscribeOn(Schedulers.io())
+            .subscribe({
+                if (it.isSend) {
+                    Timber.d("sendCertificationNumber: $it.isUserExist ${emailAddress.value.toString()}으로 이메일 전송 선공")
+                }
+            }, {
+                Timber.d("${it.message} error!!!")
+            })
     }
 }

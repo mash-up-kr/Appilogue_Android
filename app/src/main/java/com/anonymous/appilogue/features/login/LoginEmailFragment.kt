@@ -13,7 +13,9 @@ import com.anonymous.appilogue.R
 import com.anonymous.appilogue.databinding.FragmentEmailLoginBinding
 import com.anonymous.appilogue.features.base.BaseFragment
 import com.anonymous.appilogue.features.main.MainActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class LoginEmailFragment :
     BaseFragment<FragmentEmailLoginBinding, LoginViewModel>(R.layout.fragment_email_login) {
     override val viewModel: LoginViewModel by activityViewModels()

@@ -19,6 +19,7 @@ class CertificationFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.viewModel = viewModel
+        viewModel.sendCertificationNumber()
 
         certificationNumberList = listOf(
             binding.certificationNumber1, binding.certificationNumber2,
@@ -35,6 +36,7 @@ class CertificationFragment :
                     setBackgroundColor(ContextCompat.getColor(ctx, R.color.black_01))
                 }
             }
+
             // 포커스 자동 넘김
             setAddTextChangeListener()
 

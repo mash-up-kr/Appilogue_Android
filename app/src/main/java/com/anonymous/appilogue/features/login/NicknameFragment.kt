@@ -12,7 +12,9 @@ import com.anonymous.appilogue.R
 import com.anonymous.appilogue.databinding.FragmentNicknameBinding
 import com.anonymous.appilogue.features.base.BaseFragment
 import com.anonymous.appilogue.features.main.MainActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class NicknameFragment :
     BaseFragment<FragmentNicknameBinding, LoginViewModel>(R.layout.fragment_nickname) {
     override val viewModel: LoginViewModel by activityViewModels()

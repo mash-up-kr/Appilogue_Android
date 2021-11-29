@@ -10,8 +10,10 @@ import androidx.navigation.findNavController
 import com.anonymous.appilogue.R
 import com.anonymous.appilogue.databinding.FragmentPasswordBinding
 import com.anonymous.appilogue.features.base.BaseFragment
+import dagger.hilt.android.AndroidEntryPoint
 import org.mindrot.jbcrypt.BCrypt
 
+@AndroidEntryPoint
 class PasswordFragment :
     BaseFragment<FragmentPasswordBinding, LoginViewModel>(R.layout.fragment_password) {
     override val viewModel: LoginViewModel by activityViewModels()
