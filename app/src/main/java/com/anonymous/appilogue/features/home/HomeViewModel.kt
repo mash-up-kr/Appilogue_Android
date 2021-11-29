@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.anonymous.appilogue.model.ReviewedApp
 import com.anonymous.appilogue.repository.AppRepository
+import com.anonymous.appilogue.repository.ReviewRepository
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
@@ -13,7 +14,10 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(private val appRepository: AppRepository) : ViewModel() {
+class HomeViewModel @Inject constructor(
+    private val appRepository: AppRepository,
+    private val reviewRepository: ReviewRepository
+) : ViewModel() {
 
     private val _starFocused = MutableLiveData(Focus.None)
     val starFocused: LiveData<Focus> = _starFocused

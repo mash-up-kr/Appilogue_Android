@@ -1,5 +1,6 @@
 package com.anonymous.appilogue.di
 
+import com.anonymous.appilogue.network.api.SearchApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -13,6 +14,8 @@ import javax.inject.Singleton
 @Module
 object NetworkModule {
 
+    private const val BASE_URL = "https://api.moussg.io/"
+
     @Provides
     @Singleton
     fun provideOkHttpClient(): OkHttpClient {
@@ -24,9 +27,13 @@ object NetworkModule {
     @Singleton
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit =
         Retrofit.Builder()
-            .baseUrl("")
+            .baseUrl(BASE_URL)
             .client(okHttpClient)
             .addConverterFactory(MoshiConverterFactory.create())
             .build()
 
+    @Provides
+    @Singleton
+    fun provideReviewApi(retrofit: Retrofit): SearchApi =
+        retrofit.create(SearchApi::class.java)
 }
