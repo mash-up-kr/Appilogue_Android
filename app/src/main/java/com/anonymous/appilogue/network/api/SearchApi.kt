@@ -1,6 +1,6 @@
 package com.anonymous.appilogue.network.api
 
-import com.anonymous.appilogue.model.Review
+import com.anonymous.appilogue.model.SearchDto
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -13,5 +13,5 @@ interface SearchApi {
         @Query("hole") hole: String,
         @Query("page") page: Int,
         @Query("limit") limit: Int,
-    ): Response<List<Review>>
+    ): Response<List<SearchDto>>
 }

@@ -1,12 +1,14 @@
 package com.anonymous.appilogue.model
 
-import java.util.*
-
 data class Review(
-    val id: Int,
+    val app: App,
+    val comments: List<Comment>,
     val content: String,
-    val hole: String,
     val createdAt: String,
+    val deletedAt: Any,
+    val hole: String,
+    val id: Int,
+    val likes: List<Like>,
     val updatedAt: String,
-    val deletedAt: String
+    val user: User
 )
