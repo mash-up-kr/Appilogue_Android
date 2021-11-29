@@ -7,7 +7,6 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavDirections
-import androidx.navigation.Navigation
 import com.anonymous.appilogue.R
 import com.anonymous.appilogue.databinding.ActivityMainBinding
 import com.anonymous.appilogue.features.base.BaseActivity
@@ -16,7 +15,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import java.lang.Compiler.enable
 
 
 @AndroidEntryPoint
@@ -48,10 +46,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             setOnItemSelectedListener {
                 if (it.isChecked && it.itemId == R.id.homeFragment) {
                     navigateTo(R.id.searchAppFragment)
-                    viewModel.hideBottomNavigation()
                 } else {
                     navigateTo(it.itemId)
-                    viewModel.showBottomNavigation()
                 }
                 true
             }
@@ -69,10 +65,24 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     }
 
     fun navigateTo(id: Int) {
+        changeBottomNavigationStateByFragmentId(id)
         navController.navigate(id)
     }
 
     fun navigateTo(action: NavDirections) {
+        changeBottomNavigationStateByFragmentId(action.actionId)
         navController.navigate(action)
+    }
+
+    private fun changeBottomNavigationStateByFragmentId(id: Int) {
+        if (BottomNavigationStateById.bottomNavigationHidingStateById(id) == true) viewModel.hideBottomNavigation()
+        else viewModel.showBottomNavigation()
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        navController.currentDestination?.let {
+            changeBottomNavigationStateByFragmentId(it.id)
+        }
     }
 }
