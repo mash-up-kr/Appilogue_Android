@@ -10,6 +10,9 @@ import androidx.navigation.findNavController
 import com.anonymous.appilogue.R
 import com.anonymous.appilogue.databinding.FragmentCertificationBinding
 import com.anonymous.appilogue.features.base.BaseFragment
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.schedulers.Schedulers
+import timber.log.Timber
 
 class CertificationFragment :
     BaseFragment<FragmentCertificationBinding, LoginViewModel>(R.layout.fragment_certification) {
@@ -18,7 +21,8 @@ class CertificationFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.viewModel = viewModel
+        binding.vm = viewModel
+
         viewModel.sendCertificationNumber()
 
         certificationNumberList = listOf(
@@ -36,17 +40,37 @@ class CertificationFragment :
                     setBackgroundColor(ContextCompat.getColor(ctx, R.color.black_01))
                 }
             }
-
             // 포커스 자동 넘김
             setAddTextChangeListener()
 
             certificationMoveNextButton.setOnClickListener {
-                viewModel?.stopTimer()
-                it.findNavController().navigate(R.id.action_certificationFragment_to_passwordFragment)
+                viewModel.verifyCertificationNumber()
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe({
+                        if (it.isVerify) {
+                            Timber.d("Verify 성공")
+                            viewModel.stopTimer()
+                            certificationMoveNextButton.findNavController().navigate(R.id.action_certificationFragment_to_passwordFragment)
+                        } else {
+                            clearAllCertificationNumber()
+                            buttonClickUnEnable()
+                            allButtonColorTurnsRed()
+                        }
+                    }) {
+                        Timber.d("Verify 오류, ${it.message}")
+                    }
             }
 
+            resendCertificationNumber.setOnClickListener {
+                with(viewModel) {
+                    stopTimer()
+                    timerReset()
+                    resendCertificationNumber()
+                }
+                allButtonColorTurnsFirstState()
+            }
         }
-
     }
 
     private fun setAddTextChangeListener() {
@@ -111,11 +135,10 @@ class CertificationFragment :
                 background.setTint(ContextCompat.getColor(ctx, R.color.purple_01))
             }
         }
-        with(binding) {
-            var certificationNumber = ""
-            certificationNumberList.forEach { certificationNumber += it.text.toString() }
-            viewModel?.certificationNumber?.value = certificationNumber
-        }
+
+        var certificationNumber = ""
+        certificationNumberList.forEach { certificationNumber += it.text.toString() }
+        viewModel.certificationNumber.value = certificationNumber
     }
 
     private fun buttonClickUnEnable() {
@@ -125,6 +148,39 @@ class CertificationFragment :
                 setTextColor(ContextCompat.getColor(ctx, R.color.gray_01))
                 background.setTint(ContextCompat.getColor(ctx, R.color.gray_02))
             }
+        }
+    }
+
+    private fun clearAllCertificationNumber() {
+        certificationNumberList.forEach {
+            it.text.clear()
+        }
+    }
+
+    private fun allButtonColorTurnsRed() {
+        val iterator = certificationNumberList.iterator()
+        while (iterator.hasNext()) {
+            iterator.next().background = ContextCompat.getDrawable(requireContext(), R.drawable.border_radius_16_red)
+        }
+        // 처음 인증번호로 포커스 이동
+        certificationNumberList[0].requestFocus()
+        // 인증번호 텍스트 변경
+        with(binding.certificationExplainText2) {
+            text = getString(R.string.wrong_certification)
+            setTextColor(ContextCompat.getColor(context, R.color.red))
+        }
+    }
+
+    private fun allButtonColorTurnsFirstState() {
+        val iterator = certificationNumberList.iterator()
+        while (iterator.hasNext()) {
+            iterator.next().background = ContextCompat.getDrawable(requireContext(), R.drawable.border_radius_10)
+        }
+        certificationNumberList[0].requestFocus()
+        // 재전송 버튼 클릭시에 텍스트 변경
+        with(binding.certificationExplainText2) {
+            text = getString(R.string.resend_certification_notify)
+            setTextColor(ContextCompat.getColor(context, R.color.gray_02))
         }
     }
 }

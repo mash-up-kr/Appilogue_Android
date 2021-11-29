@@ -4,8 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.anonymous.appilogue.model.PostVerifyCode
+import com.anonymous.appilogue.model.VerifyCode
 import com.anonymous.appilogue.repository.LoginRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -26,8 +29,6 @@ class LoginViewModel @Inject constructor(private val loginRepository: LoginRepos
     val checkPassword = MutableLiveData<String>()
     val nickName = MutableLiveData<String>()
     val timer: LiveData<String> = _timer
-
-    var a = false
 
     fun timerStart() {
         _timerCount = 600
@@ -62,5 +63,15 @@ class LoginViewModel @Inject constructor(private val loginRepository: LoginRepos
             }, {
                 Timber.d("${it.message} error!!!")
             })
+    }
+
+    fun resendCertificationNumber() {
+        sendCertificationNumber()
+    }
+
+    fun verifyCertificationNumber(): Single<VerifyCode> {
+        return loginRepository.verifyCertificationNumber(
+            PostVerifyCode(emailAddress.value.toString(), certificationNumber.value.toString())
+        )
     }
 }
