@@ -6,12 +6,14 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
 @Module
 object NetworkModule {
+    private const val BASE_URL = "https://api.moussg.io/v1/api/"
 
     @Provides
     @Singleton
@@ -24,8 +26,9 @@ object NetworkModule {
     @Singleton
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit =
         Retrofit.Builder()
-            .baseUrl("")
+            .baseUrl(BASE_URL)
             .client(okHttpClient)
+            .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
             .addConverterFactory(MoshiConverterFactory.create())
             .build()
 
