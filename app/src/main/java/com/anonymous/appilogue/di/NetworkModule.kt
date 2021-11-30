@@ -1,6 +1,8 @@
 package com.anonymous.appilogue.di
 
 import com.anonymous.appilogue.network.api.SearchApi
+import com.anonymous.appilogue.network.interceptor.AuthorizationInterceptor
+import com.anonymous.appilogue.network.interceptor.MockAuthorizationInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,8 +20,9 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideOkHttpClient(): OkHttpClient {
+    fun provideOkHttpClient(authorizationInterceptor: MockAuthorizationInterceptor): OkHttpClient {
         return OkHttpClient.Builder()
+            .addInterceptor(authorizationInterceptor)
             .build()
     }
 
