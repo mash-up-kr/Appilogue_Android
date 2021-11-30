@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.add
 import androidx.fragment.app.commit
-import androidx.preference.PreferenceManager
 import com.anonymous.appilogue.R
 import com.anonymous.appilogue.databinding.FragmentHomeBinding
 import com.anonymous.appilogue.features.base.BaseFragment
@@ -22,17 +21,20 @@ import com.anonymous.appilogue.features.home.bottomsheet.BottomSheetPagerAdapter
 import com.anonymous.appilogue.features.home.bottomsheet.MyDecorationFragment
 import com.anonymous.appilogue.features.home.bottomsheet.StoreFragment
 import com.anonymous.appilogue.features.home.onboarding.OnboardingFragment
-import com.anonymous.appilogue.features.home.onboarding.OnboardingFragment.Companion.COMPLETED_ONBOARDING
 import com.anonymous.appilogue.features.main.MainViewModel
+import com.anonymous.appilogue.preference.AppilogueSharedPreferences
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class HomeFragment :
     BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.fragment_home) {
 
+    @Inject
+    lateinit var sharedPreference: AppilogueSharedPreferences
     private val mainViewModel: MainViewModel by activityViewModels()
     private val starsByFocus = EnumMap<Focus, ImageView>(Focus::class.java)
 
@@ -55,12 +57,10 @@ class HomeFragment :
     }
 
     private fun initOnboarding() {
-        PreferenceManager.getDefaultSharedPreferences(context).apply {
-            if (!getBoolean(COMPLETED_ONBOARDING, false)) {
-                childFragmentManager.commit {
-                    add<OnboardingFragment>(R.id.fcv_onboarding)
-                    setReorderingAllowed(true)
-                }
+        if (!sharedPreference.getOnboardingIsDone()) {
+            childFragmentManager.commit {
+                add<OnboardingFragment>(R.id.fcv_onboarding)
+                setReorderingAllowed(true)
             }
         }
     }
