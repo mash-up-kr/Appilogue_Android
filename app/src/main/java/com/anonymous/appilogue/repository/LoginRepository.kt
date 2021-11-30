@@ -8,10 +8,10 @@ import io.reactivex.rxjava3.core.Single
 
 class LoginRepository {
     fun sendCertificationEmail(email: Map<String, String>): Single<SendEmail> {
-        return NetworkManager.AppilogueApi.sendCertificationToEmail(email)
+        return NetworkManager.appilogueAuthApi.sendCertificationToEmail(email)
     }
 
     fun verifyCertificationNumber(postData: PostVerifyCode): Single<VerifyCode> {
-        return NetworkManager.AppilogueApi.verifyCertificationNumber(postData)
+        return NetworkManager.appilogueAuthApi.verifyCertificationNumber(postData)
     }
 }

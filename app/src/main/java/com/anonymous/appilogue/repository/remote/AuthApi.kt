@@ -7,7 +7,7 @@ import io.reactivex.rxjava3.core.Single
 import retrofit2.http.Body
 import retrofit2.http.POST
 
-interface ApiInterface {
+interface AuthApi {
     @POST("auth/send-email")
     fun sendCertificationToEmail(@Body email: Map<String, String>): Single<SendEmail>
 

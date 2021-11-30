@@ -1,6 +1,6 @@
 package com.anonymous.appilogue.features.retrofit
 
-import com.anonymous.appilogue.repository.remote.ApiInterface
+import com.anonymous.appilogue.repository.remote.AuthApi
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit
@@ -21,5 +21,5 @@ object NetworkManager {
         .addConverterFactory(MoshiConverterFactory.create(moshi))
         .build()
 
-    val AppilogueApi: ApiInterface = retrofit.create()
+    val appilogueAuthApi: AuthApi = retrofit.create()
 }
