@@ -31,7 +31,7 @@ class LoginViewModel @Inject constructor(private val loginRepository: LoginRepos
     val timer: LiveData<String> = _timer
 
     fun timerStart() {
-        _timerCount = 600
+        _timerCount = INITIAL_TIME
 
         job = viewModelScope.launch {
             while (_timerCount >= 0) {
@@ -73,5 +73,9 @@ class LoginViewModel @Inject constructor(private val loginRepository: LoginRepos
         return loginRepository.verifyCertificationNumber(
             PostVerifyCode(emailAddress.value.toString(), certificationNumber.value.toString())
         )
+    }
+
+    companion object {
+        const val INITIAL_TIME = 600
     }
 }
