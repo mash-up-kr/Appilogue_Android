@@ -40,22 +40,36 @@ class CertificationFragment :
             }
             // 포커스 자동 넘김
             setAddTextChangeListener()
-            // 인증 번호 확인
-            certificationNumberVerify()
+        }
+        // 인증 번호 확인
+        certificationNumberVerify()
+        // 재전송 버튼 눌렀을 때
+        initResendClickListener()
+    }
 
-            resendCertificationNumber.setOnClickListener {
-                with(viewModel) {
-                    stopTimer()
-                    timerReset()
-                    resendCertificationNumber()
-                }
-                allButtonColorTurnsFirstState()
+    private fun initResendClickListener() {
+        binding.resendCertificationNumber.setOnClickListener {
+            with(viewModel) {
+                stopTimer()
+                timerReset()
+                sendCertificationNumber()
+                    .subscribeOn(Schedulers.io())
+                    .subscribe({
+                        if (it.isSend) {
+                            Timber.d("재전송 성공")
+                        } else {
+                            Timber.d("재전송 실패(안보냄)")
+                        }
+                    }) {
+                        Timber.d("{${it.message}} 에러")
+                    }
             }
+            allButtonColorTurnsFirstState()
         }
     }
 
-    private fun FragmentCertificationBinding.certificationNumberVerify() {
-        certificationMoveNextButton.setOnClickListener {
+    private fun certificationNumberVerify() {
+        binding.certificationMoveNextButton.setOnClickListener {
             viewModel.verifyCertificationNumber()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -63,7 +77,8 @@ class CertificationFragment :
                     if (it.isVerify) {
                         Timber.d("Verify 성공")
                         viewModel.stopTimer()
-                        certificationMoveNextButton.findNavController().navigate(R.id.action_certificationFragment_to_passwordFragment)
+                        binding.certificationMoveNextButton
+                            .findNavController().navigate(R.id.action_certificationFragment_to_passwordFragment)
                     } else {
                         clearAllCertificationNumber()
                         buttonClickUnEnable()
@@ -176,7 +191,10 @@ class CertificationFragment :
     private fun allButtonColorTurnsFirstState() {
         val iterator = certificationNumberList.iterator()
         while (iterator.hasNext()) {
-            iterator.next().background = ContextCompat.getDrawable(requireContext(), R.drawable.border_radius_10)
+            with(iterator.next()) {
+                background = ContextCompat.getDrawable(requireContext(), R.drawable.border_radius_10)
+                text.clear()
+            }
         }
         certificationNumberList[0].requestFocus()
         // 재전송 버튼 클릭시에 텍스트 변경

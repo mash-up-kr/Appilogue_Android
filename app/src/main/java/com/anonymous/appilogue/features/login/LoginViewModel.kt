@@ -55,10 +55,6 @@ class LoginViewModel @Inject constructor(private val loginRepository: LoginRepos
         return loginRepository.sendCertificationEmail(mapOf("email" to emailAddress.value.toString()))
     }
 
-    fun resendCertificationNumber() {
-        sendCertificationNumber()
-    }
-
     fun verifyCertificationNumber(): Single<VerifyCode> {
         return loginRepository.verifyCertificationNumber(
             PostVerifyCode(emailAddress.value.toString(), certificationNumber.value.toString())
