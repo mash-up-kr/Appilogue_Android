@@ -4,8 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.anonymous.appilogue.model.PostVerifyCode
-import com.anonymous.appilogue.model.VerifyCode
+import com.anonymous.appilogue.model.*
 import com.anonymous.appilogue.repository.LoginRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.core.Single
@@ -35,10 +34,10 @@ class LoginViewModel @Inject constructor(private val loginRepository: LoginRepos
 
         job = viewModelScope.launch {
             while (_timerCount >= 0) {
-                val min = _timerCount / 60
-                val sec = (_timerCount % 60)
+                val min = _timerCount / ONE_MIN
+                val sec = (_timerCount % ONE_MIN)
                 _timer.value = String.format("%02d:%02d", min, sec)
-                _timerCount -= 1
+                _timerCount -= ONE_SEC
                 delay(1000L)
             }
             stopTimer()
@@ -75,7 +74,23 @@ class LoginViewModel @Inject constructor(private val loginRepository: LoginRepos
         )
     }
 
+    fun validateNickname(nickname: String): Single<ValidateNickname> {
+        return loginRepository.validateNickname(mapOf("nickname" to nickname))
+    }
+
+    fun sendToServerUserData(): Single<SignUpResult> {
+        return loginRepository.postToServerUserData(
+            SignUp(
+                email = emailAddress.value.toString(),
+                nickname = nickName.value.toString(),
+                password = checkPassword.value.toString(),
+            )
+        ).subscribeOn(Schedulers.io())
+    }
+
     companion object {
         const val INITIAL_TIME = 600
+        const val ONE_MIN = 60
+        const val ONE_SEC = 1
     }
 }
