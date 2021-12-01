@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.anonymous.appilogue.R
 import com.bumptech.glide.Glide
 import com.google.android.material.textfield.TextInputLayout
+import timber.log.Timber
 
 
 @BindingAdapter("showHint")
@@ -54,6 +55,7 @@ fun TextView.bindIsSelected(selected: Boolean) {
 
 @BindingAdapter("replaceList")
 fun RecyclerView.replaceList(list: List<Any>?) {
+    Timber.d(list.toString())
     @Suppress("UNCHECKED_CAST")
     (this.adapter as ListAdapter<Any, RecyclerView.ViewHolder>).run {
         this.submitList(list)

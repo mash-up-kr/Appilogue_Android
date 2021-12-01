@@ -1,14 +1,18 @@
 package com.anonymous.appilogue.model
 
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
+
+@JsonClass(generateAdapter = true)
 data class Review(
-    val app: App,
-    val comments: List<Comment>,
-    val content: String,
-    val createdAt: String,
-    val deletedAt: Any,
-    val hole: String,
-    val id: Int,
-    val likes: List<Like>,
-    val updatedAt: String,
-    val user: User
+    @Json(name = "app") val app: App,
+    @Json(name = "comments") val comments: List<Comment>,
+    @Json(name = "content") val content: String,
+    @Json(name = "createdAt") val createdAt: String,
+    @Json(name = "deletedAt") val deletedAt: String?,
+    @Json(name = "hole") val hole: String,
+    @Json(name = "id") val id: Int,
+    @Json(name = "likes") val likes: List<Like>,
+    @Json(name = "updatedAt") val updatedAt: String,
+    @Json(name = "user") val user: User
 )

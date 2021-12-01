@@ -13,5 +13,5 @@ interface SearchApi {
         @Query("hole") hole: String,
         @Query("page") page: Int,
         @Query("limit") limit: Int,
-    ): Response<List<SearchDto>>
+    ): Response<SearchDto>
 }

@@ -31,6 +31,6 @@ object RepositoryModule {
     @Singleton
     @Provides
     fun provideReviewRepository(searchApi: SearchApi): ReviewRepository =
-        ReviewRepository(searchApi)
+        FakeReviewRepository(searchApi)
 
 }

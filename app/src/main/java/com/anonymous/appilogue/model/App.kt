@@ -1,7 +1,11 @@
 package com.anonymous.appilogue.model
 
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
+
+@JsonClass(generateAdapter = true)
 data class App(
-    val iconUrl: String,
-    val id: Int,
-    val name: String
+    @Json(name = "iconUrl") val iconUrl: String,
+    @Json(name = "id") val id: Int,
+    @Json(name = "name") val name: String
 )

@@ -1,23 +1,18 @@
 package com.anonymous.appilogue.features.home
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.anonymous.appilogue.model.ReviewedApp
-import com.anonymous.appilogue.repository.AppRepository
+import androidx.lifecycle.*
+import com.anonymous.appilogue.model.Review
 import com.anonymous.appilogue.repository.ReviewRepository
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(
-    private val appRepository: AppRepository,
-    private val reviewRepository: ReviewRepository
-) : ViewModel() {
+class HomeViewModel @Inject constructor(): ViewModel() {
 
     private val _starFocused = MutableLiveData(Focus.None)
     val starFocused: LiveData<Focus> = _starFocused
@@ -27,9 +22,6 @@ class HomeViewModel @Inject constructor(
 
     private val _bottomSheetHideable = MutableLiveData(true)
     val bottomSheetHideable: LiveData<Boolean> = _bottomSheetHideable
-
-    private val _apps = MutableLiveData(emptyList<ReviewedApp>())
-    val apps: LiveData<List<ReviewedApp>> = _apps
 
     private val _starsAlpha =
         MutableLiveData<StarEmphasizeState>(StarEmphasizeState.EmphasizeOnAllStar())
@@ -58,15 +50,7 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun fetchBlackHoleApps() {
-        _apps.value = appRepository.getBlackHoleApps()
-    }
-
-    fun fetchWhiteHoleApps() {
-        _apps.value = appRepository.getWhiteHoleApps()
-    }
-
-    fun setStarsAlpha(focus: Focus, alpha: Float) {
+    fun setStarsAlpha(focus: Focus) {
         when (focus) {
             Focus.OnPlanet -> _starsAlpha.value =
                 StarEmphasizeState.EmphasizeOnPlanet()
