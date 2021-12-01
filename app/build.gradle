@@ -109,6 +109,4 @@ dependencies {
     // preference
     implementation "androidx.preference:preference-ktx:$preferenceVersion"
 
-    // jBCrypt
-    implementation group: 'de.svenkubiak', name: 'jBCrypt', version: "0.4.1"
 }

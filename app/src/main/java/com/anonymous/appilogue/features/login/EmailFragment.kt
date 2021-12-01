@@ -10,6 +10,9 @@ import com.anonymous.appilogue.R
 import com.anonymous.appilogue.databinding.FragmentEmailBinding
 import com.anonymous.appilogue.features.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.schedulers.Schedulers
+import timber.log.Timber
 
 @AndroidEntryPoint
 class EmailFragment :
@@ -41,8 +44,21 @@ class EmailFragment :
                 FirstButtonInit.buttonInit(this)
 
                 setOnClickListener {
-                    viewModel.timerStart()
-                    it.findNavController().navigate(R.id.action_emailFragment_to_certificationFragment)
+                    viewModel.sendCertificationNumber()
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe({ sendEmail ->
+                            if (sendEmail.isSend) {
+                                viewModel.timerStart()
+                                it.findNavController().navigate(R.id.action_emailFragment_to_certificationFragment)
+                            } else {
+                                setIncorrect(resources.getString(R.string.alreay_signup))
+                            }
+
+                        }, {
+                            Timber.d("${it.message} ")
+                            setIncorrect(resources.getString(R.string.alreay_signup))
+                        })
                 }
             }
         }

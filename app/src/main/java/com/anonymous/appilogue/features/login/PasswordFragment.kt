@@ -11,7 +11,6 @@ import com.anonymous.appilogue.R
 import com.anonymous.appilogue.databinding.FragmentPasswordBinding
 import com.anonymous.appilogue.features.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
-import org.mindrot.jbcrypt.BCrypt
 
 @AndroidEntryPoint
 class PasswordFragment :
@@ -84,8 +83,7 @@ class PasswordFragment :
         }
         // 두번 째 패스워드로 들어왔다면, checkPassword 에 저장
         else {
-            val passwordHashed = BCrypt.hashpw(correctPassword, BCrypt.gensalt())
-            viewModel.checkPassword.value = passwordHashed
+            viewModel.checkPassword.value = correctPassword
         }
         changeEditTextBackgroundColor(passwordEditText, true)
     }

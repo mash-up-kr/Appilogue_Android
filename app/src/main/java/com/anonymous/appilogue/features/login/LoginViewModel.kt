@@ -12,7 +12,6 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -52,16 +51,8 @@ class LoginViewModel @Inject constructor(private val loginRepository: LoginRepos
         job?.cancel()
     }
 
-    fun sendCertificationNumber() {
-        loginRepository.sendCertificationEmail(mapOf("email" to emailAddress.value.toString()))
-            .subscribeOn(Schedulers.io())
-            .subscribe({
-                if (it.isSend) {
-                    Timber.d("sendCertificationNumber: $it.isUserExist ${emailAddress.value.toString()}으로 이메일 전송 선공")
-                }
-            }, {
-                Timber.d("${it.message} error!!!")
-            })
+    fun sendCertificationNumber(): Single<SendEmail> {
+        return loginRepository.sendCertificationEmail(mapOf("email" to emailAddress.value.toString()))
     }
 
     fun resendCertificationNumber() {

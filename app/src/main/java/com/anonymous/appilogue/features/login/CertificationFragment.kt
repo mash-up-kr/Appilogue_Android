@@ -23,8 +23,6 @@ class CertificationFragment :
         super.onViewCreated(view, savedInstanceState)
         binding.vm = viewModel
 
-        viewModel.sendCertificationNumber()
-
         certificationNumberList = listOf(
             binding.certificationNumber1, binding.certificationNumber2,
             binding.certificationNumber3, binding.certificationNumber4,
@@ -42,25 +40,8 @@ class CertificationFragment :
             }
             // 포커스 자동 넘김
             setAddTextChangeListener()
-
-            certificationMoveNextButton.setOnClickListener {
-                viewModel.verifyCertificationNumber()
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe({
-                        if (it.isVerify) {
-                            Timber.d("Verify 성공")
-                            viewModel.stopTimer()
-                            certificationMoveNextButton.findNavController().navigate(R.id.action_certificationFragment_to_passwordFragment)
-                        } else {
-                            clearAllCertificationNumber()
-                            buttonClickUnEnable()
-                            allButtonColorTurnsRed()
-                        }
-                    }) {
-                        Timber.d("Verify 오류, ${it.message}")
-                    }
-            }
+            // 인증 번호 확인
+            certificationNumberVerify()
 
             resendCertificationNumber.setOnClickListener {
                 with(viewModel) {
@@ -70,6 +51,27 @@ class CertificationFragment :
                 }
                 allButtonColorTurnsFirstState()
             }
+        }
+    }
+
+    private fun FragmentCertificationBinding.certificationNumberVerify() {
+        certificationMoveNextButton.setOnClickListener {
+            viewModel.verifyCertificationNumber()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    if (it.isVerify) {
+                        Timber.d("Verify 성공")
+                        viewModel.stopTimer()
+                        certificationMoveNextButton.findNavController().navigate(R.id.action_certificationFragment_to_passwordFragment)
+                    } else {
+                        clearAllCertificationNumber()
+                        buttonClickUnEnable()
+                        allButtonColorTurnsRed()
+                    }
+                }) {
+                    Timber.d("Verify 오류, ${it.message}")
+                }
         }
     }
 

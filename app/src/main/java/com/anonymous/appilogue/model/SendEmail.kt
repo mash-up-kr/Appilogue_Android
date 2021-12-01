@@ -8,5 +8,5 @@ data class SendEmail(
     @Json(name = "isSend")
     val isSend: Boolean,
     @Json(name = "isUserExist")
-    val isUserExist: Boolean?
+    val isUserExist: Boolean? = null
 )

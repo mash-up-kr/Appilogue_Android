@@ -93,4 +93,5 @@
     <string name="please_enter_nickname">"닉네임을 입력해주세요."</string>
     <string name="wrong_certification">"인증번호가 다릅니다!"</string>
     <string name="resend_certification_notify">"재전송 된 번호를 입력해주세요"</string>
+    <string name="alreay_signup">"이미 가입된 이메일입니다."</string>
 </resources>
