@@ -48,7 +48,7 @@ class EmailFragment :
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe({ sendEmail ->
-                            if (sendEmail.isSend) {
+                            if (!sendEmail.isUserExist && sendEmail.isSend) {
                                 viewModel.timerStart()
                                 it.findNavController().navigate(R.id.action_emailFragment_to_certificationFragment)
                             } else {
