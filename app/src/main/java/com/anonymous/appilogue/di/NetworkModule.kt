@@ -1,5 +1,6 @@
 package com.anonymous.appilogue.di
 
+import com.anonymous.appilogue.network.api.ItemApi
 import com.anonymous.appilogue.network.api.SearchApi
 import com.anonymous.appilogue.network.interceptor.AuthorizationInterceptor
 import com.anonymous.appilogue.network.interceptor.MockAuthorizationInterceptor
@@ -39,4 +40,9 @@ object NetworkModule {
     @Singleton
     fun provideReviewApi(retrofit: Retrofit): SearchApi =
         retrofit.create(SearchApi::class.java)
+
+    @Provides
+    @Singleton
+    fun provideItemApi(retrofit: Retrofit): ItemApi =
+        retrofit.create(ItemApi::class.java)
 }
