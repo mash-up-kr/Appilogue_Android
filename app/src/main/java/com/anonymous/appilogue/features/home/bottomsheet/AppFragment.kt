@@ -3,21 +3,12 @@ package com.anonymous.appilogue.features.home.bottomsheet
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.ListAdapter
 import com.anonymous.appilogue.R
 import com.anonymous.appilogue.databinding.FragmentAppBinding
 import com.anonymous.appilogue.features.base.BaseFragment
-import com.anonymous.appilogue.features.home.BottomSheetAppsRecyclerViewDecoration
-import com.anonymous.appilogue.features.home.HomeViewModel
-import com.anonymous.appilogue.model.Review
-import com.anonymous.appilogue.utils.replaceList
+import com.anonymous.appilogue.features.home.BottomSheetAppDecoration
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
-import timber.log.Timber
 
 @AndroidEntryPoint
 class AppFragment :
@@ -33,7 +24,7 @@ class AppFragment :
             appViewModel = viewModel
             rvBottomSheetApps.apply {
                 adapter = bottomSheetAppAdapter
-                addItemDecoration(BottomSheetAppsRecyclerViewDecoration(context))
+                addItemDecoration(BottomSheetAppDecoration(context))
             }
         }
         arguments?.let {

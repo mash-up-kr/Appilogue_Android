@@ -1,8 +1,10 @@
 package com.anonymous.appilogue.features.home
 
+import android.content.Context
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import com.anonymous.appilogue.R
 import com.bumptech.glide.Glide
@@ -40,6 +42,14 @@ fun ImageView.bindAppImageUrl(uri: String?) {
             .into(this)
     }
 }
+
+@BindingAdapter("backgroundBySelect")
+fun ConstraintLayout.setBackgroundBySelect(isSelected: Boolean) {
+    background =
+        if (isSelected) ContextCompat.getDrawable(context, R.drawable.border_radius_10_purple)
+        else ContextCompat.getDrawable(context, R.drawable.border_radius_10)
+}
+
 
 const val EMPTY_STRING = ""
 const val APP_ICON_RADIUS = 20

@@ -11,5 +11,6 @@
     <dimen name="history_top_margin">10dp</dimen>
     <dimen name="history_bottom_margin">20dp</dimen>
     <dimen name="bottom_sheet_item_side_margin">3dp</dimen>
+    <dimen name="bottom_sheet_space_dust_item_side_margin">9dp</dimen>
     <dimen name="bottom_sheet_item_bottom_margin">20dp</dimen>
 </resources>

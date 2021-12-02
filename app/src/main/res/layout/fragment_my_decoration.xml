@@ -5,15 +5,23 @@
     <data>
 
         <variable
-            name="homeViewModel"
-            type="com.anonymous.appilogue.features.home.HomeViewModel" />
-
-        <variable
             name="myDecorationViewModel"
             type="com.anonymous.appilogue.features.home.bottomsheet.MyDecorationViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_spaceDustItems"
+            replaceList="@{myDecorationViewModel.spaceDustItems}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:spanCount="5" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

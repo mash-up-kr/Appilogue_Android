@@ -13,6 +13,7 @@ import com.anonymous.appilogue.databinding.FragmentMyDecorationBinding
 import com.anonymous.appilogue.features.base.BaseFragment
 import com.anonymous.appilogue.features.home.HomeViewModel
 import com.anonymous.appilogue.model.Review
+import com.anonymous.appilogue.model.SelectableSpaceDustItem
 import com.anonymous.appilogue.repository.ItemRepository
 import com.anonymous.appilogue.repository.ReviewRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -25,4 +26,15 @@ class MyDecorationViewModel @Inject constructor(
     private val itemRepository: ItemRepository
 ) : ViewModel() {
 
+    private val _spaceDustItems = MutableLiveData<List<SelectableSpaceDustItem>>()
+    val spaceDustItems: LiveData<List<SelectableSpaceDustItem>> = _spaceDustItems
+
+    fun fetchSpaceDustItems() {
+        viewModelScope.launch {
+            _spaceDustItems.value = itemRepository.fetchSpaceDustItemUrls()
+                .map {
+                    SelectableSpaceDustItem(it)
+                }
+        }
+    }
 }
