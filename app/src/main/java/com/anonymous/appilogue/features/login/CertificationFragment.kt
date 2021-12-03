@@ -1,5 +1,6 @@
 package com.anonymous.appilogue.features.login
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
@@ -41,10 +42,17 @@ class CertificationFragment :
             // 포커스 자동 넘김
             setAddTextChangeListener()
         }
+        // 어디 이메일로 보냈는지
+        initWhereToSendEmail()
         // 인증 번호 확인
         certificationNumberVerify()
         // 재전송 버튼 눌렀을 때
         initResendClickListener()
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun initWhereToSendEmail() {
+        binding.certificationWhereToSend.text = "${viewModel.emailAddress.value}로 전송되었습니다."
     }
 
     private fun initResendClickListener() {
