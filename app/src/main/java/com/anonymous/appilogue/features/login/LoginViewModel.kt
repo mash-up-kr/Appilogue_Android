@@ -79,6 +79,10 @@ class LoginViewModel @Inject constructor(private val loginRepository: LoginRepos
         return loginRepository.loginWithEmailPassword(Login(emailAddress.value.toString(), password.value.toString()))
     }
 
+    fun updatePassword(): Single<UpdatePasswordResult> {
+        return loginRepository.updatePassword(UpdatePassword(emailAddress.value.toString(), checkPassword.value.toString()))
+    }
+
     companion object {
         const val INITIAL_TIME = 600
         const val ONE_MIN = 60

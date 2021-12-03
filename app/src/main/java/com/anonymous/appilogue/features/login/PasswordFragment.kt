@@ -11,6 +11,8 @@ import com.anonymous.appilogue.R
 import com.anonymous.appilogue.databinding.FragmentPasswordBinding
 import com.anonymous.appilogue.features.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.schedulers.Schedulers
 
 @AndroidEntryPoint
 class PasswordFragment :
@@ -28,22 +30,37 @@ class PasswordFragment :
         with(binding) {
             with(passwordMoveNextButton) {
                 FirstButtonInit.buttonInit(this)
-                binding.passwordWrongPasswordNotification.visibility = View.GONE
+                passwordWrongPasswordNotification.visibility = View.GONE
 
                 // 비밀번호 찾기를 통해 넘어오면 다음 페이지가 로그인 화면, 회원 가입의 경우 닉네임 설정으로 이동
                 if (viewModel.lostPassword) {
-                    binding.passwordEnterPasswordText.text = getString(R.string.password_reset)
+                    passwordEnterPasswordText.text = getString(R.string.password_reset)
+                    passwordMoveNextButton.text = getString(R.string.done)
                     setOnClickListener {
-                        it.findNavController().navigate(R.id.action_passwordFragment_to_loginEmailFragment)
+                        sendToServerUpdatePassword()
                     }
                 } else {
-                    binding.passwordEnterPasswordText.text = getString(R.string.password_text)
+                    passwordEnterPasswordText.text = getString(R.string.password_text)
                     setOnClickListener {
                         it.findNavController().navigate(R.id.action_passwordFragment_to_nicknameFragment)
                     }
                 }
             }
         }
+    }
+
+    private fun sendToServerUpdatePassword() {
+        viewModel.updatePassword()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                if (it.isOk) {
+                    binding.passwordMoveNextButton.findNavController()
+                        .navigate(R.id.action_passwordFragment_to_loginEmailFragment)
+                }
+            }) {
+                // do something
+            }
     }
 
     private fun setAddTextChangedListener() {

@@ -25,4 +25,8 @@ class LoginRepository @Inject constructor(private val authApi: AuthApi) {
     fun loginWithEmailPassword(loginData: Login): Single<LoginResult> {
         return authApi.loginWithEmailPassword(loginData)
     }
+
+    fun updatePassword(updatePassword: UpdatePassword): Single<UpdatePasswordResult> {
+        return authApi.updatePassword(updatePassword)
+    }
 }

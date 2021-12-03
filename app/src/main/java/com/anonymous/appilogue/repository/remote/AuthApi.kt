@@ -20,4 +20,7 @@ interface AuthApi {
 
     @POST("auth/login")
     fun loginWithEmailPassword(@Body loginData: Login): Single<LoginResult>
+
+    @POST("auth/update-password")
+    fun updatePassword(@Body updatePassword: UpdatePassword): Single<UpdatePasswordResult>
 }
