@@ -17,4 +17,7 @@ interface AuthApi {
 
     @POST("auth/signup")
     fun postToServerUserData(@Body userData: SignUp): Single<SignUpResult>
+
+    @POST("auth/login")
+    fun loginWithEmailPassword(@Body loginData: Login): Single<LoginResult>
 }

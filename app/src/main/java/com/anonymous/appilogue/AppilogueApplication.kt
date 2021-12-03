@@ -9,6 +9,7 @@ import timber.log.Timber
 class AppilogueApplication : Application() {
 
     override fun onCreate() {
+        prefs = AppilogueSharedPreferences(applicationContext)
         super.onCreate()
         if (BuildConfig.DEBUG) {
             Timber.plant(AnonymousDebugTree())
@@ -20,4 +21,9 @@ class AppilogueApplication : Application() {
         override fun createStackElementTag(element: StackTraceElement): String =
             "${element.fileName}:${element.lineNumber}:${element.methodName}"
     }
+
+    companion object {
+        lateinit var prefs: AppilogueSharedPreferences
+    }
+
 }

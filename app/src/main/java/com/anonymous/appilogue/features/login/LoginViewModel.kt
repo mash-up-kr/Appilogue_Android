@@ -75,6 +75,10 @@ class LoginViewModel @Inject constructor(private val loginRepository: LoginRepos
         ).subscribeOn(Schedulers.io())
     }
 
+    fun loginWithEmailPassword(): Single<LoginResult> {
+        return loginRepository.loginWithEmailPassword(Login(emailAddress.value.toString(), password.value.toString()))
+    }
+
     companion object {
         const val INITIAL_TIME = 600
         const val ONE_MIN = 60

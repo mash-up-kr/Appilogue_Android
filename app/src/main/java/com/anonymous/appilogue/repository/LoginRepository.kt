@@ -21,4 +21,8 @@ class LoginRepository @Inject constructor(private val authApi: AuthApi) {
     fun postToServerUserData(userData: SignUp): Single<SignUpResult> {
         return authApi.postToServerUserData(userData)
     }
+
+    fun loginWithEmailPassword(loginData: Login): Single<LoginResult> {
+        return authApi.loginWithEmailPassword(loginData)
+    }
 }
