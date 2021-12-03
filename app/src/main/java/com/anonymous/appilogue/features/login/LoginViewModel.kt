@@ -51,8 +51,8 @@ class LoginViewModel @Inject constructor(private val loginRepository: LoginRepos
         job?.cancel()
     }
 
-    fun sendCertificationNumber(): Single<SendEmail> {
-        return loginRepository.sendCertificationEmail(mapOf("email" to emailAddress.value.toString()))
+    fun sendCertificationNumber(duplicateCheck: Boolean): Single<SendEmailResult> {
+        return loginRepository.sendCertificationEmail(SendEmail(duplicateCheck, emailAddress.value.toString()))
     }
 
     fun verifyCertificationNumber(): Single<VerifyCode> {

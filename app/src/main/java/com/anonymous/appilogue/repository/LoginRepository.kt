@@ -6,7 +6,7 @@ import io.reactivex.rxjava3.core.Single
 import javax.inject.Inject
 
 class LoginRepository @Inject constructor(private val authApi: AuthApi) {
-    fun sendCertificationEmail(email: Map<String, String>): Single<SendEmail> {
+    fun sendCertificationEmail(email: SendEmail): Single<SendEmailResult> {
         return authApi.sendCertificationToEmail(email)
     }
 

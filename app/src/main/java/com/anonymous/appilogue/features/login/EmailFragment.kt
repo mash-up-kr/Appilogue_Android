@@ -9,10 +9,12 @@ import androidx.navigation.findNavController
 import com.anonymous.appilogue.R
 import com.anonymous.appilogue.databinding.FragmentEmailBinding
 import com.anonymous.appilogue.features.base.BaseFragment
+import com.jakewharton.rxbinding4.view.clicks
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import timber.log.Timber
+import java.util.concurrent.TimeUnit
 
 @AndroidEntryPoint
 class EmailFragment :
@@ -43,23 +45,25 @@ class EmailFragment :
             with(emailMoveNextButton) {
                 FirstButtonInit.buttonInit(this)
 
-                setOnClickListener {
-                    viewModel.sendCertificationNumber()
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe({ sendEmail ->
-                            if (!sendEmail.isUserExist && sendEmail.isSend) {
-                                viewModel.timerStart()
-                                it.findNavController().navigate(R.id.action_emailFragment_to_certificationFragment)
-                            } else {
-                                setIncorrect(resources.getString(R.string.alreay_signup))
-                            }
+                clicks()
+                    .throttleFirst(3000L, TimeUnit.MILLISECONDS)
+                    .subscribe {
+                        viewModel.sendCertificationNumber(viewModel.lostPassword)
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe({ sendEmail ->
+                                if (sendEmail.isSend) {
+                                    viewModel.timerStart()
+                                    binding.emailMoveNextButton.findNavController().navigate(R.id.action_emailFragment_to_certificationFragment)
+                                } else {
+                                    setIncorrect(resources.getString(R.string.alreay_signup))
+                                }
 
-                        }, {
-                            Timber.d("${it.message} ")
-                            setIncorrect(resources.getString(R.string.alreay_signup))
-                        })
-                }
+                            }, {
+                                Timber.d("${it.message} ")
+                                setIncorrect(resources.getString(R.string.alreay_signup))
+                            })
+                    }
             }
         }
     }

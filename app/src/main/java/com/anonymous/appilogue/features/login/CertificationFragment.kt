@@ -60,7 +60,7 @@ class CertificationFragment :
             with(viewModel) {
                 stopTimer()
                 timerReset()
-                sendCertificationNumber()
+                sendCertificationNumber(viewModel.lostPassword)
                     .subscribeOn(Schedulers.io())
                     .subscribe({
                         if (it.isSend) {

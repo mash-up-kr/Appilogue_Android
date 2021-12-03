@@ -7,7 +7,7 @@ import retrofit2.http.POST
 
 interface AuthApi {
     @POST("auth/send-email")
-    fun sendCertificationToEmail(@Body email: Map<String, String>): Single<SendEmail>
+    fun sendCertificationToEmail(@Body email: SendEmail): Single<SendEmailResult>
 
     @POST("auth/verify-code")
     fun verifyCertificationNumber(@Body verifyData: PostVerifyCode): Single<VerifyCode>
