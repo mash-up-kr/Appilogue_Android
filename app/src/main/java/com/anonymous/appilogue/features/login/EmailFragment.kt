@@ -12,6 +12,7 @@ import com.anonymous.appilogue.features.base.BaseFragment
 import com.jakewharton.rxbinding4.view.clicks
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
@@ -20,6 +21,7 @@ import java.util.concurrent.TimeUnit
 class EmailFragment :
     BaseFragment<FragmentEmailBinding, LoginViewModel>(R.layout.fragment_email) {
     override val viewModel: LoginViewModel by activityViewModels()
+    private val compositeDisposable = CompositeDisposable()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -45,7 +47,7 @@ class EmailFragment :
             with(emailMoveNextButton) {
                 FirstButtonInit.buttonInit(this)
 
-                clicks()
+                compositeDisposable.add(binding.emailMoveNextButton.clicks()
                     .throttleFirst(3000L, TimeUnit.MILLISECONDS)
                     .subscribe {
                         viewModel.sendCertificationNumber(viewModel.lostPassword)
@@ -63,7 +65,7 @@ class EmailFragment :
                                 Timber.d("${it.message} ")
                                 setIncorrect(resources.getString(R.string.alreay_signup))
                             })
-                    }
+                    })
             }
         }
     }
@@ -146,5 +148,10 @@ class EmailFragment :
             binding.emailSubmitEditText.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_icon_error, 0)
             binding.emailSubmitEditText.setBackgroundResource(R.drawable.border_radius_16_red)
         }
+    }
+
+    override fun onDestroyView() {
+        compositeDisposable.clear()
+        super.onDestroyView()
     }
 }
