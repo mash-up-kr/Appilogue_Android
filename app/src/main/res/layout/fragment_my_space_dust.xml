@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="myDecorationViewModel"
-            type="com.anonymous.appilogue.features.home.bottomsheet.MyDecorationViewModel" />
+            name="mySpaceDustViewModel"
+            type="com.anonymous.appilogue.features.home.bottomsheet.MySpaceDustViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,7 +16,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_spaceDustItems"
-            replaceList="@{myDecorationViewModel.spaceDustItems}"
+            replaceList="@{mySpaceDustViewModel.spaceDustItems}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"

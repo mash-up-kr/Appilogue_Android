@@ -13,13 +13,10 @@ import androidx.fragment.app.commit
 import com.anonymous.appilogue.R
 import com.anonymous.appilogue.databinding.FragmentHomeBinding
 import com.anonymous.appilogue.features.base.BaseFragment
+import com.anonymous.appilogue.features.home.bottomsheet.*
 import com.anonymous.appilogue.features.main.MainActivity
-import com.anonymous.appilogue.features.home.bottomsheet.AppFragment
 import com.anonymous.appilogue.features.home.bottomsheet.AppFragment.Companion.BLACK_HOLE
 import com.anonymous.appilogue.features.home.bottomsheet.AppFragment.Companion.WHITE_HOLE
-import com.anonymous.appilogue.features.home.bottomsheet.BottomSheetPagerAdapter
-import com.anonymous.appilogue.features.home.bottomsheet.MyDecorationFragment
-import com.anonymous.appilogue.features.home.bottomsheet.StoreFragment
 import com.anonymous.appilogue.features.home.onboarding.OnboardingFragment
 import com.anonymous.appilogue.features.main.MainViewModel
 import com.anonymous.appilogue.preference.AppilogueSharedPreferences
@@ -83,11 +80,11 @@ class HomeFragment :
                 )
             }
             Focus.OnPlanet -> viewPagerFragments.apply {
-                put(FIRST_TAB, Pair(R.string.my_planet, { MyDecorationFragment.newInstance() }))
+                put(FIRST_TAB, Pair(R.string.my_planet, { MyPlanetFragment.newInstance() }))
                 put(SECOND_TAB, Pair(R.string.planet_store, { StoreFragment.newInstance() }))
             }
             Focus.OnSpaceDust -> viewPagerFragments.apply {
-                put(FIRST_TAB, Pair(R.string.my_space_dust, { MyDecorationFragment.newInstance() }))
+                put(FIRST_TAB, Pair(R.string.my_space_dust, { MySpaceDustFragment.newInstance() }))
                 put(SECOND_TAB, Pair(R.string.dust_store, { StoreFragment.newInstance() }))
             }
         }
