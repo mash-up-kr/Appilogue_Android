@@ -37,6 +37,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             mainViewModel = viewModel
         }
         initNavigation()
+        viewModel.fetchMyInformation()
     }
 
     private fun initNavigation() {

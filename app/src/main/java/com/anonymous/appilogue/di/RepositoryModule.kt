@@ -1,5 +1,6 @@
 package com.anonymous.appilogue.di
 
+import com.anonymous.appilogue.network.api.AuthApi
 import com.anonymous.appilogue.network.api.ItemApi
 import com.anonymous.appilogue.network.api.SearchApi
 import com.anonymous.appilogue.persistence.InstalledAppDao
@@ -38,5 +39,10 @@ object RepositoryModule {
     @Provides
     fun provideItemRepository(itemApi: ItemApi): ItemRepository =
         DefaultItemRepository(itemApi)
+
+    @Singleton
+    @Provides
+    fun provideUserRepository(authApi: AuthApi): UserRepository =
+        DefaultUserRepository(authApi)
 
 }

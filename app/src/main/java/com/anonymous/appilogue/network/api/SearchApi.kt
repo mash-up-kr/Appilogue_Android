@@ -1,6 +1,6 @@
 package com.anonymous.appilogue.network.api
 
-import com.anonymous.appilogue.model.SearchDto
+import com.anonymous.appilogue.model.dto.SearchDto
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query

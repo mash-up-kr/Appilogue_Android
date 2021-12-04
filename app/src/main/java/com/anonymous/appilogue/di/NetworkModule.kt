@@ -1,7 +1,9 @@
 package com.anonymous.appilogue.di
 
+import com.anonymous.appilogue.network.api.AuthApi
 import com.anonymous.appilogue.network.api.ItemApi
 import com.anonymous.appilogue.network.api.SearchApi
+import com.anonymous.appilogue.network.api.UserApi
 import com.anonymous.appilogue.network.interceptor.AuthorizationInterceptor
 import com.anonymous.appilogue.network.interceptor.MockAuthorizationInterceptor
 import dagger.Module
@@ -45,4 +47,14 @@ object NetworkModule {
     @Singleton
     fun provideItemApi(retrofit: Retrofit): ItemApi =
         retrofit.create(ItemApi::class.java)
+
+    @Provides
+    @Singleton
+    fun provideUserApi(retrofit: Retrofit): UserApi =
+        retrofit.create(UserApi::class.java)
+
+    @Provides
+    @Singleton
+    fun provideAuthApi(retrofit: Retrofit): AuthApi =
+        retrofit.create(AuthApi::class.java)
 }
