@@ -23,6 +23,7 @@ import com.anonymous.appilogue.preference.AppilogueSharedPreferences
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 import java.util.*
 import javax.inject.Inject
 
@@ -116,12 +117,19 @@ class HomeFragment :
             Pair(
                 Focus.OnSpaceDust,
                 {
+                    BottomSheetBehavior.from(binding.bottomSheetHome.root).apply {
+                        isDraggable = false
+                    }
                     setBottomSheetPeekHeight(R.dimen.peek_bottomsheet_home_space_dust)
-                    viewModel.disableBottomSheetHiding()
                 }),
             Pair(
                 Focus.OffSpaceDust,
-                { setBottomSheetPeekHeight(R.dimen.peek_bottomsheet_home_default) }
+                {
+                    BottomSheetBehavior.from(binding.bottomSheetHome.root).apply {
+                        isDraggable = true
+                    }
+                    setBottomSheetPeekHeight(R.dimen.peek_bottomsheet_home_default)
+                }
             )
         ).onEach {
             actionByFocus[it.first] = it.second
