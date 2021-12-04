@@ -14,10 +14,14 @@ import com.anonymous.appilogue.features.base.BaseFragment
 import com.anonymous.appilogue.features.home.HomeViewModel
 import com.anonymous.appilogue.model.Review
 import com.anonymous.appilogue.model.SelectableSpaceDustItem
+import com.anonymous.appilogue.model.SpaceDustItem
 import com.anonymous.appilogue.repository.ItemRepository
 import com.anonymous.appilogue.repository.ReviewRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 
@@ -35,6 +39,14 @@ class MyDecorationViewModel @Inject constructor(
                 .map {
                     SelectableSpaceDustItem(it)
                 }
+        }
+    }
+
+    fun selectItem(position: Int) {
+        val newList = _spaceDustItems.value?.toMutableList()
+        newList?.let {
+            it[position] = it[position].copy(isSelected = true)
+            _spaceDustItems.value = it
         }
     }
 }

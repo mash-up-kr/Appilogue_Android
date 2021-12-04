@@ -10,6 +10,7 @@ import com.anonymous.appilogue.R
 class SpaceDustItemDecoration(context: Context) : RecyclerView.ItemDecoration() {
     private val sideMargin =
         context.resources.getDimensionPixelSize(R.dimen.bottom_sheet_space_dust_item_side_margin)
+    private val span = 5
 
     override fun getItemOffsets(
         outRect: Rect,

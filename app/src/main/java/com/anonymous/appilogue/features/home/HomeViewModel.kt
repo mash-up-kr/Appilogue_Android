@@ -12,7 +12,7 @@ import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(): ViewModel() {
+class HomeViewModel @Inject constructor() : ViewModel() {
 
     private val _starFocused = MutableLiveData(Focus.None)
     val starFocused: LiveData<Focus> = _starFocused
@@ -42,10 +42,10 @@ class HomeViewModel @Inject constructor(): ViewModel() {
             changeBottomSheetState(BottomSheetBehavior.STATE_COLLAPSED)
             viewModelScope.launch {
                 delay(10)
-                _bottomSheetHideable.value = false
+                disableBottomSheetHiding()
             }
         } else {
-            _bottomSheetHideable.value = true
+            enableBottomSheetHiding()
             changeBottomSheetState(BottomSheetBehavior.STATE_HIDDEN)
         }
     }
@@ -62,5 +62,13 @@ class HomeViewModel @Inject constructor(): ViewModel() {
                 StarEmphasizeState.EmphasizeOnSpaceDust()
             Focus.None -> _starsAlpha.value = StarEmphasizeState.EmphasizeOnAllStar()
         }
+    }
+
+    fun enableBottomSheetHiding() {
+        _bottomSheetHideable.value = true
+    }
+
+    fun disableBottomSheetHiding() {
+        _bottomSheetHideable.value = false
     }
 }

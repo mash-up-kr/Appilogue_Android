@@ -26,7 +26,6 @@ import com.anonymous.appilogue.preference.AppilogueSharedPreferences
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 import java.util.*
 import javax.inject.Inject
 
@@ -38,6 +37,7 @@ class HomeFragment :
     lateinit var sharedPreference: AppilogueSharedPreferences
     private val mainViewModel: MainViewModel by activityViewModels()
     private val starsByFocus = EnumMap<Focus, ImageView>(Focus::class.java)
+    private val actionByFocus = EnumMap<Focus, () -> Unit>(Focus::class.java)
 
     override val viewModel: HomeViewModel by activityViewModels()
 
@@ -49,6 +49,7 @@ class HomeFragment :
         initBottomSheet()
         observeStar()
         initStarByFocus()
+        initActionByFocus()
         binding.ivAlarm.setOnClickListener {
             (activity as MainActivity).navigateTo(R.id.alarmFragment)
         }
@@ -110,6 +111,23 @@ class HomeFragment :
         }
     }
 
+    private fun initActionByFocus() {
+        listOf(
+            Pair(
+                Focus.OnSpaceDust,
+                {
+                    setBottomSheetPeekHeight(R.dimen.peek_bottomsheet_home_space_dust)
+                    viewModel.disableBottomSheetHiding()
+                }),
+            Pair(
+                Focus.OffSpaceDust,
+                { setBottomSheetPeekHeight(R.dimen.peek_bottomsheet_home_default) }
+            )
+        ).onEach {
+            actionByFocus[it.first] = it.second
+        }
+    }
+
     private fun initBottomSheet() {
         binding.bottomSheetHome.root.apply {
             updateLayoutParams {
@@ -117,7 +135,7 @@ class HomeFragment :
                         resources.getDimension(R.dimen.expanded_bottomsheet_home_margin).toInt()
             }
             BottomSheetBehavior.from(this).apply {
-                peekHeight = (resources.getDimension(R.dimen.peek_bottomsheet_home)).toInt()
+                peekHeight = (resources.getDimension(R.dimen.peek_bottomsheet_home_default)).toInt()
                 viewModel.changeBottomSheetState(BottomSheetBehavior.STATE_HIDDEN)
                 addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
                     override fun onStateChanged(bottomSheet: View, newState: Int) {
@@ -145,25 +163,33 @@ class HomeFragment :
     }
 
     private fun observeStar() {
-        viewModel.starFocused.observe(viewLifecycleOwner, {
-            if (Focus.isOnFocus(it)) {
+        viewModel.starFocused.observe(viewLifecycleOwner, { focus ->
+            actionByFocus[focus]?.invoke()
+            if (Focus.isOnFocus(focus)) {
                 binding.bottomSheetHome.apply {
-                    val viewPagerTabTextAndFragments = getViewPagerTabTextAndFragments(it)
+                    val viewPagerTabTextAndFragments = getViewPagerTabTextAndFragments(focus)
                     vpBottomSheetViewPager.adapter =
                         BottomSheetPagerAdapter(this@HomeFragment, viewPagerTabTextAndFragments)
                     TabLayoutMediator(tlBottomSheetTab, vpBottomSheetViewPager) { tab, position ->
                         tab.text = getString(viewPagerTabTextAndFragments[position].first)
                     }.attach()
                 }
-                starsByFocus[it]?.let { star ->
+                starsByFocus[focus]?.let { star ->
                     SpaceAnimator.focusStar(star, starsByFocus.values.toSet().toList(), true)
                 }
-            } else if (Focus.isOffFocus(it)) {
-                starsByFocus[it]?.let { star ->
+            } else if (Focus.isOffFocus(focus)) {
+                starsByFocus[focus]?.let { star ->
                     SpaceAnimator.focusStar(star, starsByFocus.values.toSet().toList(), false)
                 }
             }
         })
+    }
+
+    private fun setBottomSheetPeekHeight(heightDimensionId: Int) {
+        BottomSheetBehavior.from(binding.bottomSheetHome.root).apply {
+            peekHeight =
+                (resources.getDimension(heightDimensionId)).toInt()
+        }
     }
 
     companion object {

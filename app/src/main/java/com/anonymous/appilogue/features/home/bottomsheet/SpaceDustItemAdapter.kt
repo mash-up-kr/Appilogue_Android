@@ -13,7 +13,7 @@ import com.anonymous.appilogue.model.Review
 import com.anonymous.appilogue.model.ReviewedApp
 import com.anonymous.appilogue.model.SelectableSpaceDustItem
 
-class SpaceDustItemAdapter :
+class SpaceDustItemAdapter(private val clickEvent: (Int) -> Unit) :
     ListAdapter<SelectableSpaceDustItem, SpaceDustItemAdapter.SpaceDustItemViewHolder>(diffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SpaceDustItemViewHolder {
@@ -21,7 +21,7 @@ class SpaceDustItemAdapter :
         val binding = DataBindingUtil.inflate<ItemSpaceDustItemBinding>(
             layoutInflater, R.layout.item_space_dust_item, parent, false
         )
-        return SpaceDustItemViewHolder(binding)
+        return SpaceDustItemViewHolder(binding, clickEvent)
     }
 
     override fun onBindViewHolder(holder: SpaceDustItemViewHolder, position: Int) {
@@ -31,8 +31,16 @@ class SpaceDustItemAdapter :
     }
 
     class SpaceDustItemViewHolder(
-        private val binding: ItemSpaceDustItemBinding
+        private val binding: ItemSpaceDustItemBinding,
+        private val clickEvent: (Int) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
+
+        init {
+            binding.root.setOnClickListener {
+                val position = bindingAdapterPosition.takeIf { it != RecyclerView.NO_POSITION } ?: return@setOnClickListener
+                clickEvent.invoke(position)
+            }
+        }
 
         fun bind(spaceDustItem: SelectableSpaceDustItem) {
             binding.apply {
@@ -43,11 +51,17 @@ class SpaceDustItemAdapter :
 
     companion object {
         private val diffCallback = object : DiffUtil.ItemCallback<SelectableSpaceDustItem>() {
-            override fun areItemsTheSame(oldItem: SelectableSpaceDustItem, newItem: SelectableSpaceDustItem): Boolean {
+            override fun areItemsTheSame(
+                oldItem: SelectableSpaceDustItem,
+                newItem: SelectableSpaceDustItem
+            ): Boolean {
                 return oldItem.spaceDustItem.id == newItem.spaceDustItem.id
             }
 
-            override fun areContentsTheSame(oldItem: SelectableSpaceDustItem, newItem: SelectableSpaceDustItem): Boolean {
+            override fun areContentsTheSame(
+                oldItem: SelectableSpaceDustItem,
+                newItem: SelectableSpaceDustItem
+            ): Boolean {
                 return oldItem == newItem
             }
         }

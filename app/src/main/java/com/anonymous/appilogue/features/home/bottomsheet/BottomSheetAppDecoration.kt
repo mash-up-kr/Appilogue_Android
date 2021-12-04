@@ -8,7 +8,7 @@ import com.anonymous.appilogue.R
 
 
 class BottomSheetAppDecoration(context: Context) : RecyclerView.ItemDecoration() {
-    private val sideMargin = context.resources.getDimensionPixelSize(R.dimen.bottom_sheet_item_side_margin)
+    private val sideMargin = context.resources.getDimensionPixelSize(R.dimen.bottom_sheet_app_item_side_margin)
     private val bottomMargin = context.resources.getDimensionPixelSize(R.dimen.bottom_sheet_item_bottom_margin)
 
     override fun getItemOffsets(
