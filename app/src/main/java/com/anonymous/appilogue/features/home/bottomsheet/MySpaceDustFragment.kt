@@ -16,7 +16,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class MySpaceDustFragment :
     BaseFragment<FragmentMySpaceDustBinding, HomeViewModel>(R.layout.fragment_my_space_dust) {
     override val viewModel: HomeViewModel by activityViewModels()
-    private val _mySpaceDustViewModel: MySpaceDustViewModel by viewModels()
+    private val _mySpaceDustViewModel: MySpaceDustViewModel by activityViewModels()
     private val spaceDustItemAdapter: SpaceDustItemAdapter by lazy {
         SpaceDustItemAdapter {
             _mySpaceDustViewModel.selectItem(it)
@@ -32,7 +32,6 @@ class MySpaceDustFragment :
                 addItemDecoration(SpaceDustItemDecoration(context))
             }
         }
-        _mySpaceDustViewModel.fetchSpaceDustItems()
     }
 
     companion object {

@@ -33,6 +33,7 @@ class HomeFragment :
     @Inject
     lateinit var sharedPreference: AppilogueSharedPreferences
     private val mainViewModel: MainViewModel by activityViewModels()
+    private val _mySpaceDustViewModel: MySpaceDustViewModel by activityViewModels()
     private val starsByFocus = EnumMap<Focus, ImageView>(Focus::class.java)
     private val actionByFocus = EnumMap<Focus, () -> Unit>(Focus::class.java)
 
@@ -42,6 +43,7 @@ class HomeFragment :
         super.onViewCreated(view, savedInstanceState)
         bind {
             homeViewModel = viewModel
+            mySpaceDustViewModel = _mySpaceDustViewModel
         }
         initBottomSheet()
         observeStar()
@@ -52,6 +54,7 @@ class HomeFragment :
         }
         SpaceAnimator.animateSpace(binding.ivSpace)
         viewModel.changeFocus(Focus.None)
+        _mySpaceDustViewModel.fetchSpaceDustItems()
         initOnboarding()
     }
 

@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.anonymous.appilogue.R
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DecodeFormat
 import com.google.android.material.textfield.TextInputLayout
 import timber.log.Timber
 
