@@ -1,5 +1,6 @@
 package com.anonymous.appilogue.features.review
 
+import android.content.Context
 import android.os.Bundle
 import android.text.Spannable
 import android.text.Spanned
@@ -11,6 +12,7 @@ import com.anonymous.appilogue.R
 import com.anonymous.appilogue.databinding.FragmentReviewSelectorBinding
 import com.anonymous.appilogue.features.base.BaseFragment
 import com.anonymous.appilogue.features.main.MainActivity
+import com.anonymous.appilogue.utils.hideKeyboardDown
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -21,6 +23,7 @@ class ReviewSelectorFragment
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        view.hideKeyboardDown()
 
         bind {
             vm = viewModel

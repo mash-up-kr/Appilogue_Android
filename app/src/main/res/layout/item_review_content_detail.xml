@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.content.Context" />
+        <import
+            alias="TimeHelper"
+            type="com.anonymous.appilogue.utils.TimeHelperKt" />
+        <variable
+            name="item"
+            type="com.anonymous.appilogue.model.ReviewInfo" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        tools:background="@color/black">
+
+        <ImageView
+            android:id="@+id/profile_view"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:background="@drawable/border_circular_purple"
+            android:src="@drawable/space_dust"
+            app:profileUrl="@{item.user.profileUrl}"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/username_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="@{item.user.nickname}"
+            style="@style/TextStyle.Normal14"
+            app:layout_constraintTop_toTopOf="@id/profile_view"
+            app:layout_constraintStart_toEndOf="@id/profile_view"
+            tools:text="Anonymous"/>
+
+        <TextView
+            android:id="@+id/update_time_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:textColor="@color/gray_02"
+            android:text="@{TimeHelper.dateToPassedTime(item.updatedAt, context)}"
+            style="@style/TextStyle.Normal12"
+            app:layout_constraintTop_toBottomOf="@id/username_view"
+            app:layout_constraintStart_toStartOf="@id/username_view"
+            tools:text="00분 전"/>
+
+        <TextView
+            android:id="@+id/content_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:lineSpacingExtra="5sp"
+            android:text="@{item.content}"
+            style="@style/TextStyle.Normal16"
+            app:layout_constraintTop_toBottomOf="@id/update_time_view"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="@string/dummy_content"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/app_info_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/border_radius_10"
+            android:layout_marginTop="20dp"
+            app:layout_constraintTop_toBottomOf="@id/content_view"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <ImageView
+                android:id="@+id/app_icon_view"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/border_radius_10"
+                app:imageUrl="@{item.app.iconUrl}"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/app_title_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="@{item.app.name}"
+                style="@style/TextStyle.Normal14"
+                app:layout_constraintTop_toTopOf="@id/app_icon_view"
+                app:layout_constraintBottom_toBottomOf="@id/app_icon_view"
+                app:layout_constraintStart_toEndOf="@id/app_icon_view"
+                tools:text="앰 이름" />
+
+            <ImageView
+                android:id="@+id/right_arrow_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="18dp"
+                android:src="@drawable/ic_right_arrow"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/hashtags_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            app:selectionRequired="false"
+            app:tags="@{item.hashtags}"
+            app:layout_constraintTop_toBottomOf="@id/app_info_container"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <ImageView
+            android:id="@+id/like_view"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_marginTop="26dp"
+            android:src="@drawable/ic_heart_selector"
+            app:layout_constraintTop_toBottomOf="@id/hashtags_container"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/like_count_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:textColor="@color/gray_04"
+            android:includeFontPadding="false"
+            android:text="@{String.valueOf(item.likes.size())}"
+            style="@style/TextStyle.Normal14"
+            app:layout_constraintTop_toTopOf="@id/like_view"
+            app:layout_constraintStart_toEndOf="@id/like_view"
+            app:layout_constraintBottom_toBottomOf="@id/like_view"
+            tools:text="100"/>
+
+        <ImageView
+            android:id="@+id/comments_view"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginStart="14dp"
+            android:src="@drawable/ic_comments"
+            app:layout_constraintBottom_toBottomOf="@id/like_view"
+            app:layout_constraintStart_toEndOf="@id/like_count_view" />
+
+        <TextView
+            android:id="@+id/comments_count_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:textColor="@color/gray_04"
+            android:includeFontPadding="false"
+            android:text="@{String.valueOf(item.comments.size())}"
+            style="@style/TextStyle.Normal14"
+            app:layout_constraintTop_toTopOf="@id/comments_view"
+            app:layout_constraintStart_toEndOf="@id/comments_view"
+            app:layout_constraintBottom_toBottomOf="@id/comments_view"
+            tools:text="100"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
