@@ -29,12 +29,13 @@ class HomeFragment :
 
     @Inject
     lateinit var sharedPreference: AppilogueSharedPreferences
+
     private val mainViewModel: MainViewModel by activityViewModels()
     private val _mySpaceDustViewModel: MySpaceDustViewModel by activityViewModels()
+    override val viewModel: HomeViewModel by activityViewModels()
+
     private val starsByFocus = EnumMap<Focus, ImageView>(Focus::class.java)
     private val actionByFocus = EnumMap<Focus, () -> Unit>(Focus::class.java)
-
-    override val viewModel: HomeViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -123,6 +124,7 @@ class HomeFragment :
                     BottomSheetBehavior.from(binding.bottomSheetHome.root).apply {
                         isDraggable = true
                     }
+                    mainViewModel.fetchMyInformation()
                     setBottomSheetPeekHeight(R.dimen.peek_bottomsheet_home_default)
                 }
             )

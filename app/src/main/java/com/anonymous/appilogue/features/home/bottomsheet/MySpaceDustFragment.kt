@@ -18,7 +18,7 @@ class MySpaceDustFragment :
     private val _mySpaceDustViewModel: MySpaceDustViewModel by activityViewModels()
     private val spaceDustItemAdapter: SpaceDustItemAdapter by lazy {
         SpaceDustItemAdapter {
-            _mySpaceDustViewModel.selectItem(it)
+            _mySpaceDustViewModel.selectItem(it, true)
         }
     }
 

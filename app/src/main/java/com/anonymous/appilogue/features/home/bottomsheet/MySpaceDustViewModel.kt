@@ -38,22 +38,20 @@ class MySpaceDustViewModel @Inject constructor(
     fun setMySpaceDust(myImageUrl: String) {
         _spaceDustItems.value?.forEachIndexed { index, item ->
             if (myImageUrl == item.spaceDustItem.dressedUrlAndroid) {
-                selectItem(index)
+                selectItem(index, false)
                 _selectedSpaceDustImageUrl.value = myImageUrl
             }
         }
     }
 
-    fun selectItem(newlySelectedPosition: Int) {
+    fun selectItem(newlySelectedPosition: Int, canUnselect: Boolean) {
         val newList = _spaceDustItems.value?.toMutableList()
         newList?.let { _newList ->
             val alreadySelectedPosition = _newList.indexOf(_newList.find { it.isSelected })
             if (alreadySelectedPosition != -1) {
                 _newList[alreadySelectedPosition] =
                     _newList[alreadySelectedPosition].copy(isSelected = false)
-                if (newlySelectedPosition == alreadySelectedPosition) {
-                    _newList[newlySelectedPosition] =
-                        _newList[newlySelectedPosition].copy(isSelected = false)
+                if (newlySelectedPosition == alreadySelectedPosition && canUnselect) {
                     _selectedSpaceDustImageUrl.value =
                         DEFAULT_SPACE_DUST_IMAGE_URL
                 } else {
