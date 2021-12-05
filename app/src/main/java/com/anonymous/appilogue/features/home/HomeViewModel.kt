@@ -1,5 +1,6 @@
 package com.anonymous.appilogue.features.home
 
+import android.view.View
 import androidx.lifecycle.*
 import com.anonymous.appilogue.model.Review
 import com.anonymous.appilogue.repository.ReviewRepository
@@ -7,6 +8,8 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
@@ -26,6 +29,9 @@ class HomeViewModel @Inject constructor() : ViewModel() {
     private val _starsAlpha =
         MutableLiveData<StarEmphasizeState>(StarEmphasizeState.EmphasizeOnAllStar())
     val starsAlpha: LiveData<StarEmphasizeState> = _starsAlpha
+
+    private val _saveSuccessToastVisibility = MutableLiveData(false)
+    val saveSuccessToastVisibility: LiveData<Boolean> = _saveSuccessToastVisibility
 
     fun changeBottomSheetState(newState: Int) {
         _bottomSheetState.value = newState
@@ -64,11 +70,23 @@ class HomeViewModel @Inject constructor() : ViewModel() {
         }
     }
 
-    fun enableBottomSheetHiding() {
+    private fun enableBottomSheetHiding() {
         _bottomSheetHideable.value = true
     }
 
-    fun disableBottomSheetHiding() {
+    private fun disableBottomSheetHiding() {
         _bottomSheetHideable.value = false
+    }
+
+    fun showSaveSuccessToast() {
+        viewModelScope.launch {
+            _saveSuccessToastVisibility.value = true
+            delay(TOAST_DURATION)
+            _saveSuccessToastVisibility.value = false
+        }
+    }
+
+    companion object {
+        const val TOAST_DURATION = 2000L
     }
 }

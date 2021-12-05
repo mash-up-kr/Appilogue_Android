@@ -25,6 +25,7 @@
         android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -108,6 +109,7 @@
 
             <ImageView
                 android:id="@+id/iv_spaceDust"
+                ImageUrlSpaceDust="@{mySpaceDustViewModel.selectedSpaceDustImageUrl}"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginEnd="40dp"
@@ -117,7 +119,6 @@
                 android:onClick="@{ _ -> homeViewModel.changeFocus(Focus.OnSpaceDust)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                ImageUrlSpaceDust="@{mySpaceDustViewModel.selectedSpaceDustImageUrl}"
                 tools:ignore="ContentDescription" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -163,6 +164,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <include
+            android:id="@+id/toast_save_success"
+            layout="@layout/toast_save_success"
+            android:visibility="@{homeViewModel.saveSuccessToastVisibility? View.VISIBLE : View.INVISIBLE}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

@@ -22,6 +22,12 @@ class SaveSpaceDustDialogFragment :
                     remove(this@SaveSpaceDustDialogFragment)
                 }
             }
+            tvCheck.setOnClickListener {
+                viewModel.showSaveSuccessToast()
+                parentFragmentManager.commit {
+                    remove(this@SaveSpaceDustDialogFragment)
+                }
+            }
         }
     }
 }
