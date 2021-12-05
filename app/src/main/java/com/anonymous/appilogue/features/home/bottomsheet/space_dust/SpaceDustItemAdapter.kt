@@ -1,4 +1,4 @@
-package com.anonymous.appilogue.features.home.bottomsheet
+package com.anonymous.appilogue.features.home.bottomsheet.space_dust
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,10 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.anonymous.appilogue.R
-import com.anonymous.appilogue.databinding.ItemAppBinding
 import com.anonymous.appilogue.databinding.ItemSpaceDustItemBinding
-import com.anonymous.appilogue.model.Review
-import com.anonymous.appilogue.model.ReviewedApp
 import com.anonymous.appilogue.model.SelectableSpaceDustItem
 
 class SpaceDustItemAdapter(private val clickEvent: (Int) -> Unit) :

@@ -4,13 +4,13 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.core.view.forEach
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.setupWithNavController
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavDirections
+import androidx.navigation.ui.setupWithNavController
 import com.anonymous.appilogue.R
 import com.anonymous.appilogue.databinding.ActivityMainBinding
 import com.anonymous.appilogue.features.base.BaseActivity
-import com.anonymous.appilogue.features.home.bottomsheet.MySpaceDustViewModel
+import com.anonymous.appilogue.features.home.bottomsheet.space_dust.MySpaceDustViewModel
 import com.anonymous.appilogue.features.search.AppSearchManager
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers

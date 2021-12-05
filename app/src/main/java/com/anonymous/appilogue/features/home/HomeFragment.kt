@@ -11,9 +11,14 @@ import com.anonymous.appilogue.R
 import com.anonymous.appilogue.databinding.FragmentHomeBinding
 import com.anonymous.appilogue.features.base.BaseFragment
 import com.anonymous.appilogue.features.home.bottomsheet.*
+import com.anonymous.appilogue.features.home.bottomsheet.hole.HoleFragment
 import com.anonymous.appilogue.features.main.MainActivity
-import com.anonymous.appilogue.features.home.bottomsheet.AppFragment.Companion.BLACK_HOLE
-import com.anonymous.appilogue.features.home.bottomsheet.AppFragment.Companion.WHITE_HOLE
+import com.anonymous.appilogue.features.home.bottomsheet.hole.HoleFragment.Companion.BLACK_HOLE
+import com.anonymous.appilogue.features.home.bottomsheet.hole.HoleFragment.Companion.WHITE_HOLE
+import com.anonymous.appilogue.features.home.bottomsheet.planet.MyPlanetFragment
+import com.anonymous.appilogue.features.home.bottomsheet.space_dust.MySpaceDustFragment
+import com.anonymous.appilogue.features.home.bottomsheet.space_dust.MySpaceDustViewModel
+import com.anonymous.appilogue.features.home.bottomsheet.space_dust.StoreFragment
 import com.anonymous.appilogue.features.home.onboarding.OnboardingFragment
 import com.anonymous.appilogue.features.main.MainViewModel
 import com.anonymous.appilogue.preference.AppilogueSharedPreferences
@@ -70,13 +75,13 @@ class HomeFragment :
             Focus.OnBlackHole -> viewPagerFragments.apply {
                 put(
                     FIRST_TAB,
-                    Pair(R.string.my_black_hole, { AppFragment.newInstance(BLACK_HOLE) })
+                    Pair(R.string.my_black_hole, { HoleFragment.newInstance(BLACK_HOLE) })
                 )
             }
             Focus.OnWhiteHole -> viewPagerFragments.apply {
                 put(
                     FIRST_TAB,
-                    Pair(R.string.my_white_hole, { AppFragment.newInstance(WHITE_HOLE) })
+                    Pair(R.string.my_white_hole, { HoleFragment.newInstance(WHITE_HOLE) })
                 )
             }
             Focus.OnPlanet -> viewPagerFragments.apply {

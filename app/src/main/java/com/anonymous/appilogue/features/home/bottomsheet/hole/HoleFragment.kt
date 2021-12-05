@@ -1,4 +1,4 @@
-package com.anonymous.appilogue.features.home.bottomsheet
+package com.anonymous.appilogue.features.home.bottomsheet.hole
 
 import android.os.Bundle
 import android.view.View
@@ -7,24 +7,23 @@ import androidx.fragment.app.viewModels
 import com.anonymous.appilogue.R
 import com.anonymous.appilogue.databinding.FragmentAppBinding
 import com.anonymous.appilogue.features.base.BaseFragment
-import com.anonymous.appilogue.features.home.BottomSheetAppDecoration
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class AppFragment :
-    BaseFragment<FragmentAppBinding, AppViewModel>(R.layout.fragment_app) {
-    override val viewModel: AppViewModel by viewModels()
-    private val bottomSheetAppAdapter: BottomSheetAppAdapter by lazy {
-        BottomSheetAppAdapter()
+class HoleFragment :
+    BaseFragment<FragmentAppBinding, HoleViewModel>(R.layout.fragment_app) {
+    override val viewModel: HoleViewModel by viewModels()
+    private val bottomSheetHoleAppAdapter: BottomSheetHoleAppAdapter by lazy {
+        BottomSheetHoleAppAdapter()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         with(binding) {
-            appViewModel = viewModel
+            holeViewModel = viewModel
             rvBottomSheetApps.apply {
-                adapter = bottomSheetAppAdapter
-                addItemDecoration(BottomSheetAppDecoration(context))
+                adapter = bottomSheetHoleAppAdapter
+                addItemDecoration(BottomSheetHoleAppDecoration(context))
             }
         }
         arguments?.let {
@@ -42,7 +41,7 @@ class AppFragment :
 
     companion object {
         fun newInstance(hole: String): Fragment {
-            val fragment = AppFragment()
+            val fragment = HoleFragment()
             fragment.arguments = Bundle().apply {
                 putString(HOLE, hole)
             }

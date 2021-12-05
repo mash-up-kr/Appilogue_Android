@@ -1,4 +1,4 @@
-package com.anonymous.appilogue.features.home.bottomsheet
+package com.anonymous.appilogue.features.home.bottomsheet.space_dust
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -10,7 +10,6 @@ import com.anonymous.appilogue.repository.ItemRepository
 import com.anonymous.appilogue.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import javax.inject.Inject
 
 

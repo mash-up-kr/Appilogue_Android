@@ -1,4 +1,4 @@
-package com.anonymous.appilogue.features.home
+package com.anonymous.appilogue.features.home.bottomsheet.space_dust
 
 import android.content.Context
 import android.graphics.Rect
@@ -7,9 +7,10 @@ import android.view.View
 import com.anonymous.appilogue.R
 
 
-class BottomSheetAppDecoration(context: Context) : RecyclerView.ItemDecoration() {
-    private val sideMargin = context.resources.getDimensionPixelSize(R.dimen.bottom_sheet_app_item_side_margin)
-    private val bottomMargin = context.resources.getDimensionPixelSize(R.dimen.bottom_sheet_item_bottom_margin)
+class SpaceDustItemDecoration(context: Context) : RecyclerView.ItemDecoration() {
+    private val sideMargin =
+        context.resources.getDimensionPixelSize(R.dimen.bottom_sheet_space_dust_item_side_margin)
+    private val span = 5
 
     override fun getItemOffsets(
         outRect: Rect,
@@ -19,6 +20,5 @@ class BottomSheetAppDecoration(context: Context) : RecyclerView.ItemDecoration()
     ) {
         outRect.left = sideMargin
         outRect.right = sideMargin
-        outRect.bottom = bottomMargin
     }
 }

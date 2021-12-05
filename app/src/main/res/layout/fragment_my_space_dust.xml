@@ -7,7 +7,7 @@
 
         <variable
             name="mySpaceDustViewModel"
-            type="com.anonymous.appilogue.features.home.bottomsheet.MySpaceDustViewModel" />
+            type="com.anonymous.appilogue.features.home.bottomsheet.space_dust.MySpaceDustViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

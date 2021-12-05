@@ -1,4 +1,4 @@
-package com.anonymous.appilogue.features.home.bottomsheet
+package com.anonymous.appilogue.features.home.bottomsheet.hole
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class AppViewModel @Inject constructor(
+class HoleViewModel @Inject constructor(
     private val reviewRepository: ReviewRepository
 ) : ViewModel() {
     private val _apps = MutableLiveData<List<Review>>()

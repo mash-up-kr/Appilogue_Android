@@ -1,4 +1,4 @@
-package com.anonymous.appilogue.features.home.bottomsheet
+package com.anonymous.appilogue.features.home.bottomsheet.space_dust
 
 import android.os.Bundle
 import android.view.View

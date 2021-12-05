@@ -1,4 +1,4 @@
-package com.anonymous.appilogue.features.home.bottomsheet
+package com.anonymous.appilogue.features.home.bottomsheet.space_dust
 
 import android.os.Bundle
 import android.view.View
@@ -7,8 +7,6 @@ import com.anonymous.appilogue.R
 import com.anonymous.appilogue.databinding.FragmentMySpaceDustBinding
 import com.anonymous.appilogue.features.base.BaseFragment
 import com.anonymous.appilogue.features.home.HomeViewModel
-import com.anonymous.appilogue.features.home.SpaceDustItemDecoration
-import com.anonymous.appilogue.features.home.onboarding.OnboardingFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
