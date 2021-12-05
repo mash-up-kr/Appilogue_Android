@@ -19,17 +19,23 @@ class ReviewListPagingSource(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ReviewInfo> {
         val position = params.key ?: INITIAL_LOAD_PAGE
         return try {
-            val result = fetchReviewListUseCaseUseCase(hole, position)
+            val response = fetchReviewListUseCaseUseCase(hole, position)
+            val result = response.successOr(emptyList())
             val prevKey = if (position == INITIAL_LOAD_PAGE) null else position - 1
+            val nextKey = if (result.isNotEmpty()) {
+                position + 1
+            } else {
+                null
+            }
 
-            return if (result.isSuccessful) {
+            return if (result.isNotEmpty()) {
                 LoadResult.Page(
-                    data = result.successOr(emptyList()),
+                    data = result,
                     prevKey = prevKey,
-                    nextKey = position + 1
+                    nextKey = nextKey
                 )
             } else {
-                LoadResult.Error(result.throwableOrNull() ?: UnknownException(-1, "Unknown Exception"))
+                LoadResult.Error(response.throwableOrNull() ?: UnknownException(-1, "Unknown Exception"))
             }
         } catch (e: Exception) {
             LoadResult.Error(e)

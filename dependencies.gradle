@@ -50,6 +50,7 @@ ext {
     soloaderVersion = "0.10.1"
 
     // widget
+    flexboxLayoutVersion = "3.0.0"
 
     // preference
     preferenceVersion = "1.1.1"

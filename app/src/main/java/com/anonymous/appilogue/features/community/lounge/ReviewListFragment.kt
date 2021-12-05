@@ -13,11 +13,12 @@ import androidx.recyclerview.widget.RecyclerView.VERTICAL
 import com.anonymous.appilogue.R
 import com.anonymous.appilogue.databinding.FragmentReviewListBinding
 import com.anonymous.appilogue.features.base.BaseFragment
+import com.anonymous.appilogue.features.main.MainActivity
+import com.anonymous.appilogue.model.AppModel
+import com.anonymous.appilogue.model.ReviewInfo
+import com.anonymous.appilogue.utils.showToast
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.onCompletion
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -26,7 +27,11 @@ class ReviewListFragment
     override val viewModel: ReviewListViewModel by viewModels()
 
     private val reviewListAdapter: ReviewListAdapter by lazy {
-        ReviewListAdapter(viewModel).apply {
+        ReviewListAdapter(
+            viewModel,
+            this::navigateToDetail,
+            this::navigateToAppInfo
+        ).apply {
             addLoadStateListener { loadState ->
                 if (loadState.source.refresh is LoadState.Loading) {
                     viewModel.beginToLoad()
@@ -56,17 +61,6 @@ class ReviewListFragment
 
     private fun initView() {
         with(binding) {
-            swipeRefreshLayout.setOnRefreshListener {
-                lifecycleScope.launch {
-                    viewModel.fetchImageList()
-                        .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
-                        .onCompletion { swipeRefreshLayout.isRefreshing = false }
-                        .collectLatest {
-                            reviewListAdapter.submitData(it)
-                        }
-                }
-            }
-
             loungeRecyclerView.apply {
                 adapter = reviewListAdapter
                 ContextCompat.getDrawable(context, R.drawable.divider)?.let { divider ->
@@ -77,17 +71,34 @@ class ReviewListFragment
                 }
             }
         }
-
     }
 
     private fun initObservers() {
         lifecycleScope.launch {
-            viewModel.fetchImageList()
+            viewModel.fetchReviewList()
                 .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
                 .collectLatest {
                     reviewListAdapter.submitData(it)
                 }
+
+            viewModel.isLoading.collect { isLoading ->
+                binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+            }
+
+            viewModel.errorMessage.collect { errorMessage ->
+                if (!errorMessage.isNullOrEmpty()) {
+                    context?.showToast(errorMessage)
+                }
+            }
         }
+    }
+
+    private fun navigateToDetail(item: ReviewInfo) {
+        val action = LoungeFragmentDirections.actionLoungeFragmentToReviewDetailFragment(item.id)
+        (activity as MainActivity).navigateTo(action)
+    }
+
+    private fun navigateToAppInfo(item: AppModel) {
     }
 
     companion object {

@@ -5,10 +5,6 @@
     app:startDestination="@id/homeFragment">
 
     <fragment
-        android:id="@+id/loungeFragment"
-        android:name="com.anonymous.appilogue.features.community.lounge.LoungeFragment"
-        android:label="LoungeFragment" />
-    <fragment
         android:id="@+id/profileFragment"
         android:name="com.anonymous.appilogue.features.profile.ProfileFragment"
         android:label="ProfileFragment" />
@@ -45,4 +41,46 @@
         android:id="@+id/reviewRegisterFragment"
         android:name="com.anonymous.appilogue.features.review.ReviewRegisterFragment"
         android:label="ReviewRegisterFragment" />
+
+    <fragment
+        android:id="@+id/loungeFragment"
+        android:name="com.anonymous.appilogue.features.community.lounge.LoungeFragment"
+        android:label="LoungeFragment" >
+        <action
+            android:id="@+id/action_loungeFragment_to_reviewDetailFragment"
+            app:destination="@id/reviewDetailFragment"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_to_left"
+            app:popEnterAnim="@anim/slide_from_left">
+            <argument
+                android:name="reviewId"
+                app:argType="integer" />
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/reviewListFragment"
+        android:name="com.anonymous.appilogue.features.community.lounge.ReviewListFragment"
+        android:label="ReviewListFragment" />
+    <fragment
+        android:id="@+id/reviewDetailFragment"
+        android:name="com.anonymous.appilogue.features.community.detail.ReviewDetailFragment"
+        android:label="ReviewDetailFragment" >
+        <action
+            android:id="@+id/action_reviewDetailFragment_to_commentDetailFragment"
+            app:destination="@id/commentDetailFragment"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_to_left"
+            app:popEnterAnim="@anim/slide_from_left">
+            <argument
+                android:name="reviewId"
+                app:argType="integer" />
+            <argument
+                android:name="commentId"
+                app:argType="integer" />
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/commentDetailFragment"
+        android:name="com.anonymous.appilogue.features.community.comment.CommentDetailFragment"
+        android:label="CommentDetailFragment" />
 </navigation>

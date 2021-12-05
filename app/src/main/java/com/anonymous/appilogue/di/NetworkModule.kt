@@ -1,7 +1,11 @@
 package com.anonymous.appilogue.di
 
 import com.anonymous.appilogue.network.AuthInterceptor
+import com.anonymous.appilogue.network.CommentApi
+import com.anonymous.appilogue.network.ImageApi
 import com.anonymous.appilogue.network.ReviewApi
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -9,11 +13,18 @@ import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import java.util.*
 import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
 @Module
 object NetworkModule {
+
+    @Provides
+    @Singleton
+    fun provideMoshi(): Moshi = Moshi.Builder()
+        .add(Date::class.java, Rfc3339DateJsonAdapter())
+        .build()
 
     @Provides
     @Singleton
@@ -27,11 +38,14 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit =
+    fun provideRetrofit(
+        okHttpClient: OkHttpClient,
+        moshi: Moshi
+    ): Retrofit =
         Retrofit.Builder()
             .baseUrl("https://api.moussg.io/")
             .client(okHttpClient)
-            .addConverterFactory(MoshiConverterFactory.create())
+            .addConverterFactory(MoshiConverterFactory.create(moshi))
             .build()
 
     @Provides
@@ -44,5 +58,21 @@ object NetworkModule {
         retrofit: Retrofit
     ): ReviewApi {
         return retrofit.create(ReviewApi::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideCommentApi(
+        retrofit: Retrofit
+    ): CommentApi {
+        return retrofit.create(CommentApi::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideImageApi(
+        retrofit: Retrofit
+    ): ImageApi {
+        return retrofit.create(ImageApi::class.java)
     }
 }

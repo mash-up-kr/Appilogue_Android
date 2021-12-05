@@ -27,7 +27,7 @@ class ReviewListViewModel @Inject constructor(
     private val _errorMessage = MutableStateFlow<String?>(null)
     val errorMessage: StateFlow<String?> = _errorMessage
 
-    fun fetchImageList(): Flow<PagingData<ReviewInfo>> {
+    fun fetchReviewList(): Flow<PagingData<ReviewInfo>> {
         return pageDataProvider.getPagingData(hole)
             .cachedIn(viewModelScope)
             .catch { setErrorMessage(it.message) }

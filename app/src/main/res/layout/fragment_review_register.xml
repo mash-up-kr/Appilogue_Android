@@ -154,16 +154,40 @@
             app:layout_constraintTop_toBottomOf="@id/review_input_edit_text"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <com.google.android.material.chip.ChipGroup
-            android:id="@+id/review_app_keyword_view"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="@string/hashtags_max_count_text"
+            android:textColor="@color/gray_02"
+            style="@style/TextStyle.Normal14"
+            app:layout_constraintStart_toEndOf="@id/review_keyword_title_view"
+            app:layout_constraintBaseline_toBaselineOf="@id/review_keyword_title_view" />
+
+        <com.google.android.flexbox.FlexboxLayout
+            android:id="@+id/hashtags_flex_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
             android:layout_marginHorizontal="@dimen/review_content_horizontal_margin"
-            app:selectionRequired="false"
-            app:layout_constraintTop_toBottomOf="@id/review_keyword_title_view"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            android:layout_marginTop="14dp"
+            app:flexWrap="wrap"
+            app:alignItems="stretch"
+            app:alignContent="stretch"
+            app:layout_constraintTop_toBottomOf="@id/review_keyword_title_view">
+
+            <EditText
+                android:id="@+id/hashtag_input_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:imeOptions="actionDone"
+                android:inputType="text"
+                android:maxLines="1"
+                android:hint="@string/hint_hashtag"
+                android:textColorHint="@color/gray_02"
+                style="@style/TextStyle.Normal14"
+                app:layout_flexGrow="1"/>
+        </com.google.android.flexbox.FlexboxLayout>
 
         <TextView
             android:id="@+id/select_button"

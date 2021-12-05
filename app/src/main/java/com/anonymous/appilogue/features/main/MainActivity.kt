@@ -1,6 +1,7 @@
 package com.anonymous.appilogue.features.main
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import androidx.core.view.forEach
 import androidx.navigation.fragment.NavHostFragment
@@ -74,5 +75,13 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     fun navigateTo(action: NavDirections) {
         navController.navigate(action)
+    }
+
+    fun showBottomNavigation() {
+        binding.bottomNavigationView.visibility = View.VISIBLE
+    }
+
+    fun hideBottomNavigation() {
+        binding.bottomNavigationView.visibility = View.GONE
     }
 }

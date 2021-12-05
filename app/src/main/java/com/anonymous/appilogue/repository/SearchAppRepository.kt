@@ -9,7 +9,7 @@ import javax.inject.Inject
 
 class SearchAppRepository @Inject constructor(
     private val installedAppDao: InstalledAppDao
-) {
+) : Repository {
 
     suspend fun insertInstalledAppList(appList: List<InstalledApp>) {
         val result = installedAppDao.insertInstalledAppList(appList.map { it.toEntity() })

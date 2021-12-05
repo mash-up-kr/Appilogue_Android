@@ -25,6 +25,10 @@
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">12sp</item>
     </style>
+    <style name="TextStyle.Chip" parent="@android:style/Widget.TextView">
+        <item name="android:textColor">@color/purple_01</item>
+        <item name="android:textSize">13sp</item>
+    </style>
 
     <style name="TextInputLayoutStyle.purple" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="colorControlNormal">@android:color/transparent</item>

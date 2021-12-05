@@ -3,27 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-    </data>
-
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/swipeRefreshLayout"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <FrameLayout
+        android:layout_height="match_parent"
+        tools:background="@color/black">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/lounge_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:background="@color/black">
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_review_content"/>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/lounge_recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/item_lounge_feed"/>
-
-        </FrameLayout>
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminateTint="@color/purple_01" />
+    </FrameLayout>
 </layout>

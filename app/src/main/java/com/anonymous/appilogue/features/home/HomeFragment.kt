@@ -1,5 +1,6 @@
 package com.anonymous.appilogue.features.home
 
+import android.content.Context
 import android.content.res.Resources
 import android.os.Bundle
 import android.util.SparseArray
@@ -163,6 +164,12 @@ class HomeFragment :
                 }
             }
         })
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        (activity as MainActivity).showBottomNavigation()
     }
 
     companion object {

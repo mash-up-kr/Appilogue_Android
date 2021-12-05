@@ -1,5 +1,6 @@
 package com.anonymous.appilogue.features.community.lounge
 
+import android.content.Context
 import android.os.Bundle
 import android.util.SparseArray
 import android.view.View
@@ -12,6 +13,7 @@ import com.anonymous.appilogue.features.base.BaseFragment
 import com.anonymous.appilogue.features.base.ViewPagerAdapter
 import com.anonymous.appilogue.features.community.lounge.ReviewListFragment.Companion.BLACK_HOLE
 import com.anonymous.appilogue.features.community.lounge.ReviewListFragment.Companion.WHITE_HOLE
+import com.anonymous.appilogue.features.main.MainActivity
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -21,8 +23,10 @@ class LoungeFragment
 
     override val viewModel: LoungeViewModel by viewModels()
 
-    private val viewPagerAdapter: ViewPagerAdapter by lazy {
-        ViewPagerAdapter(activity as FragmentActivity, getFragmentCreators())
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        (activity as MainActivity).showBottomNavigation()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -33,7 +37,7 @@ class LoungeFragment
 
     private fun initView() {
         binding.viewPager.apply {
-            adapter = viewPagerAdapter
+            adapter = ViewPagerAdapter(activity as FragmentActivity, getFragmentCreators())
         }
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
             when (position) {

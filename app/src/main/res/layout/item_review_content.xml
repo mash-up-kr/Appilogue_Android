@@ -4,6 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.content.Context" />
+        <import
+            alias="TimeHelper"
+            type="com.anonymous.appilogue.utils.TimeHelperKt" />
         <variable
             name="item"
             type="com.anonymous.appilogue.model.ReviewInfo" />
@@ -14,6 +18,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/feed_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/review_content_horizontal_margin"
@@ -26,6 +31,8 @@
             android:layout_width="34dp"
             android:layout_height="34dp"
             android:layout_marginTop="20dp"
+            android:background="@drawable/border_circular_purple"
+            android:src="@drawable/space_dust"
             app:profileUrl="@{item.user.profileUrl}"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
@@ -47,22 +54,23 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
             android:textColor="@color/gray_02"
+            android:text="@{TimeHelper.dateToPassedTime(item.createdAt, context)}"
             style="@style/TextStyle.Normal12"
             app:layout_constraintTop_toBottomOf="@id/username_view"
             app:layout_constraintStart_toStartOf="@id/username_view"
             tools:text="00분 전"/>
 
         <ImageView
+            android:id="@+id/more_button_view"
             android:layout_width="18dp"
             android:layout_height="18dp"
             android:src="@drawable/ic_vertical_more"
-            app:imageUrl="@{item.user.profileUrl}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/profile_view"
             app:layout_constraintBottom_toBottomOf="@id/profile_view"
             android:contentDescription="@string/more_button_description" />
 
-        <TextView
+        <com.anonymous.appilogue.widget.ReadMoreTextView
             android:id="@+id/content_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -85,6 +93,7 @@
             app:layout_constraintTop_toBottomOf="@id/content_view"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
+
             <ImageView
                 android:id="@+id/app_icon_view"
                 android:layout_width="40dp"
@@ -107,7 +116,29 @@
                 app:layout_constraintBottom_toBottomOf="@id/app_icon_view"
                 app:layout_constraintStart_toEndOf="@id/app_icon_view"
                 tools:text="앰 이름" />
+
+            <ImageView
+                android:id="@+id/right_arrow_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="18dp"
+                android:src="@drawable/ic_right_arrow"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/hashtags_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/review_content_horizontal_margin"
+            android:layout_marginTop="18dp"
+            app:selectionRequired="false"
+            app:tags="@{item.hashtags}"
+            app:layout_constraintTop_toBottomOf="@id/app_info_container"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <ImageView
             android:id="@+id/like_view"
@@ -115,7 +146,7 @@
             android:layout_height="12dp"
             android:layout_marginTop="20dp"
             android:src="@drawable/ic_heart_selector"
-            app:layout_constraintTop_toBottomOf="@id/app_info_container"
+            app:layout_constraintTop_toBottomOf="@id/hashtags_container"
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
@@ -139,7 +170,7 @@
             android:layout_marginTop="18dp"
             android:layout_marginStart="14dp"
             android:src="@drawable/ic_comments"
-            app:layout_constraintTop_toBottomOf="@id/app_info_container"
+            app:layout_constraintBottom_toBottomOf="@id/like_view"
             app:layout_constraintStart_toEndOf="@id/like_count_view" />
 
         <TextView
