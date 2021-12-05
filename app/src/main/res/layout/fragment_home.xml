@@ -84,12 +84,13 @@
                 android:layout_width="136dp"
                 android:layout_height="136dp"
                 android:layout_marginStart="23dp"
-                android:layout_marginBottom="138dp"
                 android:alpha="@{homeViewModel.starsAlpha.blackHoleAlpha}"
                 android:clickable="@{homeViewModel.starFocused == Focus.None}"
                 android:onClick="@{ _ -> homeViewModel.changeFocus(Focus.OnBlackHole)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.8"
                 app:srcCompat="@drawable/black_hole"
                 tools:ignore="ContentDescription" />
 
@@ -97,13 +98,14 @@
                 android:id="@+id/iv_whiteHole"
                 android:layout_width="133dp"
                 android:layout_height="133dp"
-                android:layout_marginTop="101dp"
                 android:layout_marginEnd="18dp"
                 android:alpha="@{homeViewModel.starsAlpha.whiteHoleAlpha}"
                 android:clickable="@{homeViewModel.starFocused == Focus.None}"
                 android:onClick="@{ _ -> homeViewModel.changeFocus(Focus.OnWhiteHole)}"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.2"
                 app:srcCompat="@drawable/white_hole"
                 tools:ignore="ContentDescription" />
 
@@ -113,12 +115,13 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginEnd="40dp"
-                android:layout_marginBottom="174dp"
                 android:alpha="@{homeViewModel.starsAlpha.spaceDustAlpha}"
                 android:clickable="@{homeViewModel.starFocused == Focus.None}"
                 android:onClick="@{ _ -> homeViewModel.changeFocus(Focus.OnSpaceDust)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.7"
                 tools:ignore="ContentDescription" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
