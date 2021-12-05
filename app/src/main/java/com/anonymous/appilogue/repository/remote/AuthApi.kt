@@ -3,6 +3,7 @@ package com.anonymous.appilogue.repository.remote
 import com.anonymous.appilogue.model.*
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.Body
+import retrofit2.http.PATCH
 import retrofit2.http.POST
 
 interface AuthApi {
@@ -21,6 +22,6 @@ interface AuthApi {
     @POST("auth/login")
     fun loginWithEmailPassword(@Body loginData: Login): Single<LoginResult>
 
-    @POST("auth/update-password")
+    @PATCH("auth/update-password")
     fun updatePassword(@Body updatePassword: UpdatePassword): Single<UpdatePasswordResult>
 }

@@ -13,6 +13,7 @@ import com.anonymous.appilogue.features.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
+import timber.log.Timber
 
 @AndroidEntryPoint
 class PasswordFragment :
@@ -54,12 +55,31 @@ class PasswordFragment :
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                if (it.isOk) {
-                    binding.passwordMoveNextButton.findNavController()
-                        .navigate(R.id.action_passwordFragment_to_loginEmailFragment)
+                if (it.isUpdated) {
+                    with(binding) {
+                        passwordWrongPasswordNotification.visibility = View.GONE
+                        passwordMoveNextButton.findNavController()
+                            .navigate(R.id.action_passwordFragment_to_loginEmailFragment)
+                    }
+                } else {
+                    with(binding) {
+                        setIncorrect(passwordEdittext, null)
+                        setIncorrect(passwordEdittextBelow, resources.getString(R.string.same_password))
+                        passwordWrongPasswordNotification.apply {
+                            setTextColor(
+                                ContextCompat.getColor(
+                                    passwordWrongPasswordNotification.context,
+                                    R.color.red
+                                )
+                            )
+                            visibility = View.VISIBLE
+                        }
+                    }
+                    setButtonBackgroundColor(false)
+                    setButtonCanClick(false)
                 }
             }) {
-                // do something
+                Timber.d("${it.message}")
             }
     }
 
@@ -105,7 +125,7 @@ class PasswordFragment :
         changeEditTextBackgroundColor(passwordEditText, true)
     }
 
-    private fun setIncorrect(passwordEditText: EditText, errorText: String) {
+    private fun setIncorrect(passwordEditText: EditText, errorText: String?) {
         binding.passwordWrongPasswordNotification.text = errorText
         changeEditTextBackgroundColor(passwordEditText, false)
     }

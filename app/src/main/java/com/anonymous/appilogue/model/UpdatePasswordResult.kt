@@ -6,6 +6,6 @@ import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
 data class UpdatePasswordResult(
-    @Json(name = "isOk")
-    val isOk: Boolean
+    @Json(name = "isUpdated")
+    val isUpdated: Boolean
 )

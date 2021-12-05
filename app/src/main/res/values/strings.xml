@@ -95,4 +95,5 @@
     <string name="resend_certification_notify">"재전송 된 번호를 입력해주세요"</string>
     <string name="alreay_signup">"이미 가입된 이메일입니다."</string>
     <string name="not_signup">"가입되지 않은 이메일입니다."</string>
+    <string name="same_password">"이전 비밀번호와 동일합니다."</string>
 </resources>
