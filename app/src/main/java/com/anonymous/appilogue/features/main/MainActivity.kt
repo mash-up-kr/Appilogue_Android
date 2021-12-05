@@ -10,6 +10,7 @@ import androidx.navigation.NavDirections
 import com.anonymous.appilogue.R
 import com.anonymous.appilogue.databinding.ActivityMainBinding
 import com.anonymous.appilogue.features.base.BaseActivity
+import com.anonymous.appilogue.features.home.bottomsheet.MySpaceDustViewModel
 import com.anonymous.appilogue.features.search.AppSearchManager
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
@@ -21,6 +22,7 @@ import javax.inject.Inject
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     val viewModel: MainViewModel by viewModels()
+    val mySpaceDustViewModel: MySpaceDustViewModel by viewModels()
 
     @Inject
     lateinit var appSearchManager: AppSearchManager
@@ -62,6 +64,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             binding.bottomNavigationView.menu.forEach {
                 it.isEnabled = clickable
             }
+        })
+        mySpaceDustViewModel.fetchSpaceDustItems()
+        viewModel.myUser.observe(this, {
+            mySpaceDustViewModel.setMySpaceDust(it.profileImage)
         })
     }
 

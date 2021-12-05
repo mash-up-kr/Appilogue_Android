@@ -10,7 +10,7 @@ class MockAuthorizationInterceptor @Inject constructor() : Interceptor {
     companion object {
         private const val ACCESS_TOKEN = "Authorization"
         private const val MOCK_ACCESS_TOKEN =
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAZ21haWwuY29tIiwic3ViIjoxLCJpYXQiOjE2MzcxNTU0OTksImV4cCI6MTY2ODY5MTQ5OX0.1ne7icFLwgmZR0sxHspte3AHGLRdc9WhFB8ZCu3Jogc"
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAZ21haWwuY29tIiwic3ViIjoxLCJpYXQiOjE2Mzg3MTk5OTgsImV4cCI6MTY3MDI1NTk5OH0.ggp51WjIMA1pS1wK6k5wTxzysFM5SyRhyTLhm9KriUY"
     }
 
     override fun intercept(chain: Interceptor.Chain): Response = chain.proceed(

@@ -5,15 +5,19 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.anonymous.appilogue.model.SelectableSpaceDustItem
+import com.anonymous.appilogue.model.User
 import com.anonymous.appilogue.repository.ItemRepository
+import com.anonymous.appilogue.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 
 @HiltViewModel
 class MySpaceDustViewModel @Inject constructor(
-    private val itemRepository: ItemRepository
+    private val itemRepository: ItemRepository,
+    private val userRepository: UserRepository
 ) : ViewModel() {
 
     private val _spaceDustItems = MutableLiveData<List<SelectableSpaceDustItem>>()
@@ -28,7 +32,15 @@ class MySpaceDustViewModel @Inject constructor(
                 .map {
                     SelectableSpaceDustItem(it)
                 }
-            // TODO 내 URL과 비교하여 같으면 selected를 true로 한다.
+        }
+    }
+
+    fun setMySpaceDust(myImageUrl: String) {
+        _spaceDustItems.value?.forEachIndexed { index, item ->
+            if (myImageUrl == item.spaceDustItem.dressedUrlAndroid) {
+                selectItem(index)
+                _selectedSpaceDustImageUrl.value = myImageUrl
+            }
         }
     }
 
@@ -57,6 +69,14 @@ class MySpaceDustViewModel @Inject constructor(
                     _newList[newlySelectedPosition].spaceDustItem.dressedUrlAndroid
             }
             _spaceDustItems.value = _newList
+        }
+    }
+
+    fun saveMySpaceDust(user: User) {
+        viewModelScope.launch {
+            selectedSpaceDustImageUrl.value?.let {
+                userRepository.saveMyInformation(user.copy(profileImage = it))
+            }
         }
     }
 

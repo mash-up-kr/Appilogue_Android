@@ -6,10 +6,7 @@ import android.util.SparseArray
 import android.view.View
 import android.widget.ImageView
 import androidx.core.view.updateLayoutParams
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.add
-import androidx.fragment.app.commit
+import androidx.fragment.app.*
 import com.anonymous.appilogue.R
 import com.anonymous.appilogue.databinding.FragmentHomeBinding
 import com.anonymous.appilogue.features.base.BaseFragment
@@ -37,7 +34,7 @@ class HomeFragment :
     private val starsByFocus = EnumMap<Focus, ImageView>(Focus::class.java)
     private val actionByFocus = EnumMap<Focus, () -> Unit>(Focus::class.java)
 
-    override val viewModel: HomeViewModel by activityViewModels()
+    override val viewModel: HomeViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -54,7 +51,6 @@ class HomeFragment :
         }
         SpaceAnimator.animateSpace(binding.ivSpace)
         viewModel.changeFocus(Focus.None)
-        _mySpaceDustViewModel.fetchSpaceDustItems()
         initOnboarding()
     }
 

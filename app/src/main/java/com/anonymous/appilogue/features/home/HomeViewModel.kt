@@ -83,6 +83,8 @@ class HomeViewModel @Inject constructor() : ViewModel() {
             _saveSuccessToastVisibility.value = true
             delay(TOAST_DURATION)
             _saveSuccessToastVisibility.value = false
+        }.invokeOnCompletion {
+            _saveSuccessToastVisibility.value = false
         }
     }
 
