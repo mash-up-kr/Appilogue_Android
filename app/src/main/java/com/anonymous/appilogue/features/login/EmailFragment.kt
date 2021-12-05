@@ -58,7 +58,11 @@ class EmailFragment :
                                     viewModel.timerStart()
                                     binding.emailMoveNextButton.findNavController().navigate(R.id.action_emailFragment_to_certificationFragment)
                                 } else {
-                                    setIncorrect(resources.getString(R.string.alreay_signup))
+                                    if (!viewModel.lostPassword) {
+                                        setIncorrect(resources.getString(R.string.alreay_signup))
+                                    } else {
+                                        setIncorrect(resources.getString(R.string.not_signup))
+                                    }
                                 }
 
                             }, {
