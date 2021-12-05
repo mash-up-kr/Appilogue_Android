@@ -101,4 +101,7 @@
     <string name="password_reset">"비밀번호 재설정"</string>
     <string name="please_enter_nickname">"닉네임을 입력해주세요."</string>
     <string name="save">저장</string>
+    <string name="save_this">이대로 저장하시겠어요?</string>
+    <string name="let_my_space_dust">나만의 먼지가 될꺼에요!</string>
+    <string name="check">확인</string>
 </resources>

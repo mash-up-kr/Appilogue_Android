@@ -28,7 +28,7 @@
             app:spanCount="5" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/tv_save"
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_marginStart="9dp"

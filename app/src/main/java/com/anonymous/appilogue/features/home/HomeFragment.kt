@@ -23,7 +23,6 @@ import com.anonymous.appilogue.preference.AppilogueSharedPreferences
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 import java.util.*
 import javax.inject.Inject
 
@@ -62,7 +61,7 @@ class HomeFragment :
     private fun initOnboarding() {
         if (!sharedPreference.getOnboardingIsDone()) {
             childFragmentManager.commit {
-                add<OnboardingFragment>(R.id.fcv_onboarding)
+                add<OnboardingFragment>(R.id.fcv_home)
                 setReorderingAllowed(true)
             }
         }

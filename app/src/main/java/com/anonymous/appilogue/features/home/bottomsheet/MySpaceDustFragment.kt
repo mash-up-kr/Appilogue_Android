@@ -2,14 +2,13 @@ package com.anonymous.appilogue.features.home.bottomsheet
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.*
 import com.anonymous.appilogue.R
 import com.anonymous.appilogue.databinding.FragmentMySpaceDustBinding
 import com.anonymous.appilogue.features.base.BaseFragment
 import com.anonymous.appilogue.features.home.HomeViewModel
 import com.anonymous.appilogue.features.home.SpaceDustItemDecoration
+import com.anonymous.appilogue.features.home.onboarding.OnboardingFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -30,6 +29,12 @@ class MySpaceDustFragment :
             rvSpaceDustItems.apply {
                 adapter = spaceDustItemAdapter
                 addItemDecoration(SpaceDustItemDecoration(context))
+            }
+            tvSave.setOnClickListener {
+                parentFragmentManager.commit {
+                    add<SaveSpaceDustDialogFragment>(R.id.fcv_home)
+                    setReorderingAllowed(true)
+                }
             }
         }
     }
