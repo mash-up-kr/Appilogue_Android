@@ -9,9 +9,12 @@ import com.anonymous.appilogue.features.base.isSuccessful
 import com.anonymous.appilogue.features.base.successOr
 import com.anonymous.appilogue.model.CommentDto
 import com.anonymous.appilogue.model.CommentModel
+import com.anonymous.appilogue.model.ReportModel
+import com.anonymous.appilogue.model.ReportType
 import com.anonymous.appilogue.usecase.FetchCommentsUseCase
 import com.anonymous.appilogue.usecase.RegisterCommentUseCase
 import com.anonymous.appilogue.usecase.RemoveCommentUseCase
+import com.anonymous.appilogue.usecase.ReportCommentUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -22,7 +25,8 @@ class CommentDetailViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     private val fetchCommentsUseCase: FetchCommentsUseCase,
     private val registerCommentUseCase: RegisterCommentUseCase,
-    private val removeCommentUseCase: RemoveCommentUseCase
+    private val removeCommentUseCase: RemoveCommentUseCase,
+    private val reportCommentUseCase: ReportCommentUseCase
 ) : ViewModel() {
     private val reviewId: Int = savedStateHandle.get<Int>(REVIEW_ID_KEY)!!
     private val commentId: Int = savedStateHandle.get<Int>(COMMENT_ID_KEY)!!
@@ -66,6 +70,30 @@ class CommentDetailViewModel @Inject constructor(
         }
     }
 
+    fun getParentCommentId(): Int? = comments.value.find { it.parentId == null }?.id
+
+    fun removeComment(commentId: Int) {
+        handleRemoveOrReport(true) {
+            removeCommentUseCase(commentId)
+        }
+    }
+
+    fun reportComment(commentId: Int) {
+        handleRemoveOrReport(false) {
+            val reportModel = ReportModel(ReportType.COMMENT.type, commentId)
+            reportCommentUseCase(reportModel)
+        }
+    }
+
+    private fun handleRemoveOrReport(isMine: Boolean, block: suspend () -> UiState<*>) {
+        viewModelScope.launch {
+            val result = block()
+            if (result.isSuccessful) {
+                handleEvent(Event.ShowToastForResult(isMine))
+            }
+        }
+    }
+
     fun addNestedCommentEvent() {
         inputText.value?.let {
             handleEvent(Event.AddNestedComment(it))
@@ -77,6 +105,14 @@ class CommentDetailViewModel @Inject constructor(
         handleEvent(Event.PressBackButton)
     }
 
+    fun removeCommentEvent(commentId: Int) {
+        handleEvent(Event.RemoveComment(commentId))
+    }
+
+    fun reportCommentEvent(commentId: Int) {
+        handleEvent(Event.ReportComment(commentId))
+    }
+
     private fun handleEvent(event: Event) {
         viewModelScope.launch {
             _event.emit(event)
@@ -85,9 +121,10 @@ class CommentDetailViewModel @Inject constructor(
 
     sealed class Event {
         data class AddNestedComment(val commentText: String) : Event()
-        data class RemoveNestedComment(val commentId: Int) : Event()
-        object RemoveComment : Event()
+        data class RemoveComment(val commentId: Int) : Event()
+        data class ReportComment(val commentId: Int) : Event()
         object PressBackButton : Event()
+        data class ShowToastForResult(val isMine: Boolean) : Event()
     }
 
     companion object {

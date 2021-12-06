@@ -1,6 +1,5 @@
 package com.anonymous.appilogue.features.community.detail
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -8,10 +7,10 @@ import com.anonymous.appilogue.features.base.UiState
 import com.anonymous.appilogue.features.base.isSuccessful
 import com.anonymous.appilogue.features.base.successOr
 import com.anonymous.appilogue.model.CommentDto
+import com.anonymous.appilogue.model.ReportModel
+import com.anonymous.appilogue.model.ReportType
 import com.anonymous.appilogue.model.ReviewInfo
-import com.anonymous.appilogue.usecase.FetchReviewUseCase
-import com.anonymous.appilogue.usecase.RegisterCommentUseCase
-import com.anonymous.appilogue.usecase.RemoveCommentUseCase
+import com.anonymous.appilogue.usecase.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -22,7 +21,10 @@ class ReviewDetailViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     private val fetchReviewUseCase: FetchReviewUseCase,
     private val registerCommentUseCase: RegisterCommentUseCase,
+    private val removeReviewUseCase: RemoveReviewUseCase,
+    private val reportReviewUseCase: ReportReviewUseCase,
     private val removeCommentUseCase: RemoveCommentUseCase,
+    private val reportCommentUseCase: ReportCommentUseCase,
 ): ViewModel() {
     val reviewId: Int = savedStateHandle.get<Int>(REVIEW_ID_KEY)!!
 
@@ -64,6 +66,32 @@ class ReviewDetailViewModel @Inject constructor(
         }
     }
 
+    fun removeReview() {
+        handleRemoveOrReport(true) {
+            removeReviewUseCase(reviewId)
+        }
+    }
+
+    fun reportReview() {
+        handleRemoveOrReport(false) {
+            val reportModel = ReportModel(ReportType.REVIEW.type, reviewId)
+            reportReviewUseCase(reportModel)
+        }
+    }
+
+    fun removeComment(commentId: Int) {
+        handleRemoveOrReport(true) {
+            removeCommentUseCase(commentId)
+        }
+    }
+
+    fun reportComment(commentId: Int) {
+        handleRemoveOrReport(false) {
+            val reportModel = ReportModel(ReportType.COMMENT.type, commentId)
+            reportCommentUseCase(reportModel)
+        }
+    }
+
     fun addCommentEvent() {
         inputText.value?.let {
             handleEvent(Event.AddComment(it))
@@ -71,8 +99,35 @@ class ReviewDetailViewModel @Inject constructor(
         }
     }
 
+    fun getAuthorId(): Int = reviewInfo.value.user.id
+
+    private fun handleRemoveOrReport(isMine: Boolean, block: suspend () -> UiState<*>) {
+        viewModelScope.launch {
+            val result = block()
+            if (result.isSuccessful) {
+                handleEvent(Event.ShowToastForResult(isMine))
+            }
+        }
+    }
+
     fun pressBackButtonEvent() {
         handleEvent(Event.PressBackButton)
+    }
+
+    fun removeReviewEvent() {
+        handleEvent(Event.RemoveReview)
+    }
+
+    fun reportReviewEvent() {
+        handleEvent(Event.ReportReview)
+    }
+
+    fun removeCommentEvent(commentId: Int) {
+        handleEvent(Event.RemoveComment(commentId))
+    }
+
+    fun reportCommentEvent(commentId: Int) {
+        handleEvent(Event.ReportComment(commentId))
     }
 
     private fun handleEvent(event: Event) {
@@ -83,9 +138,12 @@ class ReviewDetailViewModel @Inject constructor(
 
     sealed class Event {
         data class AddComment(val commentText: String) : Event()
-        data class RemoveComment(val commentId: Int): Event()
+        data class RemoveComment(val commentId: Int) : Event()
+        data class ReportComment(val commentId: Int) : Event()
         object RemoveReview : Event()
+        object ReportReview : Event()
         object PressBackButton : Event()
+        data class ShowToastForResult(val isMine: Boolean) : Event()
     }
 
     companion object {

@@ -12,7 +12,9 @@ import com.anonymous.appilogue.databinding.ItemReviewCommentBinding
 import com.anonymous.appilogue.databinding.ItemReviewCommentNestedBinding
 import com.anonymous.appilogue.model.CommentModel
 
-class CommentDetailAdapter : RecyclerView.Adapter<CommentDetailAdapter.CommentViewHolder>() {
+class CommentDetailAdapter(
+    private val showBottomSheetMenu: (CommentModel) -> Unit
+) : RecyclerView.Adapter<CommentDetailAdapter.CommentViewHolder>() {
     private var items: List<CommentModel> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommentViewHolder {
@@ -25,7 +27,14 @@ class CommentDetailAdapter : RecyclerView.Adapter<CommentDetailAdapter.CommentVi
                     parent,
                     false
                 )
-                CommentDetailViewHolder(binding)
+                CommentDetailViewHolder(binding).apply {
+                    binding.moreButtonView.setOnClickListener {
+                        val position = bindingAdapterPosition
+                        if (position < itemCount) {
+                            showBottomSheetMenu(items[position])
+                        }
+                    }
+                }
             }
             else -> {
                 val binding = DataBindingUtil.inflate<ItemReviewCommentNestedBinding>(
@@ -34,7 +43,14 @@ class CommentDetailAdapter : RecyclerView.Adapter<CommentDetailAdapter.CommentVi
                     parent,
                     false
                 )
-                NestedCommentViewHolder(binding)
+                NestedCommentViewHolder(binding).apply {
+                    binding.moreButtonView.setOnClickListener {
+                        val position = bindingAdapterPosition
+                        if (position < itemCount) {
+                            showBottomSheetMenu(items[position])
+                        }
+                    }
+                }
             }
         }
         return viewHolder
@@ -59,7 +75,7 @@ class CommentDetailAdapter : RecyclerView.Adapter<CommentDetailAdapter.CommentVi
     }
 
     abstract class CommentViewHolder(
-        private val binding: ViewDataBinding
+        open val binding: ViewDataBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: CommentModel) {
             binding.apply {
@@ -70,11 +86,11 @@ class CommentDetailAdapter : RecyclerView.Adapter<CommentDetailAdapter.CommentVi
     }
 
     class CommentDetailViewHolder(
-        binding: ItemReviewCommentBinding
+        override val binding: ItemReviewCommentBinding
     ) : CommentViewHolder(binding)
 
     class NestedCommentViewHolder(
-        binding: ItemReviewCommentNestedBinding
+        override val binding: ItemReviewCommentNestedBinding
     ) : CommentViewHolder(binding)
 
     companion object {

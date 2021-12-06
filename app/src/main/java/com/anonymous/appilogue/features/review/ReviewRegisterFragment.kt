@@ -87,6 +87,15 @@ class ReviewRegisterFragment
                     context?.showToast("success")
                 }
             }
+
+            toolbarLeftIconView.setOnClickListener {
+                activity?.onBackPressed()
+            }
+
+            toolbarRightIconView.setOnClickListener {
+                val action = ReviewRegisterFragmentDirections.actionReviewRegisterFragmentToHomeFragment()
+                (activity as MainActivity).navigateTo(action)
+            }
         }
     }
 

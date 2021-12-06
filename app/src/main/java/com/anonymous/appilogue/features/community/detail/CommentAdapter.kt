@@ -10,9 +10,11 @@ import com.anonymous.appilogue.R
 import androidx.databinding.library.baseAdapters.BR
 import com.anonymous.appilogue.databinding.ItemReviewCommentBinding
 import com.anonymous.appilogue.model.CommentModel
+import com.anonymous.appilogue.widget.BottomSheetMenuDialog
 
 class CommentAdapter(
-    private val navigateToCommentDetail: (Int) -> Unit
+    private val navigateToCommentDetail: (Int) -> Unit,
+    private val showBottomSheetMenu: (CommentModel) -> Unit
 ) : ListAdapter<CommentModel, CommentAdapter.CommentViewHolder>(diffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommentViewHolder {
@@ -30,6 +32,15 @@ class CommentAdapter(
                     if (position < itemCount) {
                         getItem(position)?.let {
                             navigateToCommentDetail(it.id)
+                        }
+                    }
+                }
+
+                moreButtonView.setOnClickListener {
+                    val position = bindingAdapterPosition
+                    if (position < itemCount) {
+                        getItem(position)?.let {
+                            showBottomSheetMenu(it)
                         }
                     }
                 }

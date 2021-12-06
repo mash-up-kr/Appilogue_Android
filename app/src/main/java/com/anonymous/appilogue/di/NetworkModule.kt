@@ -1,9 +1,6 @@
 package com.anonymous.appilogue.di
 
-import com.anonymous.appilogue.network.AuthInterceptor
-import com.anonymous.appilogue.network.CommentApi
-import com.anonymous.appilogue.network.ImageApi
-import com.anonymous.appilogue.network.ReviewApi
+import com.anonymous.appilogue.network.*
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter
 import dagger.Module
@@ -54,6 +51,14 @@ object NetworkModule {
 
     @Provides
     @Singleton
+    fun provideSearchApi(
+        retrofit: Retrofit
+    ): SearchApi {
+        return retrofit.create(SearchApi::class.java)
+    }
+
+    @Provides
+    @Singleton
     fun provideReviewApi(
         retrofit: Retrofit
     ): ReviewApi {
@@ -66,6 +71,14 @@ object NetworkModule {
         retrofit: Retrofit
     ): CommentApi {
         return retrofit.create(CommentApi::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideReportApi(
+        retrofit: Retrofit
+    ): ReportApi {
+        return retrofit.create(ReportApi::class.java)
     }
 
     @Provides

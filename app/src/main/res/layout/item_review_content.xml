@@ -59,16 +59,6 @@
             app:layout_constraintStart_toStartOf="@id/username_view"
             tools:text="00분 전"/>
 
-        <ImageView
-            android:id="@+id/more_button_view"
-            android:layout_width="18dp"
-            android:layout_height="18dp"
-            android:src="@drawable/ic_vertical_more"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/profile_view"
-            app:layout_constraintBottom_toBottomOf="@id/profile_view"
-            android:contentDescription="@string/more_button_description" />
-
         <com.anonymous.appilogue.widget.ReadMoreTextView
             android:id="@+id/content_view"
             android:layout_width="match_parent"

@@ -1,12 +1,12 @@
 package com.anonymous.appilogue.repository
 
-import android.graphics.Bitmap
 import com.anonymous.appilogue.exceptions.EmptyResponseException
 import com.anonymous.appilogue.features.base.UiState
 import com.anonymous.appilogue.model.*
 import com.anonymous.appilogue.network.CommentApi
 import com.anonymous.appilogue.network.ImageApi
 import com.anonymous.appilogue.network.ReviewApi
+import com.anonymous.appilogue.network.SearchApi
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -14,6 +14,7 @@ import java.io.File
 import javax.inject.Inject
 
 class ReviewRepository @Inject constructor(
+    private val searchApi: SearchApi,
     private val reviewApi: ReviewApi,
     private val commentApi: CommentApi,
     private val imageApi: ImageApi
@@ -24,7 +25,7 @@ class ReviewRepository @Inject constructor(
         page: Int = 1,
     ): UiState<List<ReviewInfo>> {
         return try {
-            val response = reviewApi.searchReviews(hole, page)
+            val response = searchApi.searchReviews(hole, page)
 
             if (response.isSuccessful) {
                 val apiResponse = response.body() ?: throw EmptyResponseException(

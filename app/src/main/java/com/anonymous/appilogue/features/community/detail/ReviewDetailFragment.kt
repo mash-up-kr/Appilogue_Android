@@ -8,23 +8,24 @@ import androidx.lifecycle.lifecycleScope
 import com.anonymous.appilogue.R
 import com.anonymous.appilogue.databinding.FragmentReviewDetailBinding
 import com.anonymous.appilogue.features.base.BaseFragment
-import com.anonymous.appilogue.features.base.UiState
-import com.anonymous.appilogue.features.base.isSuccessful
 import com.anonymous.appilogue.features.main.MainActivity
-import com.anonymous.appilogue.model.ReviewInfo
+import com.anonymous.appilogue.model.CommentModel
+import com.anonymous.appilogue.persistence.PreferencesManager
 import com.anonymous.appilogue.utils.hideKeyboardDown
+import com.anonymous.appilogue.utils.showToast
+import com.anonymous.appilogue.widget.BottomSheetMenuDialog
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class ReviewDetailFragment
-    : BaseFragment<FragmentReviewDetailBinding, ReviewDetailViewModel>(R.layout.fragment_review_detail){
+    : BaseFragment<FragmentReviewDetailBinding, ReviewDetailViewModel>(R.layout.fragment_review_detail) {
 
     override val viewModel: ReviewDetailViewModel by viewModels()
 
     private val commentAdapter: CommentAdapter by lazy {
-        CommentAdapter(this::navigateToCommentDetail)
+        CommentAdapter(this::navigateToCommentDetail, this::showBottomSheetMenu)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -45,6 +46,18 @@ class ReviewDetailFragment
             swipeRefreshLayout.setOnRefreshListener {
                 viewModel.fetchReviews()
                 swipeRefreshLayout.isRefreshing = false
+            }
+
+            toolbarRightIconView.setOnClickListener {
+                val isMyReview = PreferencesManager.getUserId() == viewModel.getAuthorId()
+                val bottomSheetMenu = BottomSheetMenuDialog(isMyReview) {
+                    if (isMyReview) {
+                        viewModel.removeReviewEvent()
+                    } else {
+                        viewModel.reportReviewEvent()
+                    }
+                }
+                (activity as MainActivity).showBottomSheetDialog(bottomSheetMenu)
             }
         }
     }
@@ -70,6 +83,18 @@ class ReviewDetailFragment
         }
     }
 
+    private fun showBottomSheetMenu(commentModel: CommentModel) {
+        val isMyComment = PreferencesManager.getUserId() == commentModel.user.id
+        val bottomSheetMenu = BottomSheetMenuDialog(isMyComment) {
+            if (isMyComment) {
+                viewModel.removeCommentEvent(commentModel.id)
+            } else {
+                viewModel.reportCommentEvent(commentModel.id)
+            }
+        }
+        (activity as MainActivity).showBottomSheetDialog(bottomSheetMenu)
+    }
+
     private fun handleEvent(event: ReviewDetailViewModel.Event) {
         when (event) {
             is ReviewDetailViewModel.Event.AddComment -> {
@@ -77,13 +102,27 @@ class ReviewDetailFragment
                 binding.root.hideKeyboardDown()
             }
             is ReviewDetailViewModel.Event.RemoveComment -> {
-                // TODO
+                viewModel.removeComment(event.commentId)
+            }
+            is ReviewDetailViewModel.Event.ReportComment -> {
+                viewModel.reportComment(event.commentId)
             }
             is ReviewDetailViewModel.Event.RemoveReview -> {
-                // TODO
+                viewModel.removeReview()
+            }
+            is ReviewDetailViewModel.Event.ReportReview -> {
+                viewModel.reportReview()
             }
             is ReviewDetailViewModel.Event.PressBackButton -> {
                 activity?.onBackPressed()
+            }
+            is ReviewDetailViewModel.Event.ShowToastForResult -> {
+                val message = if (event.isMine) {
+                    getString(R.string.remove_result_message)
+                } else {
+                    getString(R.string.report_result_message)
+                }
+                context?.showToast(message)
             }
         }
     }

@@ -1,6 +1,7 @@
 package com.anonymous.appilogue
 
 import android.app.Application
+import com.anonymous.appilogue.persistence.PreferencesManager
 import com.facebook.flipper.android.AndroidFlipperClient
 import com.facebook.flipper.android.utils.FlipperUtils
 import com.facebook.flipper.core.FlipperClient
@@ -19,6 +20,7 @@ class AppilogueApplication : Application() {
             Timber.plant(AnonymousDebugTree())
         }
 
+        PreferencesManager.initialize(this)
         SoLoader.init(this, false)
 
         if (BuildConfig.DEBUG && FlipperUtils.shouldEnableFlipper(this)) {

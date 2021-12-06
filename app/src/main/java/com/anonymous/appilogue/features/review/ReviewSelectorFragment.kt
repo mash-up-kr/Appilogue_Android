@@ -65,7 +65,8 @@ class ReviewSelectorFragment
             }
 
             toolbarRightIconView.setOnClickListener {
-                ReviewSelectorFragmentDirections.actionReviewSelectorFragmentToHomeFragment()
+                val action = ReviewSelectorFragmentDirections.actionReviewSelectorFragmentToHomeFragment()
+                (activity as MainActivity).navigateTo(action)
             }
         }
     }

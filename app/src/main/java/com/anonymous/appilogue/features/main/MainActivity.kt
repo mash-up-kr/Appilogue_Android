@@ -13,6 +13,7 @@ import com.anonymous.appilogue.R
 import com.anonymous.appilogue.databinding.ActivityMainBinding
 import com.anonymous.appilogue.features.base.BaseActivity
 import com.anonymous.appilogue.features.search.AppSearchManager
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -83,5 +84,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     fun hideBottomNavigation() {
         binding.bottomNavigationView.visibility = View.GONE
+    }
+
+    fun showBottomSheetDialog(bottomSheetDialogFragment: BottomSheetDialogFragment) {
+        bottomSheetDialogFragment.show(supportFragmentManager, bottomSheetDialogFragment.tag)
     }
 }
