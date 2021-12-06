@@ -38,10 +38,10 @@ class MySpaceDustViewModel @Inject constructor(
     }
 
     fun setMySpaceDust(myImageUrl: String) {
+        _selectedSpaceDustImageUrl.value = myImageUrl
         _spaceDustItems.value?.forEachIndexed { index, item ->
             if (myImageUrl == item.spaceDustItem.dressedUrlAndroid) {
                 selectItem(index, false)
-                _selectedSpaceDustImageUrl.value = myImageUrl
             }
         }
     }

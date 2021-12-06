@@ -225,9 +225,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="24dp"
+                    android:switchMinWidth="40dp"
+                    android:thumb="@drawable/shape_switch_thumb"
                     app:layout_constraintBottom_toTopOf="@+id/v7"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/v6" />
+                    app:layout_constraintTop_toBottomOf="@+id/v6"
+                    app:track="@drawable/shape_switch_track" />
 
                 <View
                     android:id="@+id/v8"

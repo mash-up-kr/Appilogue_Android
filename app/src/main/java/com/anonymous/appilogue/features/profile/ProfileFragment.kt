@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import com.anonymous.appilogue.R
 import com.anonymous.appilogue.databinding.FragmentProfileBinding
 import com.anonymous.appilogue.features.base.BaseFragment
+import com.anonymous.appilogue.features.home.SpaceAnimator
 import com.anonymous.appilogue.features.main.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -24,6 +25,9 @@ class ProfileFragment :
         bind {
             mainViewModel = _mainViewModel
             profileViewModel = viewModel
+        }
+        with(binding) {
+            SpaceAnimator.animateSpace(ivSpace)
         }
         fetchApplicationVersion()
     }
