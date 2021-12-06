@@ -23,7 +23,7 @@ class UploadAppIconImage @Inject constructor(
             file.createNewFile()
 
             val bos = ByteArrayOutputStream()
-            appIconBitmap.compress(Bitmap.CompressFormat.JPEG, 0, bos)
+            appIconBitmap.compress(Bitmap.CompressFormat.PNG, 0, bos)
             val bitmapData = bos.toByteArray()
 
             FileOutputStream(file).apply {
