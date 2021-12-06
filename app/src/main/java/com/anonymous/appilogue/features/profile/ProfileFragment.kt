@@ -5,11 +5,14 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContentProviderCompat
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.add
+import androidx.fragment.app.commit
 import androidx.fragment.app.viewModels
 import com.anonymous.appilogue.R
 import com.anonymous.appilogue.databinding.FragmentProfileBinding
 import com.anonymous.appilogue.features.base.BaseFragment
 import com.anonymous.appilogue.features.home.SpaceAnimator
+import com.anonymous.appilogue.features.home.onboarding.OnboardingFragment
 import com.anonymous.appilogue.features.main.MainActivity
 import com.anonymous.appilogue.features.main.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -31,6 +34,12 @@ class ProfileFragment :
             SpaceAnimator.animateSpace(ivSpace)
             ivToAccountSetting.setOnClickListener {
                 (activity as MainActivity).navigateTo(R.id.profileSettingFragment)
+            }
+            tvRevise.setOnClickListener {
+                childFragmentManager.commit {
+                    add<NicknameEditFragment>(R.id.fcv_profile)
+                    setReorderingAllowed(true)
+                }
             }
         }
         fetchApplicationVersion()

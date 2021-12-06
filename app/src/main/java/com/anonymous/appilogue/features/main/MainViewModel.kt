@@ -47,4 +47,8 @@ class MainViewModel @Inject constructor(private val userRepository: UserReposito
         }
     }
 
+    fun editNickname(nickname: String) {
+        _myUser.value = _myUser.value?.copy(nickname = nickname)
+    }
+
 }
