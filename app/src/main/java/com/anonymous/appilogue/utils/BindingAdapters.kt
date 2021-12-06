@@ -25,7 +25,7 @@ import com.google.android.material.textfield.TextInputLayout
 
 @BindingAdapter("showHint")
 fun TextInputLayout.bindShowHint(inputKeyword: String?) {
-    this.isHintEnabled = inputKeyword.isNullOrEmpty()
+    this.isHintEnabled = inputKeyword == null
 }
 
 @BindingAdapter("imageUrl")

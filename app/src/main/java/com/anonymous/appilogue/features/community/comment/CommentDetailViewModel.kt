@@ -44,7 +44,10 @@ class CommentDetailViewModel @Inject constructor(
 
     val inputText: MutableLiveData<String?> = MutableLiveData()
 
-    private fun fetchComments() {
+    private val _event: MutableSharedFlow<Event> = MutableSharedFlow()
+    val event: SharedFlow<Event> = _event
+
+    fun fetchComments() {
         viewModelScope.launch {
             fetchCommentsUseCase(reviewId, commentId).collect {
                 _uiState.value = it
@@ -52,17 +55,39 @@ class CommentDetailViewModel @Inject constructor(
         }
     }
 
-    fun registerNestedComment() {
-        inputText.value?.let {
-            viewModelScope.launch {
-                val commentDto = CommentDto(reviewId, commentId, it)
-                val result = registerCommentUseCase(commentDto)
-                if (result.isSuccessful) {
-                    fetchComments()
-                }
-                inputText.value = ""
+    fun registerNestedComment(commentText: String) {
+        viewModelScope.launch {
+            val commentDto = CommentDto(reviewId, commentId, commentText)
+            val result = registerCommentUseCase(commentDto)
+            if (result.isSuccessful) {
+                fetchComments()
             }
+            inputText.value = ""
         }
+    }
+
+    fun addNestedCommentEvent() {
+        inputText.value?.let {
+            handleEvent(Event.AddNestedComment(it))
+            inputText.value = null
+        }
+    }
+
+    fun pressBackButtonEvent() {
+        handleEvent(Event.PressBackButton)
+    }
+
+    private fun handleEvent(event: Event) {
+        viewModelScope.launch {
+            _event.emit(event)
+        }
+    }
+
+    sealed class Event {
+        data class AddNestedComment(val commentText: String) : Event()
+        data class RemoveNestedComment(val commentId: Int) : Event()
+        object RemoveComment : Event()
+        object PressBackButton : Event()
     }
 
     companion object {

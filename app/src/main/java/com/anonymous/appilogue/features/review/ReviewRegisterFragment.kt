@@ -1,17 +1,20 @@
 package com.anonymous.appilogue.features.review
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
+import android.view.inputmethod.EditorInfo
 import androidx.core.view.children
 import androidx.fragment.app.viewModels
 import com.anonymous.appilogue.R
 import com.anonymous.appilogue.databinding.FragmentReviewRegisterBinding
 import com.anonymous.appilogue.features.base.BaseFragment
 import com.anonymous.appilogue.features.main.MainActivity
+import com.anonymous.appilogue.utils.hideKeyboardDown
 import com.anonymous.appilogue.utils.showToast
 import com.google.android.flexbox.FlexboxLayout
 import com.google.android.material.chip.Chip
@@ -53,9 +56,21 @@ class ReviewRegisterFragment
                             hashtagInputView.text.clear()
                         }
                     } else {
-                        hashtagInputView.visibility = View.GONE
+                        hashtagInputView.run {
+                            visibility = View.GONE
+                            hideKeyboardDown()
+                        }
                     }
                 }
+            hashtagInputView.setOnEditorActionListener { _, actionId, _ ->
+                var handled = false
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    hashtagsFlexLayout.addNewHashtag(hashtagInputView.text.toString())
+                    hashtagInputView.text.clear()
+                    handled = true
+                }
+                handled
+            }
 
             selectButton.setOnClickListener {
                 val hashtags = mutableListOf<String>()
@@ -89,6 +104,12 @@ class ReviewRegisterFragment
             binding.hashtagInputView.visibility = View.VISIBLE
         }
         this.addView(chip, childCount - 1, layoutParams)
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        (activity as MainActivity).hideBottomNavigation()
     }
 
     companion object {

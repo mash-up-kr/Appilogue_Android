@@ -36,9 +36,9 @@ class CommentDetailFragment
 
     private fun initView() {
         bind {
-            submitButtonView.setOnClickListener {
-                viewModel.registerNestedComment()
-                it.hideKeyboardDown()
+            swipeRefreshLayout.setOnRefreshListener {
+                viewModel.fetchComments()
+                swipeRefreshLayout.isRefreshing = false
             }
         }
     }
@@ -55,6 +55,23 @@ class CommentDetailFragment
         lifecycleScope.launch {
             viewModel.comments.collect {
                 commentDetailAdapter.submitList(it)
+            }
+        }
+        lifecycleScope.launch {
+            viewModel.event.collect {
+                handleEvent(it)
+            }
+        }
+    }
+
+    private fun handleEvent(event: CommentDetailViewModel.Event) {
+        when (event) {
+            is CommentDetailViewModel.Event.AddNestedComment -> {
+                viewModel.registerNestedComment(event.commentText)
+                binding.root.hideKeyboardDown()
+            }
+            is CommentDetailViewModel.Event.PressBackButton -> {
+                activity?.onBackPressed()
             }
         }
     }

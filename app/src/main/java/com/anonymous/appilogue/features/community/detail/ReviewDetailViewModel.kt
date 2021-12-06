@@ -44,9 +44,9 @@ class ReviewDetailViewModel @Inject constructor(
         initialValue = ReviewInfo()
     )
 
-    val inputText: MutableLiveData<String?> = MutableLiveData()
+    val inputText: MutableStateFlow<String?> = MutableStateFlow(null)
 
-    private fun fetchReviews() {
+    fun fetchReviews() {
         viewModelScope.launch {
             fetchReviewUseCase(reviewId).collect {
                 _uiState.value = it
@@ -64,11 +64,15 @@ class ReviewDetailViewModel @Inject constructor(
         }
     }
 
-    fun addComment() {
+    fun addCommentEvent() {
         inputText.value?.let {
             handleEvent(Event.AddComment(it))
-            inputText.value = ""
+            inputText.value = null
         }
+    }
+
+    fun pressBackButtonEvent() {
+        handleEvent(Event.PressBackButton)
     }
 
     private fun handleEvent(event: Event) {
@@ -81,6 +85,7 @@ class ReviewDetailViewModel @Inject constructor(
         data class AddComment(val commentText: String) : Event()
         data class RemoveComment(val commentId: Int): Event()
         object RemoveReview : Event()
+        object PressBackButton : Event()
     }
 
     companion object {

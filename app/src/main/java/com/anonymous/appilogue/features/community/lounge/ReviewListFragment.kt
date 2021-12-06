@@ -8,6 +8,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
+import androidx.paging.PagingData
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView.VERTICAL
 import com.anonymous.appilogue.R
@@ -61,6 +62,19 @@ class ReviewListFragment
 
     private fun initView() {
         with(binding) {
+            swipeRefreshLayout.setOnRefreshListener {
+                lifecycleScope.launch {
+                    reviewListAdapter.submitData(PagingData.empty())
+
+                    viewModel.fetchReviewList()
+                        .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
+                        .collectLatest {
+                            swipeRefreshLayout.isRefreshing = false
+                            reviewListAdapter.submitData(it)
+                        }
+                }
+            }
+
             loungeRecyclerView.apply {
                 adapter = reviewListAdapter
                 ContextCompat.getDrawable(context, R.drawable.divider)?.let { divider ->

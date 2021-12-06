@@ -38,7 +38,7 @@ class UploadAppIconImage @Inject constructor(
     }
 
     companion object {
-        private const val DEFAULT_IMAGE_EXT = "jpeg"
+        private const val DEFAULT_IMAGE_EXT = "png"
         private const val DEFAULT_FILE_NAME = "app_icon"
         private const val DEFAULT_MAX_FILE_SIZE = 300
         private const val KB_UNIT = 1024

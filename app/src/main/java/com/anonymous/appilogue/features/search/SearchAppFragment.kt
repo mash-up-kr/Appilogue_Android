@@ -1,5 +1,6 @@
 package com.anonymous.appilogue.features.search
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
@@ -50,21 +51,25 @@ class SearchAppFragment
     }
 
     private fun initView() {
-        binding.searchEditTextView.focusChanges()
-            .subscribe { focus ->
-                if (focus) {
-                    binding.searchInputLayout.isHintEnabled = false
-                    context?.showKeyboardUp()
+        bind {
+            searchEditTextView.focusChanges()
+                .subscribe { focus ->
+                    if (focus) {
+                        searchInputLayout.isHintEnabled = false
+                        context?.showKeyboardUp()
+                    }
                 }
+            disposable = searchEditTextView.textChanges()
+                .debounce(300L, TimeUnit.MILLISECONDS)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe { keyword ->
+                    viewModel.search(keyword.toString())
+                }
+            toolbarLeftIconView.setOnClickListener {
+                activity?.onBackPressed()
             }
-        disposable = binding.searchEditTextView.textChanges()
-            .doOnNext { text -> binding.searchInputLayout.isHintEnabled = text == null }
-            .debounce(300L, TimeUnit.MILLISECONDS)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { keyword ->
-                viewModel.search(keyword.toString())
-            }
+        }
     }
 
     private fun initObserver() {
@@ -76,5 +81,11 @@ class SearchAppFragment
     override fun onDestroyView() {
         disposable?.dispose()
         super.onDestroyView()
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        (activity as MainActivity).hideBottomNavigation()
     }
 }

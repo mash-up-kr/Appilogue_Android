@@ -34,29 +34,46 @@ class ReviewSelectorFragment
     }
 
     private fun initView() {
-        binding.blackHoleView.setOnClickListener {
-            it.isSelected = true
-            binding.whiteHoleView.isSelected = false
-            viewModel.selectBlackHole()
-            binding.planetDescriptionView.apply {
-                handleSelectEvent(R.string.description_black_hole, R.string.black_hole_text, R.color.mint)
+        bind {
+            blackHoleView.setOnClickListener {
+                it.isSelected = true
+                binding.whiteHoleView.isSelected = false
+                viewModel.selectBlackHole()
+                binding.planetDescriptionView.apply {
+                    handleSelectEvent(R.string.description_black_hole, R.string.black_hole_text, R.color.mint)
+                }
             }
-        }
 
-        binding.whiteHoleView.setOnClickListener {
-            it.isSelected = true
-            binding.blackHoleView.isSelected = false
-            viewModel.selectWhiteHole()
-            binding.planetDescriptionView.apply {
-                handleSelectEvent(R.string.description_white_hole, R.string.white_hole_text, R.color.mint)
+            whiteHoleView.setOnClickListener {
+                it.isSelected = true
+                binding.blackHoleView.isSelected = false
+                viewModel.selectWhiteHole()
+                binding.planetDescriptionView.apply {
+                    handleSelectEvent(R.string.description_white_hole, R.string.white_hole_text, R.color.mint)
+                }
+            }
+
+            selectButton.setOnClickListener {
+                if (viewModel.isSelected()) {
+                    val action = ReviewSelectorFragmentDirections.actionReviewSelectorFragmentToReviewRegisterFragment(viewModel.isBlackHoleSelected.value)
+                    (activity as MainActivity).navigateTo(action)
+                }
+            }
+
+            toolbarLeftIconView.setOnClickListener {
+                activity?.onBackPressed()
+            }
+
+            toolbarRightIconView.setOnClickListener {
+                ReviewSelectorFragmentDirections.actionReviewSelectorFragmentToHomeFragment()
             }
         }
-        binding.selectButton.setOnClickListener {
-            if (viewModel.isSelected()) {
-                val action = ReviewSelectorFragmentDirections.actionReviewSelectorFragmentToReviewRegisterFragment(viewModel.isBlackHoleSelected.value)
-                (activity as MainActivity).navigateTo(action)
-            }
-        }
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        (activity as MainActivity).hideBottomNavigation()
     }
 
     private fun TextView.handleSelectEvent(

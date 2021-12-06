@@ -12,207 +12,212 @@
             type="com.anonymous.appilogue.features.main.MainViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/black">
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/appbar_layout"
+        android:fillViewport="true">
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/black"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
-            <androidx.appcompat.widget.Toolbar
+            android:layout_height="match_parent"
+            android:background="@color/black">
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/appbar_layout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_height="wrap_content"
+                android:background="@color/black"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+                <androidx.appcompat.widget.Toolbar
                     android:layout_width="match_parent"
-                    android:layout_height="52dp">
+                    android:layout_height="wrap_content">
 
-                    <ImageView
-                        android:id="@+id/toolbar_left_icon_view"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/ic_back_left_24"
-                        android:contentDescription="@string/description_back_button"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        />
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="52dp">
 
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:src="@drawable/ic_planet_40"
-                        android:contentDescription="@string/planet_toolbar"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        />
+                        <ImageView
+                            android:id="@+id/toolbar_left_icon_view"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_back_left_24"
+                            android:contentDescription="@string/description_back_button"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            />
 
-                    <ImageView
-                        android:id="@+id/toolbar_right_icon_view"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:layout_marginEnd="24dp"
-                        android:src="@drawable/ic_close_24"
-                        android:contentDescription="@string/description_close_button"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"/>
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/ic_planet_40"
+                            android:contentDescription="@string/planet_toolbar"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            />
 
-            </androidx.appcompat.widget.Toolbar>
-        </com.google.android.material.appbar.AppBarLayout>
+                        <ImageView
+                            android:id="@+id/toolbar_right_icon_view"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_marginEnd="24dp"
+                            android:src="@drawable/ic_close_24"
+                            android:contentDescription="@string/description_close_button"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <ImageView
-            android:id="@+id/app_icon_view"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/border_radius_16"
-            android:contentDescription="@string/app_icon_content_description"
-            app:bindBitmap="@{mainVm.selectedApp.icon}"
-            app:layout_constraintTop_toBottomOf="@id/appbar_layout"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+                </androidx.appcompat.widget.Toolbar>
+            </com.google.android.material.appbar.AppBarLayout>
 
-        <LinearLayout
-            android:id="@+id/app_info_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="20dp"
-            app:layout_constraintTop_toBottomOf="@id/app_icon_view"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
-            <TextView
-                android:id="@+id/app_name_view"
+            <ImageView
+                android:id="@+id/app_icon_view"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/border_radius_16"
+                android:contentDescription="@string/app_icon_content_description"
+                app:bindBitmap="@{mainVm.selectedApp.icon}"
+                app:layout_constraintTop_toBottomOf="@id/appbar_layout"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <LinearLayout
+                android:id="@+id/app_info_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingVertical="5dp"
-                android:paddingHorizontal="10dp"
-                android:background="@drawable/border_radius_08"
-                android:backgroundTint="@color/gray_02"
-                android:text="@{mainVm.selectedApp.name}"
-                android:textStyle="bold"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp"
+                app:layout_constraintTop_toBottomOf="@id/app_icon_view"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+                <TextView
+                    android:id="@+id/app_name_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="5dp"
+                    android:paddingHorizontal="10dp"
+                    android:background="@drawable/border_radius_08"
+                    android:backgroundTint="@color/gray_02"
+                    android:text="@{mainVm.selectedApp.name}"
+                    android:textStyle="bold"
+                    style="@style/TextStyle.Normal12"
+                    tools:text="어나니머쓱"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_gravity="center"
+                    android:text="@string/app_review_sub_title"
+                    style="@style/TextStyle.Normal16"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/review_info_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="13dp"
+                android:text="@string/app_review_sub_title_question"
+                style="@style/TextStyle.Normal16"
+                app:layout_constraintTop_toBottomOf="@id/app_info_view"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <ImageView
+                android:id="@+id/black_hole_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:layout_marginHorizontal="20dp"
+                android:padding="13dp"
+                android:background="@drawable/selector_border_radius_16"
+                android:src="@drawable/image_black_hole_115"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintTop_toBottomOf="@id/review_info_text"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/white_hole_view"
+                android:contentDescription="@string/black_hole_image_description" />
+
+            <TextView
+                android:id="@+id/black_hole_title_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="@string/black_hole_text"
+                style="@style/TextStyle.Normal16"
+                app:layout_constraintTop_toBottomOf="@id/black_hole_view"
+                app:layout_constraintStart_toStartOf="@id/black_hole_view"
+                app:layout_constraintEnd_toEndOf="@id/black_hole_view" />
+
+            <ImageView
+                android:id="@+id/white_hole_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="20dp"
+                android:padding="13dp"
+                android:background="@drawable/selector_border_radius_16"
+                android:src="@drawable/image_white_hole_115"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintTop_toBottomOf="@id/review_info_text"
+                app:layout_constraintStart_toEndOf="@id/black_hole_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:contentDescription="@string/white_hole_image_description"/>
+
+            <TextView
+                android:id="@+id/white_hole_title_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="@string/white_hole_text"
+                style="@style/TextStyle.Normal16"
+                app:layout_constraintTop_toBottomOf="@id/white_hole_view"
+                app:layout_constraintStart_toStartOf="@id/white_hole_view"
+                app:layout_constraintEnd_toEndOf="@id/white_hole_view" />
+
+            <TextView
+                android:id="@+id/planet_description_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="12dp"
+                android:layout_marginHorizontal="@dimen/review_content_horizontal_margin"
+                android:layout_marginTop="22dp"
+                android:layout_marginBottom="15dp"
+                android:gravity="center"
+                android:background="@drawable/border_radius_12_gradient"
+                android:visibility="invisible"
+                android:bufferType="spannable"
                 style="@style/TextStyle.Normal12"
-                tools:text="어나니머쓱"/>
+                app:layout_constraintTop_toBottomOf="@id/black_hole_title_view"
+                app:layout_constraintBottom_toTopOf="@id/select_button"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:visibility="visible"
+                tools:text="@string/description_black_hole"/>
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_gravity="center"
-                android:text="@string/app_review_sub_title"
-                style="@style/TextStyle.Normal16"/>
-
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/review_info_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="13dp"
-            android:text="@string/app_review_sub_title_question"
-            style="@style/TextStyle.Normal16"
-            app:layout_constraintTop_toBottomOf="@id/app_info_view"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
-
-        <ImageView
-            android:id="@+id/black_hole_view"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:layout_marginHorizontal="20dp"
-            android:padding="13dp"
-            android:background="@drawable/selector_border_radius_16"
-            android:src="@drawable/image_black_hole_115"
-            app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintTop_toBottomOf="@id/review_info_text"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/white_hole_view"
-            android:contentDescription="@string/black_hole_image_description" />
-
-        <TextView
-            android:id="@+id/black_hole_title_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:text="@string/black_hole_text"
-            style="@style/TextStyle.Normal16"
-            app:layout_constraintTop_toBottomOf="@id/black_hole_view"
-            app:layout_constraintStart_toStartOf="@id/black_hole_view"
-            app:layout_constraintEnd_toEndOf="@id/black_hole_view" />
-
-        <ImageView
-            android:id="@+id/white_hole_view"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:layout_marginEnd="20dp"
-            android:padding="13dp"
-            android:background="@drawable/selector_border_radius_16"
-            android:src="@drawable/image_white_hole_115"
-            app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintTop_toBottomOf="@id/review_info_text"
-            app:layout_constraintStart_toEndOf="@id/black_hole_view"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:contentDescription="@string/white_hole_image_description"/>
-
-        <TextView
-            android:id="@+id/white_hole_title_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:text="@string/white_hole_text"
-            style="@style/TextStyle.Normal16"
-            app:layout_constraintTop_toBottomOf="@id/white_hole_view"
-            app:layout_constraintStart_toStartOf="@id/white_hole_view"
-            app:layout_constraintEnd_toEndOf="@id/white_hole_view" />
-
-        <TextView
-            android:id="@+id/planet_description_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingVertical="12dp"
-            android:layout_marginHorizontal="@dimen/review_content_horizontal_margin"
-            android:gravity="center"
-            android:background="@drawable/border_radius_12_gradient"
-            android:visibility="invisible"
-            android:bufferType="spannable"
-            style="@style/TextStyle.Normal12"
-            app:layout_constraintTop_toBottomOf="@id/black_hole_title_view"
-            app:layout_constraintBottom_toTopOf="@id/select_button"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            tools:visibility="visible"
-            tools:text="@string/description_black_hole"/>
-
-        <TextView
-            android:id="@+id/select_button"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginHorizontal="@dimen/review_content_horizontal_margin"
-            android:layout_marginBottom="30dp"
-            android:backgroundTint="@color/gray_01"
-            android:background="@drawable/border_radius_10"
-            android:text="@string/review_selector_button_text"
-            android:textAlignment="center"
-            android:textStyle="bold"
-            android:textColor="@color/gray_02"
-            android:gravity="center"
-            style="@style/TextStyle.Normal16"
-            app:isSelected="@{vm.isBlackHoleSelected || vm.isWhiteHoleSelected}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                android:id="@+id/select_button"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginHorizontal="@dimen/review_content_horizontal_margin"
+                android:layout_marginBottom="30dp"
+                android:backgroundTint="@color/gray_01"
+                android:background="@drawable/border_radius_10"
+                android:text="@string/review_selector_button_text"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                android:textColor="@color/gray_02"
+                android:gravity="center"
+                style="@style/TextStyle.Normal16"
+                app:isSelected="@{vm.isBlackHoleSelected || vm.isWhiteHoleSelected}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 </layout>

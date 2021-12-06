@@ -35,8 +35,18 @@ class ReviewDetailFragment
             vm = viewModel
         }
 
+        initView()
         initRecyclerView()
         initObservers()
+    }
+
+    private fun initView() {
+        bind {
+            swipeRefreshLayout.setOnRefreshListener {
+                viewModel.fetchReviews()
+                swipeRefreshLayout.isRefreshing = false
+            }
+        }
     }
 
     private fun initRecyclerView() {
@@ -52,8 +62,10 @@ class ReviewDetailFragment
             viewModel.reviewInfo.collect {
                 commentAdapter.submitList(it.comments.filter { comment -> comment.parentId == null })
             }
-            viewModel.event.collect { event ->
-                handleEvent(event)
+        }
+        lifecycleScope.launch {
+            viewModel.event.collect {
+                handleEvent(it)
             }
         }
     }
@@ -69,6 +81,9 @@ class ReviewDetailFragment
             }
             is ReviewDetailViewModel.Event.RemoveReview -> {
                 // TODO
+            }
+            is ReviewDetailViewModel.Event.PressBackButton -> {
+                activity?.onBackPressed()
             }
         }
     }

@@ -22,7 +22,13 @@
         android:label="SearchAppFragment">
         <action
             android:id="@+id/action_searchAppFragment_to_reviewSelectorFragment"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_to_left"
+            app:popEnterAnim="@anim/slide_from_left"
             app:destination="@id/reviewSelectorFragment" />
+        <action
+            android:id="@+id/action_searchAppFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/reviewSelectorFragment"
@@ -30,17 +36,29 @@
         android:label="ReviewSelectorFragment">
         <action
             android:id="@+id/action_reviewSelectorFragment_to_reviewRegisterFragment"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_to_left"
+            app:popEnterAnim="@anim/slide_from_left"
             app:destination="@id/reviewRegisterFragment">
             <argument
                 android:name="isBlackHoleReview"
                 android:defaultValue="false"
                 app:argType="boolean" />
         </action>
+        <action
+            android:id="@+id/action_reviewSelectorFragment_to_homeFragment"
+            app:popUpTo="@id/searchAppFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/reviewRegisterFragment"
         android:name="com.anonymous.appilogue.features.review.ReviewRegisterFragment"
-        android:label="ReviewRegisterFragment" />
+        android:label="ReviewRegisterFragment" >
+        <action
+            android:id="@+id/action_reviewRegisterFragment_to_homeFragment"
+            app:popUpTo="@id/reviewSelectorFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/loungeFragment"

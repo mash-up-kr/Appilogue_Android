@@ -113,7 +113,7 @@
             android:id="@+id/hashtags_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="18dp"
+            android:layout_marginTop="12dp"
             app:selectionRequired="false"
             app:tags="@{item.hashtags}"
             app:layout_constraintTop_toBottomOf="@id/app_info_container"
@@ -124,7 +124,7 @@
             android:id="@+id/like_view"
             android:layout_width="12dp"
             android:layout_height="12dp"
-            android:layout_marginTop="26dp"
+            android:layout_marginTop="20dp"
             android:src="@drawable/ic_heart_selector"
             app:layout_constraintTop_toBottomOf="@id/hashtags_container"
             app:layout_constraintStart_toStartOf="parent" />

@@ -41,6 +41,8 @@ class HomeFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (activity as MainActivity).showBottomNavigation()
+
         bind {
             homeViewModel = viewModel
         }
@@ -52,10 +54,10 @@ class HomeFragment :
         }
         SpaceAnimator.animateSpace(binding.ivSpace)
         viewModel.changeFocus(Focus.None)
-        initOnboarding()
+        initOnBoarding()
     }
 
-    private fun initOnboarding() {
+    private fun initOnBoarding() {
         PreferenceManager.getDefaultSharedPreferences(context).apply {
             if (!getBoolean(COMPLETED_ONBOARDING, false)) {
                 childFragmentManager.commit {
