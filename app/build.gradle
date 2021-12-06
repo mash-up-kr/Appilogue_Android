@@ -109,4 +109,6 @@ dependencies {
     // preference
     implementation "androidx.preference:preference-ktx:$preferenceVersion"
 
+    // kakao login
+    implementation "com.kakao.sdk:v2-user:$kakaoLoginVersion"
 }
