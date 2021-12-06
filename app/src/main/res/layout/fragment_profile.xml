@@ -5,6 +5,13 @@
 
     <data>
 
+        <variable
+            name="profileViewModel"
+            type="com.anonymous.appilogue.features.profile.ProfileViewModel" />
+
+        <variable
+            name="mainViewModel"
+            type="com.anonymous.appilogue.features.main.MainViewModel" />
     </data>
 
 
@@ -66,19 +73,21 @@
 
                 <ImageView
                     android:id="@+id/iv_space_dust"
+                    imageUrl="@{mainViewModel.myUser.profileImage}"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_marginTop="30dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/iv_space"
-                    app:srcCompat="@drawable/space_dust" />
+                    tools:srcCompat="@drawable/space_dust" />
 
                 <TextView
                     android:id="@+id/tv_nickname"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
+                    android:text="@{mainViewModel.myUser.nickname}"
                     android:textColor="@color/white"
                     android:textSize="18sp"
                     app:layout_constraintEnd_toEndOf="@+id/iv_space_dust"
@@ -90,6 +99,7 @@
                     android:id="@+id/tv_email"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="@{mainViewModel.myUser.email}"
                     android:textColor="@color/gray_02"
                     app:layout_constraintEnd_toEndOf="@+id/tv_nickname"
                     app:layout_constraintStart_toStartOf="@+id/tv_nickname"
@@ -145,6 +155,7 @@
                     android:id="@+id/tv_black_hole_num"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="@{profileViewModel.myBlackHoleReviewCount}"
                     android:textColor="@color/purple_01"
                     android:textSize="18sp"
                     app:layout_constraintEnd_toEndOf="@+id/tv_black_hole"
@@ -167,6 +178,7 @@
                     android:id="@+id/tv_white_hole_num"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="@{profileViewModel.myWhiteHoleReviewCount}"
                     android:textColor="@color/purple_01"
                     android:textSize="18sp"
                     app:layout_constraintEnd_toEndOf="@+id/tv_white_hole"

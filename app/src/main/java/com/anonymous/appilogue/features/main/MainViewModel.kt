@@ -42,7 +42,7 @@ class MainViewModel @Inject constructor(private val userRepository: UserReposito
     fun fetchMyInformation() {
         viewModelScope.launch {
             userRepository.fetchMyInformation()?.let {
-                _myUser.value = User(it.id, it.nickname, it.profileImage)
+                _myUser.value = it
             }
         }
     }

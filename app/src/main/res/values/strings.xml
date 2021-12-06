@@ -113,4 +113,5 @@
     <string name="set_notification">알림설정</string>
     <string name="anonymous">Anonymous</string>
     <string name="anonymous_maker_email">Annonymous@gmail.com</string>
+    <string name="profile_not_found_version">버전 정보를 찾을 수 없습니다</string>
 </resources>
