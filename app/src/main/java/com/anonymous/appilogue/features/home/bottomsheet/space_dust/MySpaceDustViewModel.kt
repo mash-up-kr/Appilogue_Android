@@ -9,6 +9,7 @@ import com.anonymous.appilogue.model.User
 import com.anonymous.appilogue.repository.ItemRepository
 import com.anonymous.appilogue.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -24,6 +25,8 @@ class MySpaceDustViewModel @Inject constructor(
 
     private val _selectedSpaceDustImageUrl = MutableLiveData(DEFAULT_SPACE_DUST_IMAGE_URL)
     val selectedSpaceDustImageUrl: LiveData<String> = _selectedSpaceDustImageUrl
+
+    val toastEvent = MutableSharedFlow<Unit>()
 
     fun fetchSpaceDustItems() {
         viewModelScope.launch {
@@ -72,7 +75,9 @@ class MySpaceDustViewModel @Inject constructor(
     fun saveMySpaceDust(user: User) {
         viewModelScope.launch {
             selectedSpaceDustImageUrl.value?.let {
-                userRepository.saveMyInformation(user.copy(profileImage = it))
+                if (userRepository.saveMyInformation(user.copy(profileImage = it))) {
+                    toastEvent.emit(Unit)
+                }
             }
         }
     }

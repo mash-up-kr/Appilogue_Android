@@ -28,7 +28,7 @@ class ProfileFragment :
         fetchApplicationVersion()
     }
 
-    fun fetchApplicationVersion() {
+    private fun fetchApplicationVersion() {
         try {
             val packageInfo = requireContext().packageManager.getPackageInfo(
                 requireContext().packageName, 0

@@ -4,11 +4,15 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.commit
+import androidx.lifecycle.lifecycleScope
 import com.anonymous.appilogue.R
 import com.anonymous.appilogue.databinding.FragmentSaveSpaceDustDialogBinding
 import com.anonymous.appilogue.features.base.BaseFragment
 import com.anonymous.appilogue.features.home.HomeViewModel
 import com.anonymous.appilogue.features.main.MainViewModel
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 class SaveSpaceDustDialogFragment :
     BaseFragment<FragmentSaveSpaceDustDialogBinding, HomeViewModel>(
@@ -30,7 +34,6 @@ class SaveSpaceDustDialogFragment :
                 mainViewModel.myUser.value?.let { user ->
                     mySpaceDustViewModel.saveMySpaceDust(user)
                 }
-                viewModel.showSaveSuccessToast()
                 parentFragmentManager.commit {
                     remove(this@SaveSpaceDustDialogFragment)
                 }

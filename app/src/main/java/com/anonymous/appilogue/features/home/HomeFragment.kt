@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.ImageView
 import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.*
+import androidx.lifecycle.lifecycleScope
 import com.anonymous.appilogue.R
 import com.anonymous.appilogue.databinding.FragmentHomeBinding
 import com.anonymous.appilogue.features.base.BaseFragment
@@ -25,6 +26,8 @@ import com.anonymous.appilogue.preference.AppilogueSharedPreferences
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
 
@@ -58,6 +61,15 @@ class HomeFragment :
         SpaceAnimator.animateSpace(binding.ivSpace)
         viewModel.changeFocus(Focus.None)
         initOnboarding()
+        observeToast()
+    }
+
+    private fun observeToast() {
+        lifecycleScope.launch {
+            _mySpaceDustViewModel.toastEvent.collect {
+                viewModel.showSaveSuccessToast()
+            }
+        }
     }
 
     private fun initOnboarding() {
