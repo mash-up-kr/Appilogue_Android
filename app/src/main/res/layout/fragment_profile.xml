@@ -95,6 +95,22 @@
                     app:layout_constraintTop_toBottomOf="@+id/iv_space_dust"
                     tools:text="어나니머쓱" />
 
+
+                <TextView
+                    android:id="@+id/tv_revise"
+                    android:layout_width="40dp"
+                    android:layout_height="22dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="30dp"
+                    android:background="@drawable/border_radius_50"
+                    android:gravity="center"
+                    android:text="@string/revise"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_nickname"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tv_nickname" />
+
                 <TextView
                     android:id="@+id/tv_email"
                     android:layout_width="wrap_content"
@@ -264,7 +280,8 @@
                     app:layout_constraintBottom_toTopOf="@+id/v8"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/v7"
-                    app:srcCompat="@drawable/ic_next" />
+                    app:srcCompat="@drawable/ic_next"
+                    tools:ignore="ContentDescription" />
 
                 <View
                     android:id="@+id/v9"
@@ -360,7 +377,7 @@
                     app:layout_constraintTop_toBottomOf="@id/v11" />
 
                 <TextView
-                    android:id="@+id/tv_version"
+                    android:id="@+id/tv_revise_password"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"

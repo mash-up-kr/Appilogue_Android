@@ -6,6 +6,7 @@ enum class BottomNavigationStateById(val id: Int, val isHiding: Boolean) {
     HOME(R.id.homeFragment, false),
     COMMUNITY(R.id.communityFragment, false),
     PROFILE(R.id.profileFragment, false),
+    PROFILE_SETTING(R.id.profileSettingFragment, true),
     SEARCH_APP_FRAGMENT(R.id.searchAppFragment, true),
     REVIEW_SELECTOR_FRAGMENT(R.id.reviewSelectorFragment, true),
     REVIEW_REGISTER_FRAGMENT(R.id.reviewRegisterFragment, true),
