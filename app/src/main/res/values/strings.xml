@@ -72,6 +72,8 @@
     <string name="hashtag_text_format">#%s</string>
     <string name="remove_result_message">삭제 되었습니다.</string>
     <string name="report_result_message">신고 되었습니다.</string>
+    <string name="review_register_complete_title">%s로 보내기 완료!</string>
+    <string name="review_register_complete_sub_title">작성한 앱이 %s로 슉- 날아갔어요!</string>
     <!--   Login  -->
     <string name="insert_email">이메일을 입력해주세요</string>
     <string name="next_button">다음</string>
@@ -117,4 +119,5 @@
     <string name="menu_text_report">신고하기</string>
     <string name="menu_text_delete">삭제하기</string>
     <string name="menu_text_cancel">취소</string>
+    <string name="ok_text">확인</string>
 </resources>

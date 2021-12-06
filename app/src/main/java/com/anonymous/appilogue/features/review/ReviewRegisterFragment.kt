@@ -84,7 +84,16 @@ class ReviewRegisterFragment
                     appName = appName,
                     hashtags = hashtags
                 ) {
-                    context?.showToast("success")
+                    context?.let { ctx ->
+                        RegisterCompleteDialog(ctx, viewModel.isBlackHoleReview).run {
+                            setCanceledOnTouchOutside(true)
+                            setCancelable(true)
+                            show()
+                        }
+
+                        val action = ReviewRegisterFragmentDirections.actionReviewRegisterFragmentToHomeFragment()
+                        (activity as MainActivity).navigateTo(action)
+                    }
                 }
             }
 
