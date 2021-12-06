@@ -34,7 +34,9 @@
     <string name="history_minute_passed">%1$d분 전</string>
     <string name="history_hour_passed">%1$d시간 전</string>
     <string name="history_day_passed">%1$d일 전</string>
+    <string name="history_week_passed">%1$d주 전</string>
     <string name="history_month_passed">%1$d달 전</string>
+    <string name="history_year_format">yyyy. MM. dd</string>
     <string name="today">오늘</string>
     <string name="this_week">이번 주</string>
     <string name="this_month">이번 달</string>
