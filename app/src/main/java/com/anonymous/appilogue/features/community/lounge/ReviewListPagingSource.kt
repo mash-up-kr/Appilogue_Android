@@ -28,15 +28,11 @@ class ReviewListPagingSource(
                 null
             }
 
-            return if (result.isNotEmpty()) {
-                LoadResult.Page(
-                    data = result,
-                    prevKey = prevKey,
-                    nextKey = nextKey
-                )
-            } else {
-                LoadResult.Error(response.throwableOrNull() ?: UnknownException(-1, "Unknown Exception"))
-            }
+            LoadResult.Page(
+                data = result,
+                prevKey = prevKey,
+                nextKey = nextKey
+            )
         } catch (e: Exception) {
             LoadResult.Error(e)
         }
