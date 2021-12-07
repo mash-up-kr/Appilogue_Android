@@ -1,8 +1,13 @@
 package com.anonymous.appilogue.di
 
+import com.anonymous.appilogue.network.api.AuthApi
+import com.anonymous.appilogue.network.api.ItemApi
+import com.anonymous.appilogue.network.api.SearchApi
+import com.anonymous.appilogue.network.api.UserApi
 import com.anonymous.appilogue.persistence.InstalledAppDao
 import com.anonymous.appilogue.repository.*
 import com.anonymous.appilogue.repository.remote.AuthApi
+import com.anonymous.appilogue.repository.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -31,5 +36,20 @@ object RepositoryModule {
     @Singleton
     @Provides
     fun provideLoginRepository(authApi: AuthApi): LoginRepository = LoginRepository(authApi)
+
+    @Singleton
+    @Provides
+    fun provideReviewRepository(searchApi: SearchApi): ReviewRepository =
+        FakeReviewRepository(searchApi)
+
+    @Singleton
+    @Provides
+    fun provideItemRepository(itemApi: ItemApi): ItemRepository =
+        DefaultItemRepository(itemApi)
+
+    @Singleton
+    @Provides
+    fun provideUserRepository(authApi: AuthApi, userApi: UserApi): UserRepository =
+        DefaultUserRepository(authApi, userApi)
 
 }

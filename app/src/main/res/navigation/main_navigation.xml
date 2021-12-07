@@ -21,6 +21,10 @@
         android:name="com.anonymous.appilogue.features.history.HistoryFragment"
         android:label="AlarmFragment" />
     <fragment
+        android:id="@+id/profileSettingFragment"
+        android:name="com.anonymous.appilogue.features.profile.ProfileSettingFragment"
+        android:label="ProfileSettingFragment" />
+    <fragment
         android:id="@+id/searchAppFragment"
         android:name="com.anonymous.appilogue.features.search.SearchAppFragment"
         android:label="SearchAppFragment">

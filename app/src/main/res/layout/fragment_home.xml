@@ -14,6 +14,10 @@
         <variable
             name="homeViewModel"
             type="com.anonymous.appilogue.features.home.HomeViewModel" />
+
+        <variable
+            name="mySpaceDustViewModel"
+            type="com.anonymous.appilogue.features.home.bottomsheet.space_dust.MySpaceDustViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -21,6 +25,7 @@
         android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -32,7 +37,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@mipmap/img_home_bg"
+                app:srcCompat="@drawable/img_home_bg"
                 tools:ignore="ContentDescription" />
 
             <TextView
@@ -64,13 +69,14 @@
                 android:layout_width="220dp"
                 android:layout_height="220dp"
                 android:layout_marginBottom="20dp"
+                android:alpha="@{homeViewModel.starsAlpha.planetAlpha}"
                 android:clickable="@{homeViewModel.starFocused == Focus.None}"
                 android:onClick="@{ _ -> homeViewModel.changeFocus(Focus.OnPlanet)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@mipmap/main_planet"
+                app:srcCompat="@drawable/main_planet"
                 tools:ignore="ContentDescription" />
 
             <ImageView
@@ -78,38 +84,44 @@
                 android:layout_width="136dp"
                 android:layout_height="136dp"
                 android:layout_marginStart="23dp"
-                android:layout_marginBottom="138dp"
+                android:alpha="@{homeViewModel.starsAlpha.blackHoleAlpha}"
                 android:clickable="@{homeViewModel.starFocused == Focus.None}"
                 android:onClick="@{ _ -> homeViewModel.changeFocus(Focus.OnBlackHole)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:srcCompat="@mipmap/black_hole"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.8"
+                app:srcCompat="@drawable/black_hole"
                 tools:ignore="ContentDescription" />
 
             <ImageView
                 android:id="@+id/iv_whiteHole"
                 android:layout_width="133dp"
                 android:layout_height="133dp"
-                android:layout_marginTop="101dp"
                 android:layout_marginEnd="18dp"
+                android:alpha="@{homeViewModel.starsAlpha.whiteHoleAlpha}"
                 android:clickable="@{homeViewModel.starFocused == Focus.None}"
                 android:onClick="@{ _ -> homeViewModel.changeFocus(Focus.OnWhiteHole)}"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@mipmap/white_hole"
+                app:layout_constraintVertical_bias="0.2"
+                app:srcCompat="@drawable/white_hole"
                 tools:ignore="ContentDescription" />
 
             <ImageView
                 android:id="@+id/iv_spaceDust"
+                ImageUrlSpaceDust="@{mySpaceDustViewModel.selectedSpaceDustImageUrl}"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginEnd="40dp"
-                android:layout_marginBottom="174dp"
+                android:alpha="@{homeViewModel.starsAlpha.spaceDustAlpha}"
                 android:clickable="@{homeViewModel.starFocused == Focus.None}"
                 android:onClick="@{ _ -> homeViewModel.changeFocus(Focus.OnSpaceDust)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:srcCompat="@mipmap/space_dust"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.7"
                 tools:ignore="ContentDescription" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -149,6 +161,23 @@
             android:id="@+id/bottomSheetHome"
             layout="@layout/bottomsheet_home"
             app:homeViewModel="@{homeViewModel}" />
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fcv_home"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <include
+            android:id="@+id/toast_save_success"
+            layout="@layout/toast_save_success"
+            android:visibility="@{homeViewModel.saveSuccessToastVisibility? View.VISIBLE : View.INVISIBLE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

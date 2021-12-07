@@ -19,7 +19,7 @@ fun TextView.setHistoryText(history: History) {
             viewTreeObserver.removeOnPreDrawListener(this)
             val ellipsisText = context.getString(
                 history.historyType.stringResId,
-                history.from.nickName,
+                history.from.nickname,
                 history.date.dateToPassedTime(context),
                 history.description
             )
@@ -36,7 +36,7 @@ fun TextView.setHistoryText(history: History) {
                 .apply {
                     setSpan(
                         ForegroundColorSpan(context.getColor(R.color.purple_01)),
-                        0, history.from.nickName.length,
+                        0, history.from.nickname.length,
                         Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
                     )
                     setSpan(

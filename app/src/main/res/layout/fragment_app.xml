@@ -5,8 +5,8 @@
     <data>
 
         <variable
-            name="homeViewModel"
-            type="com.anonymous.appilogue.features.home.HomeViewModel" />
+            name="holeViewModel"
+            type="com.anonymous.appilogue.features.home.bottomsheet.hole.HoleViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,7 +15,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_bottomSheetApps"
-            replaceList="@{homeViewModel.apps}"
+            replaceList="@{holeViewModel.apps}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
