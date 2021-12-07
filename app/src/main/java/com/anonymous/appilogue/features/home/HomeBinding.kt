@@ -1,14 +1,21 @@
 package com.anonymous.appilogue.features.home
 
+import android.content.Context
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import com.anonymous.appilogue.R
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.bumptech.glide.request.transition.DrawableCrossFadeFactory
+
+import android.R.string.no
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
+
 
 @BindingAdapter("titleByFocus")
 fun TextView.setTitleByFocus(focus: Focus) {
@@ -40,6 +47,24 @@ fun ImageView.bindAppImageUrl(uri: String?) {
             .into(this)
     }
 }
+
+@BindingAdapter("backgroundBySelect")
+fun ConstraintLayout.setBackgroundBySelect(isSelected: Boolean) {
+    background =
+        if (isSelected) ContextCompat.getDrawable(context, R.drawable.border_radius_10_purple)
+        else ContextCompat.getDrawable(context, R.drawable.border_radius_10)
+}
+
+@BindingAdapter("ImageUrlSpaceDust")
+fun ImageView.bindImageUrlSpaceDust(uri: String?) {
+    if (!uri.isNullOrEmpty()) {
+        Glide.with(context)
+            .load(uri)
+            .override(640)
+            .into(this)
+    }
+}
+
 
 const val EMPTY_STRING = ""
 const val APP_ICON_RADIUS = 20

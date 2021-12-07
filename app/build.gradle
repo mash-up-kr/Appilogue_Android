@@ -82,6 +82,7 @@ dependencies {
     // network
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
     implementation "com.squareup.retrofit2:converter-moshi:$retrofitVersion"
+    implementation "com.squareup.retrofit2:adapter-rxjava3:$retrofitVersion"
 
     // serialization
     implementation "com.squareup.moshi:moshi-kotlin:$moshiVersion"
@@ -105,6 +106,7 @@ dependencies {
     releaseImplementation "com.facebook.flipper:flipper-noop:$flipperVersion"
 
     // widget
+
     implementation "com.google.android.flexbox:flexbox:$flexboxLayoutVersion"
 
     // test
@@ -117,5 +119,7 @@ dependencies {
 
     // etc
     implementation group: 'de.svenkubiak', name: 'jBCrypt', version: "0.4.1"
+    // kakao login
+    implementation "com.kakao.sdk:v2-user:$kakaoLoginVersion"
 }
 

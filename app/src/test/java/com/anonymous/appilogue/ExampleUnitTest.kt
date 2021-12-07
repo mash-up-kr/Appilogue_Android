@@ -13,4 +13,13 @@ class ExampleUnitTest {
     fun addition_isCorrect() {
         assertEquals(4, 2 + 2)
     }
+
+//    @Test
+//    fun test_Bcyrpt() {
+//        val data1 = BCrypt.hashpw("12345678", BCrypt.gensalt())
+//
+//        val data2 = BCrypt.hashpw("12345678", BCrypt.gensalt())
+//        assertEquals(data1, data2)
+//    }
+
 }

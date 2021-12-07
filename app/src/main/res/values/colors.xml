@@ -14,8 +14,10 @@
     <color name="white">#FFFFFFFF</color>
     <color name="black_alpha90">#E6000000</color>
     <color name="black_alpha30">#1E000000</color>
+    <color name="black_alpha70">#B3000000</color>
     <color name="black_01">#13151B</color>
     <color name="black_02">#0D0F13</color>
     <color name="yellow">#FFD336</color>
     <color name="login_black">#000000</color>
+    <color name="dark_black_01">#0C0D11</color>
 </resources>

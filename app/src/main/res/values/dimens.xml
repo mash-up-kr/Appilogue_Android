@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="size_navigation_icon">36dp</dimen>
-    <dimen name="peek_bottomsheet_home">192dp</dimen>
+    <dimen name="peek_bottomsheet_home_default">192dp</dimen>
+    <dimen name="peek_bottomsheet_home_space_dust">235dp</dimen>
     <dimen name="expanded_bottomsheet_home_margin">108dp</dimen>
     <dimen name="bottom_sheet_radius">20dp</dimen>
     <dimen name="review_content_vertical_margin">12dp</dimen>
@@ -11,7 +12,8 @@
     <dimen name="history_side_margin">24dp</dimen>
     <dimen name="history_top_margin">10dp</dimen>
     <dimen name="history_bottom_margin">20dp</dimen>
-    <dimen name="bottom_sheet_item_side_margin">3dp</dimen>
+    <dimen name="bottom_sheet_app_item_side_margin">3dp</dimen>
+    <dimen name="bottom_sheet_space_dust_item_side_margin">9dp</dimen>
     <dimen name="bottom_sheet_item_bottom_margin">20dp</dimen>
     <dimen name="chip_stroke_width">2dp</dimen>
     <dimen name="hashtag_margin_end">10dp</dimen>

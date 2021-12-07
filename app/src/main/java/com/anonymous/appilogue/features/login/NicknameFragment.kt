@@ -3,16 +3,23 @@ package com.anonymous.appilogue.features.login
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
-import android.text.TextWatcher
 import android.view.View
 import android.view.View.GONE
 import androidx.core.content.ContextCompat
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.activityViewModels
 import com.anonymous.appilogue.R
 import com.anonymous.appilogue.databinding.FragmentNicknameBinding
 import com.anonymous.appilogue.features.base.BaseFragment
 import com.anonymous.appilogue.features.main.MainActivity
+import com.jakewharton.rxbinding4.widget.textChanges
+import dagger.hilt.android.AndroidEntryPoint
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.schedulers.Schedulers
+import timber.log.Timber
+import java.util.concurrent.TimeUnit
 
+@AndroidEntryPoint
 class NicknameFragment :
     BaseFragment<FragmentNicknameBinding, LoginViewModel>(R.layout.fragment_nickname) {
     override val viewModel: LoginViewModel by activityViewModels()
@@ -20,45 +27,80 @@ class NicknameFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initClickListener()
-        binding.nicknameInputText.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
-                // do nothing
-            }
-
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                binding.nicknameCounting.text = "${binding.nicknameInputText.length()}/10"
-            }
-
-            override fun afterTextChanged(s: Editable) {
-                with(binding) {
-                    if (true) {  // 임시 데이터 true 입니당 서버에서 값을 가져와서 확인해야 합니다
-                        setCorrect(s)
-                        nicknameUsedNameNotification.visibility = GONE
-                    } else if (s.isEmpty()) {
-                        nicknameUsedNameNotification.text = getString(R.string.please_enter_nickname)
-                        nicknameDoneButton.isEnabled
-                    } else {
-                        // 서버에 같은 닉네임이 있다면.
-                        setIncorrect()
-                        nicknameUsedNameNotification.visibility = View.VISIBLE
-                    }
-                }
-
-            }
-        })
+        initDoneClickListener()
+        addTextChangeListenerNicknameInputText()
     }
 
-    private fun initClickListener() {
+    private fun addTextChangeListenerNicknameInputText() {
+        binding.nicknameInputText.doOnTextChanged { _, _, _, _ ->
+            binding.nicknameCounting.text = "${binding.nicknameInputText.length()}/10"
+        }
+
+        binding.nicknameInputText.textChanges()
+            .debounce(1000L, TimeUnit.MILLISECONDS)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                viewModel.validateNickname(it.toString())
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe({ validateNickName ->
+                        when {
+                            it.toString() == "" -> {
+                                setInitState()
+                                with(binding.nicknameUsedNameNotification) {
+                                    text = getString(R.string.please_enter_nickname)
+                                    visibility = View.VISIBLE
+                                    context?.let { ctx ->
+                                        setTextColor(ContextCompat.getColor(ctx, R.color.gray_02))
+                                    }
+                                }
+                            }
+                            validateNickName.isUnique -> {
+                                setCorrect(it as Editable)
+                                binding.nicknameUsedNameNotification.visibility = GONE
+                            }
+                            else -> {
+                                setIncorrect()
+                                with(binding.nicknameUsedNameNotification) {
+                                    text = getString(R.string.nickname_be_used)
+                                    context?.let { ctx ->
+                                        setTextColor(ContextCompat.getColor(ctx, R.color.red))
+                                    }
+                                }
+                                binding.nicknameUsedNameNotification.visibility = View.VISIBLE
+                            }
+                        }
+                    }) {
+                        Timber.d("${it.message}")
+                    }
+
+            }
+    }
+
+    private fun initDoneClickListener() {
         with(binding) {
             with(nicknameDoneButton) {
                 binding.nicknameUsedNameNotification.visibility = GONE
                 FirstButtonInit.buttonInit(this)
                 setOnClickListener {
+                    sendToServerUserData()
                     val intent = Intent(activity, MainActivity::class.java)
                     startActivity(intent)
                 }
             }
+        }
+    }
+
+    private fun sendToServerUserData() {
+        viewModel.sendToServerUserData().subscribe({
+            if (it.isVerified) {
+                Timber.d("등록 성공")
+            } else {
+                Timber.d("등록 오류")
+            }
+        }) {
+            Timber.d("${it.message.toString()}")
         }
     }
 
@@ -101,4 +143,21 @@ class NicknameFragment :
         }
     }
 
+    private fun setInitState() {
+        with(binding) {
+            nicknameDoneButton.isEnabled = false
+
+            with(nicknameInputText) {
+                setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0)
+                setBackgroundResource(R.drawable.border_radius_10)
+            }
+
+            with(nicknameDoneButton) {
+                context?.let { ctx ->
+                    setTextColor(ContextCompat.getColor(ctx, R.color.gray_01))
+                    background.setTint(ContextCompat.getColor(ctx, R.color.gray_02))
+                }
+            }
+        }
+    }
 }

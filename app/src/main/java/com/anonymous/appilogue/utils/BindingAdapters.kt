@@ -23,7 +23,9 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
+import com.bumptech.glide.load.DecodeFormat
 import com.google.android.material.textfield.TextInputLayout
+import timber.log.Timber
 
 
 @BindingAdapter("showHint")
@@ -73,6 +75,7 @@ fun TextView.bindIsSelected(selected: Boolean) {
 
 @BindingAdapter("replaceList")
 fun RecyclerView.replaceList(list: List<Any>?) {
+    Timber.d(list.toString())
     @Suppress("UNCHECKED_CAST")
     (this.adapter as ListAdapter<Any, RecyclerView.ViewHolder>).run {
         this.submitList(list)

@@ -107,6 +107,33 @@
     <string name="email_signed_up_text">"가입한 이메일 주소를 입력해주세요"</string>
     <string name="password_reset">"비밀번호 재설정"</string>
     <string name="please_enter_nickname">"닉네임을 입력해주세요."</string>
+    <string name="wrong_certification">"인증번호가 다릅니다!"</string>
+    <string name="resend_certification_notify">"재전송 된 번호를 입력해주세요"</string>
+    <string name="alreay_signup">"이미 가입된 이메일입니다."</string>
+    <string name="not_signup">"가입되지 않은 이메일입니다."</string>
+    <string name="same_password">"이전 비밀번호와 동일합니다."</string>
+    <string name="save">저장</string>
+    <string name="save_this">이대로 저장하시겠어요?</string>
+    <string name="let_my_space_dust">나만의 먼지가 될꺼에요!</string>
+    <string name="check">확인</string>
+    <string name="save_success">저장 완료!</string>
+    <!--   MyPage  -->
+    <string name="my_page">마이페이지</string>
+    <string name="version">버전</string>
+    <string name="maker">만든이</string>
+    <string name="question">문의하기</string>
+    <string name="setting_account">계정관리</string>
+    <string name="set_notification">알림설정</string>
+    <string name="anonymous">Anonymous</string>
+    <string name="anonymous_maker_email">Annonymous@gmail.com</string>
+    <string name="profile_not_found_version">버전 정보를 찾을 수 없습니다</string>
+    <string name="revise">수정</string>
+    <string name="my_account">내 계정</string>
+    <string name="reset_password">비밀번호 재설정</string>
+    <string name="logout">로그아웃</string>
+    <string name="resign_service">서비스 탈퇴</string>
+    <string name="complete">완료</string>
+    <string name="cancel">취소</string>
     <!-- Lounge -->
     <string name="more_button_description">More button</string>
     <string name="dummy_content">본문은 여기에 나타나고 최대 다섯줄 노출시키도록 하겠습니다. 만약 다섯줄 이상의 텍스트양이면 …으로 줄여지면서 더보기 기능이 추가되게 진행하겠습니다. 예를 들면 지금 이렇게 네줄이 되었고, 다섯줄이 되기까지 안간힘을 쓰며 글을 쓴다면 바로 확인해볼 수 있습니다. 글자수 채우기 너무 어렵다! 지금은 또 풀로 볼 수 있을 때의 화면이다!!</string>
