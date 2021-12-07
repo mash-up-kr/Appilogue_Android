@@ -74,6 +74,16 @@
                 android:name="reviewId"
                 app:argType="integer" />
         </action>
+        <action
+            android:id="@+id/action_reviewListFragment_to_appInfoFragment"
+            app:destination="@id/appInfoFragment"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_to_left"
+            app:popEnterAnim="@anim/slide_from_left">
+            <argument
+                android:name="appInfo"
+                app:argType="com.anonymous.appilogue.model.AppModel"/>
+        </action>
     </fragment>
     <fragment
         android:id="@+id/reviewListFragment"
@@ -96,9 +106,23 @@
                 android:name="commentId"
                 app:argType="integer" />
         </action>
+        <action
+            android:id="@+id/action_reviewDetailFragment_to_appInfoFragment"
+            app:destination="@id/appInfoFragment"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_to_left"
+            app:popEnterAnim="@anim/slide_from_left">
+            <argument
+                android:name="appInfo"
+                app:argType="com.anonymous.appilogue.model.AppModel"/>
+        </action>
     </fragment>
     <fragment
         android:id="@+id/commentDetailFragment"
         android:name="com.anonymous.appilogue.features.community.comment.CommentDetailFragment"
         android:label="CommentDetailFragment" />
+    <fragment
+        android:id="@+id/appInfoFragment"
+        android:name="com.anonymous.appilogue.features.appinfo.AppInfoFragment"
+        android:label="AppInfoFragment" />
 </navigation>

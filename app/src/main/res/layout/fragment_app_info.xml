@@ -1,13 +1,150 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="vm"
+            type="com.anonymous.appilogue.features.appinfo.AppInfoViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/black">
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/black"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+            <androidx.appcompat.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp">
+
+                    <ImageView
+                        android:id="@+id/toolbar_left_icon_view"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_back_left_24"
+                        android:contentDescription="@string/description_back_button"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        />
+
+                    <TextView
+                        android:id="@+id/toolbar_title_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{@string/app_info_review_title(vm.simpleInfo.name)}"
+                        style="@style/TextStyle.Normal18"
+                        tools:text="어나니머쓲 리뷰"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <ImageView
+            android:id="@+id/app_icon_view"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="@dimen/review_content_horizontal_margin"
+            android:layout_marginTop="18dp"
+            android:background="@drawable/border_radius_10"
+            android:backgroundTint="@android:color/transparent"
+            app:imageUrl="@{vm.simpleInfo.iconUrl}"
+            app:layout_constraintTop_toBottomOf="@id/appbar_layout"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/app_name_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:text="@{vm.simpleInfo.name}"
+            style="@style/TextStyle.Normal18"
+            tools:text="어나니머쓲"
+            app:layout_constraintStart_toEndOf="@id/app_icon_view"
+            app:layout_constraintTop_toTopOf="@id/app_icon_view"
+            app:layout_constraintBottom_toBottomOf="@id/app_icon_view" />
+
+        <TextView
+            android:id="@+id/write_review_button_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/review_content_horizontal_margin"
+            android:padding="8dp"
+            android:background="@drawable/border_radius_12"
+            android:textColor="@color/gray_04"
+            android:text="@string/write_review_text"
+            style="@style/TextStyle.Normal12"
+            app:layout_constraintTop_toTopOf="@id/app_icon_view"
+            app:layout_constraintBottom_toBottomOf="@id/app_icon_view"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <View
+            android:id="@+id/top_divider_view"
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:layout_marginTop="24dp"
+            android:background="@color/black_02"
+            app:layout_constraintTop_toBottomOf="@id/app_icon_view" />
+
+        <TextView
+            android:id="@+id/ratio_title_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@{@string/ratio_title_text_format(vm.simpleInfo.name)}"
+            style="@style/TextStyle.Normal14"
+            tools:text="@string/ratio_title_text_format"
+            app:layout_constraintTop_toBottomOf="@id/top_divider_view"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/black_hole_ratio_view"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="27dp"
+            android:background="@drawable/border_radius_16"
+            android:gravity="center"
+            android:textSize="22sp"
+            app:layout_constraintEnd_toStartOf="@id/white_hole_ratio_view"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ratio_title_view" />
+
+        <TextView
+            android:id="@+id/white_hole_ratio_view"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:gravity="center"
+            android:textSize="22sp"
+            android:background="@drawable/border_radius_16"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/black_hole_ratio_view"
+            app:layout_constraintTop_toTopOf="@id/black_hole_ratio_view" />
+
+        <View
+            android:id="@+id/middle_divider_view"
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:layout_marginTop="34dp"
+            android:background="@color/black_02"
+            app:layout_constraintTop_toBottomOf="@id/black_hole_ratio_view" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

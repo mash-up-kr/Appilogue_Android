@@ -88,4 +88,12 @@ object NetworkModule {
     ): ImageApi {
         return retrofit.create(ImageApi::class.java)
     }
+
+    @Provides
+    @Singleton
+    fun provideAppApi(
+        retrofit: Retrofit
+    ): AppApi {
+        return retrofit.create(AppApi::class.java)
+    }
 }

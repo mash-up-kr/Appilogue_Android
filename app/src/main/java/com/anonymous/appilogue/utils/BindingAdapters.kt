@@ -11,11 +11,14 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.databinding.BindingAdapter
+import androidx.databinding.InverseBindingListener
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.anonymous.appilogue.R
 import com.anonymous.appilogue.features.base.UiState
 import com.anonymous.appilogue.model.HashTagModel
+import com.anonymous.appilogue.model.LikesModel
+import com.anonymous.appilogue.persistence.PreferencesManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.chip.Chip
@@ -136,4 +139,10 @@ fun ProgressBar.bindShowProgress(uiState: UiState<*>) {
     } else {
         View.GONE
     }
+}
+
+@BindingAdapter("likeModels")
+fun ImageView.bindLikeModels(likeModels: List<LikesModel>) {
+    val myId = PreferencesManager.getUserId()
+    isSelected = likeModels.any { it.user.id == myId }
 }

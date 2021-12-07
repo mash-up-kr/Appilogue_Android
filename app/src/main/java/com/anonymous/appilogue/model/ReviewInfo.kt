@@ -15,6 +15,6 @@ data class ReviewInfo(
     @field:Json(name = "deletedAt") val deletedAt: Date? = null,
     @field:Json(name = "app") val app: AppModel = AppModel(),
     @field:Json(name = "hashtags") val hashtags: List<HashTagModel> = emptyList(),
-    @field:Json(name = "likes") val likes: List<LikesModel> = emptyList(),
+    @field:Json(name = "likes") var likes: List<LikesModel> = emptyList(),
     @field:Json(name = "comments") val comments: List<CommentModel> = emptyList()
 )

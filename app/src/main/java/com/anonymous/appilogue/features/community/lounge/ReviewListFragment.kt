@@ -94,15 +94,24 @@ class ReviewListFragment
                 .collectLatest {
                     reviewListAdapter.submitData(it)
                 }
-
+        }
+        lifecycleScope.launch {
             viewModel.isLoading.collect { isLoading ->
                 binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
             }
+        }
 
+        lifecycleScope.launch {
             viewModel.errorMessage.collect { errorMessage ->
                 if (!errorMessage.isNullOrEmpty()) {
                     context?.showToast(errorMessage)
                 }
+            }
+        }
+
+        lifecycleScope.launch {
+            viewModel.event.collect {
+                handleEvent(it)
             }
         }
     }
@@ -113,6 +122,16 @@ class ReviewListFragment
     }
 
     private fun navigateToAppInfo(item: AppModel) {
+        val action = LoungeFragmentDirections.actionReviewListFragmentToAppInfoFragment(item)
+        (activity as MainActivity).navigateTo(action)
+    }
+
+    private fun handleEvent(event: ReviewListViewModel.Event) {
+        when (event) {
+            is ReviewListViewModel.Event.PlusLike -> {
+                viewModel.plusLike(event.reviewInfo)
+            }
+        }
     }
 
     companion object {

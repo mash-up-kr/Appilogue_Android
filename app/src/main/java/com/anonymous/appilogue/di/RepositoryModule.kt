@@ -17,8 +17,9 @@ object RepositoryModule {
     @Singleton
     @Provides
     fun provideSearchAppRepository(
-        installedAppDao: InstalledAppDao
-    ) = SearchAppRepository(installedAppDao)
+        installedAppDao: InstalledAppDao,
+        appApi: AppApi
+    ) = SearchAppRepository(installedAppDao, appApi)
 
     @Provides
     @Singleton

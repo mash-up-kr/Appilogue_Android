@@ -27,20 +27,36 @@ class ReviewListAdapter(
             false
         )
         return ReviewItemViewHolder(binding, viewModel).apply {
-            with(binding) {
-                feedContainer.setOnClickListener {
-                    val position = bindingAdapterPosition
-                    if (position < itemCount) {
-                        getItem(position)?.let {
-                            navigateToDetail(it)
-                        }
+            initViewHolder(binding)
+        }
+    }
+
+    private fun ReviewItemViewHolder.initViewHolder(binding: ItemReviewContentBinding) {
+        with(binding) {
+            feedContainer.setOnClickListener {
+                val position = bindingAdapterPosition
+                if (position < itemCount) {
+                    getItem(position)?.let {
+                        navigateToDetail(it)
                     }
                 }
-                appInfoContainer.setOnClickListener {
-                    val position = bindingAdapterPosition
-                    if (position < itemCount) {
-                        getItem(position)?.let {
-                            navigateToAppInfo(it.app)
+            }
+            appInfoContainer.setOnClickListener {
+                val position = bindingAdapterPosition
+                if (position < itemCount) {
+                    getItem(position)?.let {
+                        navigateToAppInfo(it.app)
+                    }
+                }
+            }
+            likeView.setOnClickListener {
+                val position = bindingAdapterPosition
+                if (position < itemCount) {
+                    getItem(position)?.let { review ->
+                        if (!it.isSelected) {
+                            val likesCount = viewModel.plusLikeEvent(review)
+                            it.isSelected = true
+                            likeCountView.text = likesCount.toString()
                         }
                     }
                 }

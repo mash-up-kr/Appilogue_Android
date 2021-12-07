@@ -120,4 +120,9 @@
     <string name="menu_text_delete">삭제하기</string>
     <string name="menu_text_cancel">취소</string>
     <string name="ok_text">확인</string>
+    <!-- App Info -->
+    <string name="write_review_text">리뷰쓰기</string>
+    <string name="ratio_title_text_format">사람들은 %s을(를) 이렇게 생각하고 있어요!</string>
+    <string name="app_info_review_title">%s 리뷰</string>
+    <string name="app_review_ratio_format">%d %%</string>
 </resources>

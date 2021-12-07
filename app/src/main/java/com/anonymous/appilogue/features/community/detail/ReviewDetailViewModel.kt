@@ -6,10 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.anonymous.appilogue.features.base.UiState
 import com.anonymous.appilogue.features.base.isSuccessful
 import com.anonymous.appilogue.features.base.successOr
-import com.anonymous.appilogue.model.CommentDto
-import com.anonymous.appilogue.model.ReportModel
-import com.anonymous.appilogue.model.ReportType
-import com.anonymous.appilogue.model.ReviewInfo
+import com.anonymous.appilogue.model.*
 import com.anonymous.appilogue.usecase.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
@@ -25,6 +22,7 @@ class ReviewDetailViewModel @Inject constructor(
     private val reportReviewUseCase: ReportReviewUseCase,
     private val removeCommentUseCase: RemoveCommentUseCase,
     private val reportCommentUseCase: ReportCommentUseCase,
+    private val plusLikeUseCase: PlusLikeUseCase
 ): ViewModel() {
     val reviewId: Int = savedStateHandle.get<Int>(REVIEW_ID_KEY)!!
 
@@ -99,6 +97,12 @@ class ReviewDetailViewModel @Inject constructor(
         }
     }
 
+    fun plusLike(reviewInfo: ReviewInfo) {
+        viewModelScope.launch {
+            plusLikeUseCase(LikeDto(reviewInfo.id))
+        }
+    }
+
     fun getAuthorId(): Int = reviewInfo.value.user.id
 
     private fun handleRemoveOrReport(isMine: Boolean, block: suspend () -> UiState<*>) {
@@ -130,6 +134,17 @@ class ReviewDetailViewModel @Inject constructor(
         handleEvent(Event.ReportComment(commentId))
     }
 
+    fun moveToAppInfoEvent() {
+        handleEvent(Event.MoveToAppInfo(reviewInfo.value.app))
+    }
+
+    fun plusLikeEvent(): Int {
+        reviewInfo.value.likes = reviewInfo.value.likes + listOf(LikesModel())
+        handleEvent(Event.PlusLike(reviewInfo.value))
+
+        return reviewInfo.value.likes.size
+    }
+
     private fun handleEvent(event: Event) {
         viewModelScope.launch {
             _event.emit(event)
@@ -144,6 +159,8 @@ class ReviewDetailViewModel @Inject constructor(
         object ReportReview : Event()
         object PressBackButton : Event()
         data class ShowToastForResult(val isMine: Boolean) : Event()
+        data class MoveToAppInfo(val appInfo: AppModel) : Event()
+        data class PlusLike(val reviewInfo: ReviewInfo) : Event()
     }
 
     companion object {

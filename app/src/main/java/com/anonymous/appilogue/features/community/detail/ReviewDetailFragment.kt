@@ -59,6 +59,18 @@ class ReviewDetailFragment
                 }
                 (activity as MainActivity).showBottomSheetDialog(bottomSheetMenu)
             }
+
+            reviewContentView.appInfoContainer.setOnClickListener {
+                viewModel.moveToAppInfoEvent()
+            }
+
+            reviewContentView.likeView.setOnClickListener { v ->
+                if (!v.isSelected) {
+                    val likeCount = viewModel.plusLikeEvent()
+                    v.isSelected = true
+                    reviewContentView.likeCountView.text = likeCount.toString()
+                }
+            }
         }
     }
 
@@ -123,6 +135,13 @@ class ReviewDetailFragment
                     getString(R.string.report_result_message)
                 }
                 context?.showToast(message)
+            }
+            is ReviewDetailViewModel.Event.MoveToAppInfo -> {
+                val action = ReviewDetailFragmentDirections.actionReviewDetailFragmentToAppInfoFragment(event.appInfo)
+                (activity as MainActivity).navigateTo(action)
+            }
+            is ReviewDetailViewModel.Event.PlusLike -> {
+                viewModel.plusLike(event.reviewInfo)
             }
         }
     }
