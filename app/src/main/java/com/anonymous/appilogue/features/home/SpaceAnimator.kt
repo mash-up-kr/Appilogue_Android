@@ -36,7 +36,8 @@ object SpaceAnimator {
         val focusedStarYCenter = (focusedStar.top + focusedStar.bottom) / 2.0f
         val focusedStarSize = focusedStar.right - focusedStar.left
         val windowXCenter = Resources.getSystem().displayMetrics.widthPixels / 2.0f
-        val windowYCenter = Resources.getSystem().displayMetrics.heightPixels / 2.0f
+        val windowYCenter =
+            Resources.getSystem().displayMetrics.heightPixels / 2.0f * STAR_HEIGHT_POSITION
         val maxStarSize = windowXCenter / MAX_STAR_RATIO
         val scaleSize = if (isFocusIn) maxStarSize / focusedStarSize else 1f
         val focusXMoveSize = if (isFocusIn) (windowXCenter - focusedStarXCenter) else 0f
@@ -88,4 +89,5 @@ object SpaceAnimator {
     private const val STAR_INTERVAL_MAGNIFICATION = 7.0f
     private const val SPACE_MOVE_RANGE = 100f
     private const val SPACE_MOVE_DURATION = 6000L
+    private const val STAR_HEIGHT_POSITION = 0.8f
 }

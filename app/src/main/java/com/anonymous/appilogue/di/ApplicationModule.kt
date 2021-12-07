@@ -1,8 +1,10 @@
 package com.anonymous.appilogue.di
 
 import android.content.Context
+import android.content.SharedPreferences
 import com.anonymous.appilogue.features.search.AppSearchManager
 import com.anonymous.appilogue.repository.SearchAppRepository
+import androidx.preference.PreferenceManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -20,4 +22,9 @@ object ApplicationModule {
         @ApplicationContext context: Context,
         searchAppRepository: SearchAppRepository): AppSearchManager =
         AppSearchManager(context, searchAppRepository)
+
+    @Provides
+    @Singleton
+    fun provideSharedPreferenceManager(@ApplicationContext context: Context): SharedPreferences =
+        PreferenceManager.getDefaultSharedPreferences(context)
 }

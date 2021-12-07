@@ -1,16 +1,16 @@
-package com.anonymous.appilogue.features.home.bottomsheet
+package com.anonymous.appilogue.features.home.bottomsheet.space_dust
 
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.anonymous.appilogue.R
-import com.anonymous.appilogue.databinding.FragmentMyDecorationBinding
+import com.anonymous.appilogue.databinding.FragmentStoreBinding
 import com.anonymous.appilogue.features.base.BaseFragment
 import com.anonymous.appilogue.features.home.HomeViewModel
 
-class MyDecorationFragment :
-    BaseFragment<FragmentMyDecorationBinding, HomeViewModel>(R.layout.fragment_my_decoration) {
+class StoreFragment :
+    BaseFragment<FragmentStoreBinding, HomeViewModel>(R.layout.fragment_store) {
     override val viewModel: HomeViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -22,7 +22,7 @@ class MyDecorationFragment :
 
     companion object {
         fun newInstance(): Fragment {
-            return MyDecorationFragment()
+            return StoreFragment()
         }
     }
 }

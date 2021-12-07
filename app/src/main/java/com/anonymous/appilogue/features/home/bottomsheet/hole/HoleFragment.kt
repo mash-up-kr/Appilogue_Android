@@ -1,26 +1,29 @@
-package com.anonymous.appilogue.features.home.bottomsheet
+package com.anonymous.appilogue.features.home.bottomsheet.hole
 
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import com.anonymous.appilogue.R
 import com.anonymous.appilogue.databinding.FragmentAppBinding
 import com.anonymous.appilogue.features.base.BaseFragment
-import com.anonymous.appilogue.features.home.BottomSheetAppsRecyclerViewDecoration
-import com.anonymous.appilogue.features.home.HomeViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
-class AppFragment() :
-    BaseFragment<FragmentAppBinding, HomeViewModel>(R.layout.fragment_app) {
-    override val viewModel: HomeViewModel by activityViewModels()
+@AndroidEntryPoint
+class HoleFragment :
+    BaseFragment<FragmentAppBinding, HoleViewModel>(R.layout.fragment_app) {
+    override val viewModel: HoleViewModel by viewModels()
+    private val bottomSheetHoleAppAdapter: BottomSheetHoleAppAdapter by lazy {
+        BottomSheetHoleAppAdapter()
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         with(binding) {
-            homeViewModel = viewModel
+            holeViewModel = viewModel
             rvBottomSheetApps.apply {
-                adapter = BottomSheetAppAdapter()
-                addItemDecoration(BottomSheetAppsRecyclerViewDecoration(context))
+                adapter = bottomSheetHoleAppAdapter
+                addItemDecoration(BottomSheetHoleAppDecoration(context))
             }
         }
         arguments?.let {
@@ -30,15 +33,15 @@ class AppFragment() :
 
     private fun fetchApps(hole: Bundle) {
         if (hole.get(HOLE) == BLACK_HOLE) {
-            viewModel.fetchBlackHoleApps()
+            viewModel.fetchMyBlackHoleApps()
         } else if (hole.get(HOLE) == WHITE_HOLE) {
-            viewModel.fetchWhiteHoleApps()
+            viewModel.fetchMyWhiteHoleApps()
         }
     }
 
     companion object {
         fun newInstance(hole: String): Fragment {
-            val fragment = AppFragment()
+            val fragment = HoleFragment()
             fragment.arguments = Bundle().apply {
                 putString(HOLE, hole)
             }
