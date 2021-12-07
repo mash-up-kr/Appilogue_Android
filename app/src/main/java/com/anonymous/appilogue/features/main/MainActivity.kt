@@ -10,6 +10,9 @@ import androidx.navigation.ui.setupWithNavController
 import com.anonymous.appilogue.R
 import com.anonymous.appilogue.databinding.ActivityMainBinding
 import com.anonymous.appilogue.features.base.BaseActivity
+import com.anonymous.appilogue.features.home.Focus
+import com.anonymous.appilogue.features.home.HomeFragment
+import com.anonymous.appilogue.features.home.HomeViewModel
 import com.anonymous.appilogue.features.home.bottomsheet.space_dust.MySpaceDustViewModel
 import com.anonymous.appilogue.features.search.AppSearchManager
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,6 +26,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     val viewModel: MainViewModel by viewModels()
     val mySpaceDustViewModel: MySpaceDustViewModel by viewModels()
+    val homeViewModel: HomeViewModel by viewModels()
 
     @Inject
     lateinit var appSearchManager: AppSearchManager
@@ -87,9 +91,20 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     }
 
     override fun onBackPressed() {
-        super.onBackPressed()
         navController.currentDestination?.let {
             changeBottomNavigationStateByFragmentId(it.id)
         }
+        val nowFragment = supportFragmentManager.primaryNavigationFragment?.let {
+            it.childFragmentManager.fragments[0]
+        }
+        if (nowFragment is HomeFragment) {
+            homeViewModel.starFocused.value?.let { focus ->
+                if (Focus.isOnFocus(focus)) {
+                    homeViewModel.changeFocus(Focus.None)
+                    return
+                }
+            }
+        }
+        super.onBackPressed()
     }
 }
