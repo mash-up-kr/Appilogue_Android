@@ -51,5 +51,7 @@ ext {
     // preference
     preferenceVersion = "1.1.1"
 
+    // kakao login
+    kakaoLoginVersion = "2.8.3"
 }
 

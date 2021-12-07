@@ -6,6 +6,8 @@ import com.anonymous.appilogue.network.api.SearchApi
 import com.anonymous.appilogue.network.api.UserApi
 import com.anonymous.appilogue.persistence.InstalledAppDao
 import com.anonymous.appilogue.repository.*
+import com.anonymous.appilogue.repository.remote.AuthApi
+import com.anonymous.appilogue.repository.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -30,6 +32,10 @@ object RepositoryModule {
     @Singleton
     @Provides
     fun provideAppRepository(): AppRepository = FakeAppRepository()
+
+    @Singleton
+    @Provides
+    fun provideLoginRepository(authApi: AuthApi): LoginRepository = LoginRepository(authApi)
 
     @Singleton
     @Provides

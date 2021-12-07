@@ -100,6 +100,11 @@
     <string name="email_signed_up_text">"가입한 이메일 주소를 입력해주세요"</string>
     <string name="password_reset">"비밀번호 재설정"</string>
     <string name="please_enter_nickname">"닉네임을 입력해주세요."</string>
+    <string name="wrong_certification">"인증번호가 다릅니다!"</string>
+    <string name="resend_certification_notify">"재전송 된 번호를 입력해주세요"</string>
+    <string name="alreay_signup">"이미 가입된 이메일입니다."</string>
+    <string name="not_signup">"가입되지 않은 이메일입니다."</string>
+    <string name="same_password">"이전 비밀번호와 동일합니다."</string>
     <string name="save">저장</string>
     <string name="save_this">이대로 저장하시겠어요?</string>
     <string name="let_my_space_dust">나만의 먼지가 될꺼에요!</string>
