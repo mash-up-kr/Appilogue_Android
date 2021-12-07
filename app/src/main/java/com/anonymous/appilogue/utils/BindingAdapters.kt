@@ -60,11 +60,6 @@ fun ImageView.bindBitmap(bitmap: Bitmap?) {
     }
 }
 
-@BindingAdapter("show")
-fun TextView.bindShow(visible: Boolean) {
-    visibility = if (visible) View.VISIBLE else View.INVISIBLE
-}
-
 @BindingAdapter("isSelected")
 fun TextView.bindIsSelected(selected: Boolean) {
     if (selected) {

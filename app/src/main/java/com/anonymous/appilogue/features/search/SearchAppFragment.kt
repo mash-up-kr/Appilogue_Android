@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.anonymous.appilogue.R
 import com.anonymous.appilogue.databinding.FragmentSearchBinding
 import com.anonymous.appilogue.features.base.BaseFragment
@@ -15,6 +16,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.schedulers.Schedulers
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
 
 @AndroidEntryPoint
@@ -24,10 +27,7 @@ class SearchAppFragment
     override val viewModel: SearchAppViewModel by viewModels()
 
     private val searchAppAdapter: SearchAppAdapter by lazy {
-        val mainActivity = activity as MainActivity
-        SearchAppAdapter(mainActivity.viewModel) {
-            mainActivity.navigateTo(R.id.action_searchAppFragment_to_reviewSelectorFragment)
-        }
+        SearchAppAdapter(viewModel)
     }
 
     private var disposable: Disposable? = null
@@ -75,6 +75,16 @@ class SearchAppFragment
     private fun initObserver() {
         viewModel.searchResult.observe(viewLifecycleOwner) { searchResult ->
             searchAppAdapter.submitList(searchResult)
+        }
+        lifecycleScope.launch {
+            viewModel.event.collect { event ->
+                when (event) {
+                    is SearchAppViewModel.Event.MoveToReviewSelector -> {
+                        val action = SearchAppFragmentDirections.actionSearchAppFragmentToReviewSelectorFragment(event.appName, event.appIconUrl)
+                        (activity as MainActivity).navigateTo(action)
+                    }
+                }
+            }
         }
     }
 

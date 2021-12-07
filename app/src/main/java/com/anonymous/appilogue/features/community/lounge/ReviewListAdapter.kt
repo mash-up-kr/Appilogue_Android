@@ -1,7 +1,9 @@
 package com.anonymous.appilogue.features.community.lounge
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
@@ -57,6 +59,25 @@ class ReviewListAdapter(
                             val likesCount = viewModel.plusLikeEvent(review)
                             it.isSelected = true
                             likeCountView.text = likesCount.toString()
+                        }
+                    }
+                }
+            }
+            if (viewModel.hole.isEmpty()) {
+                holeView.apply {
+                    visibility = View.VISIBLE
+                    val position = bindingAdapterPosition
+                    if (position < itemCount) {
+                        getItem(position)?.let { review ->
+                            if (review.hole == ReviewListFragment.BLACK_HOLE) {
+                                text = context.getString(R.string.black_hole_text)
+                                setTextColor(ContextCompat.getColor(context, R.color.purple_01))
+                                backgroundTintList = ContextCompat.getColorStateList(context, R.color.purple_02)
+                            } else {
+                                text = context.getString(R.string.white_hole_text)
+                                setTextColor(ContextCompat.getColor(context, R.color.mint_01))
+                                backgroundTintList = ContextCompat.getColorStateList(context, R.color.mint_02)
+                            }
                         }
                     }
                 }

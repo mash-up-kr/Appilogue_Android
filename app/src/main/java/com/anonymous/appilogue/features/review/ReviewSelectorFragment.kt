@@ -24,7 +24,6 @@ class ReviewSelectorFragment
 
         bind {
             vm = viewModel
-            mainVm = (activity as MainActivity).viewModel
         }
 
         initView()
@@ -37,7 +36,7 @@ class ReviewSelectorFragment
                 binding.whiteHoleView.isSelected = false
                 viewModel.selectBlackHole()
                 binding.planetDescriptionView.apply {
-                    handleSelectEvent(R.string.description_black_hole, R.string.black_hole_text, R.color.mint)
+                    handleSelectEvent(R.string.description_black_hole, R.string.black_hole_text, R.color.mint_01)
                 }
             }
 
@@ -46,13 +45,13 @@ class ReviewSelectorFragment
                 binding.blackHoleView.isSelected = false
                 viewModel.selectWhiteHole()
                 binding.planetDescriptionView.apply {
-                    handleSelectEvent(R.string.description_white_hole, R.string.white_hole_text, R.color.mint)
+                    handleSelectEvent(R.string.description_white_hole, R.string.white_hole_text, R.color.mint_01)
                 }
             }
 
             selectButton.setOnClickListener {
                 if (viewModel.isSelected()) {
-                    val action = ReviewSelectorFragmentDirections.actionReviewSelectorFragmentToReviewRegisterFragment(viewModel.isBlackHoleSelected.value)
+                    val action = ReviewSelectorFragmentDirections.actionReviewSelectorFragmentToReviewRegisterFragment(viewModel.appName, viewModel.appIconUrl, viewModel.isBlackHoleSelected.value)
                     (activity as MainActivity).navigateTo(action)
                 }
             }

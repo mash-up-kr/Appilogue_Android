@@ -9,7 +9,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor() : ViewModel() {
-    var selectedApp: InstalledApp? = null
     private val _bottomNavigationState = MutableLiveData(true)
     val bottomNavigationState: LiveData<Boolean> = _bottomNavigationState
 

@@ -55,7 +55,7 @@ class RegisterCompleteDialog (
         val titleSpanColor = if (isBlackHole) {
             R.color.purple_01
         } else {
-            R.color.mint
+            R.color.mint_01
         }
         val subTitleText = context.getString(R.string.review_register_complete_sub_title, holeText)
 

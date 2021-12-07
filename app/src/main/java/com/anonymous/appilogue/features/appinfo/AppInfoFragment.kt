@@ -1,6 +1,5 @@
 package com.anonymous.appilogue.features.appinfo
 
-import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
@@ -10,6 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import com.anonymous.appilogue.R
 import com.anonymous.appilogue.databinding.FragmentAppInfoBinding
 import com.anonymous.appilogue.features.base.BaseFragment
+import com.anonymous.appilogue.features.main.MainActivity
 import com.anonymous.appilogue.utils.hideKeyboardDown
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -37,6 +37,17 @@ class AppInfoFragment
         bind {
             toolbarLeftIconView.setOnClickListener {
                 activity?.onBackPressed()
+            }
+            writeReviewButtonView.setOnClickListener {
+                val appInfo = viewModel.appInfo.value
+                if (appInfo.name != null && appInfo.iconUrl != null) {
+                    val action =
+                        AppInfoFragmentDirections.actionAppInfoFragmentToReviewSelectorFragment(
+                            appInfo.name,
+                            appInfo.iconUrl
+                        )
+                    (activity as MainActivity).navigateTo(action)
+                }
             }
         }
     }

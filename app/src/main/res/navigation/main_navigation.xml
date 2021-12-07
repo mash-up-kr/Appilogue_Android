@@ -25,7 +25,14 @@
             app:enterAnim="@anim/slide_from_right"
             app:exitAnim="@anim/slide_to_left"
             app:popEnterAnim="@anim/slide_from_left"
-            app:destination="@id/reviewSelectorFragment" />
+            app:destination="@id/reviewSelectorFragment" >
+            <argument
+                android:name="appName"
+                app:argType="string" />
+            <argument
+                android:name="appIconUrl"
+                app:argType="string" />
+        </action>
         <action
             android:id="@+id/action_searchAppFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
@@ -40,6 +47,12 @@
             app:exitAnim="@anim/slide_to_left"
             app:popEnterAnim="@anim/slide_from_left"
             app:destination="@id/reviewRegisterFragment">
+            <argument
+                android:name="appName"
+                app:argType="string"/>
+            <argument
+                android:name="appIconUrl"
+                app:argType="string"/>
             <argument
                 android:name="isBlackHoleReview"
                 android:defaultValue="false"
@@ -124,5 +137,29 @@
     <fragment
         android:id="@+id/appInfoFragment"
         android:name="com.anonymous.appilogue.features.appinfo.AppInfoFragment"
-        android:label="AppInfoFragment" />
+        android:label="AppInfoFragment" >
+        <action
+            android:id="@+id/action_appInfoFragment_to_reviewDetailFragment"
+            app:destination="@id/reviewDetailFragment"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_to_left"
+            app:popEnterAnim="@anim/slide_from_left">
+            <argument
+                android:name="reviewId"
+                app:argType="integer" />
+        </action>
+        <action
+            android:id="@+id/action_appInfoFragment_to_reviewSelectorFragment"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_to_left"
+            app:popEnterAnim="@anim/slide_from_left"
+            app:destination="@id/reviewSelectorFragment" >
+            <argument
+                android:name="appName"
+                app:argType="string" />
+            <argument
+                android:name="appIconUrl"
+                app:argType="string" />
+        </action>
+    </fragment>
 </navigation>

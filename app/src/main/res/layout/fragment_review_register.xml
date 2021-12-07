@@ -7,9 +7,6 @@
         <variable
             name="vm"
             type="com.anonymous.appilogue.features.review.ReviewRegisterViewModel" />
-        <variable
-            name="mainVm"
-            type="com.anonymous.appilogue.features.main.MainViewModel" />
     </data>
 
     <androidx.core.widget.NestedScrollView
@@ -83,7 +80,7 @@
                 android:layout_marginTop="20dp"
                 android:background="@drawable/border_radius_16"
                 android:contentDescription="@string/app_icon_content_description"
-                app:bindBitmap="@{mainVm.selectedApp.icon}"
+                app:imageUrl="@{vm.appIconUrl}"
                 app:layout_constraintTop_toBottomOf="@id/appbar_layout"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
@@ -97,7 +94,7 @@
                 android:paddingHorizontal="10dp"
                 android:background="@drawable/border_radius_08"
                 android:backgroundTint="@color/gray_02"
-                android:text="@{mainVm.selectedApp.name}"
+                android:text="@{vm.appName}"
                 android:textStyle="bold"
                 style="@style/TextStyle.Normal12"
                 tools:text="어나니머쓱"

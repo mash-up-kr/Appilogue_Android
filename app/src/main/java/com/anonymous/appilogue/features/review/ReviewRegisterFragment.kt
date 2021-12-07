@@ -32,17 +32,9 @@ class ReviewRegisterFragment
 
         bind {
             vm = viewModel
-            mainVm = (activity as MainActivity).viewModel
         }
 
-        uploadAppIcon()
         initView()
-    }
-
-    private fun uploadAppIcon() {
-        binding.mainVm?.selectedApp?.let {
-            viewModel.uploadAppIcon(requireContext().cacheDir, it.icon)
-        }
     }
 
     private fun initView() {
@@ -79,9 +71,7 @@ class ReviewRegisterFragment
                         hashtags.add(chip.text.toString())
                     }
                 }
-                val appName = mainVm?.selectedApp?.name ?: return@setOnClickListener
                 viewModel.registerReview(
-                    appName = appName,
                     hashtags = hashtags
                 ) {
                     context?.let { ctx ->
