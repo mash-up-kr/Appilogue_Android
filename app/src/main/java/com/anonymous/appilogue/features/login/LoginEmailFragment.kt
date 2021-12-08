@@ -9,7 +9,6 @@ import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
-import com.anonymous.appilogue.AppilogueApplication
 import com.anonymous.appilogue.R
 import com.anonymous.appilogue.databinding.FragmentEmailLoginBinding
 import com.anonymous.appilogue.features.base.BaseFragment
@@ -27,7 +26,7 @@ class LoginEmailFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val emailCheckRegex = "\\w+@\\w+.(com|net|COM|NET)".toRegex()
+        val emailCheckRegex = android.util.Patterns.EMAIL_ADDRESS.toRegex()
 
         initView()
         setAddTextChangedListener(emailCheckRegex)
@@ -37,11 +36,11 @@ class LoginEmailFragment :
         FirstButtonInit.buttonInit(binding.emailLoginMoveNextButton)
 
         binding.emailLoginBackButton.setOnClickListener {
+            viewModel.stopTimer()
             activity?.onBackPressed()
         }
 
         binding.emailLoginMoveNextButton.setOnClickListener {
-            Timber.d("${viewModel.emailAddress.value.toString()}, ${viewModel.password.value.toString()}")
             viewModel.loginWithEmailPassword()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -58,6 +57,7 @@ class LoginEmailFragment :
                         activity?.finish()
                     }
                 }) {
+                    // 로그인 실패시 이쪽으로 옵니다
                     setIncorrect(binding.emailLoginEmail)
                     setIncorrect(binding.emailLoginPassword)
                     Timber.d("${it.message} 오류 존재!")
