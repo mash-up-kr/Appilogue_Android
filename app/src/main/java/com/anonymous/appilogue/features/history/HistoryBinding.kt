@@ -7,13 +7,13 @@ import android.view.ViewTreeObserver
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.anonymous.appilogue.R
-import com.anonymous.appilogue.model.History
+import com.anonymous.appilogue.model.HistoryModel
 import com.anonymous.appilogue.utils.dateToPassedTime
 import com.anonymous.appilogue.utils.ellipsizeText
 
 
 @BindingAdapter("historyText")
-fun TextView.setHistoryText(history: History) {
+fun TextView.setHistoryText(history: HistoryModel) {
     viewTreeObserver.addOnPreDrawListener(object : ViewTreeObserver.OnPreDrawListener {
         override fun onPreDraw(): Boolean {
             viewTreeObserver.removeOnPreDrawListener(this)

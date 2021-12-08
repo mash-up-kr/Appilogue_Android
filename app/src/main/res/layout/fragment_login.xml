@@ -11,17 +11,15 @@
         android:layout_height="match_parent"
         android:background="@drawable/img_login_bg">
 
-        <TextView
+        <ImageView
             android:id="@+id/AppName"
             android:layout_width="wrap_content"
-            android:layout_height="46dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="87dp"
             android:layout_marginTop="66dp"
             android:layout_marginEnd="88dp"
             android:layout_marginBottom="61dp"
-            android:text="@string/app_name"
-            android:textColor="@color/white"
-            android:textSize="34sp"
+            android:src="@drawable/text_appilogue"
             app:layout_constraintBottom_toTopOf="@id/imageView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -49,6 +47,7 @@
             android:backgroundTint="@color/yellow"
             android:text="@string/login_with_kakao"
             android:textColor="@color/white"
+            android:visibility="invisible"
             app:layout_constraintBottom_toTopOf="@id/bt_email_login"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

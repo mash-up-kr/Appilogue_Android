@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -8,122 +10,127 @@
             type="com.anonymous.appilogue.features.login.LoginViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/ic_bg_img_login">
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/email_login_back_button"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_gravity="start"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="18dp"
-            android:background="@drawable/btn_back_left_24px"
-            android:backgroundTint="@color/white"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/email_login_close_button"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginStart="305dp"
-            android:layout_marginTop="19dp"
-            android:layout_marginEnd="19dp"
-            android:background="@drawable/btn_close_24px"
-            android:backgroundTint="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/email_login_back_button"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/email_enter_email_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="116dp"
-            android:layout_marginBottom="30dp"
-            android:text="@string/email_login_text"
-            android:textColor="@color/white"
-            android:textSize="22sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <EditText
-            android:id="@+id/email_login_email"
+        android:fillViewport="true">
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="24dp"
-            android:background="@drawable/border_radius_10"
-            android:hint="@string/email_login_email_text"
-            android:inputType="textEmailAddress"
-            android:maxLines="1"
-            android:paddingStart="16dp"
-            android:paddingEnd="24dp"
-            android:text="@={viewModel.emailAddress}"
-            android:textColor="@color/white"
-            android:textColorHint="@color/gray_02"
-            android:textSize="16sp"
-            app:hintTextColor="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/email_enter_email_text" />
+            android:layout_height="match_parent"
+            android:background="@drawable/ic_bg_img_login">
 
-        <EditText
-            android:id="@+id/email_login_password"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="24dp"
-            android:background="@drawable/border_radius_10"
-            android:hint="@string/email_login_password_text"
-            android:inputType="textPassword"
-            android:maxLines="1"
-            android:paddingStart="16dp"
-            android:paddingEnd="24dp"
-            android:text="@={viewModel.checkPassword}"
-            android:textColor="@color/white"
-            android:textColorHint="@color/gray_02"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/email_login_email" />
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/email_login_back_button"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="start"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="18dp"
+                android:background="@drawable/btn_back_left_24px"
+                android:backgroundTint="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/email_login_forget_id"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            android:paddingStart="116dp"
-            android:paddingEnd="116dp"
-            android:text="@string/email_login_forget_id"
-            android:textColor="@color/white"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toTopOf="@id/email_Login_move_next_button"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/email_login_close_button"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="305dp"
+                android:layout_marginTop="19dp"
+                android:layout_marginEnd="19dp"
+                android:background="@drawable/btn_close_24px"
+                android:backgroundTint="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/email_login_back_button"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/email_Login_move_next_button"
-            android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="335dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginBottom="20dp"
-            android:background="@drawable/border_radius_10_purple"
-            android:backgroundTint="@color/purple_01"
-            android:text="@string/done"
-            android:textColor="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/email_enter_email_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="116dp"
+                android:layout_marginBottom="30dp"
+                android:text="@string/email_login_text"
+                android:textColor="@color/white"
+                android:textSize="22sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/email_login_email"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/border_radius_10"
+                android:hint="@string/email_login_email_text"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+                android:paddingStart="16dp"
+                android:paddingEnd="24dp"
+                android:text="@={viewModel.emailAddress}"
+                android:textColor="@color/white"
+                android:textColorHint="@color/gray_02"
+                android:textSize="16sp"
+                app:hintTextColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/email_enter_email_text" />
+
+            <EditText
+                android:id="@+id/email_login_password"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/border_radius_10"
+                android:hint="@string/email_login_password_text"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:paddingStart="16dp"
+                android:paddingEnd="24dp"
+                android:text="@={viewModel.checkPassword}"
+                android:textColor="@color/white"
+                android:textColorHint="@color/gray_02"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/email_login_email" />
+
+            <TextView
+                android:id="@+id/email_login_forget_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:paddingStart="116dp"
+                android:paddingEnd="116dp"
+                android:text="@string/email_login_forget_id"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toTopOf="@id/email_Login_move_next_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/email_Login_move_next_button"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="335dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/border_radius_10_purple"
+                android:backgroundTint="@color/purple_01"
+                android:text="@string/done"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 </layout>

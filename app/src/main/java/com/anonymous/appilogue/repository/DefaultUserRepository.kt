@@ -10,8 +10,7 @@ import javax.inject.Inject
 class DefaultUserRepository @Inject constructor(
     private val authApi: AuthApi,
     private val userApi: UserApi
-) :
-    UserRepository {
+) : UserRepository {
 
     override suspend fun fetchMyInformation(): User? {
         try {
@@ -37,6 +36,19 @@ class DefaultUserRepository @Inject constructor(
                         user.profileImage
                     )
                 )
+            Timber.d(response.toString())
+            if (response.isSuccessful) {
+                return true
+            }
+        } catch (e: Throwable) {
+            Timber.e(e)
+        }
+        return false
+    }
+
+    override suspend fun deleteUser(): Boolean {
+        try {
+            val response = userApi.deleteUser()
             Timber.d(response.toString())
             if (response.isSuccessful) {
                 return true

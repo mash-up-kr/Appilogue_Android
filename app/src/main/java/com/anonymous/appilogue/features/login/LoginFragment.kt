@@ -71,7 +71,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>(R.layou
                 }
             }
         } else if (token != null) {
-            AppilogueApplication.prefs.myEditText = token.accessToken
             Toast.makeText(requireContext(), "로그인에 성공하였습니다.", Toast.LENGTH_SHORT).show()
         }
     }

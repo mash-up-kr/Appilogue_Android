@@ -4,6 +4,7 @@ import com.anonymous.appilogue.model.User
 import com.anonymous.appilogue.model.dto.UpdateUserDto
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.PATCH
 
 interface UserApi {
@@ -12,4 +13,7 @@ interface UserApi {
     suspend fun updateUser(
         @Body updateUserDto: UpdateUserDto
     ): Response<User>
+
+    @DELETE("v1/api/user")
+    suspend fun deleteUser(): Response<Void>
 }

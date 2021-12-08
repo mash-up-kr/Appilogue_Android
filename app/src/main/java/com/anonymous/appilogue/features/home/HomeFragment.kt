@@ -1,5 +1,6 @@
 package com.anonymous.appilogue.features.home
 
+import android.content.Context
 import android.content.res.Resources
 import android.os.Bundle
 import android.util.SparseArray
@@ -22,21 +23,17 @@ import com.anonymous.appilogue.features.home.bottomsheet.space_dust.MySpaceDustV
 import com.anonymous.appilogue.features.home.bottomsheet.space_dust.StoreFragment
 import com.anonymous.appilogue.features.home.onboarding.OnboardingFragment
 import com.anonymous.appilogue.features.main.MainViewModel
-import com.anonymous.appilogue.preference.AppilogueSharedPreferences
+import com.anonymous.appilogue.persistence.PreferencesManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import java.util.*
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class HomeFragment :
     BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.fragment_home) {
-
-    @Inject
-    lateinit var sharedPreference: AppilogueSharedPreferences
 
     private val mainViewModel: MainViewModel by activityViewModels()
     private val _mySpaceDustViewModel: MySpaceDustViewModel by activityViewModels()
@@ -47,6 +44,8 @@ class HomeFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (activity as MainActivity).showBottomNavigation()
+
         bind {
             homeViewModel = viewModel
             mySpaceDustViewModel = _mySpaceDustViewModel
@@ -60,7 +59,6 @@ class HomeFragment :
         }
         SpaceAnimator.animateSpace(binding.ivSpace)
         viewModel.changeFocus(Focus.None)
-        initOnboarding()
         observeToast()
     }
 
@@ -70,10 +68,11 @@ class HomeFragment :
                 viewModel.showSaveSuccessToast()
             }
         }
+        initOnBoarding()
     }
 
-    private fun initOnboarding() {
-        if (!sharedPreference.getOnboardingIsDone()) {
+    private fun initOnBoarding() {
+        if (!PreferencesManager.isOnBoardingDone()) {
             childFragmentManager.commit {
                 add<OnboardingFragment>(R.id.fcv_home)
                 setReorderingAllowed(true)
@@ -162,9 +161,9 @@ class HomeFragment :
                 addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
                     override fun onStateChanged(bottomSheet: View, newState: Int) {
                         if (newState != BottomSheetBehavior.STATE_HIDDEN) {
-                            mainViewModel.hideBottomNavigation()
+                            (activity as MainActivity).hideBottomNavigation()
                         } else {
-                            mainViewModel.showBottomNavigation()
+                            (activity as MainActivity).showBottomNavigation()
                         }
                         viewModel.changeBottomSheetState(newState)
                     }
@@ -212,6 +211,12 @@ class HomeFragment :
             peekHeight =
                 (resources.getDimension(heightDimensionId)).toInt()
         }
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        (activity as MainActivity).showBottomNavigation()
     }
 
     companion object {

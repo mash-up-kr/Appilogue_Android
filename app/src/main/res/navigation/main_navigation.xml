@@ -5,13 +5,16 @@
     app:startDestination="@id/homeFragment">
 
     <fragment
-        android:id="@+id/communityFragment"
-        android:name="com.anonymous.appilogue.features.community.CommunityFragment"
-        android:label="CommunityFragment" />
-    <fragment
         android:id="@+id/profileFragment"
         android:name="com.anonymous.appilogue.features.profile.ProfileFragment"
-        android:label="ProfileFragment" />
+        android:label="ProfileFragment" >
+        <action
+            android:id="@+id/action_profileFragment_to_profileSettingFragment"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_to_left"
+            app:popEnterAnim="@anim/slide_from_left"
+            app:destination="@id/profileSettingFragment" />
+    </fragment>
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.anonymous.appilogue.features.home.HomeFragment"
@@ -30,7 +33,20 @@
         android:label="SearchAppFragment">
         <action
             android:id="@+id/action_searchAppFragment_to_reviewSelectorFragment"
-            app:destination="@id/reviewSelectorFragment" />
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_to_left"
+            app:popEnterAnim="@anim/slide_from_left"
+            app:destination="@id/reviewSelectorFragment" >
+            <argument
+                android:name="appName"
+                app:argType="string" />
+            <argument
+                android:name="appIconUrl"
+                app:argType="string" />
+        </action>
+        <action
+            android:id="@+id/action_searchAppFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/reviewSelectorFragment"
@@ -38,15 +54,123 @@
         android:label="ReviewSelectorFragment">
         <action
             android:id="@+id/action_reviewSelectorFragment_to_reviewRegisterFragment"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_to_left"
+            app:popEnterAnim="@anim/slide_from_left"
             app:destination="@id/reviewRegisterFragment">
+            <argument
+                android:name="appName"
+                app:argType="string"/>
+            <argument
+                android:name="appIconUrl"
+                app:argType="string"/>
             <argument
                 android:name="isBlackHoleReview"
                 android:defaultValue="false"
                 app:argType="boolean" />
         </action>
+        <action
+            android:id="@+id/action_reviewSelectorFragment_to_homeFragment"
+            app:popUpTo="@id/searchAppFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/reviewRegisterFragment"
         android:name="com.anonymous.appilogue.features.review.ReviewRegisterFragment"
-        android:label="ReviewRegisterFragment" />
+        android:label="ReviewRegisterFragment" >
+        <action
+            android:id="@+id/action_reviewRegisterFragment_to_homeFragment"
+            app:popUpTo="@id/reviewSelectorFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/loungeFragment"
+        android:name="com.anonymous.appilogue.features.community.lounge.LoungeFragment"
+        android:label="LoungeFragment" >
+        <action
+            android:id="@+id/action_loungeFragment_to_reviewDetailFragment"
+            app:destination="@id/reviewDetailFragment"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_to_left"
+            app:popEnterAnim="@anim/slide_from_left">
+            <argument
+                android:name="reviewId"
+                app:argType="integer" />
+        </action>
+        <action
+            android:id="@+id/action_reviewListFragment_to_appInfoFragment"
+            app:destination="@id/appInfoFragment"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_to_left"
+            app:popEnterAnim="@anim/slide_from_left">
+            <argument
+                android:name="appInfo"
+                app:argType="com.anonymous.appilogue.model.AppModel"/>
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/reviewListFragment"
+        android:name="com.anonymous.appilogue.features.community.lounge.ReviewListFragment"
+        android:label="ReviewListFragment" />
+    <fragment
+        android:id="@+id/reviewDetailFragment"
+        android:name="com.anonymous.appilogue.features.community.detail.ReviewDetailFragment"
+        android:label="ReviewDetailFragment" >
+        <action
+            android:id="@+id/action_reviewDetailFragment_to_commentDetailFragment"
+            app:destination="@id/commentDetailFragment"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_to_left"
+            app:popEnterAnim="@anim/slide_from_left">
+            <argument
+                android:name="reviewId"
+                app:argType="integer" />
+            <argument
+                android:name="commentId"
+                app:argType="integer" />
+        </action>
+        <action
+            android:id="@+id/action_reviewDetailFragment_to_appInfoFragment"
+            app:destination="@id/appInfoFragment"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_to_left"
+            app:popEnterAnim="@anim/slide_from_left">
+            <argument
+                android:name="appInfo"
+                app:argType="com.anonymous.appilogue.model.AppModel"/>
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/commentDetailFragment"
+        android:name="com.anonymous.appilogue.features.community.comment.CommentDetailFragment"
+        android:label="CommentDetailFragment" />
+    <fragment
+        android:id="@+id/appInfoFragment"
+        android:name="com.anonymous.appilogue.features.appinfo.AppInfoFragment"
+        android:label="AppInfoFragment" >
+        <action
+            android:id="@+id/action_appInfoFragment_to_reviewDetailFragment"
+            app:destination="@id/reviewDetailFragment"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_to_left"
+            app:popEnterAnim="@anim/slide_from_left">
+            <argument
+                android:name="reviewId"
+                app:argType="integer" />
+        </action>
+        <action
+            android:id="@+id/action_appInfoFragment_to_reviewSelectorFragment"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_to_left"
+            app:popEnterAnim="@anim/slide_from_left"
+            app:destination="@id/reviewSelectorFragment" >
+            <argument
+                android:name="appName"
+                app:argType="string" />
+            <argument
+                android:name="appIconUrl"
+                app:argType="string" />
+        </action>
+    </fragment>
 </navigation>

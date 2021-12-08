@@ -17,6 +17,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/black"
         tools:context=".features.main.MainActivity">
 
         <androidx.fragment.app.FragmentContainerView
@@ -25,7 +26,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:defaultNavHost="true"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -36,7 +37,7 @@
             android:layout_width="0dp"
             android:layout_height="@dimen/home_bottom_navigation_height"
             android:background="@color/black_01"
-            android:visibility="@{mainViewModel.bottomNavigationState ? View.VISIBLE : View.INVISIBLE}"
+            android:visibility="@{mainViewModel.bottomNavigationState ? View.VISIBLE : View.GONE}"
             app:itemIconSize="@dimen/size_navigation_icon"
             app:itemIconTint="@color/gray_02"
             app:labelVisibilityMode="unlabeled"

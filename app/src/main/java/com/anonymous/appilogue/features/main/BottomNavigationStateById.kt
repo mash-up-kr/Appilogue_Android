@@ -4,7 +4,7 @@ import com.anonymous.appilogue.R
 
 enum class BottomNavigationStateById(val id: Int, val isHiding: Boolean) {
     HOME(R.id.homeFragment, false),
-    COMMUNITY(R.id.communityFragment, false),
+    COMMUNITY(R.id.loungeFragment, false),
     PROFILE(R.id.profileFragment, false),
     PROFILE_SETTING(R.id.profileSettingFragment, true),
     SEARCH_APP_FRAGMENT(R.id.searchAppFragment, true),

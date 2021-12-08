@@ -1,12 +1,19 @@
 package com.anonymous.appilogue.model.dto
 
-import com.anonymous.appilogue.model.Meta
-import com.anonymous.appilogue.model.Review
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-data class SearchDto(
-    @Json(name = "items") val reviews: List<Review>,
-    @Json(name = "meta") val meta: Meta
-)
+data class SearchDto<T>(
+    @field:Json(name = "items") val items: List<T> = emptyList(),
+    @field:Json(name = "meta") val meta: Meta = Meta()
+) {
+    @JsonClass(generateAdapter = true)
+    data class Meta(
+        @field:Json(name = "totalItems") val totalItems: Int = 0,
+        @field:Json(name = "itemCount") val itemCount: Int = 0,
+        @field:Json(name = "itemsPerPage") val itemsPerPage: Int = 0,
+        @field:Json(name = "totalPages") val totalPages: Int = 0,
+        @field:Json(name = "currentPage") val currentPage: Int = 0,
+    )
+}

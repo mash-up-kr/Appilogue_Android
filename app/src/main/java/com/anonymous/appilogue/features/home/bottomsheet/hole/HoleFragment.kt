@@ -26,17 +26,6 @@ class HoleFragment :
                 addItemDecoration(BottomSheetHoleAppDecoration(context))
             }
         }
-        arguments?.let {
-            fetchApps(it)
-        }
-    }
-
-    private fun fetchApps(hole: Bundle) {
-        if (hole.get(HOLE) == BLACK_HOLE) {
-            viewModel.fetchMyBlackHoleApps()
-        } else if (hole.get(HOLE) == WHITE_HOLE) {
-            viewModel.fetchMyWhiteHoleApps()
-        }
     }
 
     companion object {
@@ -49,7 +38,7 @@ class HoleFragment :
         }
 
         private const val HOLE = "HOLE"
-        const val WHITE_HOLE = "WHITE_HOLE"
-        const val BLACK_HOLE = "BLACK_HOLE"
+        const val BLACK_HOLE = "black"
+        const val WHITE_HOLE = "white"
     }
 }

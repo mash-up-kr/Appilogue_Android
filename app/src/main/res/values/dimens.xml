@@ -5,6 +5,7 @@
     <dimen name="peek_bottomsheet_home_space_dust">235dp</dimen>
     <dimen name="expanded_bottomsheet_home_margin">108dp</dimen>
     <dimen name="bottom_sheet_radius">20dp</dimen>
+    <dimen name="review_content_vertical_margin">12dp</dimen>
     <dimen name="review_content_horizontal_margin">24dp</dimen>
     <dimen name="above_bottom_sheet_margin">10dp</dimen>
     <dimen name="home_bottom_navigation_height">56dp</dimen>
@@ -14,4 +15,6 @@
     <dimen name="bottom_sheet_app_item_side_margin">3dp</dimen>
     <dimen name="bottom_sheet_space_dust_item_side_margin">9dp</dimen>
     <dimen name="bottom_sheet_item_bottom_margin">20dp</dimen>
+    <dimen name="chip_stroke_width">2dp</dimen>
+    <dimen name="hashtag_margin_end">10dp</dimen>
 </resources>

@@ -8,6 +8,7 @@ import android.view.View.GONE
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.anonymous.appilogue.R
 import com.anonymous.appilogue.databinding.FragmentNicknameBinding
 import com.anonymous.appilogue.features.base.BaseFragment
@@ -32,6 +33,14 @@ class NicknameFragment :
     }
 
     private fun addTextChangeListenerNicknameInputText() {
+        binding.nicknameBackButton.setOnClickListener {
+            activity?.onBackPressed()
+        }
+
+        binding.nicknameCloseButton.setOnClickListener {
+            findNavController().navigate(R.id.action_nicknameFragment_to_loginFragment)
+        }
+
         binding.nicknameInputText.doOnTextChanged { _, _, _, _ ->
             binding.nicknameCounting.text = "${binding.nicknameInputText.length()}/10"
         }
@@ -87,6 +96,7 @@ class NicknameFragment :
                     sendToServerUserData()
                     val intent = Intent(activity, MainActivity::class.java)
                     startActivity(intent)
+                    activity?.finish()
                 }
             }
         }

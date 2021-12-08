@@ -34,7 +34,9 @@
     <string name="history_minute_passed">%1$d분 전</string>
     <string name="history_hour_passed">%1$d시간 전</string>
     <string name="history_day_passed">%1$d일 전</string>
+    <string name="history_week_passed">%1$d주 전</string>
     <string name="history_month_passed">%1$d달 전</string>
+    <string name="history_year_format">yyyy. MM. dd</string>
     <string name="today">오늘</string>
     <string name="this_week">이번 주</string>
     <string name="this_month">이번 달</string>
@@ -49,7 +51,7 @@
     <string name="planet_toolbar">planet toolbar</string>
     <string name="description_black_hole">블랙홀은 더 이상 사용하지 않는, 또는\n떠나보내주고 싶은 앱이 모여있는 곳이에요.</string>
     <string name="description_white_hole">화이트홀은 블랙홀에 있던 앱을 꺼내오거나,\n좋은 경험으로 기념하고 싶은 앱이 모여있는 곳이에요.</string>
-    <string name="community_fragment">CommunityFragment</string>
+    <string name="lounge_fragment">LoungeFragment</string>
     <string name="profile_fragment">ProfileFragment</string>
     <string name="home_fragment">HomeFragment</string>
     <string name="white_hole_text">화이트홀</string>
@@ -63,10 +65,15 @@
     <string name="app_icon_content_description">Selected App Icon</string>
     <string name="review_input_title_text">리뷰를 작성해주세요 :)</string>
     <string name="black_hole_review_hint">이제 그만 너를 놓아줄게…</string>
-    <string name="review_keyword_title_text">이 앱의 키워드를 뽑아주세요</string>
+    <string name="review_keyword_title_text">이 앱의 키워드를 뽑아주세요!</string>
     <string name="review_send_button_text">리뷰 보내기</string>
     <string name="review_selector_button_text">선택</string>
     <string name="review_text_count">%d/500자</string>
+    <string name="hashtag_text_format">#%s</string>
+    <string name="remove_result_message">삭제 되었습니다.</string>
+    <string name="report_result_message">신고 되었습니다.</string>
+    <string name="review_register_complete_title">%s로 보내기 완료!</string>
+    <string name="review_register_complete_sub_title">작성한 앱이 %s로 슉- 날아갔어요!</string>
     <!--   Login  -->
     <string name="insert_email">이메일을 입력해주세요</string>
     <string name="next_button">다음</string>
@@ -127,4 +134,25 @@
     <string name="resign_service">서비스 탈퇴</string>
     <string name="complete">완료</string>
     <string name="cancel">취소</string>
+    <!-- Lounge -->
+    <string name="more_button_description">More button</string>
+    <string name="dummy_content">본문은 여기에 나타나고 최대 다섯줄 노출시키도록 하겠습니다. 만약 다섯줄 이상의 텍스트양이면 …으로 줄여지면서 더보기 기능이 추가되게 진행하겠습니다. 예를 들면 지금 이렇게 네줄이 되었고, 다섯줄이 되기까지 안간힘을 쓰며 글을 쓴다면 바로 확인해볼 수 있습니다. 글자수 채우기 너무 어렵다! 지금은 또 풀로 볼 수 있을 때의 화면이다!!</string>
+    <string name="hint_comment">댓글을 입력해주세요</string>
+    <string name="read_more_text"> … 더보기</string>
+    <string name="comment_chip_text_empty">댓글 달기</string>
+    <string name="comment_count_text">댓글 %d</string>
+    <string name="hashtags_max_count_text">(최대 5개)</string>
+    <string name="hint_hashtag"># 어떤 키워드가 생각나세요?</string>
+    <string name="menu_text_report">신고하기</string>
+    <string name="menu_text_delete">삭제하기</string>
+    <string name="menu_text_cancel">취소</string>
+    <string name="ok_text">확인</string>
+    <!-- App Info -->
+    <string name="write_review_text">리뷰쓰기</string>
+    <string name="ratio_title_text_format">사람들은 %s을(를) 이렇게 생각하고 있어요!</string>
+    <string name="app_info_review_title">%s 리뷰</string>
+    <string name="app_review_ratio_format">%d %%</string>
+    <!-- profile -->
+    <string name="logout_alert_title">로그아웃 하시겠습니까?</string>
+    <string name="withdraw_alert_title">회원 탈퇴 하시겠습니까?</string>
 </resources>

@@ -25,11 +25,8 @@
         <activity
             android:name=".features.splash.SplashActivity"
             android:exported="true"
+            android:screenOrientation="portrait"
             android:theme="@style/SplashTheme">
-        </activity>
-        <activity
-            android:name="com.anonymous.appilogue.features.main.MainActivity"
-            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -37,8 +34,17 @@
             </intent-filter>
         </activity>
         <activity
+            android:name="com.anonymous.appilogue.features.main.MainActivity"
+            android:screenOrientation="portrait"
+            android:exported="true" >
+        </activity>
+        <activity
             android:name=".features.login.LoginActivity"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
+
+        <activity android:name="com.facebook.flipper.android.diagnostics.FlipperDiagnosticActivity"
+            android:exported="true"/>
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
             android:exported="true">

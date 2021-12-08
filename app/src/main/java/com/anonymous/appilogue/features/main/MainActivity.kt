@@ -1,6 +1,7 @@
 package com.anonymous.appilogue.features.main
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import androidx.core.view.forEach
 import androidx.navigation.fragment.NavHostFragment
@@ -15,6 +16,7 @@ import com.anonymous.appilogue.features.home.HomeFragment
 import com.anonymous.appilogue.features.home.HomeViewModel
 import com.anonymous.appilogue.features.home.bottomsheet.space_dust.MySpaceDustViewModel
 import com.anonymous.appilogue.features.search.AppSearchManager
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -83,6 +85,18 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     fun navigateTo(action: NavDirections) {
         changeBottomNavigationStateByFragmentId(action.actionId)
         navController.navigate(action)
+    }
+
+    fun showBottomNavigation() {
+        binding.bottomNavigationView.visibility = View.VISIBLE
+    }
+
+    fun hideBottomNavigation() {
+        binding.bottomNavigationView.visibility = View.GONE
+    }
+
+    fun showBottomSheetDialog(bottomSheetDialogFragment: BottomSheetDialogFragment) {
+        bottomSheetDialogFragment.show(supportFragmentManager, bottomSheetDialogFragment.tag)
     }
 
     private fun changeBottomNavigationStateByFragmentId(id: Int) {

@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id 'kotlin-parcelize'
     id 'dagger.hilt.android.plugin'
     id 'androidx.navigation.safeargs.kotlin'
 }
@@ -48,6 +49,8 @@ dependencies {
     implementation "androidx.fragment:fragment-ktx:$fragmentKtxVersion"
     implementation "androidx.appcompat:appcompat:$appcompatVersion"
     implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
+    implementation "androidx.paging:paging-runtime-ktx:$pagingVersion"
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:$swipeRefreshVersion"
 
     // lifecycle
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion"
@@ -83,6 +86,7 @@ dependencies {
 
     // serialization
     implementation "com.squareup.moshi:moshi-kotlin:$moshiVersion"
+    implementation "com.squareup.moshi:moshi-adapters:$moshiVersion"
     kapt "com.squareup.moshi:moshi-kotlin-codegen:$moshiVersion"
 
     // image
@@ -97,9 +101,13 @@ dependencies {
 
     // debug
     implementation "com.jakewharton.timber:timber:$timberVersion"
-    implementation "com.facebook.stetho:stetho:$stethoVersion"
+    debugImplementation "com.facebook.flipper:flipper:$flipperVersion"
+    debugImplementation "com.facebook.soloader:soloader:$soloaderVersion"
+    releaseImplementation "com.facebook.flipper:flipper-noop:$flipperVersion"
 
     // widget
+
+    implementation "com.google.android.flexbox:flexbox:$flexboxLayoutVersion"
 
     // test
     testImplementation 'junit:junit:4.13.2'
@@ -109,6 +117,8 @@ dependencies {
     // preference
     implementation "androidx.preference:preference-ktx:$preferenceVersion"
 
+    // etc
+    implementation group: 'de.svenkubiak', name: 'jBCrypt', version: "0.4.1"
     // kakao login
     implementation "com.kakao.sdk:v2-user:$kakaoLoginVersion"
 }

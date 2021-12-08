@@ -14,7 +14,7 @@ fun TextView.setOnboardingDialogText(onboardingDialogStringId: Int, emphasizedSt
     text = SpannableString(onboardingDialogString).apply {
         if (onboardingDialogString.contains(emphasizedString))
             setSpan(
-                ForegroundColorSpan(context.getColor(R.color.mint)),
+                ForegroundColorSpan(context.getColor(R.color.mint_01)),
                 onboardingDialogString.indexOf(emphasizedString),
                 onboardingDialogString.indexOf(emphasizedString) + emphasizedString.length,
                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE

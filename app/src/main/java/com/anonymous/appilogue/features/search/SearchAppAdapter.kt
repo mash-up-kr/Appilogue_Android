@@ -12,8 +12,7 @@ import com.anonymous.appilogue.features.main.MainViewModel
 import com.anonymous.appilogue.model.InstalledApp
 
 class SearchAppAdapter(
-    private val mainViewModel: MainViewModel,
-    private val navigate: () -> Unit,
+    private val viewModel: SearchAppViewModel,
 ) : ListAdapter<InstalledApp, SearchAppAdapter.SearchAppViewHolder>(diffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchAppViewHolder {
@@ -25,8 +24,7 @@ class SearchAppAdapter(
                 val position = bindingAdapterPosition
                 if (position < itemCount) {
                     val item = getItem(position)
-                    mainViewModel.selectedApp = item
-                    navigate()
+                    viewModel.uploadAppIconAndMoveToNextPage(it.context.cacheDir, item)
                 }
             }
         }

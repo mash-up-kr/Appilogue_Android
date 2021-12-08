@@ -7,6 +7,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.anonymous.appilogue.R
 import com.anonymous.appilogue.databinding.FragmentPasswordBinding
 import com.anonymous.appilogue.features.base.BaseFragment
@@ -29,6 +30,14 @@ class PasswordFragment :
 
     private fun initClickListener() {
         with(binding) {
+            passwordBackButton.setOnClickListener {
+                activity?.onBackPressed()
+            }
+
+            passwordCloseButton.setOnClickListener {
+                findNavController().navigate(R.id.action_passwordFragment_to_loginFragment)
+            }
+
             with(passwordMoveNextButton) {
                 FirstButtonInit.buttonInit(this)
                 passwordWrongPasswordNotification.visibility = View.GONE

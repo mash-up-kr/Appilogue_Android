@@ -99,7 +99,7 @@
 
         <TextView
             android:id="@+id/tv_revise_password"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:text="@string/reset_password"
@@ -123,7 +123,7 @@
 
         <TextView
             android:id="@+id/tv_logout"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:text="@string/logout"
@@ -147,7 +147,7 @@
 
         <TextView
             android:id="@+id/tv_service_resign"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:text="@string/resign_service"

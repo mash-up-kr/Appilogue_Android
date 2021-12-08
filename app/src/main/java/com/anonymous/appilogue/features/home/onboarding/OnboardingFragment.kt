@@ -10,16 +10,12 @@ import com.anonymous.appilogue.features.base.BaseFragment
 import com.anonymous.appilogue.features.home.Focus
 import com.anonymous.appilogue.features.home.HomeViewModel
 import com.anonymous.appilogue.features.main.MainViewModel
-import com.anonymous.appilogue.preference.AppilogueSharedPreferences
+import com.anonymous.appilogue.persistence.PreferencesManager
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class OnboardingFragment :
     BaseFragment<FragmentOnboardingBinding, OnboardingViewModel>(R.layout.fragment_onboarding) {
-
-    @Inject
-    lateinit var sharedPreferences: AppilogueSharedPreferences
 
     val mainViewModel: MainViewModel by activityViewModels()
     val homeViewModel: HomeViewModel by activityViewModels()
@@ -81,7 +77,7 @@ class OnboardingFragment :
         super.onDestroyView()
         mainViewModel.enableClickBottomNavigation()
         if (onboardingEventIndex == onboardingEvents.size)
-            sharedPreferences.finishOnboarding()
+            PreferencesManager.finishOnBoarding()
     }
 
     companion object {

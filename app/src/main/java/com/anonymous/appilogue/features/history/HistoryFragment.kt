@@ -22,7 +22,6 @@ class HistoryFragment :
             historyViewModel = viewModel
         }
         initView()
-        viewModel.fetchHistories() // fetch mock data
     }
 
     private fun initView() {
