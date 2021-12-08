@@ -10,7 +10,7 @@
             type="com.anonymous.appilogue.utils.TimeHelperKt" />
         <variable
             name="item"
-            type="com.anonymous.appilogue.model.ReviewInfo" />
+            type="com.anonymous.appilogue.model.ReviewModel" />
         <variable
             name="vm"
             type="com.anonymous.appilogue.features.community.detail.ReviewDetailViewModel" />
@@ -28,7 +28,7 @@
             android:layout_height="34dp"
             android:background="@drawable/border_circular_purple"
             android:src="@drawable/space_dust"
-            app:profileUrl="@{item.user.profileUrl}"
+            app:profileUrl="@{item.user.profileImage}"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
 

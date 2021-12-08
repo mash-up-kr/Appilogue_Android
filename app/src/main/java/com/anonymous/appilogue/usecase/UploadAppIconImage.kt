@@ -3,7 +3,7 @@ package com.anonymous.appilogue.usecase
 import android.graphics.Bitmap
 import androidx.annotation.WorkerThread
 import com.anonymous.appilogue.features.base.UiState
-import com.anonymous.appilogue.model.ImageApiResponse
+import com.anonymous.appilogue.model.dto.ImageDto
 import com.anonymous.appilogue.repository.ReviewRepository
 import java.io.ByteArrayOutputStream
 import java.io.File
@@ -15,7 +15,7 @@ class UploadAppIconImage @Inject constructor(
 ) {
 
     @WorkerThread
-    suspend operator fun invoke(cacheDir: File, appIconBitmap: Bitmap): UiState<ImageApiResponse> {
+    suspend operator fun invoke(cacheDir: File, appIconBitmap: Bitmap): UiState<ImageDto> {
         return try {
             val maxKB = (appIconBitmap.byteCount / KB_UNIT).coerceAtLeast(DEFAULT_MAX_FILE_SIZE)
             val format = DEFAULT_IMAGE_EXT

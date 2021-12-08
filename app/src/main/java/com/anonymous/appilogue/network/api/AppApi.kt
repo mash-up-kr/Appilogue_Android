@@ -1,4 +1,4 @@
-package com.anonymous.appilogue.network
+package com.anonymous.appilogue.network.api
 
 import com.anonymous.appilogue.model.AppModel
 import retrofit2.Response

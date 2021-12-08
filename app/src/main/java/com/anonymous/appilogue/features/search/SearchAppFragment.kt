@@ -90,6 +90,7 @@ class SearchAppFragment
 
     override fun onDestroyView() {
         disposable?.dispose()
+        (activity as MainActivity).showBottomNavigation()
         super.onDestroyView()
     }
 

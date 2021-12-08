@@ -9,131 +9,136 @@
             type="com.anonymous.appilogue.features.login.LoginViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/ic_bg_img_login">
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/nickname_back_button"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_gravity="start"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="18dp"
-            android:background="@drawable/btn_back_left_24px"
-            android:backgroundTint="@color/white"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/nickname_close_button"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginStart="305dp"
-            android:layout_marginTop="19dp"
-            android:layout_marginEnd="19dp"
-            android:background="@drawable/btn_close_24px"
-            android:backgroundTint="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/nickname_back_button"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/nickname_set_nickname"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="116dp"
-            android:layout_marginBottom="5dp"
-            android:text="@string/nickname_notify_insert_nickname"
-            android:textColor="@color/white"
-            android:textSize="22sp"
-            app:layout_constraintBottom_toTopOf="@id/nickname_explain_text"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/nickname_explain_text"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="155dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginBottom="15dp"
-            android:text="@string/nickname_can_change"
-            android:textColor="@color/gray_02"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toTopOf="@id/nickname_inputText"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <EditText
-            android:id="@+id/nickname_inputText"
+        android:fillViewport="true">
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="196dp"
-            android:layout_marginEnd="24dp"
-            android:background="@drawable/border_radius_16"
-            android:hint="@string/nickname_example"
-            android:inputType="text"
-            android:maxLength="10"
-            android:maxLines="1"
-            android:paddingStart="16dp"
-            android:paddingEnd="24dp"
-            android:text="@={vm.nickName}"
-            android:textColor="@color/white"
-            android:textColorHint="@color/gray_02"
-            android:textSize="16sp"
-            app:counterEnabled="true"
-            app:counterMaxLength="10"
-            app:counterTextColor="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_height="match_parent"
+            android:background="@drawable/ic_bg_img_login">
 
-        <TextView
-            android:id="@+id/nickname_used_name_notification"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="10dp"
-            android:text="@string/nickname_be_used"
-            android:textColor="@color/red"
-            android:textSize="12sp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/nickname_inputText" />
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/nickname_back_button"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="start"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="18dp"
+                android:background="@drawable/btn_back_left_24px"
+                android:backgroundTint="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/nickname_counting"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="24dp"
-            android:hint="0/10"
-            android:textColorHint="@color/white"
-            android:textColor="@color/white"
-            android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/nickname_inputText" />
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/nickname_close_button"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="305dp"
+                android:layout_marginTop="19dp"
+                android:layout_marginEnd="19dp"
+                android:background="@drawable/btn_close_24px"
+                android:backgroundTint="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/nickname_back_button"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/nickname_done_button"
-            android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="335dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginBottom="20dp"
-            android:background="@drawable/border_radius_10_purple"
-            android:backgroundTint="@color/purple_01"
-            android:text="@string/done"
-            android:textColor="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            <TextView
+                android:id="@+id/nickname_set_nickname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="116dp"
+                android:layout_marginBottom="5dp"
+                android:text="@string/nickname_notify_insert_nickname"
+                android:textColor="@color/white"
+                android:textSize="22sp"
+                app:layout_constraintBottom_toTopOf="@id/nickname_explain_text"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/nickname_explain_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="155dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="15dp"
+                android:text="@string/nickname_can_change"
+                android:textColor="@color/gray_02"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toTopOf="@id/nickname_inputText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <EditText
+                android:id="@+id/nickname_inputText"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="196dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/border_radius_16"
+                android:hint="@string/nickname_example"
+                android:inputType="text"
+                android:maxLength="10"
+                android:maxLines="1"
+                android:paddingStart="16dp"
+                android:paddingEnd="24dp"
+                android:text="@={vm.nickName}"
+                android:textColor="@color/white"
+                android:textColorHint="@color/gray_02"
+                android:textSize="16sp"
+                app:counterEnabled="true"
+                app:counterMaxLength="10"
+                app:counterTextColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/nickname_used_name_notification"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/nickname_be_used"
+                android:textColor="@color/red"
+                android:textSize="12sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/nickname_inputText" />
+
+            <TextView
+                android:id="@+id/nickname_counting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="24dp"
+                android:hint="0/10"
+                android:textColorHint="@color/white"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/nickname_inputText" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/nickname_done_button"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="335dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/border_radius_10_purple"
+                android:backgroundTint="@color/purple_01"
+                android:text="@string/done"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 </layout>

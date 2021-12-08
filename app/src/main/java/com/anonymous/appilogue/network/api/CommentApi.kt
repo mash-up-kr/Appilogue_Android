@@ -1,6 +1,6 @@
-package com.anonymous.appilogue.network
+package com.anonymous.appilogue.network.api
 
-import com.anonymous.appilogue.model.CommentDto
+import com.anonymous.appilogue.model.dto.CommentDto
 import com.anonymous.appilogue.model.CommentModel
 import retrofit2.Response
 import retrofit2.http.*

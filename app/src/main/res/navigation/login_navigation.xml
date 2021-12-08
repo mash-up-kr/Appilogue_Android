@@ -26,6 +26,10 @@
         <action
             android:id="@+id/action_emailFragment_to_certificationFragment"
             app:destination="@id/certificationFragment" />
+        <action
+            android:id="@+id/action_emailFragment_to_loginFragment"
+            app:popUpTo="@id/loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/certificationFragment"
@@ -35,12 +39,21 @@
         <action
             android:id="@+id/action_certificationFragment_to_passwordFragment"
             app:destination="@id/passwordFragment" />
+        <action
+            android:id="@+id/action_certificationFragment_to_loginFragment"
+            app:popUpTo="@id/loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/nicknameFragment"
         android:name="com.anonymous.appilogue.features.login.NicknameFragment"
         android:label="NicknameFragment"
-        tools:layout="@layout/fragment_nickname" />
+        tools:layout="@layout/fragment_nickname" >
+        <action
+            android:id="@+id/action_nicknameFragment_to_loginFragment"
+            app:popUpTo="@id/loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
     <fragment
         android:id="@+id/passwordFragment"
         android:name="com.anonymous.appilogue.features.login.PasswordFragment"
@@ -52,6 +65,10 @@
         <action
             android:id="@+id/action_passwordFragment_to_loginEmailFragment"
             app:destination="@id/loginEmailFragment" />
+        <action
+            android:id="@+id/action_passwordFragment_to_loginFragment"
+            app:popUpTo="@id/loginFragment"
+            app:destination="@id/loginFragment" />
 
     </fragment>
     <fragment

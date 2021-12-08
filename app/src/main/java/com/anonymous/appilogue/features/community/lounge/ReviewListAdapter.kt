@@ -9,16 +9,17 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.anonymous.appilogue.R
-import com.anonymous.appilogue.model.ReviewInfo
+import com.anonymous.appilogue.model.ReviewModel
 import androidx.databinding.library.baseAdapters.BR
 import com.anonymous.appilogue.databinding.ItemReviewContentBinding
 import com.anonymous.appilogue.model.AppModel
 
 class ReviewListAdapter(
     private val viewModel: ReviewListViewModel,
-    private val navigateToDetail: (ReviewInfo) -> Unit,
-    private val navigateToAppInfo: (AppModel) -> Unit
-) : PagingDataAdapter<ReviewInfo, ReviewListAdapter.ReviewItemViewHolder>(DiffCallback()) {
+    private val navigateToDetail: (ReviewModel) -> Unit,
+    private val navigateToAppInfo: (AppModel) -> Unit,
+    private val showBottomSheetMenu: (ReviewModel) -> Unit
+) : PagingDataAdapter<ReviewModel, ReviewListAdapter.ReviewItemViewHolder>(DiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReviewItemViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -43,11 +44,19 @@ class ReviewListAdapter(
                     }
                 }
             }
+            moreButtonView.setOnClickListener {
+                val position = bindingAdapterPosition
+                if (position < itemCount) {
+                    getItem(position)?.let { review ->
+                        showBottomSheetMenu(review)
+                    }
+                }
+            }
             appInfoContainer.setOnClickListener {
                 val position = bindingAdapterPosition
                 if (position < itemCount) {
-                    getItem(position)?.let {
-                        navigateToAppInfo(it.app)
+                    getItem(position)?.let { review ->
+                        navigateToAppInfo(review.app)
                     }
                 }
             }
@@ -95,22 +104,22 @@ class ReviewListAdapter(
         private val binding: ItemReviewContentBinding,
         private val viewModel: ReviewListViewModel
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(info: ReviewInfo) {
+        fun bind(model: ReviewModel) {
             binding.apply {
-                setVariable(BR.item, info)
+                setVariable(BR.item, model)
                 setVariable(BR.vm, viewModel)
                 executePendingBindings()
             }
         }
     }
 
-    private class DiffCallback : DiffUtil.ItemCallback<ReviewInfo>() {
-        override fun areItemsTheSame(oldInfo: ReviewInfo, newInfo: ReviewInfo): Boolean {
-            return oldInfo.id == newInfo.id
+    private class DiffCallback : DiffUtil.ItemCallback<ReviewModel>() {
+        override fun areItemsTheSame(oldModel: ReviewModel, newModel: ReviewModel): Boolean {
+            return oldModel.id == newModel.id
         }
 
-        override fun areContentsTheSame(oldInfo: ReviewInfo, newInfo: ReviewInfo): Boolean {
-            return oldInfo == newInfo
+        override fun areContentsTheSame(oldModel: ReviewModel, newModel: ReviewModel): Boolean {
+            return oldModel == newModel
         }
     }
 }

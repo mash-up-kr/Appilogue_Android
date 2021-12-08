@@ -8,6 +8,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.anonymous.appilogue.R
 import com.anonymous.appilogue.databinding.FragmentCertificationBinding
 import com.anonymous.appilogue.features.base.BaseFragment
@@ -31,6 +32,14 @@ class CertificationFragment :
         )
 
         with(binding) {
+            certificationBackButton.setOnClickListener {
+                activity?.onBackPressed()
+            }
+
+            certificationCloseButton.setOnClickListener {
+                findNavController().navigate(R.id.action_certificationFragment_to_loginFragment)
+            }
+
             with(certificationMoveNextButton) {
                 isEnabled = false
                 // 처음 Fragment 시작시에는 비활성화

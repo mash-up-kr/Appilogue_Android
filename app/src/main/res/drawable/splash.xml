@@ -6,4 +6,10 @@
             android:src="@drawable/splash_image_80"
             android:gravity="center"/>
     </item>
+    <item
+        android:bottom="80dp">
+        <bitmap
+            android:src="@drawable/text_appilogue"
+            android:gravity="bottom"/>
+    </item>
 </layer-list>

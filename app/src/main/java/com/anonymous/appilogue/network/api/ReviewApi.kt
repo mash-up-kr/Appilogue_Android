@@ -1,6 +1,8 @@
-package com.anonymous.appilogue.network
+package com.anonymous.appilogue.network.api
 
 import com.anonymous.appilogue.model.*
+import com.anonymous.appilogue.model.dto.LikeDto
+import com.anonymous.appilogue.model.dto.ReviewDto
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -9,7 +11,7 @@ interface ReviewApi {
     @GET("v1/api/review/{reviewId}")
     suspend fun searchReview(
         @Path("reviewId") reviewId: Int
-    ): Response<ReviewInfo>
+    ): Response<ReviewModel>
 
     @POST("v1/api/review")
     suspend fun registerReview(

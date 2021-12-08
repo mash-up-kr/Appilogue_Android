@@ -8,10 +8,10 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.anonymous.appilogue.R
 import com.anonymous.appilogue.databinding.ItemAppBinding
-import com.anonymous.appilogue.model.Review
+import com.anonymous.appilogue.model.ReviewModel
 
 class BottomSheetHoleAppAdapter :
-    ListAdapter<Review, BottomSheetHoleAppAdapter.BottomSheetAppViewHolder>(diffCallback) {
+    ListAdapter<ReviewModel, BottomSheetHoleAppAdapter.BottomSheetAppViewHolder>(diffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BottomSheetAppViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -31,7 +31,7 @@ class BottomSheetHoleAppAdapter :
         private val binding: ItemAppBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(review: Review) {
+        fun bind(review: ReviewModel) {
             binding.apply {
                 item = review
             }
@@ -39,12 +39,12 @@ class BottomSheetHoleAppAdapter :
     }
 
     companion object {
-        private val diffCallback = object : DiffUtil.ItemCallback<Review>() {
-            override fun areItemsTheSame(oldItem: Review, newItem: Review): Boolean {
+        private val diffCallback = object : DiffUtil.ItemCallback<ReviewModel>() {
+            override fun areItemsTheSame(oldItem: ReviewModel, newItem: ReviewModel): Boolean {
                 return oldItem.id == newItem.id
             }
 
-            override fun areContentsTheSame(oldItem: Review, newItem: Review): Boolean {
+            override fun areContentsTheSame(oldItem: ReviewModel, newItem: ReviewModel): Boolean {
                 return oldItem == newItem
             }
         }

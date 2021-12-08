@@ -6,6 +6,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.anonymous.appilogue.R
 import com.anonymous.appilogue.databinding.FragmentEmailBinding
 import com.anonymous.appilogue.features.base.BaseFragment
@@ -44,6 +45,14 @@ class EmailFragment :
 
     private fun initClickListener() {
         with(binding) {
+            emailBackButton.setOnClickListener {
+                activity?.onBackPressed()
+            }
+
+            emailCloseButton.setOnClickListener {
+                findNavController().navigate(R.id.action_emailFragment_to_loginFragment)
+            }
+
             with(emailMoveNextButton) {
                 FirstButtonInit.buttonInit(this)
 

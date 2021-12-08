@@ -11,7 +11,6 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.databinding.BindingAdapter
-import androidx.databinding.InverseBindingListener
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.anonymous.appilogue.R
@@ -23,7 +22,6 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
-import com.bumptech.glide.load.DecodeFormat
 import com.google.android.material.textfield.TextInputLayout
 import timber.log.Timber
 
@@ -92,6 +90,7 @@ fun TextView.bindReviewTitle(isBlackHoleReview: Boolean?) {
 @SuppressLint("SetTextI18n")
 @BindingAdapter("tags")
 fun ChipGroup.bindTags(tags: List<HashTagModel>?) {
+    removeAllViews()
     tags?.forEach { tag ->
         val tagView: Chip = Chip(context).apply {
             text = "#${tag.name}"
@@ -141,6 +140,6 @@ fun ProgressBar.bindShowProgress(uiState: UiState<*>) {
 
 @BindingAdapter("likeModels")
 fun ImageView.bindLikeModels(likeModels: List<LikesModel>) {
-    val myId = PreferencesManager.getUserId()
+    val myId = PreferencesManager.getMyId()
     isSelected = likeModels.any { it.user.id == myId }
 }

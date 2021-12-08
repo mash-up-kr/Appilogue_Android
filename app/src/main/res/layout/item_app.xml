@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="com.anonymous.appilogue.model.Review" />
+            type="com.anonymous.appilogue.model.ReviewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

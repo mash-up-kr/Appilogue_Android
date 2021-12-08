@@ -6,7 +6,7 @@ import com.anonymous.appilogue.model.AppModel
 import com.anonymous.appilogue.model.InstalledApp
 import com.anonymous.appilogue.model.toData
 import com.anonymous.appilogue.model.toEntity
-import com.anonymous.appilogue.network.AppApi
+import com.anonymous.appilogue.network.api.AppApi
 import com.anonymous.appilogue.persistence.InstalledAppDao
 import timber.log.Timber
 import javax.inject.Inject

@@ -1,14 +1,9 @@
 package com.anonymous.appilogue.di
 
-import com.anonymous.appilogue.network.*
+import com.anonymous.appilogue.network.api.*
+import com.anonymous.appilogue.network.interceptor.AuthInterceptor
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter
-import com.anonymous.appilogue.network.api.AuthApi
-import com.anonymous.appilogue.network.api.ItemApi
-import com.anonymous.appilogue.network.api.SearchApi
-import com.anonymous.appilogue.network.api.UserApi
-import com.anonymous.appilogue.network.interceptor.AuthorizationInterceptor
-import com.anonymous.appilogue.network.interceptor.MockAuthorizationInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -23,8 +18,6 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 @Module
 object NetworkModule {
-    private const val BASE_URL = "https://api.moussg.io/v1/api/"
-
     private const val BASE_URL = "https://api.moussg.io/"
 
     @Provides
@@ -38,10 +31,8 @@ object NetworkModule {
     fun provideOkHttpClient(
         authInterceptor: AuthInterceptor
     ): OkHttpClient {
-    fun provideOkHttpClient(authorizationInterceptor: MockAuthorizationInterceptor): OkHttpClient {
         return OkHttpClient.Builder()
             .addInterceptor(authInterceptor)
-            .addInterceptor(authorizationInterceptor)
             .build()
     }
 
@@ -52,12 +43,10 @@ object NetworkModule {
         moshi: Moshi
     ): Retrofit =
         Retrofit.Builder()
-            .baseUrl("https://api.moussg.io/")
             .baseUrl(BASE_URL)
             .client(okHttpClient)
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
-            .addConverterFactory(MoshiConverterFactory.create())
             .build()
 
     @Provides
@@ -111,10 +100,6 @@ object NetworkModule {
     ): AppApi {
         return retrofit.create(AppApi::class.java)
     }
-    @Provides
-    @Singleton
-    fun provideReviewApi(retrofit: Retrofit): SearchApi =
-        retrofit.create(SearchApi::class.java)
 
     @Provides
     @Singleton

@@ -10,7 +10,7 @@
             type="com.anonymous.appilogue.utils.TimeHelperKt" />
         <variable
             name="item"
-            type="com.anonymous.appilogue.model.ReviewInfo" />
+            type="com.anonymous.appilogue.model.ReviewModel" />
 
         <variable
             name="vm"
@@ -33,7 +33,7 @@
             android:layout_marginTop="20dp"
             android:background="@drawable/border_circular_purple"
             android:src="@drawable/space_dust"
-            app:profileUrl="@{item.user.profileUrl}"
+            app:profileUrl="@{item.user.profileImage}"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
 
@@ -75,6 +75,17 @@
             app:layout_constraintTop_toTopOf="@id/profile_view"
             app:layout_constraintBottom_toBottomOf="@id/profile_view"
             app:layout_constraintEnd_toEndOf="parent" />
+
+        <ImageView
+            android:id="@+id/more_button_view"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@drawable/ic_vertical_more"
+            android:backgroundTint="@color/white"
+            android:contentDescription="@string/description_close_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/profile_view"
+            app:layout_constraintBottom_toBottomOf="@id/profile_view"/>
 
         <com.anonymous.appilogue.widget.ReadMoreTextView
             android:id="@+id/content_view"

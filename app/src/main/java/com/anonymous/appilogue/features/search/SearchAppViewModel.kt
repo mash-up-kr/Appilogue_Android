@@ -3,7 +3,7 @@ package com.anonymous.appilogue.features.search
 import androidx.lifecycle.*
 import com.anonymous.appilogue.features.base.isSuccessful
 import com.anonymous.appilogue.features.base.successOr
-import com.anonymous.appilogue.model.ImageApiResponse
+import com.anonymous.appilogue.model.dto.ImageDto
 import com.anonymous.appilogue.model.InstalledApp
 import com.anonymous.appilogue.repository.SearchAppRepository
 import com.anonymous.appilogue.usecase.UploadAppIconImage
@@ -57,7 +57,7 @@ class SearchAppViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             val result = uploadAppIconImage(cacheDir, appItem.icon)
             if (result.isSuccessful) {
-                handleEvent(Event.MoveToReviewSelector(appItem.name, result.successOr(ImageApiResponse()).url))
+                handleEvent(Event.MoveToReviewSelector(appItem.name, result.successOr(ImageDto()).url))
             }
         }
     }

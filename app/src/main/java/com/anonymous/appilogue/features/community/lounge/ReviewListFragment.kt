@@ -16,8 +16,10 @@ import com.anonymous.appilogue.databinding.FragmentReviewListBinding
 import com.anonymous.appilogue.features.base.BaseFragment
 import com.anonymous.appilogue.features.main.MainActivity
 import com.anonymous.appilogue.model.AppModel
-import com.anonymous.appilogue.model.ReviewInfo
+import com.anonymous.appilogue.model.ReviewModel
+import com.anonymous.appilogue.persistence.PreferencesManager
 import com.anonymous.appilogue.utils.showToast
+import com.anonymous.appilogue.widget.BottomSheetMenuDialog
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -31,7 +33,8 @@ class ReviewListFragment
         ReviewListAdapter(
             viewModel,
             this::navigateToDetail,
-            this::navigateToAppInfo
+            this::navigateToAppInfo,
+            this::showBottomSheetMenu
         ).apply {
             addLoadStateListener { loadState ->
                 if (loadState.source.refresh is LoadState.Loading) {
@@ -116,7 +119,7 @@ class ReviewListFragment
         }
     }
 
-    private fun navigateToDetail(item: ReviewInfo) {
+    private fun navigateToDetail(item: ReviewModel) {
         val action = LoungeFragmentDirections.actionLoungeFragmentToReviewDetailFragment(item.id)
         (activity as MainActivity).navigateTo(action)
     }
@@ -126,10 +129,30 @@ class ReviewListFragment
         (activity as MainActivity).navigateTo(action)
     }
 
+    private fun showBottomSheetMenu(review: ReviewModel) {
+        val isMyReview = PreferencesManager.getMyId() == review.user.id
+        val bottomSheetMenu = BottomSheetMenuDialog(isMyReview) {
+            if (isMyReview) {
+                viewModel.removeReview(review.id)
+            } else {
+                viewModel.reportReview(review.id)
+            }
+        }
+        (activity as MainActivity).showBottomSheetDialog(bottomSheetMenu)
+    }
+
     private fun handleEvent(event: ReviewListViewModel.Event) {
         when (event) {
             is ReviewListViewModel.Event.PlusLike -> {
-                viewModel.plusLike(event.reviewInfo)
+                viewModel.plusLike(event.reviewModel)
+            }
+            is ReviewListViewModel.Event.ShowToastForResult -> {
+                val message = if (event.isMine) {
+                    getString(R.string.remove_result_message)
+                } else {
+                    getString(R.string.report_result_message)
+                }
+                context?.showToast(message)
             }
         }
     }

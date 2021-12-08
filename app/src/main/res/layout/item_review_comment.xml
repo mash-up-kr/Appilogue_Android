@@ -27,7 +27,7 @@
             android:layout_height="34dp"
             android:src="@drawable/space_dust"
             android:background="@drawable/border_circular_purple"
-            app:profileUrl="@{item.user.profileUrl}"
+            app:profileUrl="@{item.user.profileImage}"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
 

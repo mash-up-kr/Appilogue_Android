@@ -23,12 +23,11 @@ class AppSearchManager @Inject constructor(
         val appList = packageManager.getInstalledApplications(
             PackageManager.MATCH_DISABLED_COMPONENTS)
 
-        return emptyList()
-//        appList
-//            .filter { appInfo -> !appInfo.name.isNullOrBlank() && packageManager.getApplicationLabel(appInfo).isNotBlank() }
-//            .map { appInfo ->
-//                val appName = packageManager.getApplicationLabel(appInfo).toString()
-//                InstalledApp(appName, packageManager.getApplicationIcon(appInfo).toBitmap())
-//            }
+        return appList
+            .filter { appInfo -> !appInfo.name.isNullOrBlank() && packageManager.getApplicationLabel(appInfo).isNotBlank() }
+            .map { appInfo ->
+                val appName = packageManager.getApplicationLabel(appInfo).toString()
+                InstalledApp(appName, packageManager.getApplicationIcon(appInfo).toBitmap())
+            }
     }
 }

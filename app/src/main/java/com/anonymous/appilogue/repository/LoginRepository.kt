@@ -1,13 +1,13 @@
 package com.anonymous.appilogue.repository
 
 import com.anonymous.appilogue.model.*
-import com.anonymous.appilogue.repository.remote.AuthApi
+import com.anonymous.appilogue.network.api.AuthApi
 import io.reactivex.rxjava3.core.Single
 import javax.inject.Inject
 
 class LoginRepository @Inject constructor(private val authApi: AuthApi) {
-    fun sendCertificationEmail(email: SendEmail): Single<SendEmailResult> {
-        return authApi.sendCertificationToEmail(email)
+    fun sendCertificationEmail(emailModel: SendEmailModel): Single<SendEmailResult> {
+        return authApi.sendCertificationToEmail(emailModel)
     }
 
     fun verifyCertificationNumber(postData: PostVerifyCode): Single<VerifyCode> {
@@ -18,15 +18,15 @@ class LoginRepository @Inject constructor(private val authApi: AuthApi) {
         return authApi.validateNickname(nickname)
     }
 
-    fun postToServerUserData(userData: SignUp): Single<SignUpResult> {
+    fun postToServerUserData(userData: SignUpModel): Single<SignUpResult> {
         return authApi.postToServerUserData(userData)
     }
 
-    fun loginWithEmailPassword(loginData: Login): Single<LoginResult> {
-        return authApi.loginWithEmailPassword(loginData)
+    fun loginWithEmailPassword(loginModelData: LoginModel): Single<TokenModel> {
+        return authApi.loginWithEmailPassword(loginModelData)
     }
 
-    fun updatePassword(updatePassword: UpdatePassword): Single<UpdatePasswordResult> {
-        return authApi.updatePassword(updatePassword)
+    fun updatePassword(updatePasswordModel: UpdatePasswordModel): Single<UpdatePasswordResult> {
+        return authApi.updatePassword(updatePasswordModel)
     }
 }

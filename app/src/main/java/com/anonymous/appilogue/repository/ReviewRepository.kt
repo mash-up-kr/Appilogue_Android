@@ -3,10 +3,14 @@ package com.anonymous.appilogue.repository
 import com.anonymous.appilogue.exceptions.EmptyResponseException
 import com.anonymous.appilogue.features.base.UiState
 import com.anonymous.appilogue.model.*
-import com.anonymous.appilogue.network.CommentApi
-import com.anonymous.appilogue.network.ImageApi
-import com.anonymous.appilogue.network.ReviewApi
-import com.anonymous.appilogue.network.SearchApi
+import com.anonymous.appilogue.model.dto.CommentDto
+import com.anonymous.appilogue.model.dto.ImageDto
+import com.anonymous.appilogue.model.dto.LikeDto
+import com.anonymous.appilogue.model.dto.ReviewDto
+import com.anonymous.appilogue.network.api.CommentApi
+import com.anonymous.appilogue.network.api.ImageApi
+import com.anonymous.appilogue.network.api.ReviewApi
+import com.anonymous.appilogue.network.api.SearchApi
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -20,10 +24,46 @@ class ReviewRepository @Inject constructor(
     private val imageApi: ImageApi
 ) : Repository {
 
+    suspend fun fetchMyReviews(userId: Int): UiState<List<ReviewModel>> {
+        return try {
+            val response = searchApi.searchReviews(userId,  1, 1000)
+
+            if (response.isSuccessful) {
+                val apiResponse = response.body() ?: throw EmptyResponseException(
+                    response.code(),
+                    response.raw().message()
+                )
+                UiState.Success(apiResponse.items)
+            } else {
+                handleApiError(response)
+            }
+        } catch (e: Exception) {
+            UiState.Failure(e)
+        }
+    }
+
+    suspend fun fetchReviewsByUser(userId: Int, hole: String): UiState<List<ReviewModel>> {
+        return try {
+            val response = searchApi.searchReviews(userId, hole, 1, 30)
+
+            if (response.isSuccessful) {
+                val apiResponse = response.body() ?: throw EmptyResponseException(
+                    response.code(),
+                    response.raw().message()
+                )
+                UiState.Success(apiResponse.items)
+            } else {
+                handleApiError(response)
+            }
+        } catch (e: Exception) {
+            UiState.Failure(e)
+        }
+    }
+
     suspend fun fetchReviews(
         hole: String = "",
         page: Int = 1,
-    ): UiState<List<ReviewInfo>> {
+    ): UiState<List<ReviewModel>> {
         return try {
             val response = searchApi.searchReviews(hole, page)
 
@@ -43,7 +83,7 @@ class ReviewRepository @Inject constructor(
 
     suspend fun fetchReview(
         reviewId: Int
-    ): UiState<ReviewInfo> {
+    ): UiState<ReviewModel> {
         return try {
             val response = reviewApi.searchReview(reviewId)
 
@@ -167,7 +207,7 @@ class ReviewRepository @Inject constructor(
         maxKB: Int,
         format: String,
         imageFile: File
-    ): UiState<ImageApiResponse> {
+    ): UiState<ImageDto> {
         return try {
             val requestFile = RequestBody.create(MediaType.parse("image/*"), imageFile)
             val appIconPart = MultipartBody.Part.createFormData("image", imageFile.name, requestFile)

@@ -2,7 +2,7 @@ package com.anonymous.appilogue.features.review
 
 import androidx.lifecycle.*
 import com.anonymous.appilogue.features.base.isSuccessful
-import com.anonymous.appilogue.model.ReviewDto
+import com.anonymous.appilogue.model.dto.ReviewDto
 import com.anonymous.appilogue.usecase.RegisterReviewUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch

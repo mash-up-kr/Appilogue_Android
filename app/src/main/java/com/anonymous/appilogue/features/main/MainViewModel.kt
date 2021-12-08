@@ -6,15 +6,16 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.anonymous.appilogue.model.InstalledApp
 import com.anonymous.appilogue.model.User
+import com.anonymous.appilogue.persistence.PreferencesManager
 import com.anonymous.appilogue.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor() : ViewModel() {
-class MainViewModel @Inject constructor(private val userRepository: UserRepository) : ViewModel() {
-    var selectedApp: InstalledApp? = null
+class MainViewModel @Inject constructor(
+    private val userRepository: UserRepository
+) : ViewModel() {
     private val _bottomNavigationState = MutableLiveData(true)
     val bottomNavigationState: LiveData<Boolean> = _bottomNavigationState
 
@@ -44,7 +45,14 @@ class MainViewModel @Inject constructor(private val userRepository: UserReposito
         viewModelScope.launch {
             userRepository.fetchMyInformation()?.let {
                 _myUser.value = it
+                PreferencesManager.saveUserId(it.id)
             }
+        }
+    }
+
+    fun deleteMyAccount() {
+        viewModelScope.launch {
+            userRepository.deleteUser()
         }
     }
 

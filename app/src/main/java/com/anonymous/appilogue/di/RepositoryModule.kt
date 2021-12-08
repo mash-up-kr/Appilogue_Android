@@ -1,14 +1,8 @@
 package com.anonymous.appilogue.di
 
-import com.anonymous.appilogue.network.*
-import com.anonymous.appilogue.network.api.AuthApi
-import com.anonymous.appilogue.network.api.ItemApi
 import com.anonymous.appilogue.network.api.SearchApi
-import com.anonymous.appilogue.network.api.UserApi
+import com.anonymous.appilogue.network.api.*
 import com.anonymous.appilogue.persistence.InstalledAppDao
-import com.anonymous.appilogue.repository.*
-import com.anonymous.appilogue.repository.*
-import com.anonymous.appilogue.repository.remote.AuthApi
 import com.anonymous.appilogue.repository.*
 import dagger.Module
 import dagger.Provides
@@ -28,14 +22,6 @@ object RepositoryModule {
         appApi: AppApi
     ) = SearchAppRepository(installedAppDao, appApi)
 
-    @Provides
-    @Singleton
-    fun provideHistoryRepository(): HistoryRepository = FakeHistoryRepository()
-
-    @Singleton
-    @Provides
-    fun provideAppRepository(): AppRepository = FakeAppRepository()
-
     @Singleton
     @Provides
     fun provideReviewRepository(
@@ -50,14 +36,10 @@ object RepositoryModule {
     fun provideReportRepository(
         reportApi: ReportApi
     ): ReportRepository = ReportRepository(reportApi)
-    @Singleton
-    @Provides
-    fun provideLoginRepository(authApi: AuthApi): LoginRepository = LoginRepository(authApi)
 
     @Singleton
     @Provides
-    fun provideReviewRepository(searchApi: SearchApi): ReviewRepository =
-        FakeReviewRepository(searchApi)
+    fun provideLoginRepository(authApi: AuthApi): LoginRepository = LoginRepository(authApi)
 
     @Singleton
     @Provides

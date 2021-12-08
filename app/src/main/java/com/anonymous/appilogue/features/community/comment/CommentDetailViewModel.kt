@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.anonymous.appilogue.features.base.UiState
 import com.anonymous.appilogue.features.base.isSuccessful
 import com.anonymous.appilogue.features.base.successOr
-import com.anonymous.appilogue.model.CommentDto
+import com.anonymous.appilogue.model.dto.CommentDto
 import com.anonymous.appilogue.model.CommentModel
 import com.anonymous.appilogue.model.ReportModel
 import com.anonymous.appilogue.model.ReportType

@@ -1,4 +1,4 @@
-package com.anonymous.appilogue.model
+package com.anonymous.appilogue.model.dto
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass

@@ -1,6 +1,6 @@
-package com.anonymous.appilogue.network
+package com.anonymous.appilogue.network.api
 
-import com.anonymous.appilogue.model.ImageApiResponse
+import com.anonymous.appilogue.model.dto.ImageDto
 import okhttp3.MultipartBody
 import retrofit2.Response
 import retrofit2.http.Multipart
@@ -16,5 +16,5 @@ interface ImageApi {
         @Query("maxKB") maxKB: Int,
         @Query("format") format: String,
         @Part imageFile: MultipartBody.Part
-    ): Response<ImageApiResponse>
+    ): Response<ImageDto>
 }

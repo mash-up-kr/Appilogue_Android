@@ -22,9 +22,4 @@ object ApplicationModule {
         @ApplicationContext context: Context,
         searchAppRepository: SearchAppRepository): AppSearchManager =
         AppSearchManager(context, searchAppRepository)
-
-    @Provides
-    @Singleton
-    fun provideSharedPreferenceManager(@ApplicationContext context: Context): SharedPreferences =
-        PreferenceManager.getDefaultSharedPreferences(context)
 }

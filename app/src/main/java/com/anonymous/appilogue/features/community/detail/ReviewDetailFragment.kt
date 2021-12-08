@@ -49,7 +49,7 @@ class ReviewDetailFragment
             }
 
             toolbarRightIconView.setOnClickListener {
-                val isMyReview = PreferencesManager.getUserId() == viewModel.getAuthorId()
+                val isMyReview = PreferencesManager.getMyId() == viewModel.getAuthorId()
                 val bottomSheetMenu = BottomSheetMenuDialog(isMyReview) {
                     if (isMyReview) {
                         viewModel.removeReviewEvent()
@@ -84,7 +84,7 @@ class ReviewDetailFragment
 
     private fun initObservers() {
         lifecycleScope.launch {
-            viewModel.reviewInfo.collect {
+            viewModel.reviewModel.collect {
                 commentAdapter.submitList(it.comments.filter { comment -> comment.parentId == null })
             }
         }
@@ -96,7 +96,7 @@ class ReviewDetailFragment
     }
 
     private fun showBottomSheetMenu(commentModel: CommentModel) {
-        val isMyComment = PreferencesManager.getUserId() == commentModel.user.id
+        val isMyComment = PreferencesManager.getMyId() == commentModel.user.id
         val bottomSheetMenu = BottomSheetMenuDialog(isMyComment) {
             if (isMyComment) {
                 viewModel.removeCommentEvent(commentModel.id)
@@ -141,7 +141,7 @@ class ReviewDetailFragment
                 (activity as MainActivity).navigateTo(action)
             }
             is ReviewDetailViewModel.Event.PlusLike -> {
-                viewModel.plusLike(event.reviewInfo)
+                viewModel.plusLike(event.reviewModel)
             }
         }
     }

@@ -3,7 +3,6 @@ package com.anonymous.appilogue.features.profile
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.View
-import androidx.core.content.ContentProviderCompat
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.add
 import androidx.fragment.app.commit
@@ -12,7 +11,6 @@ import com.anonymous.appilogue.R
 import com.anonymous.appilogue.databinding.FragmentProfileBinding
 import com.anonymous.appilogue.features.base.BaseFragment
 import com.anonymous.appilogue.features.home.SpaceAnimator
-import com.anonymous.appilogue.features.home.onboarding.OnboardingFragment
 import com.anonymous.appilogue.features.main.MainActivity
 import com.anonymous.appilogue.features.main.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -43,6 +41,11 @@ class ProfileFragment :
             }
         }
         fetchApplicationVersion()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.fetchMyReviewCount()
     }
 
     private fun fetchApplicationVersion() {

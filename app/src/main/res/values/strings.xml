@@ -152,4 +152,7 @@
     <string name="ratio_title_text_format">사람들은 %s을(를) 이렇게 생각하고 있어요!</string>
     <string name="app_info_review_title">%s 리뷰</string>
     <string name="app_review_ratio_format">%d %%</string>
+    <!-- profile -->
+    <string name="logout_alert_title">로그아웃 하시겠습니까?</string>
+    <string name="withdraw_alert_title">회원 탈퇴 하시겠습니까?</string>
 </resources>

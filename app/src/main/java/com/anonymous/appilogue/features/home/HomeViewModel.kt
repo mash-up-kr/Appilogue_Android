@@ -1,17 +1,10 @@
 package com.anonymous.appilogue.features.home
 
-import android.view.View
 import androidx.lifecycle.*
-import com.anonymous.appilogue.model.Review
-import com.anonymous.appilogue.repository.ReviewRepository
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel

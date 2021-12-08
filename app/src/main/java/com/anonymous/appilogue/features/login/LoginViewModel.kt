@@ -52,7 +52,7 @@ class LoginViewModel @Inject constructor(private val loginRepository: LoginRepos
     }
 
     fun sendCertificationNumber(duplicateCheck: Boolean): Single<SendEmailResult> {
-        return loginRepository.sendCertificationEmail(SendEmail(duplicateCheck, emailAddress.value.toString()))
+        return loginRepository.sendCertificationEmail(SendEmailModel(duplicateCheck, emailAddress.value.toString()))
     }
 
     fun verifyCertificationNumber(): Single<VerifyCode> {
@@ -67,7 +67,7 @@ class LoginViewModel @Inject constructor(private val loginRepository: LoginRepos
 
     fun sendToServerUserData(): Single<SignUpResult> {
         return loginRepository.postToServerUserData(
-            SignUp(
+            SignUpModel(
                 email = emailAddress.value.toString(),
                 nickname = nickName.value.toString(),
                 password = checkPassword.value.toString(),
@@ -75,12 +75,12 @@ class LoginViewModel @Inject constructor(private val loginRepository: LoginRepos
         ).subscribeOn(Schedulers.io())
     }
 
-    fun loginWithEmailPassword(): Single<LoginResult> {
-        return loginRepository.loginWithEmailPassword(Login(emailAddress.value.toString(), password.value.toString()))
+    fun loginWithEmailPassword(): Single<TokenModel> {
+        return loginRepository.loginWithEmailPassword(LoginModel(emailAddress.value.toString(), password.value.toString()))
     }
 
     fun updatePassword(): Single<UpdatePasswordResult> {
-        return loginRepository.updatePassword(UpdatePassword(emailAddress.value.toString(), checkPassword.value.toString()))
+        return loginRepository.updatePassword(UpdatePasswordModel(emailAddress.value.toString(), checkPassword.value.toString()))
     }
 
     companion object {

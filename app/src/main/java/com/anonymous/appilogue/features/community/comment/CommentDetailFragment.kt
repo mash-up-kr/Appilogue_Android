@@ -70,7 +70,7 @@ class CommentDetailFragment
     }
 
     private fun showBottomSheetMenu(commentModel: CommentModel) {
-        val isMyComment = PreferencesManager.getUserId() == commentModel.user.id
+        val isMyComment = PreferencesManager.getMyId() == commentModel.user.id
         val bottomSheetMenu = BottomSheetMenuDialog(isMyComment) {
             if (isMyComment) {
                 viewModel.removeCommentEvent(commentModel.id)

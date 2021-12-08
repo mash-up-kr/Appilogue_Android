@@ -14,6 +14,7 @@ import com.anonymous.appilogue.R
 import com.anonymous.appilogue.databinding.FragmentEmailLoginBinding
 import com.anonymous.appilogue.features.base.BaseFragment
 import com.anonymous.appilogue.features.main.MainActivity
+import com.anonymous.appilogue.persistence.PreferencesManager
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -35,6 +36,10 @@ class LoginEmailFragment :
     private fun initView() {
         FirstButtonInit.buttonInit(binding.emailLoginMoveNextButton)
 
+        binding.emailLoginBackButton.setOnClickListener {
+            activity?.onBackPressed()
+        }
+
         binding.emailLoginMoveNextButton.setOnClickListener {
             Timber.d("${viewModel.emailAddress.value.toString()}, ${viewModel.password.value.toString()}")
             viewModel.loginWithEmailPassword()
@@ -47,9 +52,10 @@ class LoginEmailFragment :
                         setIncorrect(binding.emailLoginPassword)
                     } else {
                         // accessToken 값 sharedPreference 에 추가
-                        AppilogueApplication.prefs.myEditText = it.accessToken
+                        PreferencesManager.saveToken(it.accessToken)
                         val intent = Intent(activity, MainActivity::class.java)
                         startActivity(intent)
+                        activity?.finish()
                     }
                 }) {
                     setIncorrect(binding.emailLoginEmail)

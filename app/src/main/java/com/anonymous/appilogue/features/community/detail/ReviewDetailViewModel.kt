@@ -7,6 +7,8 @@ import com.anonymous.appilogue.features.base.UiState
 import com.anonymous.appilogue.features.base.isSuccessful
 import com.anonymous.appilogue.features.base.successOr
 import com.anonymous.appilogue.model.*
+import com.anonymous.appilogue.model.dto.CommentDto
+import com.anonymous.appilogue.model.dto.LikeDto
 import com.anonymous.appilogue.usecase.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
@@ -29,19 +31,19 @@ class ReviewDetailViewModel @Inject constructor(
     private val _event = MutableSharedFlow<Event>()
     val event: SharedFlow<Event> = _event
 
-    private val _uiState: MutableStateFlow<UiState<ReviewInfo>> = MutableStateFlow(UiState.Loading)
-    val uiState: StateFlow<UiState<ReviewInfo>> = _uiState
+    private val _uiState: MutableStateFlow<UiState<ReviewModel>> = MutableStateFlow(UiState.Loading)
+    val uiState: StateFlow<UiState<ReviewModel>> = _uiState
 
     init {
         fetchReviews()
     }
 
-    val reviewInfo: StateFlow<ReviewInfo> = uiState.mapLatest { state ->
-        state.successOr(ReviewInfo())
+    val reviewModel: StateFlow<ReviewModel> = uiState.mapLatest { state ->
+        state.successOr(ReviewModel())
     }.stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5_000L),
-        initialValue = ReviewInfo()
+        initialValue = ReviewModel()
     )
 
     val inputText: MutableStateFlow<String?> = MutableStateFlow(null)
@@ -56,7 +58,7 @@ class ReviewDetailViewModel @Inject constructor(
 
     fun registerComment(commentText: String) {
         viewModelScope.launch {
-            val commentDto = CommentDto(reviewInfo.value.id, null, commentText)
+            val commentDto = CommentDto(reviewModel.value.id, null, commentText)
             val result = registerCommentUseCase(commentDto)
             if (result.isSuccessful) {
                 fetchReviews()
@@ -97,13 +99,13 @@ class ReviewDetailViewModel @Inject constructor(
         }
     }
 
-    fun plusLike(reviewInfo: ReviewInfo) {
+    fun plusLike(reviewModel: ReviewModel) {
         viewModelScope.launch {
-            plusLikeUseCase(LikeDto(reviewInfo.id))
+            plusLikeUseCase(LikeDto(reviewModel.id))
         }
     }
 
-    fun getAuthorId(): Int = reviewInfo.value.user.id
+    fun getAuthorId(): Int = reviewModel.value.user.id
 
     private fun handleRemoveOrReport(isMine: Boolean, block: suspend () -> UiState<*>) {
         viewModelScope.launch {
@@ -135,14 +137,14 @@ class ReviewDetailViewModel @Inject constructor(
     }
 
     fun moveToAppInfoEvent() {
-        handleEvent(Event.MoveToAppInfo(reviewInfo.value.app))
+        handleEvent(Event.MoveToAppInfo(reviewModel.value.app))
     }
 
     fun plusLikeEvent(): Int {
-        reviewInfo.value.likes = reviewInfo.value.likes + listOf(LikesModel())
-        handleEvent(Event.PlusLike(reviewInfo.value))
+        reviewModel.value.likes = reviewModel.value.likes + listOf(LikesModel())
+        handleEvent(Event.PlusLike(reviewModel.value))
 
-        return reviewInfo.value.likes.size
+        return reviewModel.value.likes.size
     }
 
     private fun handleEvent(event: Event) {
@@ -160,7 +162,7 @@ class ReviewDetailViewModel @Inject constructor(
         object PressBackButton : Event()
         data class ShowToastForResult(val isMine: Boolean) : Event()
         data class MoveToAppInfo(val appInfo: AppModel) : Event()
-        data class PlusLike(val reviewInfo: ReviewInfo) : Event()
+        data class PlusLike(val reviewModel: ReviewModel) : Event()
     }
 
     companion object {

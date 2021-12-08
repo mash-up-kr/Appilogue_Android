@@ -36,7 +36,7 @@
             android:layout_marginStart="10dp"
             android:background="@drawable/border_circular_purple"
             android:src="@drawable/space_dust"
-            app:profileUrl="@{item.user.profileUrl}"
+            app:profileUrl="@{item.user.profileImage}"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toEndOf="@id/nested_indicator_view"/>
 

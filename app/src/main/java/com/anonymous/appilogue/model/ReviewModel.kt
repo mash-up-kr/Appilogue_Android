@@ -5,7 +5,7 @@ import com.squareup.moshi.JsonClass
 import java.util.*
 
 @JsonClass(generateAdapter = true)
-data class ReviewInfo(
+data class ReviewModel(
     @field:Json(name = "id") val id: Int = 0,
     @field:Json(name = "content") val content: String? = null,
     @field:Json(name = "hole") val hole: String? = null,

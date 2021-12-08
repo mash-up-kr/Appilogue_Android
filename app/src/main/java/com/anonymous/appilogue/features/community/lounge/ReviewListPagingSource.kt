@@ -2,21 +2,18 @@ package com.anonymous.appilogue.features.community.lounge
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.anonymous.appilogue.exceptions.UnknownException
-import com.anonymous.appilogue.features.base.isSuccessful
 import com.anonymous.appilogue.features.base.successOr
-import com.anonymous.appilogue.features.base.throwableOrNull
-import com.anonymous.appilogue.model.ReviewInfo
+import com.anonymous.appilogue.model.ReviewModel
 import com.anonymous.appilogue.usecase.FetchReviewListUseCase
 
 class ReviewListPagingSource(
     private val fetchReviewListUseCaseUseCase: FetchReviewListUseCase,
     private val hole: String
-) : PagingSource<Int, ReviewInfo>() {
+) : PagingSource<Int, ReviewModel>() {
 
-    override fun getRefreshKey(state: PagingState<Int, ReviewInfo>): Int? = null
+    override fun getRefreshKey(state: PagingState<Int, ReviewModel>): Int? = null
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ReviewInfo> {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ReviewModel> {
         val position = params.key ?: INITIAL_LOAD_PAGE
         return try {
             val response = fetchReviewListUseCaseUseCase(hole, position)

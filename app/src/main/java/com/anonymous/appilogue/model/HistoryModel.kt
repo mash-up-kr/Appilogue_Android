@@ -3,7 +3,7 @@ package com.anonymous.appilogue.model
 import com.anonymous.appilogue.R
 import java.util.*
 
-data class History(
+data class HistoryModel(
     val id: Int,
     val iconUrl: String,
     val description: String,

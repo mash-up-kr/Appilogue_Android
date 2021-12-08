@@ -5,8 +5,9 @@ import com.anonymous.appilogue.network.api.ItemApi
 import timber.log.Timber
 import javax.inject.Inject
 
-class DefaultItemRepository @Inject constructor(private val itemApi: ItemApi) :
-    ItemRepository {
+class DefaultItemRepository @Inject constructor(
+    private val itemApi: ItemApi
+) : ItemRepository {
 
     override suspend fun fetchSpaceDustItemUrls(): List<SpaceDustItem> {
         try {

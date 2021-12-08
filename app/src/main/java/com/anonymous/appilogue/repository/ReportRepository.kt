@@ -2,7 +2,7 @@ package com.anonymous.appilogue.repository
 
 import com.anonymous.appilogue.features.base.UiState
 import com.anonymous.appilogue.model.ReportModel
-import com.anonymous.appilogue.network.ReportApi
+import com.anonymous.appilogue.network.api.ReportApi
 import javax.inject.Inject
 
 class ReportRepository @Inject constructor(
