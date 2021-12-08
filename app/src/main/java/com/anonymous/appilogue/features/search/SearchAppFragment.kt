@@ -81,7 +81,7 @@ class SearchAppFragment
                 when (event) {
                     is SearchAppViewModel.Event.MoveToReviewSelector -> {
                         val action = SearchAppFragmentDirections.actionSearchAppFragmentToReviewSelectorFragment(event.appName, event.appIconUrl)
-                        (activity as MainActivity).navigateTo(action)
+                        (activity as MainActivity).navigateTo(R.id.reviewSelectorFragment, action)
                     }
                 }
             }

@@ -52,7 +52,7 @@ class ReviewSelectorFragment
             selectButton.setOnClickListener {
                 if (viewModel.isSelected()) {
                     val action = ReviewSelectorFragmentDirections.actionReviewSelectorFragmentToReviewRegisterFragment(viewModel.appName, viewModel.appIconUrl, viewModel.isBlackHoleSelected.value)
-                    (activity as MainActivity).navigateTo(action)
+                    (activity as MainActivity).navigateTo(R.id.reviewRegisterFragment, action)
                 }
             }
 
@@ -62,7 +62,7 @@ class ReviewSelectorFragment
 
             toolbarRightIconView.setOnClickListener {
                 val action = ReviewSelectorFragmentDirections.actionReviewSelectorFragmentToHomeFragment()
-                (activity as MainActivity).navigateTo(action)
+                (activity as MainActivity).navigateTo(R.id.homeFragment, action)
             }
         }
     }

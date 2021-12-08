@@ -127,13 +127,13 @@ class ReviewListFragment
         } else {
             AppInfoFragmentDirections.actionAppInfoFragmentToReviewDetailFragment(item.id)
         }
-        (activity as MainActivity).navigateTo(action)
+        (activity as MainActivity).navigateTo(R.id.reviewDetailFragment, action)
     }
 
     private fun navigateToAppInfo(item: AppModel) {
         if (viewModel.parentFragment == LOUNGE_FRAGMENT) {
             val action = LoungeFragmentDirections.actionReviewListFragmentToAppInfoFragment(item)
-            (activity as MainActivity).navigateTo(action)
+            (activity as MainActivity).navigateTo(R.id.reviewListFragment, action)
         }
     }
 

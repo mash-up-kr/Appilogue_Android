@@ -82,7 +82,7 @@ class ReviewRegisterFragment
                         }
 
                         val action = ReviewRegisterFragmentDirections.actionReviewRegisterFragmentToHomeFragment()
-                        (activity as MainActivity).navigateTo(action)
+                        (activity as MainActivity).navigateTo(R.id.homeFragment, action)
                     }
                 }
             }
@@ -93,7 +93,7 @@ class ReviewRegisterFragment
 
             toolbarRightIconView.setOnClickListener {
                 val action = ReviewRegisterFragmentDirections.actionReviewRegisterFragmentToHomeFragment()
-                (activity as MainActivity).navigateTo(action)
+                (activity as MainActivity).navigateTo(R.id.homeFragment, action)
             }
         }
     }

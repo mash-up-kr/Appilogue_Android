@@ -38,7 +38,7 @@ class ReviewListAdapter(
         with(binding) {
             feedContainer.setOnClickListener {
                 val position = bindingAdapterPosition
-                if (position in 1 until itemCount) {
+                if (position in 0 until itemCount) {
                     getItem(position)?.let {
                         navigateToDetail(it)
                     }
@@ -46,7 +46,7 @@ class ReviewListAdapter(
             }
             moreButtonView.setOnClickListener {
                 val position = bindingAdapterPosition
-                if (position in 1 until itemCount) {
+                if (position in 0 until itemCount) {
                     getItem(position)?.let { review ->
                         showBottomSheetMenu(review)
                     }
@@ -54,7 +54,7 @@ class ReviewListAdapter(
             }
             appInfoContainer.setOnClickListener {
                 val position = bindingAdapterPosition
-                if (position in 1 until itemCount) {
+                if (position in 0 until itemCount) {
                     getItem(position)?.let { review ->
                         navigateToAppInfo(review.app)
                     }
@@ -62,7 +62,7 @@ class ReviewListAdapter(
             }
             likeView.setOnClickListener {
                 val position = bindingAdapterPosition
-                if (position in 1 until itemCount) {
+                if (position in 0 until itemCount) {
                     getItem(position)?.let { review ->
                         if (!it.isSelected) {
                             val likesCount = viewModel.plusLikeEvent(review)

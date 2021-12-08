@@ -138,7 +138,7 @@ class ReviewDetailFragment
             }
             is ReviewDetailViewModel.Event.MoveToAppInfo -> {
                 val action = ReviewDetailFragmentDirections.actionReviewDetailFragmentToAppInfoFragment(event.appInfo)
-                (activity as MainActivity).navigateTo(action)
+                (activity as MainActivity).navigateTo(R.id.appInfoFragment, action)
             }
             is ReviewDetailViewModel.Event.PlusLike -> {
                 viewModel.plusLike(event.reviewModel)
@@ -148,6 +148,6 @@ class ReviewDetailFragment
 
     private fun navigateToCommentDetail(commentId: Int) {
         val action = ReviewDetailFragmentDirections.actionReviewDetailFragmentToCommentDetailFragment(viewModel.reviewId, commentId)
-        (activity as MainActivity).navigateTo(action)
+        (activity as MainActivity).navigateTo(R.id.commentDetailFragment, action)
     }
 }

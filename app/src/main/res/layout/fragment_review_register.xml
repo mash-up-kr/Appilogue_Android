@@ -122,7 +122,7 @@
                 android:padding="16dp"
                 android:background="@drawable/border_radius_10"
                 android:gravity="top|start"
-                android:inputType="text"
+                android:inputType="textMultiLine"
                 android:maxLength="500"
                 android:hint="@string/black_hole_review_hint"
                 android:textColorHint="@color/gray_02"

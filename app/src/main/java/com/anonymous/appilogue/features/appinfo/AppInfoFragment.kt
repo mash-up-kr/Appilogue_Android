@@ -49,7 +49,7 @@ class AppInfoFragment
                             appInfo.name,
                             appInfo.iconUrl
                         )
-                    (activity as MainActivity).navigateTo(action)
+                    (activity as MainActivity).navigateTo(R.id.reviewSelectorFragment, action)
                 }
             }
             childFragmentManager.commit {
