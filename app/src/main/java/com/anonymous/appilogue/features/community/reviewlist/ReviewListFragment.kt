@@ -1,4 +1,4 @@
-package com.anonymous.appilogue.features.community.lounge
+package com.anonymous.appilogue.features.community.reviewlist
 
 import android.os.Bundle
 import android.view.View
@@ -13,7 +13,9 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView.VERTICAL
 import com.anonymous.appilogue.R
 import com.anonymous.appilogue.databinding.FragmentReviewListBinding
+import com.anonymous.appilogue.features.appinfo.AppInfoFragmentDirections
 import com.anonymous.appilogue.features.base.BaseFragment
+import com.anonymous.appilogue.features.community.lounge.LoungeFragmentDirections
 import com.anonymous.appilogue.features.main.MainActivity
 import com.anonymous.appilogue.model.AppModel
 import com.anonymous.appilogue.model.ReviewModel
@@ -120,13 +122,19 @@ class ReviewListFragment
     }
 
     private fun navigateToDetail(item: ReviewModel) {
-        val action = LoungeFragmentDirections.actionLoungeFragmentToReviewDetailFragment(item.id)
+        val action = if (viewModel.parentFragment == LOUNGE_FRAGMENT) {
+            LoungeFragmentDirections.actionLoungeFragmentToReviewDetailFragment(item.id)
+        } else {
+            AppInfoFragmentDirections.actionAppInfoFragmentToReviewDetailFragment(item.id)
+        }
         (activity as MainActivity).navigateTo(action)
     }
 
     private fun navigateToAppInfo(item: AppModel) {
-        val action = LoungeFragmentDirections.actionReviewListFragmentToAppInfoFragment(item)
-        (activity as MainActivity).navigateTo(action)
+        if (viewModel.parentFragment == LOUNGE_FRAGMENT) {
+            val action = LoungeFragmentDirections.actionReviewListFragmentToAppInfoFragment(item)
+            (activity as MainActivity).navigateTo(action)
+        }
     }
 
     private fun showBottomSheetMenu(review: ReviewModel) {
@@ -158,13 +166,17 @@ class ReviewListFragment
     }
 
     companion object {
+        const val PARENT_FRAGMENT_KEY = "parent_fragment_key"
         const val HOLE_KEY = "hole"
         const val BLACK_HOLE = "black"
         const val WHITE_HOLE = "white"
+        const val LOUNGE_FRAGMENT = "lounge"
+        const val APP_INFO_FRAGMENT = "app_info"
 
-        fun newInstance(hole: String): ReviewListFragment {
+        fun newInstance(parentFragmentName: String, hole: String): ReviewListFragment {
             val fragment = ReviewListFragment()
             val bundle = Bundle().apply {
+                putString(PARENT_FRAGMENT_KEY, parentFragmentName)
                 putString(HOLE_KEY, hole)
             }
             return fragment.apply {

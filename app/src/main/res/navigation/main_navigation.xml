@@ -111,7 +111,7 @@
     </fragment>
     <fragment
         android:id="@+id/reviewListFragment"
-        android:name="com.anonymous.appilogue.features.community.lounge.ReviewListFragment"
+        android:name="com.anonymous.appilogue.features.community.reviewlist.ReviewListFragment"
         android:label="ReviewListFragment" />
     <fragment
         android:id="@+id/reviewDetailFragment"

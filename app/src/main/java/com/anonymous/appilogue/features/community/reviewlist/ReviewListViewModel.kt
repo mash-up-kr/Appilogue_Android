@@ -1,4 +1,4 @@
-package com.anonymous.appilogue.features.community.lounge
+package com.anonymous.appilogue.features.community.reviewlist
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -7,8 +7,8 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.anonymous.appilogue.features.base.UiState
 import com.anonymous.appilogue.features.base.isSuccessful
-import com.anonymous.appilogue.features.community.detail.ReviewDetailViewModel
-import com.anonymous.appilogue.features.community.lounge.ReviewListFragment.Companion.HOLE_KEY
+import com.anonymous.appilogue.features.community.reviewlist.ReviewListFragment.Companion.HOLE_KEY
+import com.anonymous.appilogue.features.community.reviewlist.ReviewListFragment.Companion.PARENT_FRAGMENT_KEY
 import com.anonymous.appilogue.model.dto.LikeDto
 import com.anonymous.appilogue.model.LikesModel
 import com.anonymous.appilogue.model.ReportModel
@@ -30,6 +30,7 @@ class ReviewListViewModel @Inject constructor(
     private val removeReviewUseCase: RemoveReviewUseCase,
     private val reportReviewUseCase: ReportReviewUseCase,
 ) : ViewModel() {
+    val parentFragment: String = savedStateHandle.get(PARENT_FRAGMENT_KEY) ?: ""
     val hole: String = savedStateHandle.get(HOLE_KEY) ?: ""
 
     private val _event = MutableSharedFlow<Event>()

@@ -1,4 +1,4 @@
-package com.anonymous.appilogue.features.community.lounge
+package com.anonymous.appilogue.features.community.reviewlist
 
 import android.view.LayoutInflater
 import android.view.View
@@ -38,7 +38,7 @@ class ReviewListAdapter(
         with(binding) {
             feedContainer.setOnClickListener {
                 val position = bindingAdapterPosition
-                if (position < itemCount) {
+                if (position in 1 until itemCount) {
                     getItem(position)?.let {
                         navigateToDetail(it)
                     }
@@ -46,7 +46,7 @@ class ReviewListAdapter(
             }
             moreButtonView.setOnClickListener {
                 val position = bindingAdapterPosition
-                if (position < itemCount) {
+                if (position in 1 until itemCount) {
                     getItem(position)?.let { review ->
                         showBottomSheetMenu(review)
                     }
@@ -54,7 +54,7 @@ class ReviewListAdapter(
             }
             appInfoContainer.setOnClickListener {
                 val position = bindingAdapterPosition
-                if (position < itemCount) {
+                if (position in 1 until itemCount) {
                     getItem(position)?.let { review ->
                         navigateToAppInfo(review.app)
                     }
@@ -62,31 +62,12 @@ class ReviewListAdapter(
             }
             likeView.setOnClickListener {
                 val position = bindingAdapterPosition
-                if (position < itemCount) {
+                if (position in 1 until itemCount) {
                     getItem(position)?.let { review ->
                         if (!it.isSelected) {
                             val likesCount = viewModel.plusLikeEvent(review)
                             it.isSelected = true
                             likeCountView.text = likesCount.toString()
-                        }
-                    }
-                }
-            }
-            if (viewModel.hole.isEmpty()) {
-                holeView.apply {
-                    visibility = View.VISIBLE
-                    val position = bindingAdapterPosition
-                    if (position < itemCount) {
-                        getItem(position)?.let { review ->
-                            if (review.hole == ReviewListFragment.BLACK_HOLE) {
-                                text = context.getString(R.string.black_hole_text)
-                                setTextColor(ContextCompat.getColor(context, R.color.purple_01))
-                                backgroundTintList = ContextCompat.getColorStateList(context, R.color.purple_02)
-                            } else {
-                                text = context.getString(R.string.white_hole_text)
-                                setTextColor(ContextCompat.getColor(context, R.color.mint_01))
-                                backgroundTintList = ContextCompat.getColorStateList(context, R.color.mint_02)
-                            }
                         }
                     }
                 }
@@ -104,9 +85,26 @@ class ReviewListAdapter(
         private val binding: ItemReviewContentBinding,
         private val viewModel: ReviewListViewModel
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(model: ReviewModel) {
+        fun bind(item: ReviewModel) {
+            if (viewModel.hole.isEmpty()) {
+                binding.holeView.apply {
+                    visibility = View.VISIBLE
+                    if (item.hole == ReviewListFragment.BLACK_HOLE) {
+                        text = context.getString(R.string.black_hole_text)
+                        setTextColor(ContextCompat.getColor(context, R.color.purple_01))
+                        backgroundTintList =
+                            ContextCompat.getColorStateList(context, R.color.purple_02)
+                    } else {
+                        text = context.getString(R.string.white_hole_text)
+                        setTextColor(ContextCompat.getColor(context, R.color.mint_01))
+                        backgroundTintList =
+                            ContextCompat.getColorStateList(context, R.color.mint_02)
+                    }
+                }
+            }
+
             binding.apply {
-                setVariable(BR.item, model)
+                setVariable(BR.item, item)
                 setVariable(BR.vm, viewModel)
                 executePendingBindings()
             }

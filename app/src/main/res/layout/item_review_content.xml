@@ -14,7 +14,7 @@
 
         <variable
             name="vm"
-            type="com.anonymous.appilogue.features.community.lounge.ReviewListViewModel" />
+            type="com.anonymous.appilogue.features.community.reviewlist.ReviewListViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -74,7 +74,7 @@
             android:visibility="gone"
             app:layout_constraintTop_toTopOf="@id/profile_view"
             app:layout_constraintBottom_toBottomOf="@id/profile_view"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toStartOf="@id/more_button_view" />
 
         <ImageView
             android:id="@+id/more_button_view"

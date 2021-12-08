@@ -1,4 +1,4 @@
-package com.anonymous.appilogue.features.community.lounge
+package com.anonymous.appilogue.features.community.reviewlist
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
