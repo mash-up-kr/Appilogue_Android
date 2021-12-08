@@ -150,16 +150,4 @@ class ReviewDetailFragment
         val action = ReviewDetailFragmentDirections.actionReviewDetailFragmentToCommentDetailFragment(viewModel.reviewId, commentId)
         (activity as MainActivity).navigateTo(action)
     }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-
-        (activity as MainActivity).hideBottomNavigation()
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-
-        (activity as MainActivity).showBottomNavigation()
-    }
 }

@@ -71,9 +71,4 @@ class ProfileSettingFragment :
             activity?.finish()
         }
     }
-
-    override fun onDestroyView() {
-        (activity as MainActivity).showBottomNavigation()
-        super.onDestroyView()
-    }
 }
