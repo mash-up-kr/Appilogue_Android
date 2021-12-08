@@ -66,10 +66,4 @@ class ReviewSelectorFragment
             }
         }
     }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-
-        (activity as MainActivity).hideBottomNavigation()
-    }
 }

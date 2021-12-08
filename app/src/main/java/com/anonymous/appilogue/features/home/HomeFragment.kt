@@ -44,8 +44,6 @@ class HomeFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as MainActivity).showBottomNavigation()
-
         bind {
             homeViewModel = viewModel
             mySpaceDustViewModel = _mySpaceDustViewModel
@@ -161,9 +159,9 @@ class HomeFragment :
                 addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
                     override fun onStateChanged(bottomSheet: View, newState: Int) {
                         if (newState != BottomSheetBehavior.STATE_HIDDEN) {
-                            (activity as MainActivity).hideBottomNavigation()
+                            mainViewModel.hideBottomNavigation()
                         } else {
-                            (activity as MainActivity).showBottomNavigation()
+                            mainViewModel.showBottomNavigation()
                         }
                         viewModel.changeBottomSheetState(newState)
                     }
@@ -211,12 +209,6 @@ class HomeFragment :
             peekHeight =
                 (resources.getDimension(heightDimensionId)).toInt()
         }
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-
-        (activity as MainActivity).showBottomNavigation()
     }
 
     companion object {
