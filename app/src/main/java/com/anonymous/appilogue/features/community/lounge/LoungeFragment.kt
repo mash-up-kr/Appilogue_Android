@@ -23,12 +23,6 @@ class LoungeFragment
 
     override val viewModel: LoungeViewModel by viewModels()
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-
-        (activity as MainActivity).showBottomNavigation()
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 

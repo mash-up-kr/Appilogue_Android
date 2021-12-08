@@ -20,6 +20,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 
@@ -87,14 +88,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         navController.navigate(action)
     }
 
-    fun showBottomNavigation() {
-        binding.bottomNavigationView.visibility = View.VISIBLE
-    }
-
-    fun hideBottomNavigation() {
-        binding.bottomNavigationView.visibility = View.GONE
-    }
-
     fun showBottomSheetDialog(bottomSheetDialogFragment: BottomSheetDialogFragment) {
         bottomSheetDialogFragment.show(supportFragmentManager, bottomSheetDialogFragment.tag)
     }
@@ -105,9 +98,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     }
 
     override fun onBackPressed() {
-        navController.currentDestination?.let {
-            changeBottomNavigationStateByFragmentId(it.id)
-        }
         val nowFragment = supportFragmentManager.primaryNavigationFragment?.let {
             it.childFragmentManager.fragments[0]
         }
@@ -120,5 +110,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             }
         }
         super.onBackPressed()
+        navController.currentDestination?.let {
+            changeBottomNavigationStateByFragmentId(it.id)
+        }
     }
 }

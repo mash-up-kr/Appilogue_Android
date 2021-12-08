@@ -114,12 +114,6 @@ class ReviewRegisterFragment
         this.addView(chip, childCount - 1, layoutParams)
     }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-
-        (activity as MainActivity).hideBottomNavigation()
-    }
-
     companion object {
         private const val MAX_HASHTAG_COUNT = 5
     }
