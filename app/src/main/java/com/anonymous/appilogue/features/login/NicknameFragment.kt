@@ -104,11 +104,7 @@ class NicknameFragment :
 
     private fun sendToServerUserData() {
         viewModel.sendToServerUserData().subscribe({
-            if (it.isVerified) {
-                Timber.d("등록 성공")
-            } else {
-                Timber.d("등록 오류")
-            }
+            Timber.d("등록 성공")
         }) {
             Timber.d("${it.message.toString()}")
         }
