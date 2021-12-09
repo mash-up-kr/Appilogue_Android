@@ -93,7 +93,7 @@ fun ChipGroup.bindTags(tags: List<HashTagModel>?) {
     removeAllViews()
     tags?.forEach { tag ->
         val tagView: Chip = Chip(context).apply {
-            text = "#${tag.name}"
+            text = tag.name
             isCheckable = false
             isCloseIconVisible = false
             setChipStrokeColorResource(R.color.purple_01)
