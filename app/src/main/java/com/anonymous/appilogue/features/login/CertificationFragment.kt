@@ -33,6 +33,7 @@ class CertificationFragment :
 
         with(binding) {
             certificationBackButton.setOnClickListener {
+                viewModel.stopTimer()
                 activity?.onBackPressed()
             }
 
