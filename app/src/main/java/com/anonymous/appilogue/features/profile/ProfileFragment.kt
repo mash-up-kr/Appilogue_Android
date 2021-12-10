@@ -30,7 +30,7 @@ class ProfileFragment :
         }
         with(binding) {
             SpaceAnimator.animateSpace(ivSpace)
-            ivToAccountSetting.setOnClickListener {
+            tvSettingAccount.setOnClickListener {
                 (activity as MainActivity).navigateTo(R.id.profileSettingFragment)
             }
             tvRevise.setOnClickListener {

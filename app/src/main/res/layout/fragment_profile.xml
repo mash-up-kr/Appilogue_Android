@@ -262,14 +262,16 @@
 
                 <TextView
                     android:id="@+id/tv_setting_account"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
                     android:layout_marginStart="24dp"
+                    android:gravity="center_vertical"
                     android:text="@string/setting_account"
                     android:textColor="@color/white"
                     android:textSize="16sp"
                     app:layout_constraintBottom_toTopOf="@+id/v8"
                     app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/iv_to_account_setting"
                     app:layout_constraintTop_toBottomOf="@+id/v7" />
 
                 <ImageView

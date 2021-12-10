@@ -52,10 +52,6 @@ class AppInfoFragment
                     (activity as MainActivity).navigateTo(R.id.reviewSelectorFragment, action)
                 }
             }
-            childFragmentManager.commit {
-                replace(R.id.fragment_container, ReviewListFragment.newInstance(APP_INFO_FRAGMENT, ""))
-                setReorderingAllowed(true)
-            }
         }
     }
 
