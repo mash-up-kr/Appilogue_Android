@@ -32,6 +32,9 @@ class HoleViewModel @Inject constructor(
             val result = fetchMyReviewsUseCase(holeText)
             if (result.isSuccessful) {
                 _apps.value = result.successOr(emptyList())
+                    .sortedBy { it.updatedAt }
+                    .reversed()
+                    .distinctBy { it.app.name }
             }
         }
     }

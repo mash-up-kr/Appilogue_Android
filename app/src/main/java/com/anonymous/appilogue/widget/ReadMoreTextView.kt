@@ -35,7 +35,7 @@ class ReadMoreTextView @JvmOverloads constructor(
 
     @SuppressLint("SetTextI18n")
     private fun addReadMoreText() {
-        val ellipsisCount = layout?.getEllipsisCount(maxLines - 1) ?: return
+        val ellipsisCount = layout?.getEllipsisCount(layout.lineCount - 1) ?: return
         val isEllipsis = ellipsisCount > 0
         val readMoreText = context.resources.getString(R.string.read_more_text)
 
