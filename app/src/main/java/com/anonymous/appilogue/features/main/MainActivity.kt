@@ -98,14 +98,13 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     }
 
     override fun onBackPressed() {
-        val nowFragment = supportFragmentManager.primaryNavigationFragment?.let {
-            it.childFragmentManager.fragments[0]
-        }
-        if (nowFragment is HomeFragment) {
-            homeViewModel.starFocused.value?.let { focus ->
-                if (Focus.isOnFocus(focus)) {
-                    homeViewModel.changeFocus(Focus.None)
-                    return
+        navController.currentDestination?.let {
+            if (it.id == R.id.homeFragment) {
+                homeViewModel.starFocused.value?.let { focus ->
+                    if (Focus.isOnFocus(focus)) {
+                        homeViewModel.changeFocus(Focus.None)
+                        return
+                    }
                 }
             }
         }

@@ -36,7 +36,6 @@ class LoginEmailFragment :
         FirstButtonInit.buttonInit(binding.emailLoginMoveNextButton)
 
         binding.emailLoginBackButton.setOnClickListener {
-            viewModel.stopTimer()
             activity?.onBackPressed()
         }
 
