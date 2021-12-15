@@ -155,4 +155,11 @@
     <!-- profile -->
     <string name="logout_alert_title">로그아웃 하시겠습니까?</string>
     <string name="withdraw_alert_title">회원 탈퇴 하시겠습니까?</string>
+    <string name="agreement_title_text">서비스 이용 동의 및 확인</string>
+    <string name="all_agreement_text">전체 동의하기</string>
+    <string name="terms_title_text">[필수] 서비스 이용약관 동의</string>
+    <string name="terms_title">서비스 이용약관 동의</string>
+    <string name="personal_info_title">개인 정보 수집 및 이용 동의</string>
+    <string name="personal_info_title_text">[필수] 개인 정보 수집 및 이용 동의</string>
+    <string name="agreement_read_more_text">더보기</string>
 </resources>

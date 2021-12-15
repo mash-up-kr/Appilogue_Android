@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModel
 import androidx.navigation.fragment.findNavController
 
 
-abstract class BaseFragment<B : ViewDataBinding, VM : ViewModel>(
+abstract class BaseFragment<B : ViewDataBinding, out VM : ViewModel>(
     @LayoutRes private val layoutResId: Int,
 ) : Fragment(layoutResId) {
 

@@ -28,7 +28,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>(R.layou
 
     private fun initView() {
         binding.btSignUp.setOnClickListener {
-            it.findNavController().navigate(R.id.action_loginFragment_to_emailFragment)
+            it.findNavController().navigate(R.id.action_loginFragment_to_agreementFragment)
         }
         binding.btEmailLogin.setOnClickListener {
             it.findNavController().navigate(R.id.action_loginFragment_to_loginEmailFragment)
