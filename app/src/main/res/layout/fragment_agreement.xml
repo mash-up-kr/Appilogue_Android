@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="vm"
+            type="com.anonymous.appilogue.features.login.agreement.AgreementViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/ic_bg_img_login">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/black"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+            <androidx.appcompat.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp">
+
+                    <ImageView
+                        android:id="@+id/toolbar_left_icon_view"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_back_left_24"
+                        android:contentDescription="@string/description_back_button"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        />
+
+                    <ImageView
+                        android:id="@+id/toolbar_right_icon_view"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginEnd="24dp"
+                        android:src="@drawable/ic_close_24"
+                        android:contentDescription="@string/description_close_button"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <TextView
+            android:id="@+id/title_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_marginHorizontal="@dimen/review_content_horizontal_margin"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:text="@string/agreement_title_text"
+            app:layout_constraintTop_toBottomOf="@id/appbar_layout" />
+
+        <TextView
+            android:id="@+id/all_agreement_title_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/review_content_horizontal_margin"
+            android:layout_marginTop="30dp"
+            android:paddingStart="55dp"
+            android:background="@drawable/border_radius_10"
+            android:paddingVertical="16dp"
+            android:text="@string/all_agreement_text"
+            android:onClick="@{() -> vm.checkAllAgreement()}"
+            android:clickable="true"
+            style="@style/TextStyle.Normal16"
+            app:isSelected="@{vm.areAllChecked}"
+            app:layout_constraintTop_toBottomOf="@id/title_view" />
+
+        <ImageView
+            android:id="@+id/all_check_view"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="20dp"
+            android:src="@drawable/selector_check_20"
+            android:onClick="@{() -> vm.checkAllAgreement()}"
+            app:isAgreed="@{vm.areAllChecked}"
+            app:layout_constraintStart_toStartOf="@id/all_agreement_title_view"
+            app:layout_constraintTop_toTopOf="@id/all_agreement_title_view"
+            app:layout_constraintBottom_toBottomOf="@id/all_agreement_title_view" />
+
+        <TextView
+            android:id="@+id/terms_title_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/review_content_horizontal_margin"
+            android:layout_marginTop="22dp"
+            android:paddingStart="55dp"
+            android:textColor="@color/gray_02"
+            android:text="@string/terms_title_text"
+            android:onClick="@{() -> vm.checkTermsAgreement()}"
+            android:clickable="true"
+            style="@style/TextStyle.Normal12"
+            app:textColorForAgreement="@{vm.isTermsChecked}"
+            app:layout_constraintTop_toBottomOf="@id/all_agreement_title_view" />
+
+        <ImageView
+            android:id="@+id/terms_check_view"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="20dp"
+            android:src="@drawable/selector_check_20"
+            android:onClick="@{() -> vm.checkTermsAgreement()}"
+            app:isAgreed="@{vm.isTermsChecked}"
+            app:layout_constraintStart_toStartOf="@id/terms_title_view"
+            app:layout_constraintTop_toTopOf="@id/terms_title_view"
+            app:layout_constraintBottom_toBottomOf="@id/terms_title_view" />
+
+        <TextView
+            android:id="@+id/terms_read_more_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/gray_02"
+            android:text="@string/agreement_read_more_text"
+            style="@style/TextStyle.Normal12"
+            app:underlineText="@{@string/agreement_read_more_text}"
+            app:textColorForAgreement="@{vm.isTermsChecked}"
+            app:layout_constraintEnd_toEndOf="@id/terms_title_view"
+            app:layout_constraintBaseline_toBaselineOf="@id/terms_title_view" />
+
+        <TextView
+            android:id="@+id/personal_info_title_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/review_content_horizontal_margin"
+            android:layout_marginTop="22dp"
+            android:paddingStart="55dp"
+            android:textColor="@color/gray_02"
+            android:text="@string/personal_info_title_text"
+            android:onClick="@{() -> vm.checkPersonalInfoAgreement()}"
+            android:clickable="true"
+            style="@style/TextStyle.Normal12"
+            app:textColorForAgreement="@{vm.isPersonalInfoChecked}"
+            app:layout_constraintTop_toBottomOf="@id/terms_title_view" />
+
+        <ImageView
+            android:id="@+id/personal_info_check_view"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="20dp"
+            android:src="@drawable/selector_check_20"
+            android:onClick="@{() -> vm.checkPersonalInfoAgreement()}"
+            app:isAgreed="@{vm.isPersonalInfoChecked}"
+            app:layout_constraintStart_toStartOf="@id/personal_info_title_view"
+            app:layout_constraintTop_toTopOf="@id/personal_info_title_view"
+            app:layout_constraintBottom_toBottomOf="@id/personal_info_title_view" />
+
+        <TextView
+            android:id="@+id/personal_read_more_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/gray_02"
+            android:text="@string/agreement_read_more_text"
+            style="@style/TextStyle.Normal12"
+            app:underlineText="@{@string/agreement_read_more_text}"
+            app:textColorForAgreement="@{vm.isPersonalInfoChecked}"
+            app:layout_constraintEnd_toEndOf="@id/personal_info_title_view"
+            app:layout_constraintBaseline_toBaselineOf="@id/personal_info_title_view" />
+
+        <TextView
+            android:id="@+id/next_button_view"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="335dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/border_radius_10"
+            android:gravity="center"
+            android:textColor="@color/gray_02"
+            android:text="@string/complete"
+            style="@style/TextStyle.Normal16"
+            app:isSelected="@{vm.areAllChecked}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

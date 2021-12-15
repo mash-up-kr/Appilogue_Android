@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.chip.Chip xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:theme="@style/Widget.MaterialComponents.Chip.Action"
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    android:clickable="false"
+    android:checkable="false"
+    tools:text="hashtag"
+    app:closeIconSize="10dp"
+    app:closeIconVisible="true"
+    app:closeIconEnabled="true"
+    app:closeIcon="@drawable/ic_close_12"
+    app:closeIconTint="@color/purple_01"
+    app:chipBackgroundColor="@color/gray_01" />

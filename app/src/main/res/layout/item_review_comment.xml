@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="android.content.Context" />
+        <import
+            alias="TimeHelper"
+            type="com.anonymous.appilogue.utils.TimeHelperKt" />
+
+        <variable
+            name="item"
+            type="com.anonymous.appilogue.model.CommentModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:paddingVertical="15dp"
+        tools:background="@color/black">
+
+        <ImageView
+            android:id="@+id/profile_view"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:src="@drawable/space_dust"
+            android:background="@drawable/border_circular_purple"
+            app:profileUrl="@{item.user.profileImage}"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/username_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="@{item.user.nickname}"
+            style="@style/TextStyle.Normal12"
+            app:layout_constraintTop_toTopOf="@id/profile_view"
+            app:layout_constraintStart_toEndOf="@id/profile_view"
+            tools:text="Anonymous"/>
+
+        <TextView
+            android:id="@+id/update_time_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:textColor="@color/gray_02"
+            android:text="@{TimeHelper.dateToPassedTime(item.createdAt, context)}"
+            style="@style/TextStyle.Normal12"
+            app:layout_constraintStart_toEndOf="@id/username_view"
+            app:layout_constraintBaseline_toBaselineOf="@id/username_view"
+            tools:text="00분 전"/>
+
+        <TextView
+            android:id="@+id/content_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@{item.content}"
+            style="@style/TextStyle.Normal14"
+            app:layout_constraintTop_toBottomOf="@id/username_view"
+            app:layout_constraintStart_toStartOf="@id/username_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="@string/dummy_content"/>
+
+        <TextView
+            android:id="@+id/comment_label_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:paddingVertical="4dp"
+            android:paddingHorizontal="10dp"
+            android:background="@drawable/border_radius_40"
+            android:textSize="11sp"
+            android:textColor="@color/gray_03"
+            app:bindCommentCount="@{item.childrenCount}"
+            app:layout_constraintTop_toBottomOf="@id/content_view"
+            app:layout_constraintStart_toStartOf="@id/content_view"
+            tools:text="@string/comment_chip_text_empty"/>
+
+        <ImageView
+            android:id="@+id/more_button_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="6dp"
+            android:paddingVertical="14dp"
+            android:src="@drawable/ic_more_horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/username_view"
+            app:layout_constraintBottom_toBottomOf="@id/username_view"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

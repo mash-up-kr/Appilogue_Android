@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.anonymous.appilogue.features.login.LoginViewModel" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/ic_bg_img_login">
+
+            <TextView
+                android:id="@+id/certification_explain_text1"
+                android:layout_width="0dp"
+                android:layout_height="34dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="116dp"
+                android:layout_marginEnd="24dp"
+                android:text="@string/certification_number_message"
+                android:textColor="@color/white"
+                android:textSize="22sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/certification_where_to_send"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="155dp"
+                android:layout_marginEnd="25dp"
+                android:textColor="@color/gray_02"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/certification_back_button"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="start"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="18dp"
+                android:background="@drawable/btn_back_left_24px"
+                android:backgroundTint="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/certification_close_button"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="305dp"
+                android:layout_marginTop="19dp"
+                android:layout_marginEnd="19dp"
+                android:background="@drawable/btn_close_24px"
+                android:backgroundTint="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/certification_back_button"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/certification_number1"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="196dp"
+                android:layout_marginEnd="9dp"
+                android:background="@drawable/border_radius_10"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLength="1"
+                android:maxLines="1"
+                android:nextFocusDown="@id/certification_number2"
+                android:selectAllOnFocus="true"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toStartOf="@id/certification_number2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <requestFocus />
+            </EditText>
+
+            <EditText
+                android:id="@+id/certification_number2"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="196dp"
+                android:layout_marginEnd="9dp"
+                android:background="@drawable/border_radius_10"
+                android:digits="0123456789"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLength="1"
+                android:maxLines="1"
+                android:nextFocusDown="@id/certification_number3"
+                android:selectAllOnFocus="true"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toStartOf="@id/certification_number3"
+                app:layout_constraintStart_toEndOf="@id/certification_number1"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/certification_number3"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="196dp"
+                android:layout_marginEnd="9dp"
+                android:background="@drawable/border_radius_10"
+                android:digits="0123456789"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLength="1"
+                android:maxLines="1"
+                android:nextFocusDown="@id/certification_number4"
+                android:selectAllOnFocus="true"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toStartOf="@id/certification_number4"
+                app:layout_constraintStart_toEndOf="@id/certification_number2"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/certification_number4"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="196dp"
+                android:layout_marginEnd="9dp"
+                android:background="@drawable/border_radius_10"
+                android:digits="0123456789"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLength="1"
+                android:maxLines="1"
+                android:nextFocusDown="@id/certification_number5"
+                android:selectAllOnFocus="true"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toStartOf="@id/certification_number5"
+                app:layout_constraintStart_toEndOf="@id/certification_number3"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/certification_number5"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="196dp"
+                android:layout_marginEnd="9dp"
+                android:background="@drawable/border_radius_10"
+                android:digits="0123456789"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLength="1"
+                android:maxLines="1"
+                android:nextFocusDown="@id/certification_number6"
+                android:selectAllOnFocus="true"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toStartOf="@id/certification_number6"
+                app:layout_constraintStart_toEndOf="@id/certification_number4"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/certification_number6"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="196dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/border_radius_10"
+                android:digits="0123456789"
+                android:gravity="center"
+                android:imeOptions="actionDone"
+                android:inputType="number"
+                android:maxLength="1"
+                android:maxLines="1"
+                android:selectAllOnFocus="true"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/certification_number5"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/certification_explain_text2"
+                android:layout_width="0dp"
+                android:layout_height="22dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="253dp"
+                android:layout_marginEnd="24dp"
+                android:text="@string/certification_notify_message"
+                android:textColor="@color/gray_02"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/timer"
+                android:layout_width="32dp"
+                android:layout_height="22dp"
+                android:layout_marginStart="143dp"
+                android:layout_marginTop="293dp"
+                android:layout_marginEnd="185dp"
+                android:text="@{vm.timer}"
+                android:textColor="@color/gray_02"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/resend_certification_number"
+                android:layout_width="0dp"
+                android:layout_height="22dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="293dp"
+                android:layout_marginEnd="143dp"
+                android:text="@string/certification_resend_message"
+                android:textColor="@color/gray_02"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/timer"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/certification_move_next_button"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/border_radius_10_purple"
+                android:text="@string/next_button"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</layout>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="item"
+            type="com.anonymous.appilogue.model.InstalledApp" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="10dp"
+        tools:background="@color/black">
+
+        <ImageView
+            android:id="@+id/app_icon_view"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:contentDescription="@string/description_installed_app_icon"
+            app:bindBitmap="@{item.icon}"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/app_title_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:text="@{item.name}"
+            android:textStyle="bold"
+            style="@style/TextStyle.Normal16"
+            app:layout_constraintStart_toEndOf="@id/app_icon_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:text="어나니머쓱"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
