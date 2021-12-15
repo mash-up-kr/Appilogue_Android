@@ -18,7 +18,19 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.anonymous.appilogue.features.home.HomeFragment"
-        android:label="HomeFragment" />
+        android:label="HomeFragment" >
+
+        <action
+            android:id="@+id/action_homeFragment_to_appInfoFragment"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_to_left"
+            app:popEnterAnim="@anim/slide_from_left"
+            app:destination="@id/appInfoFragment" >
+            <argument
+                android:name="appInfo"
+                app:argType="com.anonymous.appilogue.model.AppModel"/>
+        </action>
+    </fragment>
     <fragment
         android:id="@+id/alarmFragment"
         android:name="com.anonymous.appilogue.features.history.HistoryFragment"
@@ -111,7 +123,7 @@
     </fragment>
     <fragment
         android:id="@+id/reviewListFragment"
-        android:name="com.anonymous.appilogue.features.community.lounge.ReviewListFragment"
+        android:name="com.anonymous.appilogue.features.community.reviewlist.ReviewListFragment"
         android:label="ReviewListFragment" />
     <fragment
         android:id="@+id/reviewDetailFragment"

@@ -80,6 +80,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_more_horizontal"
+            android:paddingHorizontal="6dp"
+            android:paddingVertical="14dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/username_view"
             app:layout_constraintBottom_toBottomOf="@id/username_view"/>

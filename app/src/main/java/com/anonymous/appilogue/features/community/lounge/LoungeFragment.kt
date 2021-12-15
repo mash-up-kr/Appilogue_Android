@@ -11,8 +11,10 @@ import com.anonymous.appilogue.R
 import com.anonymous.appilogue.databinding.FragmentLoungeBinding
 import com.anonymous.appilogue.features.base.BaseFragment
 import com.anonymous.appilogue.features.base.ViewPagerAdapter
-import com.anonymous.appilogue.features.community.lounge.ReviewListFragment.Companion.BLACK_HOLE
-import com.anonymous.appilogue.features.community.lounge.ReviewListFragment.Companion.WHITE_HOLE
+import com.anonymous.appilogue.features.community.reviewlist.ReviewListFragment
+import com.anonymous.appilogue.features.community.reviewlist.ReviewListFragment.Companion.BLACK_HOLE
+import com.anonymous.appilogue.features.community.reviewlist.ReviewListFragment.Companion.LOUNGE_FRAGMENT
+import com.anonymous.appilogue.features.community.reviewlist.ReviewListFragment.Companion.WHITE_HOLE
 import com.anonymous.appilogue.features.main.MainActivity
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
@@ -46,8 +48,8 @@ class LoungeFragment
     }
 
     private fun getFragmentCreators() = SparseArray<() -> Fragment>().apply {
-        put(BLACK_HOLE_PAGE_INDEX) { ReviewListFragment.newInstance(BLACK_HOLE) }
-        put(WHITE_HOLE_PAGE_INDEX) { ReviewListFragment.newInstance(WHITE_HOLE) }
+        put(BLACK_HOLE_PAGE_INDEX) { ReviewListFragment.newInstance(LOUNGE_FRAGMENT, BLACK_HOLE) }
+        put(WHITE_HOLE_PAGE_INDEX) { ReviewListFragment.newInstance(LOUNGE_FRAGMENT, WHITE_HOLE) }
     }
 
     companion object {

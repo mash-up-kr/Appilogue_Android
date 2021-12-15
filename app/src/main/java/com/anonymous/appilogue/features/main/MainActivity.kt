@@ -83,8 +83,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         navController.navigate(id)
     }
 
-    fun navigateTo(action: NavDirections) {
-        changeBottomNavigationStateByFragmentId(action.actionId)
+    fun navigateTo(destination: Int, action: NavDirections) {
+        changeBottomNavigationStateByFragmentId(destination)
         navController.navigate(action)
     }
 

@@ -3,7 +3,9 @@ package com.anonymous.appilogue.utils
 import android.annotation.SuppressLint
 import android.graphics.Bitmap
 import android.text.SpannableString
+import android.text.SpannableStringBuilder
 import android.text.style.ForegroundColorSpan
+import android.text.style.UnderlineSpan
 import android.view.View
 import android.widget.ImageView
 import android.widget.ProgressBar
@@ -62,12 +64,15 @@ fun ImageView.bindBitmap(bitmap: Bitmap?) {
 
 @BindingAdapter("isSelected")
 fun TextView.bindIsSelected(selected: Boolean) {
+    val viewBackground = background.constantState?.newDrawable()?.mutate() ?: return
     if (selected) {
-        val viewBackground = background
-        val wrap = DrawableCompat.wrap(viewBackground)
-        DrawableCompat.setTint(wrap, context.getColor(R.color.purple_01))
-        background = wrap
+        DrawableCompat.setTint(viewBackground, context.getColor(R.color.purple_01))
+        background = viewBackground
         setTextColor(context.getColor(R.color.white))
+    } else {
+        DrawableCompat.setTint(viewBackground, context.getColor(R.color.gray_01))
+        background = viewBackground
+        setTextColor(context.getColor(R.color.gray_02))
     }
 }
 
@@ -93,7 +98,7 @@ fun ChipGroup.bindTags(tags: List<HashTagModel>?) {
     removeAllViews()
     tags?.forEach { tag ->
         val tagView: Chip = Chip(context).apply {
-            text = "#${tag.name}"
+            text = tag.name
             isCheckable = false
             isCloseIconVisible = false
             setChipStrokeColorResource(R.color.purple_01)
@@ -142,4 +147,29 @@ fun ProgressBar.bindShowProgress(uiState: UiState<*>) {
 fun ImageView.bindLikeModels(likeModels: List<LikesModel>) {
     val myId = PreferencesManager.getMyId()
     isSelected = likeModels.any { it.user.id == myId }
+}
+
+@BindingAdapter("underlineText")
+fun TextView.bindUnderlineText(str: String?) {
+    if (!str.isNullOrEmpty()) {
+        val spannable = SpannableString(str).apply {
+            setSpan(UnderlineSpan(), 0, str.length, 0)
+        }
+        text = spannable
+    }
+}
+
+@BindingAdapter("isAgreed")
+fun ImageView.bindIsAgreed(isAgreed: Boolean) {
+    isSelected = isAgreed
+}
+
+@BindingAdapter("textColorForAgreement")
+fun TextView.bindTextColorForAgreement(isAgreed: Boolean) {
+    val textColor = if (isAgreed) {
+        ContextCompat.getColor(context, R.color.white)
+    } else {
+        ContextCompat.getColor(context, R.color.gray_02)
+    }
+    setTextColor(textColor)
 }

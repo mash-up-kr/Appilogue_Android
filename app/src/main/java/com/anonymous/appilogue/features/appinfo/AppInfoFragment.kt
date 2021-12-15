@@ -4,11 +4,14 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.commit
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.anonymous.appilogue.R
 import com.anonymous.appilogue.databinding.FragmentAppInfoBinding
 import com.anonymous.appilogue.features.base.BaseFragment
+import com.anonymous.appilogue.features.community.reviewlist.ReviewListFragment
+import com.anonymous.appilogue.features.community.reviewlist.ReviewListFragment.Companion.APP_INFO_FRAGMENT
 import com.anonymous.appilogue.features.main.MainActivity
 import com.anonymous.appilogue.utils.hideKeyboardDown
 import dagger.hilt.android.AndroidEntryPoint
@@ -46,7 +49,7 @@ class AppInfoFragment
                             appInfo.name,
                             appInfo.iconUrl
                         )
-                    (activity as MainActivity).navigateTo(action)
+                    (activity as MainActivity).navigateTo(R.id.reviewSelectorFragment, action)
                 }
             }
         }

@@ -85,6 +85,8 @@
             android:id="@+id/more_button_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingHorizontal="6dp"
+            android:paddingVertical="14dp"
             android:src="@drawable/ic_more_horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/username_view"

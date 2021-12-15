@@ -11,6 +11,7 @@ import com.anonymous.appilogue.features.login.LoginActivity
 import com.anonymous.appilogue.features.main.MainActivity
 import com.anonymous.appilogue.features.main.MainViewModel
 import com.anonymous.appilogue.persistence.PreferencesManager
+import com.anonymous.appilogue.utils.showToast
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -54,8 +55,9 @@ class ProfileSettingFragment :
         MaterialAlertDialogBuilder(requireContext())
             .setTitle(R.string.withdraw_alert_title)
             .setPositiveButton(R.string.ok_text) { dialog, _ ->
-                viewModel.deleteMyAccount()
-                doLogout()
+                viewModel.deleteMyAccount {
+                    doLogout()
+                }
                 dialog.dismiss()
             }
             .setNegativeButton(R.string.cancel) { dialog, _ ->

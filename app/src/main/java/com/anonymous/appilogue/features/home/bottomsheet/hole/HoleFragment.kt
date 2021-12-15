@@ -7,6 +7,9 @@ import androidx.fragment.app.viewModels
 import com.anonymous.appilogue.R
 import com.anonymous.appilogue.databinding.FragmentAppBinding
 import com.anonymous.appilogue.features.base.BaseFragment
+import com.anonymous.appilogue.features.home.HomeFragmentDirections
+import com.anonymous.appilogue.features.main.MainActivity
+import com.anonymous.appilogue.model.AppModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -14,7 +17,7 @@ class HoleFragment :
     BaseFragment<FragmentAppBinding, HoleViewModel>(R.layout.fragment_app) {
     override val viewModel: HoleViewModel by viewModels()
     private val bottomSheetHoleAppAdapter: BottomSheetHoleAppAdapter by lazy {
-        BottomSheetHoleAppAdapter()
+        BottomSheetHoleAppAdapter(this::navigateToAppInfo)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -26,6 +29,11 @@ class HoleFragment :
                 addItemDecoration(BottomSheetHoleAppDecoration(context))
             }
         }
+    }
+
+    private fun navigateToAppInfo(app: AppModel) {
+        val action = HomeFragmentDirections.actionHomeFragmentToAppInfoFragment(app)
+        (activity as MainActivity).navigateTo(R.id.appInfoFragment, action)
     }
 
     companion object {

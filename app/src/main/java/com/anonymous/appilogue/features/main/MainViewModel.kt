@@ -50,9 +50,14 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    fun deleteMyAccount() {
+    fun deleteMyAccount(
+        onSuccess: () -> Unit
+    ) {
         viewModelScope.launch {
-            userRepository.deleteUser()
+            val result = userRepository.deleteUser()
+            if (result) {
+                onSuccess()
+            }
         }
     }
 

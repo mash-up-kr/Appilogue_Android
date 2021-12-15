@@ -1,6 +1,6 @@
 package com.anonymous.appilogue.di
 
-import com.anonymous.appilogue.features.community.lounge.ReviewListDataProvider
+import com.anonymous.appilogue.features.community.reviewlist.ReviewListDataProvider
 import com.anonymous.appilogue.usecase.FetchReviewListUseCase
 import dagger.Module
 import dagger.Provides

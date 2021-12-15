@@ -8,17 +8,30 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.anonymous.appilogue.R
 import com.anonymous.appilogue.databinding.ItemAppBinding
+import com.anonymous.appilogue.model.AppModel
 import com.anonymous.appilogue.model.ReviewModel
 
-class BottomSheetHoleAppAdapter :
-    ListAdapter<ReviewModel, BottomSheetHoleAppAdapter.BottomSheetAppViewHolder>(diffCallback) {
+class BottomSheetHoleAppAdapter constructor(
+    private val navigateToAppInfo: (AppModel) -> Unit
+) : ListAdapter<ReviewModel, BottomSheetHoleAppAdapter.BottomSheetAppViewHolder>(diffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BottomSheetAppViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = DataBindingUtil.inflate<ItemAppBinding>(
             layoutInflater, R.layout.item_app, parent, false
         )
-        return BottomSheetAppViewHolder(binding)
+        return BottomSheetAppViewHolder(binding).apply {
+            with(binding) {
+                appContainer.setOnClickListener {
+                    val position = bindingAdapterPosition
+                    if (position in 0 until itemCount) {
+                        getItem(position)?.let { item ->
+                            navigateToAppInfo(item.app)
+                        }
+                    }
+                }
+            }
+        }
     }
 
     override fun onBindViewHolder(holder: BottomSheetAppViewHolder, position: Int) {

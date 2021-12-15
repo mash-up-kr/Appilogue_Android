@@ -11,12 +11,11 @@
         android:label="LoginFragment"
         tools:layout="@layout/fragment_login">
         <action
-            android:id="@+id/action_loginFragment_to_emailFragment"
-            app:destination="@id/emailFragment"
-            app:enterAnim="@android:anim/slide_in_left" />
-        <action
             android:id="@+id/action_loginFragment_to_loginEmailFragment"
             app:destination="@id/loginEmailFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_agreementFragment"
+            app:destination="@id/agreementFragment" />
     </fragment>
     <fragment
         android:id="@+id/emailFragment"
@@ -78,5 +77,26 @@
         <action
             android:id="@+id/action_loginEmailFragment_to_emailFragment"
             app:destination="@id/emailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/agreementFragment"
+        android:name="com.anonymous.appilogue.features.login.agreement.AgreementFragment"
+        android:label="AgreementFragment">
+        <action
+            android:id="@+id/action_agreementFragment_to_agreementDetailFragment"
+            app:destination="@id/agreementDetailFragment" >
+            <argument
+                android:name="agreementDetail"
+                app:argType="string"/>
+        </action>
+        <action
+            android:id="@+id/action_agreementFragment_to_emailFragment"
+            app:destination="@id/emailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/agreementDetailFragment"
+        android:name="com.anonymous.appilogue.features.login.agreement.AgreementDetailFragment"
+        android:label="AgreementDetailFragment">
+
     </fragment>
 </navigation>
