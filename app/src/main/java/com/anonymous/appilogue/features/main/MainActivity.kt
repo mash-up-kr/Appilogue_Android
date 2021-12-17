@@ -1,5 +1,6 @@
 package com.anonymous.appilogue.features.main
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -117,6 +118,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         else viewModel.showBottomNavigation()
     }
 
+    @SuppressLint("RestrictedApi")
     override fun onBackPressed() {
         navController.currentDestination?.let {
             if (it.id == R.id.homeFragment) {
@@ -128,7 +130,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                 }
             }
         }
-        behaviorSubject.onNext(System.currentTimeMillis())
+        if (navController.backStack.count() <= 2) {
+            behaviorSubject.onNext(System.currentTimeMillis())
+        } else {
+            super.onBackPressed()
+        }
 
         navController.currentDestination?.let {
             changeBottomNavigationStateByFragmentId(it.id)
