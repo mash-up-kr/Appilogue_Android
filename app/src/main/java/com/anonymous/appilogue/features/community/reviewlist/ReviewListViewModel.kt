@@ -67,23 +67,27 @@ class ReviewListViewModel @Inject constructor(
     }
 
     fun removeReview(reviewId: Int) {
-        handleRemoveOrReport(true) {
+        handleRemoveOrReport(reviewId, true) {
             removeReviewUseCase(reviewId)
         }
     }
 
     fun reportReview(reviewId: Int) {
-        handleRemoveOrReport(false) {
+        handleRemoveOrReport(reviewId, false) {
             val reportModel = ReportModel(ReportType.REVIEW.type, reviewId)
             reportReviewUseCase(reportModel)
         }
     }
 
-    private fun handleRemoveOrReport(isMine: Boolean, block: suspend () -> UiState<*>) {
+    private fun handleRemoveOrReport(
+        reviewId: Int,
+        isMine: Boolean,
+        block: suspend () -> UiState<*>
+    ) {
         viewModelScope.launch {
             val result = block()
             if (result.isSuccessful) {
-                handleEvent(Event.ShowToastForResult(isMine))
+                handleEvent(Event.ShowToastForResult(reviewId, isMine))
             }
         }
     }
@@ -102,6 +106,6 @@ class ReviewListViewModel @Inject constructor(
 
     sealed class Event {
         data class PlusLike(val reviewModel: ReviewModel) : Event()
-        data class ShowToastForResult(val isMine: Boolean) : Event()
+        data class ShowToastForResult(val reviewId: Int, val isMine: Boolean) : Event()
     }
 }

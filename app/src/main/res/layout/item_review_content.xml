@@ -5,6 +5,7 @@
 
     <data>
         <import type="android.content.Context" />
+        <import type="android.view.View"/>
         <import
             alias="TimeHelper"
             type="com.anonymous.appilogue.utils.TimeHelperKt" />
@@ -17,193 +18,208 @@
             type="com.anonymous.appilogue.features.community.reviewlist.ReviewListViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/feed_container"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/review_content_horizontal_margin"
         android:layout_marginVertical="@dimen/review_content_vertical_margin"
         android:background="@android:color/transparent"
         tools:background="@color/black">
-
-        <ImageView
-            android:id="@+id/profile_view"
-            android:layout_width="34dp"
-            android:layout_height="34dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/border_circular_purple"
-            android:src="@drawable/space_dust"
-            app:profileUrl="@{item.user.profileImage}"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
-
-        <TextView
-            android:id="@+id/username_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:text="@{item.user.nickname}"
-            style="@style/TextStyle.Normal14"
-            app:layout_constraintTop_toTopOf="@id/profile_view"
-            app:layout_constraintStart_toEndOf="@id/profile_view"
-            tools:text="Anonymous"/>
-
-        <TextView
-            android:id="@+id/update_time_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:textColor="@color/gray_02"
-            android:text="@{TimeHelper.dateToPassedTime(item.createdAt, context)}"
-            style="@style/TextStyle.Normal12"
-            app:layout_constraintTop_toBottomOf="@id/username_view"
-            app:layout_constraintStart_toStartOf="@id/username_view"
-            tools:text="00분 전"/>
-
-        <TextView
-            android:id="@+id/hole_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:paddingVertical="4dp"
-            android:paddingHorizontal="8dp"
-            android:background="@drawable/border_radius_08"
-            android:backgroundTint="@color/purple_02"
-            android:textColor="@color/purple_01"
-            android:text="@string/black_hole_text"
-            android:visibility="gone"
-            app:layout_constraintTop_toTopOf="@id/profile_view"
-            app:layout_constraintBottom_toBottomOf="@id/profile_view"
-            app:layout_constraintEnd_toStartOf="@id/more_button_view" />
-
-        <ImageView
-            android:id="@+id/more_button_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingHorizontal="6dp"
-            android:paddingVertical="14dp"
-            android:src="@drawable/ic_vertical_more"
-            android:backgroundTint="@color/white"
-            android:contentDescription="@string/description_close_button"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/profile_view"
-            app:layout_constraintBottom_toBottomOf="@id/profile_view"/>
-
-        <com.anonymous.appilogue.widget.ReadMoreTextView
-            android:id="@+id/content_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="@{item.content}"
-            android:maxLines="5"
-            android:ellipsize="end"
-            style="@style/TextStyle.Normal14"
-            app:layout_constraintTop_toBottomOf="@id/update_time_view"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            tools:text="@string/dummy_content"/>
-
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/app_info_container"
+            android:id="@+id/feed_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/border_radius_10"
-            android:layout_marginTop="20dp"
-            app:layout_constraintTop_toBottomOf="@id/content_view"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
+            android:visibility="@{!item.isInvalid ? View.VISIBLE : View.GONE, default=visible}">
 
             <ImageView
-                android:id="@+id/app_icon_view"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_margin="10dp"
-                android:background="@drawable/border_radius_10"
-                app:imageUrl="@{item.app.iconUrl}"
+                android:id="@+id/profile_view"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/border_circular_purple"
+                android:src="@drawable/space_dust"
+                app:profileUrl="@{item.user.profileImage}"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"/>
 
             <TextView
-                android:id="@+id/app_title_view"
+                android:id="@+id/username_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:text="@{item.app.name}"
+                android:text="@{item.user.nickname}"
                 style="@style/TextStyle.Normal14"
-                app:layout_constraintTop_toTopOf="@id/app_icon_view"
-                app:layout_constraintBottom_toBottomOf="@id/app_icon_view"
-                app:layout_constraintStart_toEndOf="@id/app_icon_view"
-                tools:text="앰 이름" />
+                app:layout_constraintTop_toTopOf="@id/profile_view"
+                app:layout_constraintStart_toEndOf="@id/profile_view"
+                tools:text="Anonymous"/>
 
-            <ImageView
-                android:id="@+id/right_arrow_view"
+            <TextView
+                android:id="@+id/update_time_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="18dp"
-                android:src="@drawable/ic_right_arrow"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                android:layout_marginTop="2dp"
+                android:textColor="@color/gray_02"
+                android:text="@{TimeHelper.dateToPassedTime(item.createdAt, context)}"
+                style="@style/TextStyle.Normal12"
+                app:layout_constraintTop_toBottomOf="@id/username_view"
+                app:layout_constraintStart_toStartOf="@id/username_view"
+                tools:text="00분 전"/>
+
+            <TextView
+                android:id="@+id/hole_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:paddingVertical="4dp"
+                android:paddingHorizontal="8dp"
+                android:background="@drawable/border_radius_08"
+                android:backgroundTint="@color/purple_02"
+                android:textColor="@color/purple_01"
+                android:text="@string/black_hole_text"
+                android:visibility="gone"
+                app:layout_constraintTop_toTopOf="@id/profile_view"
+                app:layout_constraintBottom_toBottomOf="@id/profile_view"
+                app:layout_constraintEnd_toStartOf="@id/more_button_view" />
+
+            <ImageView
+                android:id="@+id/more_button_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="6dp"
+                android:paddingVertical="14dp"
+                android:src="@drawable/ic_vertical_more"
+                android:backgroundTint="@color/white"
+                android:contentDescription="@string/description_close_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/profile_view"
+                app:layout_constraintBottom_toBottomOf="@id/profile_view"/>
+
+            <com.anonymous.appilogue.widget.ReadMoreTextView
+                android:id="@+id/content_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@{item.content}"
+                android:maxLines="5"
+                android:ellipsize="end"
+                style="@style/TextStyle.Normal14"
+                app:layout_constraintTop_toBottomOf="@id/update_time_view"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:text="@string/dummy_content"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/app_info_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border_radius_10"
+                android:layout_marginTop="20dp"
+                app:layout_constraintTop_toBottomOf="@id/content_view"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <ImageView
+                    android:id="@+id/app_icon_view"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/border_radius_10"
+                    app:imageUrl="@{item.app.iconUrl}"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/app_title_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="@{item.app.name}"
+                    style="@style/TextStyle.Normal14"
+                    app:layout_constraintTop_toTopOf="@id/app_icon_view"
+                    app:layout_constraintBottom_toBottomOf="@id/app_icon_view"
+                    app:layout_constraintStart_toEndOf="@id/app_icon_view"
+                    tools:text="앰 이름" />
+
+                <ImageView
+                    android:id="@+id/right_arrow_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="18dp"
+                    android:src="@drawable/ic_right_arrow"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/hashtags_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                app:selectionRequired="false"
+                app:tags="@{item.hashtags}"
+                app:layout_constraintTop_toBottomOf="@id/app_info_container"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <ImageView
+                android:id="@+id/like_view"
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/ic_heart_selector"
+                app:likeModels="@{item.likes}"
+                app:layout_constraintTop_toBottomOf="@id/hashtags_container"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/like_count_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:textColor="@color/gray_04"
+                android:includeFontPadding="false"
+                android:text="@{String.valueOf(item.likes.size())}"
+                style="@style/TextStyle.Normal14"
+                app:layout_constraintTop_toTopOf="@id/like_view"
+                app:layout_constraintStart_toEndOf="@id/like_view"
+                app:layout_constraintBottom_toBottomOf="@id/like_view"
+                tools:text="100"/>
+
+            <ImageView
+                android:id="@+id/comments_view"
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:layout_marginTop="18dp"
+                android:layout_marginStart="14dp"
+                android:src="@drawable/ic_comments"
+                app:layout_constraintBottom_toBottomOf="@id/like_view"
+                app:layout_constraintStart_toEndOf="@id/like_count_view" />
+
+            <TextView
+                android:id="@+id/comments_count_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:textColor="@color/gray_04"
+                android:includeFontPadding="false"
+                android:text="@{String.valueOf(item.comments.size())}"
+                style="@style/TextStyle.Normal14"
+                app:layout_constraintTop_toTopOf="@id/comments_view"
+                app:layout_constraintStart_toEndOf="@id/comments_view"
+                app:layout_constraintBottom_toBottomOf="@id/comments_view"
+                tools:text="100"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <com.google.android.material.chip.ChipGroup
-            android:id="@+id/hashtags_container"
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            app:selectionRequired="false"
-            app:tags="@{item.hashtags}"
-            app:layout_constraintTop_toBottomOf="@id/app_info_container"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <ImageView
-            android:id="@+id/like_view"
-            android:layout_width="12dp"
-            android:layout_height="12dp"
-            android:layout_marginTop="20dp"
-            android:src="@drawable/ic_heart_selector"
-            app:likeModels="@{item.likes}"
-            app:layout_constraintTop_toBottomOf="@id/hashtags_container"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <TextView
-            android:id="@+id/like_count_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:textColor="@color/gray_04"
-            android:includeFontPadding="false"
-            android:text="@{String.valueOf(item.likes.size())}"
+            android:layout_gravity="center"
+            android:text="@string/reported_post_text"
+            android:textColor="@color/gray_02"
             style="@style/TextStyle.Normal14"
-            app:layout_constraintTop_toTopOf="@id/like_view"
-            app:layout_constraintStart_toEndOf="@id/like_view"
-            app:layout_constraintBottom_toBottomOf="@id/like_view"
-            tools:text="100"/>
+            android:visibility="@{item.isInvalid ? View.VISIBLE : View.GONE, default=gone}" />
+    </FrameLayout>
 
-        <ImageView
-            android:id="@+id/comments_view"
-            android:layout_width="12dp"
-            android:layout_height="12dp"
-            android:layout_marginTop="18dp"
-            android:layout_marginStart="14dp"
-            android:src="@drawable/ic_comments"
-            app:layout_constraintBottom_toBottomOf="@id/like_view"
-            app:layout_constraintStart_toEndOf="@id/like_count_view" />
-
-        <TextView
-            android:id="@+id/comments_count_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:textColor="@color/gray_04"
-            android:includeFontPadding="false"
-            android:text="@{String.valueOf(item.comments.size())}"
-            style="@style/TextStyle.Normal14"
-            app:layout_constraintTop_toTopOf="@id/comments_view"
-            app:layout_constraintStart_toEndOf="@id/comments_view"
-            app:layout_constraintBottom_toBottomOf="@id/comments_view"
-            tools:text="100"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

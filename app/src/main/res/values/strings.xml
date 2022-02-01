@@ -162,4 +162,5 @@
     <string name="personal_info_title">개인 정보 수집 및 이용 동의</string>
     <string name="personal_info_title_text">[필수] 개인 정보 수집 및 이용 동의</string>
     <string name="agreement_read_more_text">더보기</string>
+    <string name="reported_post_text">삭제 되거나 신고된 글 입니다.</string>
 </resources>

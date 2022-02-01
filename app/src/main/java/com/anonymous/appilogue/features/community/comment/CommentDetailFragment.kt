@@ -92,6 +92,8 @@ class CommentDetailFragment
             }
             is CommentDetailViewModel.Event.ReportComment -> {
                 viewModel.reportComment(event.commentId)
+                val index = viewModel.comments.value.indexOfFirst { it.id == event.commentId }
+                commentDetailAdapter.notifyItemChanged(index)
             }
             is CommentDetailViewModel.Event.PressBackButton -> {
                 activity?.onBackPressed()

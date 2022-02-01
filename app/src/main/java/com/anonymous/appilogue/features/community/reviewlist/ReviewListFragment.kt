@@ -155,6 +155,7 @@ class ReviewListFragment
                 viewModel.plusLike(event.reviewModel)
             }
             is ReviewListViewModel.Event.ShowToastForResult -> {
+                reviewListAdapter.removeReview(event.reviewId)
                 val message = if (event.isMine) {
                     getString(R.string.remove_result_message)
                 } else {

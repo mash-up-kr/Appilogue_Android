@@ -15,4 +15,6 @@ data class CommentModel(
     @field:Json(name = "parentId") val parentId: Int? = null,
     @field:Json(name = "children") val children: List<CommentModel> = emptyList(),
     @field:Json(name = "childrenCount") val childrenCount: Int = 0
-)
+) {
+    var isInvalid: Boolean = false
+}

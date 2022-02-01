@@ -118,12 +118,17 @@ class ReviewDetailFragment
             }
             is ReviewDetailViewModel.Event.ReportComment -> {
                 viewModel.reportComment(event.commentId)
+                val index =
+                    viewModel.reviewModel.value.comments.indexOfFirst { it.id == event.commentId }
+                commentAdapter.notifyItemChanged(index)
             }
             is ReviewDetailViewModel.Event.RemoveReview -> {
                 viewModel.removeReview()
+                activity?.onBackPressed()
             }
             is ReviewDetailViewModel.Event.ReportReview -> {
                 viewModel.reportReview()
+                activity?.onBackPressed()
             }
             is ReviewDetailViewModel.Event.PressBackButton -> {
                 activity?.onBackPressed()

@@ -17,4 +17,6 @@ data class ReviewModel(
     @field:Json(name = "hashtags") val hashtags: List<HashTagModel> = emptyList(),
     @field:Json(name = "likes") var likes: List<LikesModel> = emptyList(),
     @field:Json(name = "comments") val comments: List<CommentModel> = emptyList()
-)
+) {
+    var isInvalid: Boolean = false
+}

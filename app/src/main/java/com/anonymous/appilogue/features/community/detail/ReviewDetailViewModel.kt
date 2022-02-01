@@ -77,6 +77,7 @@ class ReviewDetailViewModel @Inject constructor(
             val reportModel = ReportModel(ReportType.REVIEW.type, reviewId)
             reportReviewUseCase(reportModel)
         }
+        reviewModel.value.isInvalid = true
     }
 
     fun removeComment(commentId: Int) {
@@ -89,6 +90,9 @@ class ReviewDetailViewModel @Inject constructor(
         handleRemoveOrReport(false) {
             val reportModel = ReportModel(ReportType.COMMENT.type, commentId)
             reportCommentUseCase(reportModel)
+        }
+        reviewModel.value.comments.find { it.id == commentId }?.apply {
+            isInvalid = true
         }
     }
 

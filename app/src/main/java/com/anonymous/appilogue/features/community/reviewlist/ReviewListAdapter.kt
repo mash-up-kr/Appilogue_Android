@@ -81,6 +81,14 @@ class ReviewListAdapter(
         }
     }
 
+    fun removeReview(reviewId: Int) {
+        val index = snapshot().indexOfFirst { it?.id == reviewId }
+        if (index >= 0) {
+            snapshot()[index]?.isInvalid = true
+            notifyItemChanged(index)
+        }
+    }
+
     class ReviewItemViewHolder(
         private val binding: ItemReviewContentBinding,
         private val viewModel: ReviewListViewModel

@@ -83,6 +83,9 @@ class CommentDetailViewModel @Inject constructor(
             val reportModel = ReportModel(ReportType.COMMENT.type, commentId)
             reportCommentUseCase(reportModel)
         }
+        comments.value.find { it.id == commentId }?.apply {
+            isInvalid = true
+        }
     }
 
     private fun handleRemoveOrReport(isMine: Boolean, block: suspend () -> UiState<*>) {
