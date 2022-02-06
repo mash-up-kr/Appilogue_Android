@@ -14,7 +14,7 @@ android {
         applicationId "com.anonymous.appilogue"
         minSdkVersion min_sdk_version
         targetSdkVersion target_sdk_version
-        versionCode 1
+        versionCode 3
         versionName "1.0.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
